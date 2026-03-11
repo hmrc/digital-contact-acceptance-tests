@@ -16,16 +16,19 @@
 
 package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.WebDriver
-import org.openqa.selenium.support.ui.{FluentWait, Wait}
-import uk.gov.hmrc.selenium.component.PageObject
-import uk.gov.hmrc.selenium.webdriver.Driver
+import uk.gov.hmrc.configuration.TestEnvironment
+import org.openqa.selenium.support.ui.ExpectedConditions
 
-import java.time.Duration
+object AuthWizardPage extends BasePage {
 
-trait BasePage extends PageObject {
+  private val url: String = TestEnvironment.url("auth-wizard")
+  var authPageTitle: String = "Authority Wizard"
 
-  def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
-    .withTimeout(Duration.ofSeconds(3))
-    .pollingEvery(Duration.ofSeconds(1))
+  def pageLoad(): Unit = {
+    get(url)
+    fluentWait.until(ExpectedConditions.urlContains(url))
+  }
+
+  def pageTitle(): Unit =
+    getTitle
 }
