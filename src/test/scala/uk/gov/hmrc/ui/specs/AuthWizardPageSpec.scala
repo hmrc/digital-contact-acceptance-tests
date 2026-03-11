@@ -14,18 +14,24 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages
+package uk.gov.hmrc.ui.specs
 
-import org.openqa.selenium.WebDriver
-import org.openqa.selenium.support.ui.{FluentWait, Wait}
-import uk.gov.hmrc.selenium.component.PageObject
-import uk.gov.hmrc.selenium.webdriver.Driver
+import org.scalatest.featurespec.AnyFeatureSpec
+import uk.gov.hmrc.ui.pages.AuthWizardPage
+import uk.gov.hmrc.ui.specs.tags.Wip
 
-import java.time.Duration
 
-trait BasePage extends PageObject {
+class AuthWizardPageSpec extends BaseSpec {
 
-  def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
-    .withTimeout(Duration.ofSeconds(3))
-    .pollingEvery(Duration.ofSeconds(1))
+  Feature("To test Auth wizard page"){
+    Scenario("Validate page title of auth wizard", Wip){
+      Given("I am on the auth wizard page")
+      AuthWizardPage.pageLoad()
+
+      When("")
+
+      Then("I should see the page title")
+      AuthWizardPage.pageTitle()
+    }
+  }
 }

@@ -14,18 +14,10 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages
+package uk.gov.hmrc.ui.specs.tags
 
-import org.openqa.selenium.WebDriver
-import org.openqa.selenium.support.ui.{FluentWait, Wait}
-import uk.gov.hmrc.selenium.component.PageObject
-import uk.gov.hmrc.selenium.webdriver.Driver
+import org.scalatest.Tag
 
-import java.time.Duration
+object Wip extends Tag("Wip") {
 
-trait BasePage extends PageObject {
-
-  def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
-    .withTimeout(Duration.ofSeconds(3))
-    .pollingEvery(Duration.ofSeconds(1))
 }
