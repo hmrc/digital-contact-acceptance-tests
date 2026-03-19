@@ -16,19 +16,38 @@
 
 package uk.gov.hmrc.ui.pages
 
+import org.openqa.selenium.By
 import uk.gov.hmrc.configuration.TestEnvironment
 import org.openqa.selenium.support.ui.ExpectedConditions
+import uk.gov.hmrc.ui.pages.PreferencesAdmin.{click, sendKeys}
+import uk.gov.hmrc.ui.utils.TestData
 
-object AuthWizardPage extends BasePage {
+object AuthWizardPage extends BasePage with TestData {
 
-  private val url: String = TestEnvironment.url("auth-wizard")
+  private val authWizardBaseUrl: String = TestEnvironment.url("auth-wizard")
+  val saApiProxyBaseUrl: String = TestEnvironment.url("sa-api-proxy")
   var authPageTitle: String = "Authority Wizard"
 
   def pageLoad(): Unit = {
-    get(url)
-    fluentWait.until(ExpectedConditions.urlContains(url))
+    get(authWizardBaseUrl)
+    fluentWait.until(ExpectedConditions.urlContains(authWizardBaseUrl))
   }
 
   def pageTitle(): Unit =
     getTitle
+  
+  def loginPTAUsingAuthWizard(): Unit = {
+    val getRedirectUrl: By = By.id(getRedirectUrlId)
+    val getCredentialStrength: By = By.id(getCredentialStrengthId)
+    val getConfidenceLevel: By = By.id(getConfidenceLevelId)
+    val getNinoNumber: By = By.id(getNinoId)
+
+    sendKeys(getRedirectUrl, redirectUrlForPTA)
+    selectByValue(getCredentialStrength, credentialStrength)
+    selectByValue(getConfidenceLevel, confidenceLevel)
+    sendKeys(getNinoNumber, ninoNumber)
+    click(By.id("submit"))
+    }
+
+
 }

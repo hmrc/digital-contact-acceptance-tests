@@ -1,0 +1,57 @@
+/*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package uk.gov.hmrc.ui.specs.PreferencesAdminTests
+
+import org.scalatest.featurespec.AnyFeatureSpec
+import uk.gov.hmrc.ui.pages.PreferencesAdmin
+import uk.gov.hmrc.ui.specs.BaseSpec
+import uk.gov.hmrc.ui.specs.tags.PreferencesAdminTests
+
+
+class PreferencesAdminLoginSpec extends BaseSpec {
+
+  Feature("Preferences Admin Login Tests"){
+
+    Scenario("Login into admin as admin"){
+      Given("I am on the auth wizard page")
+      PreferencesAdmin.loadPage()
+
+      When("I enter the admin login details")
+      PreferencesAdmin.adminLogin()
+
+      Then("I should see the admin page title")
+      PreferencesAdmin.pageTitle()
+      
+      And("I should be on admin home page")
+      PreferencesAdmin.adminHomePage()
+    }
+
+    Scenario("Login into admin as user") {
+      Given("I am on the auth wizard page")
+      PreferencesAdmin.loadPage()
+
+      When("I enter the user login details")
+      PreferencesAdmin.userLogin()
+
+      Then("I should see the user page title")
+      PreferencesAdmin.pageTitle()
+
+      And("I should be on user home page")
+      PreferencesAdmin.userHomePage()
+    }
+  }
+}

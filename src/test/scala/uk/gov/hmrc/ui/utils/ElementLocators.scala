@@ -14,8 +14,11 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs.tags
+package uk.gov.hmrc.ui
 
-import org.scalatest.Tag
 
-object Wip extends Tag("Wip") {}
+object ElementLocators {
+  
+    val signIn = ("#main-content > div > div > form > fieldset > button")
+
+} 

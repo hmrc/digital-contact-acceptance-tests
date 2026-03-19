@@ -14,8 +14,22 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs.tags
+package uk.gov.hmrc.ui.pages
 
-import org.scalatest.Tag
+import org.openqa.selenium.By
+import org.openqa.selenium.support.ui.ExpectedConditions
+import uk.gov.hmrc.configuration.TestEnvironment
+import uk.gov.hmrc.ui.ElementLocators.signIn
 
-object Wip extends Tag("Wip") {}
+object PaperlessIntrruptPage extends BasePage {
+  var paperlessPageTitle: String = "Choose how to get your tax letters"
+  
+  def fillIntrruptPageForOptin(): Unit = {
+    val getOnlineRadioButton: By = By.id(onlineRadioButtonId)
+    selectCheckbox(getOnlineRadioButton)
+    click(By.id("submitEmailButton"))
+    Thread.sleep(2000)
+  }
+  
+
+}

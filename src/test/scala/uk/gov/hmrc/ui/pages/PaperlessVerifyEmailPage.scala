@@ -14,8 +14,16 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui
+package uk.gov.hmrc.ui.pages
 
-object Locators {
-  
-} 
+import org.openqa.selenium.By
+import uk.gov.hmrc.ui.pages.AuthWizardPage.email
+
+object PaperlessVerifyEmailPage extends BasePage {
+  var paperlessEmailPageTitle: String = "Enter your email address"
+
+  def contineVerifyEmailAddressPage(): Unit = {
+    click(By.ByCssSelector("#main-content > div > div > div:nth-child(5) > a"))
+    Thread.sleep(2000)
+  }
+}
