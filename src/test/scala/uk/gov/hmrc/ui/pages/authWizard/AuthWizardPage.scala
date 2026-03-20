@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages
+package uk.gov.hmrc.ui.pages.authWizard
 
 import org.openqa.selenium.By
-import uk.gov.hmrc.configuration.TestEnvironment
 import org.openqa.selenium.support.ui.ExpectedConditions
-import uk.gov.hmrc.ui.pages.PreferencesAdmin.{click, sendKeys}
+import uk.gov.hmrc.configuration.TestEnvironment
+import uk.gov.hmrc.ui.pages.BasePage
+import uk.gov.hmrc.ui.pages.preferencesAdmin.PreferencesAdminPage.{click, sendKeys}
 import uk.gov.hmrc.ui.utils.TestData
 
 object AuthWizardPage extends BasePage with TestData {

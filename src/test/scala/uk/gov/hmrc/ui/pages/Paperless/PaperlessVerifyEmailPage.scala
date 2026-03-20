@@ -14,22 +14,15 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages
+package uk.gov.hmrc.ui.pages.Paperless
 
 import org.openqa.selenium.By
-import org.openqa.selenium.support.ui.ExpectedConditions
-import uk.gov.hmrc.configuration.TestEnvironment
-import uk.gov.hmrc.ui.ElementLocators.signIn
+import uk.gov.hmrc.ui.pages.BasePage
 
-object PaperlessIntrruptPage extends BasePage {
-  var paperlessPageTitle: String = "Choose how to get your tax letters"
-  
-  def fillIntrruptPageForOptin(): Unit = {
-    val getOnlineRadioButton: By = By.id(onlineRadioButtonId)
-    selectCheckbox(getOnlineRadioButton)
-    click(By.id("submitEmailButton"))
-    Thread.sleep(2000)
+object PaperlessVerifyEmailPage extends BasePage {
+  var paperlessEmailPageTitle: String = "Enter your email address"
+
+  def contineVerifyEmailAddressPage(): Unit = {
+    click(By.ByCssSelector("#main-content > div > div > div:nth-child(5) > a"))
   }
-  
-
 }

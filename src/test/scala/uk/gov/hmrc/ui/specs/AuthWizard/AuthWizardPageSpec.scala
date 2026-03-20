@@ -14,12 +14,25 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui
+package uk.gov.hmrc.ui.specs.AuthWizard
+
+import org.scalatest.featurespec.AnyFeatureSpec
+import uk.gov.hmrc.ui.pages.authWizard.AuthWizardPage
+import uk.gov.hmrc.ui.specs.BaseSpec
+import uk.gov.hmrc.ui.specs.tags.Wip
 
 
-object ElementLocators {
-  
-    val signIn = ("#main-content > div > div > form > fieldset > button")
-    val clickOnPaperlessAdminLink = ("#main-content > div > div > div > ul > li > a")
+class AuthWizardPageSpec extends BaseSpec {
 
-} 
+  Feature("To test Auth wizard page"){
+    Scenario("Validate page title of auth wizard", Wip){
+      Given("I am on the auth wizard page")
+      AuthWizardPage.pageLoad()
+
+      When("")
+
+      Then("I should see the page title")
+      AuthWizardPage.pageTitle()
+    }
+  }
+}

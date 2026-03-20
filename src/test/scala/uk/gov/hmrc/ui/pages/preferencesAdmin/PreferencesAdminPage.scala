@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages
+package uk.gov.hmrc.ui.pages.preferencesAdmin
 
 import org.openqa.selenium.By
 import org.openqa.selenium.support.ui.ExpectedConditions
 import uk.gov.hmrc.configuration.TestEnvironment
-import uk.gov.hmrc.ui.ElementLocators.signIn
+import uk.gov.hmrc.ui.ElementLocators.{clickOnPaperlessAdminLink, signIn}
+import uk.gov.hmrc.ui.pages.BasePage
 
-object PreferencesAdmin extends BasePage {
+object PreferencesAdminPage extends BasePage {
   private val url: String = TestEnvironment.url("preferences-admin-frontend")
   var authPageTitle: String = "Home"
   var homePage: String = "home"
@@ -65,5 +66,10 @@ object PreferencesAdmin extends BasePage {
     val currentLocation: String = getCurrentUrl
     assert(currentLocation.equals(url + homePage))
     assert(getPageSource.contains("Paperless Admin"))
+  }
+
+  def clickOnPaperlessAdmin(): Unit = {
+    click(By.ByCssSelector(clickOnPaperlessAdminLink))
+    fluentWait
   }
 }

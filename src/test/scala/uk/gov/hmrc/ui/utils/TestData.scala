@@ -37,9 +37,11 @@ trait TestData {
   val identifierName: String = "UTR"
   val ninoNumber: String = "YY000200A"
   val email: String = "testuser@gmail.com"
+  val optOutReasonText: String = "for testing purpose"
   
   def redirectUrlForPTA: String =TestEnvironment.url("demo-frontend")
   def deleteAllPreferencesCollection(): String = TestEnvironment.url("preferences")
   def saApiProxy(): String = TestEnvironment.url("sa-api-proxy")
+  def preferenceFrontend(): String = TestEnvironment.url("preferences-frontend")
 
 }

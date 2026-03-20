@@ -14,16 +14,19 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages
+package uk.gov.hmrc.ui.pages.preferencesAdmin
 
-import org.openqa.selenium.By
-import uk.gov.hmrc.ui.pages.AuthWizardPage.email
+import uk.gov.hmrc.ui.pages.BasePage
 
-object PaperlessVerifyEmailPage extends BasePage {
-  var paperlessEmailPageTitle: String = "Enter your email address"
+object PreferencesAdminUserSummaryPage extends BasePage {
 
-  def contineVerifyEmailAddressPage(): Unit = {
-    click(By.ByCssSelector("#main-content > div > div > div:nth-child(5) > a"))
-    Thread.sleep(2000)
+  var searchPageTitle: String = "User Summary"
+
+  def pageTitle(): Unit = {
+    getTitle
+  }
+
+  def userOptOutSuccessfullyMessage(): Unit = {
+   getPageSource.contains("You successfully opted out the user in the below summary")
   }
 }

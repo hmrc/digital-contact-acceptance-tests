@@ -17,9 +17,8 @@
 package uk.gov.hmrc.ui.specs.PreferencesAdminTests
 
 import org.scalatest.featurespec.AnyFeatureSpec
-import uk.gov.hmrc.ui.pages.PreferencesAdmin
+import uk.gov.hmrc.ui.pages.preferencesAdmin.PreferencesAdminPage
 import uk.gov.hmrc.ui.specs.BaseSpec
-import uk.gov.hmrc.ui.specs.tags.PreferencesAdminTests
 
 
 class PreferencesAdminLoginSpec extends BaseSpec {
@@ -28,30 +27,30 @@ class PreferencesAdminLoginSpec extends BaseSpec {
 
     Scenario("Login into admin as admin"){
       Given("I am on the auth wizard page")
-      PreferencesAdmin.loadPage()
+      PreferencesAdminPage.loadPage()
 
       When("I enter the admin login details")
-      PreferencesAdmin.adminLogin()
+      PreferencesAdminPage.adminLogin()
 
       Then("I should see the admin page title")
-      PreferencesAdmin.pageTitle()
+      PreferencesAdminPage.pageTitle()
       
       And("I should be on admin home page")
-      PreferencesAdmin.adminHomePage()
+      PreferencesAdminPage.adminHomePage()
     }
 
     Scenario("Login into admin as user") {
       Given("I am on the auth wizard page")
-      PreferencesAdmin.loadPage()
+      PreferencesAdminPage.loadPage()
 
       When("I enter the user login details")
-      PreferencesAdmin.userLogin()
+      PreferencesAdminPage.userLogin()
 
       Then("I should see the user page title")
-      PreferencesAdmin.pageTitle()
+      PreferencesAdminPage.pageTitle()
 
       And("I should be on user home page")
-      PreferencesAdmin.userHomePage()
+      PreferencesAdminPage.userHomePage()
     }
   }
 }
