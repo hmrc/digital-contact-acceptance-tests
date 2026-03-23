@@ -42,6 +42,8 @@ object PreferencesAdminPage extends BasePage {
     sendKeys(adminUsername, "admin")
     sendKeys(adminPassword, "pwd")
     click(By.ByCssSelector(signIn))
+    fluentWait
+    Thread.sleep(1000)
   }
 
   def userLogin(): Unit = {
@@ -50,6 +52,7 @@ object PreferencesAdminPage extends BasePage {
     sendKeys(adminUsername, "user")
     sendKeys(adminPassword, "pwd")
     click(By.ByCssSelector(signIn))
+    fluentWait
   }
 
   def adminHomePage(): Unit = {
@@ -60,12 +63,14 @@ object PreferencesAdminPage extends BasePage {
     assert(getPageSource.contains("Message Brake Allowlist"))
     assert(getPageSource.contains("Message Decode"))
     assert(getPageSource.contains("Multi Search"))
+    fluentWait
   }
 
   def userHomePage(): Unit = {
     val currentLocation: String = getCurrentUrl
     assert(currentLocation.equals(url + homePage))
     assert(getPageSource.contains("Paperless Admin"))
+    fluentWait
   }
 
   def clickOnPaperlessAdmin(): Unit = {

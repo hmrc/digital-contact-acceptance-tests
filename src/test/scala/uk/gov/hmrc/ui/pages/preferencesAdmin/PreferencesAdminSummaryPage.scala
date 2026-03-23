@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.pages.preferencesAdmin
 
 import org.openqa.selenium.By
-import uk.gov.hmrc.ui.pages.authWizard.AuthWizardPage.optOutReasonText
+import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.optOutReasonText
 import uk.gov.hmrc.ui.pages.BasePage
 import PreferencesAdminUserSummaryPage.{fluentWait, getTitle}
 
@@ -35,6 +35,7 @@ object PreferencesAdminSummaryPage extends BasePage {
   def clickOnOptUserOutLink(): Unit = {
     click(By.cssSelector(optUserOutLinkSelector))
     fluentWait
+    Thread.sleep(2000)
   }
 
   def fillReasonToOptOut(): Unit = {
@@ -42,5 +43,7 @@ object PreferencesAdminSummaryPage extends BasePage {
     sendKeys(optOutUserReasonTextArea, optUserOutReason)
     click(By.cssSelector(yesButtonOnSummaryPage))
     fluentWait
+    Thread.sleep(2000)
+    
   }
 }

@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages.Paperless
+package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.By
 import uk.gov.hmrc.ui.pages.BasePage
 
-object PaperlessIntrruptPage extends BasePage {
+object PaperlessInterruptPage extends BasePage {
   var paperlessPageTitle: String = "Choose how to get your tax letters"
   
   def fillIntrruptPageForOptin(): Unit = {
     val getOnlineRadioButton: By = By.id(onlineRadioButtonId)
     selectCheckbox(getOnlineRadioButton)
     click(By.id("submitEmailButton"))
+    fluentWait
+    Thread.sleep(2000)
   }
-  
-
 }

@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.pages.preferencesAdmin
 
 import org.openqa.selenium.By
-import uk.gov.hmrc.ui.pages.authWizard.AuthWizardPage.{email, ninoNumber}
+import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.{email, identifierValue, ninoNumber}
 import uk.gov.hmrc.ui.pages.BasePage
 import PreferencesAdminUserSummaryPage.{fluentWait, getTitle}
 
@@ -40,8 +40,13 @@ object PreferencesAdminSearchPage extends BasePage {
   }
 
   def selectEmailRadioOption(): Unit = {
-    val selectNino: By = By.id(emailIdRadioButton)
-    selectCheckbox(selectNino)
+    val selectEmail: By = By.id(emailIdRadioButton)
+    selectCheckbox(selectEmail)
+  }
+
+  def selectSautrRadioOption(): Unit = {
+    val selectSautr: By = By.id(saUtrRadioButton)
+    selectCheckbox(selectSautr)
   }
 
   def fillIdentifierValueUsingNino(): Unit = {
@@ -49,6 +54,7 @@ object PreferencesAdminSearchPage extends BasePage {
     sendKeys(identifierValueTextArea, ninoNumber)
     click(By.cssSelector(searchButtonOnSearchPage))
     fluentWait
+    Thread.sleep(2000)
   }
 
   def fillIdentifierValueUsingEmail(): Unit = {
@@ -56,5 +62,14 @@ object PreferencesAdminSearchPage extends BasePage {
     sendKeys(identifierValueTextArea, email)
     click(By.cssSelector(searchButtonOnSearchPage))
     fluentWait
+    Thread.sleep(2000)
+  }
+
+  def fillIdentifierValueUsingSautr(): Unit = {
+    val identifierValueTextArea: By = By.id(identifierValueText)
+    sendKeys(identifierValueTextArea, identifierValue)
+    click(By.cssSelector(searchButtonOnSearchPage))
+    fluentWait
+    Thread.sleep(2000)
   }
 }

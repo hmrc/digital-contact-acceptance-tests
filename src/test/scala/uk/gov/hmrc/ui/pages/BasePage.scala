@@ -24,7 +24,7 @@ import play.api.libs.ws.StandaloneWSRequest
 import play.api.libs.ws.ahc.StandaloneAhcWSClient
 import uk.gov.hmrc.selenium.component.PageObject
 import uk.gov.hmrc.selenium.webdriver.Driver
-import uk.gov.hmrc.ui.pages.authWizard.AuthWizardPage.{deleteAllPreferencesCollection, ninoNumber, preferenceFrontend, saApiProxy}
+import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.{deleteAllPreferencesCollection, ninoNumber, preferenceFrontend, saApiProxy}
 
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.concurrent.ScalaFutures.convertScalaFuture
@@ -52,7 +52,7 @@ trait BasePage extends PageObject {
   val onlineRadioButtonId = "sps-opt-in"
   val postRadioButtonId = "sps-opt-in-2"
   val getEmailTextFieldId = "sps-opt-in-email"
-  val saUtrRadioButtonId = "name-1"
+  val saUtrRadioButtonId = "name"
   val ninoRadioButtonId = "name-2"
   val ItsaIdRadioButtonId = "name-3"
   val emailIdRadioButtonId = "name-4"
@@ -69,6 +69,7 @@ trait BasePage extends PageObject {
   def deletePreferencesCollection(): Unit = {
     val deletePreferencesRecords: String = deleteAllPreferencesCollection() + "test-only/preferences-admin/print-suppression"
     WsClient.url(deletePreferencesRecords).delete()
+    fluentWait
   }
 
   def verifyEmail(): Unit = {
@@ -88,6 +89,7 @@ trait BasePage extends PageObject {
     //To verify email address using token
     val emailVerificationUrl: String = preferenceFrontend()+(s"sa/print-preferences/verification/$verificationToken")
     val emailVerification = WsClient.url(emailVerificationUrl).get()
+    fluentWait
   }
 }
 

@@ -35,11 +35,15 @@ trait TestData {
   val confidenceLevel: String = "200"
   val enrolmentKey: String = "IR-SA"
   val identifierName: String = "UTR"
+  val identifierValue: String ="1234567890"
+  val identifierValue2: String ="1234567891"
   val ninoNumber: String = "YY000200A"
+  val pta: String = "/personal-account"
+  val bta: String = "/business-account"
   val email: String = "testuser@gmail.com"
   val optOutReasonText: String = "for testing purpose"
-  
-  def redirectUrlForPTA: String =TestEnvironment.url("demo-frontend")
+
+  def redirectUrlDemoFrontend: String =TestEnvironment.url("demo-frontend")
   def deleteAllPreferencesCollection(): String = TestEnvironment.url("preferences")
   def saApiProxy(): String = TestEnvironment.url("sa-api-proxy")
   def preferenceFrontend(): String = TestEnvironment.url("preferences-frontend")

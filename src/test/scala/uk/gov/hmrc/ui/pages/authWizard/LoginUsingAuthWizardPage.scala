@@ -23,7 +23,7 @@ import uk.gov.hmrc.ui.pages.BasePage
 import uk.gov.hmrc.ui.pages.preferencesAdmin.PreferencesAdminPage.{click, sendKeys}
 import uk.gov.hmrc.ui.utils.TestData
 
-object AuthWizardPage extends BasePage with TestData {
+object LoginUsingAuthWizardPage extends BasePage with TestData {
 
   private val authWizardBaseUrl: String = TestEnvironment.url("auth-wizard")
   val saApiProxyBaseUrl: String = TestEnvironment.url("sa-api-proxy")
@@ -37,18 +37,46 @@ object AuthWizardPage extends BasePage with TestData {
   def pageTitle(): Unit =
     getTitle
   
-  def loginPTAUsingAuthWizard(): Unit = {
+  def loginPTAUsingAuthWizardByNinoOnly(): Unit = {
     val getRedirectUrl: By = By.id(getRedirectUrlId)
     val getCredentialStrength: By = By.id(getCredentialStrengthId)
     val getConfidenceLevel: By = By.id(getConfidenceLevelId)
     val getNinoNumber: By = By.id(getNinoId)
 
-    sendKeys(getRedirectUrl, redirectUrlForPTA)
+    sendKeys(getRedirectUrl, redirectUrlDemoFrontend+pta)
     selectByValue(getCredentialStrength, credentialStrength)
     selectByValue(getConfidenceLevel, confidenceLevel)
     sendKeys(getNinoNumber, ninoNumber)
+
     click(By.id("submit"))
-    }
+    fluentWait
+    Thread.sleep(2000)
+  }
 
+  def loginIntoAccountByAuthWizard(enrolmentType: String): Unit = {
+    val getRedirectUrl: By = By.id(getRedirectUrlId)
+    val getCredentialStrength: By = By.id(getCredentialStrengthId)
+    val getConfidenceLevel: By = By.id(getConfidenceLevelId)
+    val getNinoNumber: By = By.id(getNinoId)
+    val enrolmentKeyId: By = By.id("enrolment[0].name")
+    val enrolmentNameId: By = By.id("input-0-0-name")
+    val enrolmentValueId: By = By.id("input-0-0-value")
 
+      sendKeys(getRedirectUrl, redirectUrlDemoFrontend + bta)
+      selectByValue(getCredentialStrength, credentialStrength)
+      selectByValue(getConfidenceLevel, confidenceLevel)
+      sendKeys(getNinoNumber, ninoNumber)
+      sendKeys(enrolmentKeyId, enrolmentKey)
+      sendKeys(enrolmentNameId, identifierName)
+
+      val enrolmentValue = enrolmentType match {
+        case "sautr" => sendKeys(enrolmentValueId, identifierValue)
+        case "sautr2" => sendKeys(enrolmentValueId, identifierValue2)
+        case _ => throw new IllegalArgumentException(s"Unknown UTR Value")
+      }
+    click(By.id("submit"))
+    fluentWait
+    Thread.sleep(2000)
+  }
+  
 }

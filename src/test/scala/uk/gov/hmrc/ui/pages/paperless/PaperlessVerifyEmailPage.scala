@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages.Paperless
+package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.By
 import uk.gov.hmrc.ui.pages.BasePage

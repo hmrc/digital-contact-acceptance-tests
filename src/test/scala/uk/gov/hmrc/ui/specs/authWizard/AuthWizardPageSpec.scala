@@ -14,18 +14,25 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages.Paperless
+package uk.gov.hmrc.ui.specs.authWizard
 
-import org.openqa.selenium.By
-import uk.gov.hmrc.ui.pages.authWizard.AuthWizardPage.email
-import uk.gov.hmrc.ui.pages.BasePage
+import org.scalatest.featurespec.AnyFeatureSpec
+import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
+import uk.gov.hmrc.ui.specs.BaseSpec
+import uk.gov.hmrc.ui.specs.tags.Wip
 
-object PaperlessEmailPage extends BasePage {
-  var paperlessEmailPageTitle: String = "Enter your email address"
 
-  def fillEmailPage(): Unit = {
-    val getEmailTextField: By = By.id(getEmailTextFieldId)
-    sendKeys(getEmailTextField, email)
-    click(By.id("submitEmailButton"))
+class AuthWizardPageSpec extends BaseSpec {
+
+  Feature("To test Auth wizard page"){
+    Scenario("Validate page title of auth wizard", Wip){
+      Given("I am on the auth wizard page")
+      LoginUsingAuthWizardPage.pageLoad()
+
+      When("")
+
+      Then("I should see the page title")
+      LoginUsingAuthWizardPage.pageTitle()
+    }
   }
 }

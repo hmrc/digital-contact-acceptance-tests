@@ -14,29 +14,26 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages.preferencesAdmin
+package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.By
+import org.openqa.selenium.support.ui.FluentWait
 import uk.gov.hmrc.ui.pages.BasePage
-import uk.gov.hmrc.ui.ElementLocators
-import uk.gov.hmrc.ui.pages.preferencesAdmin.PreferencesAdminSummaryPage.optUserOutLinkSelector
 
-object PreferencesAdminUserSummaryPage extends BasePage {
+object PaperlessBTAHomePage extends BasePage {
 
-  var searchPageTitle: String = "User Summary"
-
-  def pageTitle(): Unit = {
-    getTitle
+  //This is BTA home page for paperless journey using digital-contact-demo-frontend
+  var paperlessBtaHomePageTitle: String = "Business Tax Account"
+  
+  def btaPageTitle(): Unit = {
+    getTitle.contains(paperlessBtaHomePageTitle)
   }
 
-  def userOptOutSuccessfullyMessage(): Unit = {
-    getPageSource.contains("You successfully opted out the user in the below summary")
+  def clickOnGetTaxLettersOnlineLink(): Unit = {
+    val getTaxLettersOnlineLink: By = By.id("Gettaxlettersonline")
+    click(getTaxLettersOnlineLink)
     fluentWait
+    Thread.sleep(2000)
   }
 
-  def optOutUserLinkMissing(): Unit = {
-    val optOutUserLink: By = By.ByCssSelector(optUserOutLinkSelector)
-    getText(optOutUserLink).empty
-
-  }
 }
