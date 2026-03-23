@@ -50,7 +50,6 @@ object LoginUsingAuthWizardPage extends BasePage with TestData {
 
     click(By.id("submit"))
     fluentWait
-    Thread.sleep(2000)
   }
 
   def loginIntoAccountByAuthWizard(enrolmentType: String): Unit = {
@@ -76,7 +75,6 @@ object LoginUsingAuthWizardPage extends BasePage with TestData {
       }
     click(By.id("submit"))
     fluentWait
-    Thread.sleep(2000)
   }
   
 }

@@ -54,7 +54,6 @@ object PreferencesAdminSearchPage extends BasePage {
     sendKeys(identifierValueTextArea, ninoNumber)
     click(By.cssSelector(searchButtonOnSearchPage))
     fluentWait
-    Thread.sleep(2000)
   }
 
   def fillIdentifierValueUsingEmail(): Unit = {
@@ -62,7 +61,6 @@ object PreferencesAdminSearchPage extends BasePage {
     sendKeys(identifierValueTextArea, email)
     click(By.cssSelector(searchButtonOnSearchPage))
     fluentWait
-    Thread.sleep(2000)
   }
 
   def fillIdentifierValueUsingSautr(): Unit = {
@@ -70,6 +68,5 @@ object PreferencesAdminSearchPage extends BasePage {
     sendKeys(identifierValueTextArea, identifierValue)
     click(By.cssSelector(searchButtonOnSearchPage))
     fluentWait
-    Thread.sleep(2000)
   }
 }

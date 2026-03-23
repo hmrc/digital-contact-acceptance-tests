@@ -43,7 +43,6 @@ object PreferencesAdminPage extends BasePage {
     sendKeys(adminPassword, "pwd")
     click(By.ByCssSelector(signIn))
     fluentWait
-    Thread.sleep(1000)
   }
 
   def userLogin(): Unit = {

@@ -27,6 +27,5 @@ object PaperlessInterruptPage extends BasePage {
     selectCheckbox(getOnlineRadioButton)
     click(By.id("submitEmailButton"))
     fluentWait
-    Thread.sleep(2000)
   }
 }

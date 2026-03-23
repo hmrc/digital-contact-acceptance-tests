@@ -35,7 +35,6 @@ object PreferencesAdminSummaryPage extends BasePage {
   def clickOnOptUserOutLink(): Unit = {
     click(By.cssSelector(optUserOutLinkSelector))
     fluentWait
-    Thread.sleep(2000)
   }
 
   def fillReasonToOptOut(): Unit = {
@@ -43,7 +42,5 @@ object PreferencesAdminSummaryPage extends BasePage {
     sendKeys(optOutUserReasonTextArea, optUserOutReason)
     click(By.cssSelector(yesButtonOnSummaryPage))
     fluentWait
-    Thread.sleep(2000)
-    
   }
 }

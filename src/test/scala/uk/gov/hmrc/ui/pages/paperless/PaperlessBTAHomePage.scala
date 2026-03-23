@@ -33,7 +33,6 @@ object PaperlessBTAHomePage extends BasePage {
     val getTaxLettersOnlineLink: By = By.id("Gettaxlettersonline")
     click(getTaxLettersOnlineLink)
     fluentWait
-    Thread.sleep(2000)
   }
 
 }

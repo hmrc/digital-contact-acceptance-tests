@@ -29,6 +29,5 @@ object PaperlessEmailPage extends BasePage {
     sendKeys(getEmailTextField, email)
     click(By.id("submitEmailButton"))
     fluentWait
-    Thread.sleep(2000)
   }
 }
