@@ -14,21 +14,12 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages
+package uk.gov.hmrc.ui
 
-import uk.gov.hmrc.configuration.TestEnvironment
-import org.openqa.selenium.support.ui.ExpectedConditions
 
-object AuthWizardPage extends BasePage {
+object ElementLocators {
+  
+    val signIn = ("#main-content > div > div > form > fieldset > button")
+    val clickOnPaperlessAdminLink = ("#main-content > div > div > div > ul > li > a")
 
-  private val url: String = TestEnvironment.url("auth-wizard")
-  var authPageTitle: String = "Authority Wizard"
-
-  def pageLoad(): Unit = {
-    get(url)
-    fluentWait.until(ExpectedConditions.urlContains(url))
-  }
-
-  def pageTitle(): Unit =
-    getTitle
-}
+} 

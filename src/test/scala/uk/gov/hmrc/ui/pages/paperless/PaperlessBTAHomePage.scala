@@ -14,25 +14,25 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs
+package uk.gov.hmrc.ui.pages.paperless
 
-import org.scalatest.featurespec.AnyFeatureSpec
-import org.scalatest.matchers.should.Matchers
-import org.scalatest.{BeforeAndAfterEach, GivenWhenThen}
-import uk.gov.hmrc.selenium.webdriver.{Browser, ScreenshotOnFailure}
+import org.openqa.selenium.By
+import org.openqa.selenium.support.ui.FluentWait
+import uk.gov.hmrc.ui.pages.BasePage
 
-  trait BaseSpec
-      extends AnyFeatureSpec
-      with GivenWhenThen
-      with Matchers
-      with BeforeAndAfterEach
-      with Browser
-      with ScreenshotOnFailure {
+object PaperlessBTAHomePage extends BasePage {
+
+  //This is BTA home page for paperless journey using digital-contact-demo-frontend
+  var paperlessBtaHomePageTitle: String = "Business Tax Account"
   
-    override def beforeEach(): Unit =
-      startBrowser()
-  
-    override def afterEach(): Unit =
-      quitBrowser()
-  
+  def btaPageTitle(): Unit = {
+    getTitle.contains(paperlessBtaHomePageTitle)
   }
+
+  def clickOnGetTaxLettersOnlineLink(): Unit = {
+    val getTaxLettersOnlineLink: By = By.id("Gettaxlettersonline")
+    click(getTaxLettersOnlineLink)
+    fluentWait
+  }
+
+}

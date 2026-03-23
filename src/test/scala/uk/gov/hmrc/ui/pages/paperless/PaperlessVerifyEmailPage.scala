@@ -14,8 +14,15 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs.tags
+package uk.gov.hmrc.ui.pages.paperless
 
-import org.scalatest.Tag
+import org.openqa.selenium.By
+import uk.gov.hmrc.ui.pages.BasePage
 
-object Wip extends Tag("Wip") {}
+object PaperlessVerifyEmailPage extends BasePage {
+  var paperlessEmailPageTitle: String = "Enter your email address"
+
+  def contineVerifyEmailAddressPage(): Unit = {
+    click(By.ByCssSelector("#main-content > div > div > div:nth-child(5) > a"))
+  }
+}
