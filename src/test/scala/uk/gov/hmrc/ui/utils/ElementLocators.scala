@@ -14,12 +14,44 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui
-
+package uk.gov.hmrc.ui.utils
 
 object ElementLocators {
-  
-    val signIn = ("#main-content > div > div > form > fieldset > button")
-    val clickOnPaperlessAdminLink = ("#main-content > div > div > div > ul > li > a")
 
-} 
+  val signIn                    = "#main-content > div > div > form > fieldset > button"
+  val clickOnPaperlessAdminLink = "#main-content > div > div > div > ul > li > a"
+  val clickOnMessageBrakeLink   = "#main-content > div > div > div > ul > li > b"
+  val getRedirectUrlId          = "redirectionUrl"
+  val getCredentialStrengthId   = "credentialStrength"
+  val getConfidenceLevelId      = "confidenceLevel"
+  val getNinoId                 = "nino"
+  val onlineRadioButtonId       = "sps-opt-in"
+  val postRadioButtonId         = "sps-opt-in-2"
+  val getEmailTextFieldId       = "sps-opt-in-email"
+  val saUtrRadioButtonId        = "name"
+  val ninoRadioButtonId         = "name-2"
+  val ItsaIdRadioButtonId       = "name-3"
+  val emailIdRadioButtonId      = "name-4"
+  val identifierValueTextId     = "value"
+  val optUserOutLinkCssSelector = "#main-content > div > div > details > summary > span"
+  val optOutUserReasonTextId    = "reason"
+  val yesButtonOnSummaryPage    = "#confirm > form > div.govuk-button-group > button"
+  val searchButtonOnSearchPage  = "#main-content > div > div > form > button"
+  val uniqueReferenceId         = "externalRef.id"
+  val messageSourceId           = "externalRef.source"
+  val taxIdentifierNameId       = "recipient.taxIdentifier.name"
+  val taxIdentifierValueId      = "recipient.taxIdentifier.value"
+  val regimeId                  = "recipient.regime"
+  val messageTypeId             = "messageType"
+  val alertQueueId              = "alertQueue"
+  val englishSubjectId          = "english-subject"
+  val welshSubjectId            = "english-subject"
+  val englishMessageId          = "english-message-content"
+  val welshMessageId            = "welsh-message-content"
+  val validFromId               = "validFrom"
+  val formIdId                  = "details.formId"
+  val issueDateId               = "details.issueDate"
+  val batchIdId                 = "details.batchId"
+  val sourceDataId              = "details.sourceData"
+
+}

@@ -17,7 +17,6 @@
 package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.By
-import org.openqa.selenium.support.ui.FluentWait
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.email
 import uk.gov.hmrc.ui.pages.BasePage
 

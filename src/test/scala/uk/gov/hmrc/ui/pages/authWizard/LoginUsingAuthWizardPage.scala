@@ -21,6 +21,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions
 import uk.gov.hmrc.configuration.TestEnvironment
 import uk.gov.hmrc.ui.pages.BasePage
 import uk.gov.hmrc.ui.pages.preferencesAdmin.PreferencesAdminPage.{click, sendKeys}
+import uk.gov.hmrc.ui.utils.ElementLocators.{getConfidenceLevelId, getCredentialStrengthId, getNinoId, getRedirectUrlId}
 import uk.gov.hmrc.ui.utils.TestData
 
 object LoginUsingAuthWizardPage extends BasePage with TestData {
@@ -43,7 +44,7 @@ object LoginUsingAuthWizardPage extends BasePage with TestData {
     val getConfidenceLevel: By = By.id(getConfidenceLevelId)
     val getNinoNumber: By = By.id(getNinoId)
 
-    sendKeys(getRedirectUrl, redirectUrlDemoFrontend+pta)
+    sendKeys(getRedirectUrl, digitalContactDemoFrontend+pta)
     selectByValue(getCredentialStrength, credentialStrength)
     selectByValue(getConfidenceLevel, confidenceLevel)
     sendKeys(getNinoNumber, ninoNumber)
@@ -61,7 +62,7 @@ object LoginUsingAuthWizardPage extends BasePage with TestData {
     val enrolmentNameId: By = By.id("input-0-0-name")
     val enrolmentValueId: By = By.id("input-0-0-value")
 
-      sendKeys(getRedirectUrl, redirectUrlDemoFrontend + bta)
+      sendKeys(getRedirectUrl, digitalContactDemoFrontend + bta)
       selectByValue(getCredentialStrength, credentialStrength)
       selectByValue(getConfidenceLevel, confidenceLevel)
       sendKeys(getNinoNumber, ninoNumber)

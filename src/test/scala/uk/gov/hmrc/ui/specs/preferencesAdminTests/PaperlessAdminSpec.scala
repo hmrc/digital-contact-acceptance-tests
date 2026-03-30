@@ -31,7 +31,7 @@ class PaperlessAdminSpec extends BaseSpec with TestData {
 
   Feature("Admin can opt-out the verified users") {
 
-    Scenario("Admin can opt-out the user who has already opted-in and verified using nino", PreferencesAdminTests) {
+    Scenario("Admin can opt-out the user who has already opted-in and verified using nino") {
       Given("I am logged into PTA account with nino enrolment and verify the email")
       deletePreferencesCollection()
       LoginUsingAuthWizardPage.pageLoad()
@@ -56,7 +56,7 @@ class PaperlessAdminSpec extends BaseSpec with TestData {
       PreferencesAdminUserSummaryPage.userOptOutSuccessfullyMessage()
     }
 
-    Scenario("Admin can opt-out the user who has already opted-in and verified using email", PreferencesAdminTests) {
+    Scenario("Admin can opt-out the user who has already opted-in and verified using email") {
       Given("I am logged into PTA account with nino enrolment and verify the email")
       deletePreferencesCollection()
       LoginUsingAuthWizardPage.pageLoad()
@@ -81,7 +81,7 @@ class PaperlessAdminSpec extends BaseSpec with TestData {
       PreferencesAdminUserSummaryPage.userOptOutSuccessfullyMessage()
     }
 
-    Scenario("Admin can opt-out the user who has already opted-in and verified using sautr", PreferencesAdminTests) {
+    Scenario("Admin can opt-out the user who has already opted-in and verified using sautr") {
       Given("I am logged into BTA account with nino & sautr enrolment and verify the email")
       deletePreferencesCollection()
       LoginUsingAuthWizardPage.pageLoad()
@@ -108,7 +108,7 @@ class PaperlessAdminSpec extends BaseSpec with TestData {
       PreferencesAdminUserSummaryPage.userOptOutSuccessfullyMessage()
     }
 
-    Scenario("Admin can view details for user opted-in with the same nino and with different sautr but can't opt-out that user using email", PreferencesAdminTests) {
+    Scenario("Admin can view details for user opted-in with the same nino and with different sautr but can't opt-out that user using email") {
       Given("I am logged into BTA account with nino & sautr enrolment and verify the email")
       deletePreferencesCollection()
       LoginUsingAuthWizardPage.pageLoad()
@@ -137,7 +137,7 @@ class PaperlessAdminSpec extends BaseSpec with TestData {
 //      PreferencesAdminUserSummaryPage.optOutUserLinkMissing()
     }
 
-    Scenario("Admin can view details for user opted-in with the same nino and with different sautr & opt-out that user using sautr", PreferencesAdminTests) {
+    Scenario("Admin can view details for user opted-in with the same nino and with different sautr & opt-out that user using sautr") {
       Given("I am logged into BTA account with nino & sautr enrolment and verify the email")
       deletePreferencesCollection()
       LoginUsingAuthWizardPage.pageLoad()
@@ -170,7 +170,7 @@ class PaperlessAdminSpec extends BaseSpec with TestData {
       PreferencesAdminUserSummaryPage.userOptOutSuccessfullyMessage()
     }
 
-    Scenario("Admin can view details for user opted-in with the same nino and with different sautr & opt-out that user using nino", PreferencesAdminTests) {
+    Scenario("Admin can view details for user opted-in with the same nino and with different sautr & opt-out that user using nino") {
       Given("I am logged into BTA account with nino & sautr enrolment and verify the email")
       deletePreferencesCollection()
       LoginUsingAuthWizardPage.pageLoad()

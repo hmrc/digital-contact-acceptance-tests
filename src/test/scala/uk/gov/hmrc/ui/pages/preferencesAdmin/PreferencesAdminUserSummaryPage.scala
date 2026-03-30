@@ -18,7 +18,6 @@ package uk.gov.hmrc.ui.pages.preferencesAdmin
 
 import org.openqa.selenium.By
 import uk.gov.hmrc.ui.pages.BasePage
-import uk.gov.hmrc.ui.ElementLocators
 import uk.gov.hmrc.ui.pages.preferencesAdmin.PreferencesAdminSummaryPage.optUserOutLinkSelector
 
 object PreferencesAdminUserSummaryPage extends BasePage {

@@ -26,7 +26,7 @@ class AdminLoginSpec extends BaseSpec {
 
   Feature("Preferences Admin Login Tests"){
 
-    Scenario("Login into admin as admin", PreferencesAdminTests){
+    Scenario("Login into admin as admin"){
       Given("I am on the auth wizard page")
       PreferencesAdminPage.loadPage()
 
@@ -40,7 +40,7 @@ class AdminLoginSpec extends BaseSpec {
       PreferencesAdminPage.adminHomePage()
     }
 
-    Scenario("Login into admin as user", PreferencesAdminTests) {
+    Scenario("Login into admin as user") {
       Given("I am on the auth wizard page")
       PreferencesAdminPage.loadPage()
 
