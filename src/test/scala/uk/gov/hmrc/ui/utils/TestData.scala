@@ -43,9 +43,26 @@ trait TestData {
   val email: String = "testuser@gmail.com"
   val optOutReasonText: String = "for testing purpose"
 
-  def redirectUrlDemoFrontend: String =TestEnvironment.url("demo-frontend")
-  def deleteAllPreferencesCollection(): String = TestEnvironment.url("preferences")
-  def saApiProxy(): String = TestEnvironment.url("sa-api-proxy")
-  def preferenceFrontend(): String = TestEnvironment.url("preferences-frontend")
+  val referenceIdValue: String = "1234243234242234"
+  val sourceValue: String = "gmc"
+  val taxIdentifierNameValue: String = "nino"
+  val regimeValue: String = "paye"
+  val messageTypeValue: String = "mailout-batch"
+  val alertQueueValue: String = "DEFAULT"
+  val englishSubjectValue: String = "Reminder to file Self Assessment return"
+  val englishContentValue: String =
+    "PGgxPlRlc3QgTWVzc2FnZTxoMT4NCg0KPHNjcmlwdD53aW5kb3cuYWxlcnQoIkhlbGxvIik8L3NjcmlwdD4NCg0KPGgyPk5vIHBvcCB1cCBzaG91bGQgYXBwZWFyPC9oMj4NCg0KPHAgc3R5bGU9ImZvbnQtc2l6ZTogMTlweDtsaW5lLWhlaWdodDogMS4zMTU3ODk0NzQ7bWFyZ2luOiAwIDAgMzBweCAwOyI+DQogICAgRGVhciBDdXN0b21lcg0KPC9wPg0KDQo8cD5UaGlzIGlzIHlvdXIgbWVzc2FnZTwvcD4="
+  val validFromValue: String = "2026-03-09"
+  val invalidFormIdValue: String = "Test312"
+  val batchIdValue: String = "1234567"
+  val sourceDataValue: String = "ew0KICAgIm5hbWUiOiAiRGFuaWVsIiwNCiAgICJzZWF0IiA6ICJ5ZXMiDQp9"
+
+
+  val digitalContactDemoFrontend: String =TestEnvironment.url("demo-frontend")
+  val saApiProxy: String = TestEnvironment.url("sa-api-proxy")
+  val preferenceFrontend: String = TestEnvironment.url("preferences-frontend")
+  val preferences: String = TestEnvironment.url("preferences")
+  val secureMessage: String = TestEnvironment.url("secure-message")
+  val externalMessageAdapter: String   = TestEnvironment.url("external-message-adapter")
 
 }

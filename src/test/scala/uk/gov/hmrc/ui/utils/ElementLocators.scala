@@ -21,5 +21,5 @@ object ElementLocators {
   
     val signIn = ("#main-content > div > div > form > fieldset > button")
     val clickOnPaperlessAdminLink = ("#main-content > div > div > div > ul > li > a")
-
-} 
+    val clickOnMessageBrakeLink = ("#main-content > div > div > div > ul > li:nth-child(2) > a")
+}

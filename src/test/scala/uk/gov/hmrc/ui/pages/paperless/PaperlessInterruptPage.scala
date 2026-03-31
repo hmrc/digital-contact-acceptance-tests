@@ -22,7 +22,7 @@ import uk.gov.hmrc.ui.pages.BasePage
 object PaperlessInterruptPage extends BasePage {
   var paperlessPageTitle: String = "Choose how to get your tax letters"
   
-  def fillIntrruptPageForOptin(): Unit = {
+  def fillInterruptPageForOptin(): Unit = {
     val getOnlineRadioButton: By = By.id(onlineRadioButtonId)
     selectCheckbox(getOnlineRadioButton)
     click(By.id("submitEmailButton"))

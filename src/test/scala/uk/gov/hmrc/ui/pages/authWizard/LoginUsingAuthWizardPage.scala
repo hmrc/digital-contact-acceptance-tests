@@ -21,13 +21,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions
 import uk.gov.hmrc.configuration.TestEnvironment
 import uk.gov.hmrc.ui.pages.BasePage
 import uk.gov.hmrc.ui.pages.preferencesAdmin.PreferencesAdminPage.{click, sendKeys}
-import uk.gov.hmrc.ui.utils.TestData
 
-object LoginUsingAuthWizardPage extends BasePage with TestData {
+
+object LoginUsingAuthWizardPage extends BasePage {
 
   private val authWizardBaseUrl: String = TestEnvironment.url("auth-wizard")
   val saApiProxyBaseUrl: String = TestEnvironment.url("sa-api-proxy")
   var authPageTitle: String = "Authority Wizard"
+  val v4Message: String = digitalContactDemoFrontend + "/v4-message"
 
   def pageLoad(): Unit = {
     get(authWizardBaseUrl)
@@ -43,11 +44,10 @@ object LoginUsingAuthWizardPage extends BasePage with TestData {
     val getConfidenceLevel: By = By.id(getConfidenceLevelId)
     val getNinoNumber: By = By.id(getNinoId)
 
-    sendKeys(getRedirectUrl, redirectUrlDemoFrontend+pta)
+    sendKeys(getRedirectUrl, digitalContactDemoFrontend + pta)
     selectByValue(getCredentialStrength, credentialStrength)
     selectByValue(getConfidenceLevel, confidenceLevel)
     sendKeys(getNinoNumber, ninoNumber)
-
     click(By.id("submit"))
     fluentWait
   }
@@ -61,7 +61,7 @@ object LoginUsingAuthWizardPage extends BasePage with TestData {
     val enrolmentNameId: By = By.id("input-0-0-name")
     val enrolmentValueId: By = By.id("input-0-0-value")
 
-      sendKeys(getRedirectUrl, redirectUrlDemoFrontend + bta)
+      sendKeys(getRedirectUrl, digitalContactDemoFrontend + bta)
       selectByValue(getCredentialStrength, credentialStrength)
       selectByValue(getConfidenceLevel, confidenceLevel)
       sendKeys(getNinoNumber, ninoNumber)
@@ -76,5 +76,12 @@ object LoginUsingAuthWizardPage extends BasePage with TestData {
     click(By.id("submit"))
     fluentWait
   }
-  
+
+  def logIntoDemoFrontendForV4(): Unit = {
+    pageLoad()
+    val getRedirectUrl: By = By.id(getRedirectUrlId)
+    sendKeys(getRedirectUrl, v4Message)
+    click(By.id("submit"))
+    fluentWait
+  }
 }

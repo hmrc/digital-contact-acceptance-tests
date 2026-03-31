@@ -24,17 +24,16 @@ import play.api.libs.ws.StandaloneWSRequest
 import play.api.libs.ws.ahc.StandaloneAhcWSClient
 import uk.gov.hmrc.selenium.component.PageObject
 import uk.gov.hmrc.selenium.webdriver.Driver
-import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.{deleteAllPreferencesCollection, ninoNumber, preferenceFrontend, saApiProxy}
-
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.concurrent.ScalaFutures.convertScalaFuture
 import org.scalatest.time.{Seconds, Span}
 import play.api.libs.json.Json
+import uk.gov.hmrc.ui.utils.TestData
 
 import java.time.Duration
 import scala.concurrent.Future
 
-trait BasePage extends PageObject {
+trait BasePage extends PageObject with TestData {
 
   implicit val patienceConfig: PatienceConfig =
     PatienceConfig(timeout = Span(10, Seconds), interval = Span(5, Seconds))
@@ -61,33 +60,53 @@ trait BasePage extends PageObject {
   val optOutUserReasonTextId = "reason"
   val yesButtonOnSummaryPage = "#confirm > form > div.govuk-button-group > button"
   val searchButtonOnSearchPage = "#main-content > div > div > form > button"
+  val uniqueReferenceId = "externalRef.id"
+  val messageSourceId = "externalRef.source"
+  val taxIdentifierNameId = "recipient.taxIdentifier.name"
+  val taxIdentifierValueId = "recipient.taxIdentifier.value"
+  val regimeId = "recipient.regime"
+  val emailId = "recipient.email"
+  val messageTypeId = "messageType"
+  val alertQueueId = "alertQueue"
+  val englishSubjectId = "english-subject"
+  val welshSubjectId = "english-subject"
+  val englishMessageId = "english-message-content"
+  val welshMessageId = "welsh-message-content"
+  val validFromId = "validFrom"
+  val formIdId = "details.formId"
+  val issueDateId = "details.issueDate"
+  val batchIdId = "details.batchId"
+  val sourceDataId = "details.sourceData"
 
   def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
     .withTimeout(Duration.ofSeconds(3))
     .pollingEvery(Duration.ofSeconds(1))
 
-  def deletePreferencesCollection(): Unit = {
-    val deletePreferencesRecords: String = deleteAllPreferencesCollection() + "test-only/preferences-admin/print-suppression"
-    WsClient.url(deletePreferencesRecords).delete()
+  def deleteMongoRecordsFromCollection(serviceCollection: String): Unit = {
+    val deletePreferencesRecords: String = preferences+ "test-only/preferences-admin/print-suppression"
+    val deleteSecureMessageRecords: String = secureMessage + "test-only/delete/secure-messages"
+
+    val collectionMatch = serviceCollection.toLowerCase() match {
+      case "preferences" =>   WsClient.url(deletePreferencesRecords).delete()
+      case "secure message" =>  WsClient.url(deleteSecureMessageRecords).delete()
+    }
     fluentWait
   }
 
   def verifyEmail(): Unit = {
 
     //To get entity ID via sa-api proxy
-    val entityIdUrl: String = saApiProxy() + (("/entity-resolver/entity-resolver/paye/")+ninoNumber)
+    val entityIdUrl: String = saApiProxy + (("/entity-resolver/entity-resolver/paye/")+ninoNumber)
     val entityIdUrlResponse: Future[StandaloneWSRequest#Response] = WsClient.url(entityIdUrl).get()
     val resultBody = entityIdUrlResponse.futureValue.body
     val bodyAsJson = (Json.parse(resultBody).\("_id")).toString
     val extractedEntityId = bodyAsJson.replaceAll(entityIdRegex, "")
-
     //To get verificaton token via sa-api proxy
-    val verificationTokenUrl: String = saApiProxy() + (s"/preferences/test-only/preferences-admin/$extractedEntityId/verification-token")
+    val verificationTokenUrl: String = saApiProxy + (s"/preferences/test-only/preferences-admin/$extractedEntityId/verification-token")
     val getToken: Future[StandaloneWSRequest#Response] = WsClient.url(verificationTokenUrl).get()
     val verificationToken = getToken.futureValue.body
-
     //To verify email address using token
-    val emailVerificationUrl: String = preferenceFrontend()+(s"sa/print-preferences/verification/$verificationToken")
+    val emailVerificationUrl: String = preferenceFrontend + (s"sa/print-preferences/verification/$verificationToken")
     val emailVerification = WsClient.url(emailVerificationUrl).get()
     fluentWait
   }
