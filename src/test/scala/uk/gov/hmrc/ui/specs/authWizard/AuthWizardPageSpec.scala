@@ -21,11 +21,10 @@ import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.Wip
 
-
 class AuthWizardPageSpec extends BaseSpec {
 
-  Feature("To test Auth wizard page"){
-    Scenario("Validate page title of auth wizard"){
+  Feature("To test Auth wizard page") {
+    Scenario("Validate page title of auth wizard") {
       Given("I am on the auth wizard page")
       LoginUsingAuthWizardPage.pageLoad()
 

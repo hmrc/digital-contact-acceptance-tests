@@ -20,14 +20,14 @@ import org.openqa.selenium.By
 import uk.gov.hmrc.ui.pages.BasePage
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.*
 
-object GmcMessages extends BasePage  {
+object GmcMessages extends BasePage {
 
   val referenceId: String        = uniqueReferenceId
   val sourceType: String         = messageSourceId
   val taxIdentifierName: String  = taxIdentifierNameId
   val taxIdentifierValue: String = taxIdentifierValueId
   val regime: String             = regimeId
-  val userEmail: String              = emailId
+  val userEmail: String          = emailId
   val messageType: String        = messageTypeId
   val alertQueue: String         = alertQueueId
   val englishSubject: String     = englishSubjectId
@@ -40,13 +40,13 @@ object GmcMessages extends BasePage  {
 
   def createV4Message(messageType: String): Unit = {
     logIntoDemoFrontendForV4()
-    val message: Unit     = messageType.toLowerCase match {
+    val message: Unit = messageType.toLowerCase match {
       case "invalid formid" => fillFormWithInvalidFormId()
     }
     click(By.id("submit-button"))
   }
 
-  def fillFormWithInvalidFormId(): Unit           = {
+  def fillFormWithInvalidFormId(): Unit = {
     val referenceIdInputField: By     = By.id(referenceId)
     val sourceInputField: By          = By.id(sourceType)
     val identifierNameInputField: By  = By.id(taxIdentifierName)
@@ -78,7 +78,6 @@ object GmcMessages extends BasePage  {
     sendKeys(issueDateInputField, validFromValue)
     sendKeys(batchIdInputField, batchIdValue)
     sendKeys(sourceDataIdInputField, sourceDataValue)
-    
-  }
 
+  }
 }

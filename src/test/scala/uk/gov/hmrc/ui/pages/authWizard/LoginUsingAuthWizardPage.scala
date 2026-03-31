@@ -22,13 +22,12 @@ import uk.gov.hmrc.configuration.TestEnvironment
 import uk.gov.hmrc.ui.pages.BasePage
 import uk.gov.hmrc.ui.pages.preferencesAdmin.PreferencesAdminPage.{click, sendKeys}
 
-
 object LoginUsingAuthWizardPage extends BasePage {
 
   private val authWizardBaseUrl: String = TestEnvironment.url("auth-wizard")
-  val saApiProxyBaseUrl: String = TestEnvironment.url("sa-api-proxy")
-  var authPageTitle: String = "Authority Wizard"
-  val v4Message: String = digitalContactDemoFrontend + "/v4-message"
+  val saApiProxyBaseUrl: String         = TestEnvironment.url("sa-api-proxy")
+  var authPageTitle: String             = "Authority Wizard"
+  val v4Message: String                 = digitalContactDemoFrontend + "/v4-message"
 
   def pageLoad(): Unit = {
     get(authWizardBaseUrl)
@@ -37,12 +36,12 @@ object LoginUsingAuthWizardPage extends BasePage {
 
   def pageTitle(): Unit =
     getTitle
-  
+
   def loginPTAUsingAuthWizardByNinoOnly(): Unit = {
-    val getRedirectUrl: By = By.id(getRedirectUrlId)
+    val getRedirectUrl: By        = By.id(getRedirectUrlId)
     val getCredentialStrength: By = By.id(getCredentialStrengthId)
-    val getConfidenceLevel: By = By.id(getConfidenceLevelId)
-    val getNinoNumber: By = By.id(getNinoId)
+    val getConfidenceLevel: By    = By.id(getConfidenceLevelId)
+    val getNinoNumber: By         = By.id(getNinoId)
 
     sendKeys(getRedirectUrl, digitalContactDemoFrontend + pta)
     selectByValue(getCredentialStrength, credentialStrength)
@@ -53,26 +52,26 @@ object LoginUsingAuthWizardPage extends BasePage {
   }
 
   def loginIntoAccountByAuthWizard(enrolmentType: String): Unit = {
-    val getRedirectUrl: By = By.id(getRedirectUrlId)
+    val getRedirectUrl: By        = By.id(getRedirectUrlId)
     val getCredentialStrength: By = By.id(getCredentialStrengthId)
-    val getConfidenceLevel: By = By.id(getConfidenceLevelId)
-    val getNinoNumber: By = By.id(getNinoId)
-    val enrolmentKeyId: By = By.id("enrolment[0].name")
-    val enrolmentNameId: By = By.id("input-0-0-name")
-    val enrolmentValueId: By = By.id("input-0-0-value")
+    val getConfidenceLevel: By    = By.id(getConfidenceLevelId)
+    val getNinoNumber: By         = By.id(getNinoId)
+    val enrolmentKeyId: By        = By.id("enrolment[0].name")
+    val enrolmentNameId: By       = By.id("input-0-0-name")
+    val enrolmentValueId: By      = By.id("input-0-0-value")
 
-      sendKeys(getRedirectUrl, digitalContactDemoFrontend + bta)
-      selectByValue(getCredentialStrength, credentialStrength)
-      selectByValue(getConfidenceLevel, confidenceLevel)
-      sendKeys(getNinoNumber, ninoNumber)
-      sendKeys(enrolmentKeyId, enrolmentKey)
-      sendKeys(enrolmentNameId, identifierName)
+    sendKeys(getRedirectUrl, digitalContactDemoFrontend + bta)
+    selectByValue(getCredentialStrength, credentialStrength)
+    selectByValue(getConfidenceLevel, confidenceLevel)
+    sendKeys(getNinoNumber, ninoNumber)
+    sendKeys(enrolmentKeyId, enrolmentKey)
+    sendKeys(enrolmentNameId, identifierName)
 
-      val enrolmentValue = enrolmentType match {
-        case "sautr" => sendKeys(enrolmentValueId, identifierValue)
-        case "sautr2" => sendKeys(enrolmentValueId, identifierValue2)
-        case _ => throw new IllegalArgumentException(s"Unknown UTR Value")
-      }
+    val enrolmentValue = enrolmentType match {
+      case "sautr"  => sendKeys(enrolmentValueId, identifierValue)
+      case "sautr2" => sendKeys(enrolmentValueId, identifierValue2)
+      case _        => throw new IllegalArgumentException(s"Unknown UTR Value")
+    }
     click(By.id("submit"))
     fluentWait
   }

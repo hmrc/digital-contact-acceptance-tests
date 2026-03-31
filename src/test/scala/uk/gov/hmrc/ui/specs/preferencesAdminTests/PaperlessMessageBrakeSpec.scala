@@ -22,12 +22,10 @@ import uk.gov.hmrc.ui.pages.messages.GmcMessages.*
 import uk.gov.hmrc.ui.pages.paperless.*
 import uk.gov.hmrc.ui.pages.preferencesAdmin.*
 import uk.gov.hmrc.ui.specs.BaseSpec
-import uk.gov.hmrc.ui.specs.tags.{PreferencesAdminTests, Wip}
+import uk.gov.hmrc.ui.specs.tags.PreferencesAdminTests
 import uk.gov.hmrc.ui.utils.TestData
 
 class PaperlessMessageBrakeSpec extends BaseSpec with TestData {
-
-
 
   Feature("Message Brake test via Preferences Admin Frontend") {
 

@@ -21,12 +21,11 @@ import uk.gov.hmrc.ui.pages.BasePage
 
 object PaperlessBTAHomePage extends BasePage {
 
-  //This is BTA home page for paperless journey using digital-contact-demo-frontend
+  // This is BTA home page for paperless journey using digital-contact-demo-frontend
   var paperlessBtaHomePageTitle: String = "Business Tax Account"
-  
-  def btaPageTitle(): Unit = {
+
+  def btaPageTitle(): Unit =
     getTitle.contains(paperlessBtaHomePageTitle)
-  }
 
   def clickOnGetTaxLettersOnlineLink(): Unit = {
     val getTaxLettersOnlineLink: By = By.id("Gettaxlettersonline")

@@ -23,9 +23,8 @@ object PreferencesMessageBrakePage extends BasePage {
 
   var searchPageTitle: String = "Unverified Message Request FormIDs"
 
-  def pageTitle(): Unit = {
+  def pageTitle(): Unit =
     getTitle
-  }
 
   def selectFormIdAndClickOnApproveButton(): Unit = {
     val selectFormId: By = By.id("Test312")

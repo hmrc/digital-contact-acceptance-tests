@@ -19,22 +19,21 @@ package uk.gov.hmrc.ui.pages.preferencesAdmin
 import org.openqa.selenium.By
 import org.openqa.selenium.support.ui.ExpectedConditions
 import uk.gov.hmrc.configuration.TestEnvironment
-import uk.gov.hmrc.ui.ElementLocators.{clickOnMessageBrakeLink, clickOnPaperlessAdminLink, signIn}
+import uk.gov.hmrc.ui.ElementLocators.*
 import uk.gov.hmrc.ui.pages.BasePage
 
 object PreferencesAdminPage extends BasePage {
-  private val url: String = TestEnvironment.url("preferences-admin-frontend")
+  private val url: String   = TestEnvironment.url("preferences-admin-frontend")
   var authPageTitle: String = "Home"
-  var homePage: String = "home"
+  var homePage: String      = "home"
 
   def loadPage(): Unit = {
     get(url)
     fluentWait.until(ExpectedConditions.urlContains(url))
   }
 
-  def pageTitle(): Unit = {
+  def pageTitle(): Unit =
     getTitle
-  }
 
   def adminLogin(): Unit = {
     val adminUsername: By = By.id("username")
@@ -56,7 +55,7 @@ object PreferencesAdminPage extends BasePage {
 
   def adminHomePage(): Unit = {
     val currentLocation: String = getCurrentUrl
-    assert(currentLocation.equals(url+homePage))
+    assert(currentLocation.equals(url + homePage))
     assert(getPageSource.contains("Paperless Admin"))
     assert(getPageSource.contains("Message Brake"))
     assert(getPageSource.contains("Message Brake Allowlist"))
@@ -80,5 +79,11 @@ object PreferencesAdminPage extends BasePage {
   def clickOnMessageBrake(): Unit = {
     click(By.ByCssSelector(clickOnMessageBrakeLink))
     fluentWait
+  }
+
+  def clickOnMessageBrakeAllowlist(): Unit = {
+    click(By.ByCssSelector(clickOnMessageBrakeAllowlistLink))
+    fluentWait
+    Thread.sleep(2000)
   }
 }

@@ -23,14 +23,13 @@ import PreferencesAdminUserSummaryPage.{fluentWait, getTitle}
 
 object PreferencesAdminSummaryPage extends BasePage {
 
-  var searchPageTitle: String = "User Summary"
+  var searchPageTitle: String        = "User Summary"
   val optUserOutLinkSelector: String = optUserOutLinkCssSelector
-  val optOutUserReasonId: String = optOutUserReasonTextId
-  val optUserOutReason: String = optOutReasonText
+  val optOutUserReasonId: String     = optOutUserReasonTextId
+  val optUserOutReason: String       = optOutReasonText
 
-  def pageTitle(): Unit = {
+  def pageTitle(): Unit =
     getTitle
-  }
 
   def clickOnOptUserOutLink(): Unit = {
     click(By.cssSelector(optUserOutLinkSelector))

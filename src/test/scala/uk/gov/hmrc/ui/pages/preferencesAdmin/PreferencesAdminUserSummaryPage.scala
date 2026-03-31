@@ -24,9 +24,8 @@ object PreferencesAdminUserSummaryPage extends BasePage {
 
   var searchPageTitle: String = "User Summary"
 
-  def pageTitle(): Unit = {
+  def pageTitle(): Unit =
     getTitle
-  }
 
   def userOptOutSuccessfullyMessage(): Unit = {
     getPageSource.contains("You successfully opted out the user in the below summary")

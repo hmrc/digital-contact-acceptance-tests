@@ -26,8 +26,6 @@ import uk.gov.hmrc.ui.specs.BaseSpec
 
 class PaperlessAdminSpec extends BaseSpec {
 
-
-
   Feature("Admin can opt-out the verified users") {
 
     Scenario("Admin can opt-out the user who has already opted-in and verified using nino", PreferencesAdminTests) {
@@ -107,7 +105,10 @@ class PaperlessAdminSpec extends BaseSpec {
       PreferencesAdminUserSummaryPage.userOptOutSuccessfullyMessage()
     }
 
-    Scenario("Admin can view details for user opted-in with the same nino and with different sautr but can't opt-out that user using email", PreferencesAdminTests) {
+    Scenario(
+      "Admin can view details for user opted-in with the same nino and with different sautr but can't opt-out that user using email",
+      PreferencesAdminTests
+    ) {
       Given("I am logged into BTA account with nino & sautr enrolment and verify the email")
       deleteMongoRecordsFromCollection("Preferences")
       LoginUsingAuthWizardPage.pageLoad()
@@ -136,7 +137,10 @@ class PaperlessAdminSpec extends BaseSpec {
 //      PreferencesAdminUserSummaryPage.optOutUserLinkMissing()
     }
 
-    Scenario("Admin can view details for user opted-in with the same nino and with different sautr & opt-out that user using sautr", PreferencesAdminTests) {
+    Scenario(
+      "Admin can view details for user opted-in with the same nino and with different sautr & opt-out that user using sautr",
+      PreferencesAdminTests
+    ) {
       Given("I am logged into BTA account with nino & sautr enrolment and verify the email")
       deleteMongoRecordsFromCollection("Preferences")
       LoginUsingAuthWizardPage.pageLoad()
@@ -169,7 +173,10 @@ class PaperlessAdminSpec extends BaseSpec {
       PreferencesAdminUserSummaryPage.userOptOutSuccessfullyMessage()
     }
 
-    Scenario("Admin can view details for user opted-in with the same nino and with different sautr & opt-out that user using nino", PreferencesAdminTests) {
+    Scenario(
+      "Admin can view details for user opted-in with the same nino and with different sautr & opt-out that user using nino",
+      PreferencesAdminTests
+    ) {
       Given("I am logged into BTA account with nino & sautr enrolment and verify the email")
       deleteMongoRecordsFromCollection("Preferences")
       LoginUsingAuthWizardPage.pageLoad()

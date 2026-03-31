@@ -23,16 +23,15 @@ import PreferencesAdminUserSummaryPage.{fluentWait, getTitle}
 
 object PreferencesAdminSearchPage extends BasePage {
 
-  var searchPageTitle: String = "Customer Identification"
-  val saUtrRadioButton: String = saUtrRadioButtonId
-  val ninoRadioButton: String = ninoRadioButtonId
-  val ItsaIdRadioButton: String = ItsaIdRadioButtonId
-  val emailIdRadioButton: String = emailIdRadioButtonId
+  var searchPageTitle: String     = "Customer Identification"
+  val saUtrRadioButton: String    = saUtrRadioButtonId
+  val ninoRadioButton: String     = ninoRadioButtonId
+  val ItsaIdRadioButton: String   = ItsaIdRadioButtonId
+  val emailIdRadioButton: String  = emailIdRadioButtonId
   val identifierValueText: String = identifierValueTextId
 
-  def pageTitle(): Unit = {
+  def pageTitle(): Unit =
     getTitle
-  }
 
   def selectNinoRadioOption(): Unit = {
     val selectNino: By = By.id(ninoRadioButton)
