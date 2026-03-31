@@ -22,7 +22,6 @@ import uk.gov.hmrc.ui.pages.BasePage
 object PaperlessVerifyEmailPage extends BasePage {
   var paperlessEmailPageTitle: String = "Enter your email address"
 
-  def contineVerifyEmailAddressPage(): Unit = {
+  def contineVerifyEmailAddressPage(): Unit =
     click(By.ByCssSelector("#main-content > div > div > div:nth-child(5) > a"))
-  }
 }

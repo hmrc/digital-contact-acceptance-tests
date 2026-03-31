@@ -21,21 +21,17 @@ import uk.gov.hmrc.ui.pages.preferencesAdmin.PreferencesAdminPage
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.PreferencesAdminTests
 
-
 class AdminLoginSpec extends BaseSpec {
 
-  Feature("Preferences Admin Login Tests"){
+  Feature("Preferences Admin Login Tests") {
 
-    Scenario("Login into admin as admin", PreferencesAdminTests){
+    Scenario("Login into admin as admin", PreferencesAdminTests) {
       Given("I am on the auth wizard page")
       PreferencesAdminPage.loadPage()
-
       When("I enter the admin login details")
       PreferencesAdminPage.adminLogin()
-
       Then("I should see the admin page title")
       PreferencesAdminPage.pageTitle()
-      
       And("I should be on admin home page")
       PreferencesAdminPage.adminHomePage()
     }
@@ -43,13 +39,10 @@ class AdminLoginSpec extends BaseSpec {
     Scenario("Login into admin as user", PreferencesAdminTests) {
       Given("I am on the auth wizard page")
       PreferencesAdminPage.loadPage()
-
       When("I enter the user login details")
       PreferencesAdminPage.userLogin()
-
       Then("I should see the user page title")
       PreferencesAdminPage.pageTitle()
-
       And("I should be on user home page")
       PreferencesAdminPage.userHomePage()
     }

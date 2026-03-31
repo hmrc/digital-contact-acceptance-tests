@@ -17,24 +17,30 @@
 package uk.gov.hmrc.ui.pages.preferencesAdmin
 
 import org.openqa.selenium.By
+import uk.gov.hmrc.ui.ElementLocators.clickOnMessageDecode
 import uk.gov.hmrc.ui.pages.BasePage
-import uk.gov.hmrc.ui.pages.preferencesAdmin.PreferencesAdminSummaryPage.optUserOutLinkSelector
 
-object PreferencesAdminUserSummaryPage extends BasePage {
+object PreferencesMessageDecodePage extends BasePage {
 
-  var searchPageTitle: String = "User Summary"
+  var searchPageTitle: String = "Decode from Base64 encoded format"
 
   def pageTitle(): Unit =
     getTitle
 
-  def userOptOutSuccessfullyMessage(): Unit = {
-    getPageSource.contains("You successfully opted out the user in the below summary")
+  def clickOnMessageDecodeLink(): Unit = {
+    click(By.cssSelector(clickOnMessageDecode))
     fluentWait
   }
 
-  def optOutUserLinkMissing(): Unit = {
-    val optOutUserLink: By = By.ByCssSelector(optUserOutLinkSelector)
-    getText(optOutUserLink).empty
+  def enterBase64EncodedText(): Unit = {
+    val base64EncodedTextId: By = By.id(encodedTextId)
+    sendKeys(base64EncodedTextId, englishContentValue)
+    click(By.id(decodeButtonId))
+    fluentWait
+  }
 
+  def messageDecodedTextCheck(): Unit = {
+    getText(By.cssSelector("#encoded-text")).contains("Test Message")
+    fluentWait
   }
 }

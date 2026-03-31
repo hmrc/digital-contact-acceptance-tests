@@ -19,24 +19,21 @@ package uk.gov.hmrc.ui.specs.preferencesAdminTests
 import uk.gov.hmrc.ui.specs.tags.PreferencesAdminTests
 import org.scalatest.featurespec.AnyFeatureSpec
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
-import uk.gov.hmrc.ui.pages.paperless.PaperlessEmailPage.{verifyEmail, deletePreferencesCollection}
-import uk.gov.hmrc.ui.pages.paperless.{PaperlessBTAHomePage, PaperlessEmailPage, PaperlessInterruptPage}
-import uk.gov.hmrc.ui.pages.preferencesAdmin.{PreferencesAdminPage, PreferencesAdminSearchPage, PreferencesAdminSummaryPage, PreferencesAdminUserSummaryPage}
+import uk.gov.hmrc.ui.pages.messages.GmcMessages.{deleteMongoRecordsFromCollection, verifyEmail}
+import uk.gov.hmrc.ui.pages.paperless.*
+import uk.gov.hmrc.ui.pages.preferencesAdmin.*
 import uk.gov.hmrc.ui.specs.BaseSpec
-import uk.gov.hmrc.ui.utils.TestData
 
-class PaperlessAdminSpec extends BaseSpec with TestData {
-
-
+class PaperlessAdminSpec extends BaseSpec {
 
   Feature("Admin can opt-out the verified users") {
 
     Scenario("Admin can opt-out the user who has already opted-in and verified using nino", PreferencesAdminTests) {
       Given("I am logged into PTA account with nino enrolment and verify the email")
-      deletePreferencesCollection()
+      deleteMongoRecordsFromCollection("Preferences")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginPTAUsingAuthWizardByNinoOnly()
-      PaperlessInterruptPage.fillIntrruptPageForOptin()
+      PaperlessInterruptPage.fillInterruptPageForOptin()
       PaperlessEmailPage.fillEmailPage()
       verifyEmail()
       When("Admin log into the preferences admin")
@@ -58,10 +55,10 @@ class PaperlessAdminSpec extends BaseSpec with TestData {
 
     Scenario("Admin can opt-out the user who has already opted-in and verified using email", PreferencesAdminTests) {
       Given("I am logged into PTA account with nino enrolment and verify the email")
-      deletePreferencesCollection()
+      deleteMongoRecordsFromCollection("Preferences")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginPTAUsingAuthWizardByNinoOnly()
-      PaperlessInterruptPage.fillIntrruptPageForOptin()
+      PaperlessInterruptPage.fillInterruptPageForOptin()
       PaperlessEmailPage.fillEmailPage()
       verifyEmail()
       When("Admin log into the preferences admin")
@@ -83,12 +80,12 @@ class PaperlessAdminSpec extends BaseSpec with TestData {
 
     Scenario("Admin can opt-out the user who has already opted-in and verified using sautr", PreferencesAdminTests) {
       Given("I am logged into BTA account with nino & sautr enrolment and verify the email")
-      deletePreferencesCollection()
+      deleteMongoRecordsFromCollection("Preferences")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr")
       PaperlessBTAHomePage.btaPageTitle()
       PaperlessBTAHomePage.clickOnGetTaxLettersOnlineLink()
-      PaperlessInterruptPage.fillIntrruptPageForOptin()
+      PaperlessInterruptPage.fillInterruptPageForOptin()
       PaperlessEmailPage.fillEmailPage()
       verifyEmail()
       When("Admin log into the preferences admin")
@@ -108,20 +105,23 @@ class PaperlessAdminSpec extends BaseSpec with TestData {
       PreferencesAdminUserSummaryPage.userOptOutSuccessfullyMessage()
     }
 
-    Scenario("Admin can view details for user opted-in with the same nino and with different sautr but can't opt-out that user using email", PreferencesAdminTests) {
+    Scenario(
+      "Admin can view details for user opted-in with the same nino and with different sautr but can't opt-out that user using email",
+      PreferencesAdminTests
+    ) {
       Given("I am logged into BTA account with nino & sautr enrolment and verify the email")
-      deletePreferencesCollection()
+      deleteMongoRecordsFromCollection("Preferences")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr")
       PaperlessBTAHomePage.clickOnGetTaxLettersOnlineLink()
-      PaperlessInterruptPage.fillIntrruptPageForOptin()
+      PaperlessInterruptPage.fillInterruptPageForOptin()
       PaperlessEmailPage.fillEmailPage()
       verifyEmail()
       And("I am logged into BTA account with nino & sautr2 enrolment and verify the email")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr2")
       PaperlessBTAHomePage.clickOnGetTaxLettersOnlineLink()
-      PaperlessInterruptPage.fillIntrruptPageForOptin()
+      PaperlessInterruptPage.fillInterruptPageForOptin()
       PaperlessEmailPage.fillEmailPage()
       verifyEmail()
       When("Admin log into the preferences admin")
@@ -137,20 +137,23 @@ class PaperlessAdminSpec extends BaseSpec with TestData {
 //      PreferencesAdminUserSummaryPage.optOutUserLinkMissing()
     }
 
-    Scenario("Admin can view details for user opted-in with the same nino and with different sautr & opt-out that user using sautr", PreferencesAdminTests) {
+    Scenario(
+      "Admin can view details for user opted-in with the same nino and with different sautr & opt-out that user using sautr",
+      PreferencesAdminTests
+    ) {
       Given("I am logged into BTA account with nino & sautr enrolment and verify the email")
-      deletePreferencesCollection()
+      deleteMongoRecordsFromCollection("Preferences")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr")
       PaperlessBTAHomePage.clickOnGetTaxLettersOnlineLink()
-      PaperlessInterruptPage.fillIntrruptPageForOptin()
+      PaperlessInterruptPage.fillInterruptPageForOptin()
       PaperlessEmailPage.fillEmailPage()
       verifyEmail()
       And("I am logged into BTA account with nino & sautr2 enrolment and verify the email")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr2")
       PaperlessBTAHomePage.clickOnGetTaxLettersOnlineLink()
-      PaperlessInterruptPage.fillIntrruptPageForOptin()
+      PaperlessInterruptPage.fillInterruptPageForOptin()
       PaperlessEmailPage.fillEmailPage()
       verifyEmail()
       When("Admin log into the preferences admin")
@@ -170,20 +173,23 @@ class PaperlessAdminSpec extends BaseSpec with TestData {
       PreferencesAdminUserSummaryPage.userOptOutSuccessfullyMessage()
     }
 
-    Scenario("Admin can view details for user opted-in with the same nino and with different sautr & opt-out that user using nino", PreferencesAdminTests) {
+    Scenario(
+      "Admin can view details for user opted-in with the same nino and with different sautr & opt-out that user using nino",
+      PreferencesAdminTests
+    ) {
       Given("I am logged into BTA account with nino & sautr enrolment and verify the email")
-      deletePreferencesCollection()
+      deleteMongoRecordsFromCollection("Preferences")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr")
       PaperlessBTAHomePage.clickOnGetTaxLettersOnlineLink()
-      PaperlessInterruptPage.fillIntrruptPageForOptin()
+      PaperlessInterruptPage.fillInterruptPageForOptin()
       PaperlessEmailPage.fillEmailPage()
       verifyEmail()
       And("I am logged into BTA account with nino & sautr2 enrolment and verify the email")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr2")
       PaperlessBTAHomePage.clickOnGetTaxLettersOnlineLink()
-      PaperlessInterruptPage.fillIntrruptPageForOptin()
+      PaperlessInterruptPage.fillInterruptPageForOptin()
       PaperlessEmailPage.fillEmailPage()
       verifyEmail()
       When("Admin log into the preferences admin")
