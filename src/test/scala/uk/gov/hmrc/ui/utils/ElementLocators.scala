@@ -24,4 +24,5 @@ object ElementLocators {
   val clickOnMessageBrakeAllowlistLink = "#main-content > div > div > div > ul > li:nth-child(3) > a"
   val clickOnAddNewFormButtonId        = "#main-content > div > div > form > div > button"
   val clickOnDeleteFormButtonId        = "#main-content > div > div > div:nth-child(8) > form > button"
+  val clickOnMessageDecode             = "#main-content > div > div > div > ul > li:nth-child(4) > a"
 }

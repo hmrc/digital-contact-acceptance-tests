@@ -31,18 +31,24 @@ trait TestData {
     }
   }
 
-  val credentialStrength: String = "strong"
-  val confidenceLevel: String    = "200"
-  val enrolmentKey: String       = "IR-SA"
-  val identifierName: String     = "UTR"
-  val identifierValue: String    = "1234567890"
-  val identifierValue2: String   = "1234567891"
-  val ninoNumber: String         = "YY000200A"
-  val pta: String                = "/personal-account"
-  val bta: String                = "/business-account"
-  val email: String              = "testuser@gmail.com"
-  val optOutReasonText: String   = "for testing purpose"
+  val digitalContactDemoFrontend: String = TestEnvironment.url("demo-frontend")
+  val saApiProxy: String                 = TestEnvironment.url("sa-api-proxy")
+  val preferenceFrontend: String         = TestEnvironment.url("preferences-frontend")
+  val preferences: String                = TestEnvironment.url("preferences")
+  val secureMessage: String              = TestEnvironment.url("secure-message")
+  val externalMessageAdapter: String     = TestEnvironment.url("external-message-adapter")
 
+  val credentialStrength: String     = "strong"
+  val confidenceLevel: String        = "200"
+  val enrolmentKey: String           = "IR-SA"
+  val identifierName: String         = "UTR"
+  val identifierValue: String        = "1234567890"
+  val identifierValue2: String       = "1234567891"
+  val ninoNumber: String             = "YY000200A"
+  val pta: String                    = "/personal-account"
+  val bta: String                    = "/business-account"
+  val email: String                  = "testuser@gmail.com"
+  val optOutReasonText: String       = "for testing purpose"
   val referenceIdValue: String       = "1234243234242234"
   val sourceValue: String            = "gmc"
   val taxIdentifierNameValue: String = "nino"
@@ -56,14 +62,9 @@ trait TestData {
   val invalidFormIdValue: String     = "Test312"
   val batchIdValue: String           = "1234567"
   val sourceDataValue: String        = "ew0KICAgIm5hbWUiOiAiRGFuaWVsIiwNCiAgICJzZWF0IiA6ICJ5ZXMiDQp9"
-
-  val digitalContactDemoFrontend: String = TestEnvironment.url("demo-frontend")
-  val saApiProxy: String                 = TestEnvironment.url("sa-api-proxy")
-  val preferenceFrontend: String         = TestEnvironment.url("preferences-frontend")
-  val preferences: String                = TestEnvironment.url("preferences")
-  val secureMessage: String              = TestEnvironment.url("secure-message")
-  val externalMessageAdapter: String     = TestEnvironment.url("external-message-adapter")
-  val reasonTextForAdding: String        = "Adding a formId for testing"
-  val reasonTextForDeleting: String      = "Deleting a formId for testing"
+  val reasonTextForAdding: String    = "Adding a formId for testing"
+  val reasonTextForDeleting: String  = "Deleting a formId for testing"
+  val rejectReasonText: String       = "Not a valid formId"
+  val addReasonText: String          = "Approved valid formId for testing"
 
 }

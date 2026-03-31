@@ -79,6 +79,11 @@ trait BasePage extends PageObject with TestData {
   val sourceDataId              = "details.sourceData"
   val newFormIdId               = "formId"
   val reasonTextId              = "reasonText"
+  val encodedTextId             = "encoded-text"
+  val rejectButtonId            = "reject"
+  val confirmButtonId           = "confirm"
+  val approveButtonId           = "approve"
+  val decodeButtonId            = "decode"
 
   def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
     .withTimeout(Duration.ofSeconds(3))

@@ -84,6 +84,5 @@ object PreferencesAdminPage extends BasePage {
   def clickOnMessageBrakeAllowlist(): Unit = {
     click(By.ByCssSelector(clickOnMessageBrakeAllowlistLink))
     fluentWait
-    Thread.sleep(2000)
   }
 }

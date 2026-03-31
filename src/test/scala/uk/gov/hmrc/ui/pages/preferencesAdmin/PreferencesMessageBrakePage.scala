@@ -27,30 +27,30 @@ object PreferencesMessageBrakePage extends BasePage {
     getTitle
 
   def selectFormIdAndClickOnApproveButton(): Unit = {
-    val selectFormId: By = By.id("Test312")
+    val selectFormId: By = By.id(invalidFormIdValue)
     selectCheckbox(selectFormId)
-    click(By.id("approve"))
+    click(By.id(approveButtonId))
     fluentWait
   }
 
   def selectFormIdAndClickOnRejectButton(): Unit = {
-    val selectFormId: By = By.id("Test312")
+    val selectFormId: By = By.id(invalidFormIdValue)
     selectCheckbox(selectFormId)
-    click(By.id("reject"))
+    click(By.id(rejectButtonId))
     fluentWait
   }
 
   def enterReasonForReject(): Unit = {
-    val rejectReasonText: By = By.id("reasonText")
-    sendKeys(rejectReasonText, "Not a valid formId")
-    click(By.name("confirm"))
+    val reasonText: By = By.id(reasonTextId)
+    sendKeys(reasonText, rejectReasonText)
+    click(By.name(confirmButtonId))
     fluentWait
   }
 
   def enterReasonForApprove(): Unit = {
-    val rejectReasonText: By = By.id("reasonText")
-    sendKeys(rejectReasonText, "Approved valid formId for testing")
-    click(By.name("confirm"))
+    val reasonText: By = By.id(reasonTextId)
+    sendKeys(reasonText, addReasonText)
+    click(By.name(confirmButtonId))
     fluentWait
   }
 
