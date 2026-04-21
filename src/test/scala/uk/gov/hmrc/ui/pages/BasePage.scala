@@ -37,7 +37,7 @@ import scala.concurrent.Future
 trait BasePage extends PageObject with TestData {
 
   implicit val patienceConfig: PatienceConfig =
-    PatienceConfig(timeout = Span(20, Seconds), interval = Span(5, Seconds))
+    PatienceConfig(timeout = Span(10, Seconds), interval = Span(5, Seconds))
 
   implicit val system: ActorSystem = ActorSystem()
 
@@ -104,19 +104,19 @@ trait BasePage extends PageObject with TestData {
   def verifyEmail(): Unit = {
 
     // To get entity ID via sa-api proxy
-    val entityIdUrl: String                                       = saApiProxy + ("/entity-resolver/entity-resolver/paye/" + ninoNumber)
-    val entityIdUrlResponse = WsClient.url(entityIdUrl).get().futureValue(Timeout(Span(10, Seconds)))
-    val resultBody = entityIdUrlResponse.body
-    val bodyAsJson                                                = Json.parse(resultBody).\("_id").toString
-    val extractedEntityId                                         = bodyAsJson.replaceAll(entityIdRegex, "")
+    val entityIdUrl: String                            = saApiProxy + ("/entity-resolver/entity-resolver/paye/" + ninoNumber)
+    val entityIdUrlResponse                            = WsClient.url(entityIdUrl).get().futureValue(Timeout(Span(10, Seconds)))
+    val resultBody                                     = entityIdUrlResponse.body
+    val bodyAsJson                                     = Json.parse(resultBody).\("_id").toString
+    val extractedEntityId                              = bodyAsJson.replaceAll(entityIdRegex, "")
     // To get verificaton token via sa-api proxy
-    val verificationTokenUrl: String                              =
+    val verificationTokenUrl: String                   =
       saApiProxy + s"/preferences/test-only/preferences-admin/$extractedEntityId/verification-token"
-    val getToken: Future[StandaloneWSRequest#Response]            = WsClient.url(verificationTokenUrl).get()
-    val verificationToken                                         = getToken.futureValue.body
+    val getToken: Future[StandaloneWSRequest#Response] = WsClient.url(verificationTokenUrl).get()
+    val verificationToken                              = getToken.futureValue.body
     // To verify email address using token
-    val emailVerificationUrl: String                              = preferenceFrontend + s"sa/print-preferences/verification/$verificationToken"
-    val emailVerification                                         = WsClient.url(emailVerificationUrl).get()
+    val emailVerificationUrl: String                   = preferenceFrontend + s"sa/print-preferences/verification/$verificationToken"
+    val emailVerification                              = WsClient.url(emailVerificationUrl).get()
     fluentWait
   }
 }
