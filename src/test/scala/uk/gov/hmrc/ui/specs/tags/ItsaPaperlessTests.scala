@@ -14,20 +14,8 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages.paperless
+package uk.gov.hmrc.ui.specs.tags
+import org.scalatest.Tag
+object ItsaPaperlessTests extends Tag("ItsaPaperlessTests"){
 
-import org.openqa.selenium.By
-import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.email
-import uk.gov.hmrc.ui.pages.BasePage
-
-
-object PaperlessEmailPage extends BasePage {
-  var paperlessEmailPageTitle: String = "Enter your email address"
-
-  def fillEmailPage(): Unit = {
-    val getEmailTextField: By = By.id(getEmailTextFieldId)
-    sendKeys(getEmailTextField, email)
-    click(By.id("submitEmailButton"))
-    fluentWait
-  }
 }

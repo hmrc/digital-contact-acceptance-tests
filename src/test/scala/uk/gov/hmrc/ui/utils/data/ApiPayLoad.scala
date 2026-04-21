@@ -1,5 +1,5 @@
 /*
- * Copyright 2026 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,19 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages.paperless
+package uk.gov.hmrc.ui.utils.data
 
-import org.openqa.selenium.By
-import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.email
-import uk.gov.hmrc.ui.pages.BasePage
+import uk.gov.hmrc.ui.pages.messages.GmcMessages.{email, email2}
 
+trait ApiPayLoad {
 
-object PaperlessEmailPage extends BasePage {
-  var paperlessEmailPageTitle: String = "Enter your email address"
+  val payloadBounceEmail1 =
+    s"""{
+            "emailAddress": "$email"
+    }""".stripMargin
 
-  def fillEmailPage(): Unit = {
-    val getEmailTextField: By = By.id(getEmailTextFieldId)
-    sendKeys(getEmailTextField, email)
-    click(By.id("submitEmailButton"))
-    fluentWait
-  }
+  val payloadBounceEmail2 =
+    s"""{
+            "emailAddress": "$email2"
+    }""".stripMargin
 }

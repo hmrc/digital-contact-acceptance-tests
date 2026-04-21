@@ -17,22 +17,21 @@
 package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.By
+import play.api.libs.ws.StandaloneWSRequest
 import uk.gov.hmrc.ui.pages.BasePage
+import uk.gov.hmrc.ui.pages.paperless.PaperlessBTAHomePage.{WsClient, click, digitalContactDemoFrontend, fluentWait}
 
-object PaperlessInterruptPage extends BasePage {
-  var paperlessPageTitle: String = "Choose how to get your tax letters"
+import scala.concurrent.Future
 
-  def fillInterruptPageForOptin(): Unit = {
-    val getOnlineRadioButton: By = By.id(onlineRadioButtonId)
-    selectCheckbox(getOnlineRadioButton)
-    click(By.id("submitEmailButton"))
-    fluentWait
-  }
-
-  def fillInterruptPageForOptout(): Unit = {
-    val getPostRadioButton: By = By.id(postRadioButtonId)
-    selectCheckbox(getPostRadioButton)
-    click(By.id("submitEmailButton"))
-  }
+object PaperlessTroubleSendingEmailPage extends BasePage{
   
+  var PaperlessTroubleSendingEmailPageHeader: String = "We are having trouble sending you emails"
+  def enterYourEmailAddress(): Unit = {
+    click(By.cssSelector("#main-content > div > div > div.govuk-button-group > a"))
+  }
+
+  def doNotWantToGetOnlineTaxLetters(): Unit = {
+    click(By.cssSelector("#main-content > div > div > p:nth-child(6) > a"))
+  }
+
 }
