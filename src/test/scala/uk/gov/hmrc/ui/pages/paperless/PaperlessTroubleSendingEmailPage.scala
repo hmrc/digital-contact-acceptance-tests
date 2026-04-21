@@ -17,11 +17,7 @@
 package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.By
-import play.api.libs.ws.StandaloneWSRequest
 import uk.gov.hmrc.ui.pages.BasePage
-import uk.gov.hmrc.ui.pages.paperless.PaperlessBTAHomePage.{WsClient, click, digitalContactDemoFrontend, fluentWait}
-
-import scala.concurrent.Future
 
 object PaperlessTroubleSendingEmailPage extends BasePage{
   

@@ -73,7 +73,6 @@ object LoginUsingAuthWizardPage extends BasePage {
       case _        => throw new IllegalArgumentException(s"Unknown UTR Value")
     }
     click(By.id("submit"))
-//    Thread.sleep(1)
   }
 
   def logIntoDemoFrontendForV4(): Unit = {

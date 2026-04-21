@@ -37,7 +37,7 @@ import uk.gov.hmrc.ui.utils.data.ApiPayLoad
 import play.api.libs.ws.DefaultBodyWritables.writeableOf_String
 
 import java.time.Duration
-import scala.concurrent.{Await, Future}
+import scala.concurrent.Await
 
 trait BasePage extends PageObject with TestData with ApiPayLoad{
 

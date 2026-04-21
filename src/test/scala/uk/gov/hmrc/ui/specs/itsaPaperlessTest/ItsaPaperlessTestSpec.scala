@@ -19,7 +19,7 @@ import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
 import uk.gov.hmrc.ui.pages.messages.GmcMessages.{bounceVerifyEmail, deleteMongoRecordsFromCollection, itsa, setVersionMajor, verifyEmail, waitUntilHeader}
 import uk.gov.hmrc.ui.pages.paperless.{PaperlessBTAHomePage, PaperlessEmailPage, PaperlessInterruptPage, PaperlessOptoutPage, PaperlessReOptInPage, PaperlessTroubleSendingEmailPage, PaperlessVerifyEmailPage}
 import uk.gov.hmrc.ui.specs.BaseSpec
-import uk.gov.hmrc.ui.specs.tags.{ItsaPaperlessTests, Wip}
+import uk.gov.hmrc.ui.specs.tags.ItsaPaperlessTests
 
 
 class ItsaPaperlessTestSpec extends BaseSpec {
@@ -46,7 +46,7 @@ class ItsaPaperlessTestSpec extends BaseSpec {
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr", itsa)
       PaperlessBTAHomePage.clickOnGetTaxLettersOnlineLink()
-      When("I click Continue Optout button")
+      When("I continue opt out")
       PaperlessInterruptPage.fillInterruptPageForOptout()
       Then("I am in Opt out confirmation page")
       PaperlessOptoutPage.inPaperlessOptoutConfirmPage()
@@ -69,7 +69,7 @@ class ItsaPaperlessTestSpec extends BaseSpec {
       PaperlessVerifyEmailPage.sendTheLinkAgain()
       And("I verify email")
       verifyEmail()
-      And("I am logged into account ")
+      And("I am logged into account")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr", itsa)
       Then("I can see Contact preference: Online – we will let you know by email")
@@ -98,7 +98,6 @@ class ItsaPaperlessTestSpec extends BaseSpec {
       PaperlessVerifyEmailPage.continueVerifyEmailAddressPage()
       Then("I can see Contact preference: By post, until you verify your email address")
       PaperlessBTAHomePage.checkContactPreferenceText("By post, until you verify your email address")
-
     }
 
     Scenario("ITSA Opt-in with email address bounced page - enter email address", ItsaPaperlessTests) {
@@ -117,7 +116,7 @@ class ItsaPaperlessTestSpec extends BaseSpec {
       And("I see the page: We are having trouble sending you emails")
       PaperlessBTAHomePage.clickOnFixthisLink()
       waitUntilHeader("We are having trouble sending you emails")
-      And("I enter email")
+      And("I enter an email address")
       PaperlessTroubleSendingEmailPage.enterYourEmailAddress()
       PaperlessEmailPage.fillEmailPage()
       And("I click Close button")
@@ -142,7 +141,7 @@ class ItsaPaperlessTestSpec extends BaseSpec {
       And("I see the page: We are having trouble sending you emails")
       PaperlessBTAHomePage.clickOnFixthisLink()
       waitUntilHeader("We are having trouble sending you emails")
-      And(" I opt out")
+      And("I continue opt out")
       PaperlessTroubleSendingEmailPage.doNotWantToGetOnlineTaxLetters()
       PaperlessInterruptPage.fillInterruptPageForOptout()
       Then("I am in Opt out confirmation page")
@@ -213,7 +212,7 @@ class ItsaPaperlessTestSpec extends BaseSpec {
       And("I am logged into account")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr", itsa)
-      And("I optin with an new email")
+      And("I optin with a new email")
       PaperlessBTAHomePage.clickOnReviewUpdatedTermsLink()
       PaperlessReOptInPage.reOptIn(true)
       PaperlessReOptInPage.reOptinEnterNewEmail()
