@@ -51,7 +51,7 @@ object LoginUsingAuthWizardPage extends BasePage {
     fluentWait
   }
 
-  def loginIntoAccountByAuthWizard(enrolmentType: String): Unit = {
+  def loginIntoAccountByAuthWizard(enrolmentType: String, account: String=bta): Unit = {
     val getRedirectUrl: By        = By.id(getRedirectUrlId)
     val getCredentialStrength: By = By.id(getCredentialStrengthId)
     val getConfidenceLevel: By    = By.id(getConfidenceLevelId)
@@ -60,7 +60,7 @@ object LoginUsingAuthWizardPage extends BasePage {
     val enrolmentNameId: By       = By.id("input-0-0-name")
     val enrolmentValueId: By      = By.id("input-0-0-value")
 
-    sendKeys(getRedirectUrl, digitalContactDemoFrontend + bta)
+    sendKeys(getRedirectUrl, digitalContactDemoFrontend + account)
     selectByValue(getCredentialStrength, credentialStrength)
     selectByValue(getConfidenceLevel, confidenceLevel)
     sendKeys(getNinoNumber, ninoNumber)
@@ -73,7 +73,6 @@ object LoginUsingAuthWizardPage extends BasePage {
       case _        => throw new IllegalArgumentException(s"Unknown UTR Value")
     }
     click(By.id("submit"))
-    fluentWait
   }
 
   def logIntoDemoFrontendForV4(): Unit = {
@@ -83,4 +82,5 @@ object LoginUsingAuthWizardPage extends BasePage {
     click(By.id("submit"))
     fluentWait
   }
+  
 }

@@ -17,7 +17,9 @@
 package uk.gov.hmrc.ui.pages
 
 import org.apache.pekko.actor.ActorSystem
-import org.openqa.selenium.WebDriver
+import org.mongodb.scala.model.{Filters, Updates}
+import org.mongodb.scala.{Document, MongoClient, MongoCollection, MongoDatabase, SingleObservableFuture}
+import org.openqa.selenium.{By, WebDriver}
 import org.openqa.selenium.support.ui.{FluentWait, Wait}
 import org.scalatest.concurrent.Futures.PatienceConfig
 import play.api.libs.ws.StandaloneWSRequest
@@ -26,14 +28,18 @@ import uk.gov.hmrc.selenium.component.PageObject
 import uk.gov.hmrc.selenium.webdriver.Driver
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.concurrent.ScalaFutures.convertScalaFuture
+import org.scalatest.time.SpanSugar.convertIntToGrainOfTime
 import org.scalatest.time.{Seconds, Span}
-import play.api.libs.json.Json
+import play.api.libs.json.{JsValue, Json}
+import uk.gov.hmrc.ui.pages.messages.GmcMessages.preferences
 import uk.gov.hmrc.ui.utils.TestData
+import uk.gov.hmrc.ui.utils.data.ApiPayLoad
+import play.api.libs.ws.DefaultBodyWritables.writeableOf_String
 
 import java.time.Duration
-import scala.concurrent.Future
+import scala.concurrent.Await
 
-trait BasePage extends PageObject with TestData {
+trait BasePage extends PageObject with TestData with ApiPayLoad{
 
   implicit val patienceConfig: PatienceConfig =
     PatienceConfig(timeout = Span(10, Seconds), interval = Span(5, Seconds))
@@ -85,6 +91,13 @@ trait BasePage extends PageObject with TestData {
   val approveButtonId           = "approve"
   val decodeButtonId            = "decode"
 
+  private val PREFERENCESDATABASE = "preferences"
+  private val COLLECTION2 = "saIndividualPreferences"
+
+  def mongoClient: MongoClient = MongoClient()
+  def preferencesDb: MongoDatabase = mongoClient.getDatabase(PREFERENCESDATABASE)
+  def saIndividualPreferencesCollection: MongoCollection[Document] = preferencesDb.getCollection(COLLECTION2)
+  
   def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
     .withTimeout(Duration.ofSeconds(3))
     .pollingEvery(Duration.ofSeconds(1))
@@ -104,18 +117,44 @@ trait BasePage extends PageObject with TestData {
 
     // To get entity ID via sa-api proxy
     val entityIdUrl: String                                       = saApiProxy + ("/entity-resolver/entity-resolver/paye/" + ninoNumber)
-    val entityIdUrlResponse: Future[StandaloneWSRequest#Response] = WsClient.url(entityIdUrl).get()
-    val resultBody                                                = entityIdUrlResponse.futureValue.body
+    val entityIdUrlResponse: StandaloneWSRequest#Response         = waitGetUrlResult(entityIdUrl)
+    val resultBody                                                = entityIdUrlResponse.body
     val bodyAsJson                                                = Json.parse(resultBody).\("_id").toString
     val extractedEntityId                                         = bodyAsJson.replaceAll(entityIdRegex, "")
     // To get verificaton token via sa-api proxy
     val verificationTokenUrl: String                              =
       saApiProxy + s"/preferences/test-only/preferences-admin/$extractedEntityId/verification-token"
-    val getToken: Future[StandaloneWSRequest#Response]            = WsClient.url(verificationTokenUrl).get()
-    val verificationToken                                         = getToken.futureValue.body
+    val getToken: StandaloneWSRequest#Response                    = waitGetUrlResult(verificationTokenUrl)
+    val verificationToken                                         = getToken.body
     // To verify email address using token
     val emailVerificationUrl: String                              = preferenceFrontend + s"sa/print-preferences/verification/$verificationToken"
-    val emailVerification                                         = WsClient.url(emailVerificationUrl).get()
-    fluentWait
+    waitGetUrlResult(emailVerificationUrl)
+  }
+
+  def bounceVerifyEmail(): Unit = {
+    val bounceUrl = preferences + "test-only/preferences-admin/bounce-email"
+      val response = Await.result(WsClient.url(bounceUrl)
+        .addHttpHeaders("Content-Type" -> "application/json")
+        .post(payloadBounceEmail1), 5.seconds)
+      assert(response.status == 204)
+  }
+
+  def setVersionMajor(): Unit = {
+    val json: JsValue = Json.parse(saIndividualPreferencesCollection.find().first().toFuture().futureValue.toJson())
+    val entityId = (json \ "entityId").as[String]
+    val query = Filters.equal("entityId", entityId)
+    val update = Updates.set("termsAndConditions.generic.optInPage.version.major", 0)
+    saIndividualPreferencesCollection.findOneAndUpdate(query, update).toFuture().futureValue
+  }
+
+  def waitUntilHeader(header: String): Unit = {
+    fluentWait.until(driver => driver.findElement(By.cssSelector("#main-content > div > div > h1")).getText.equals(header))
+  }
+
+  def waitGetUrlResult(url: String): StandaloneWSRequest#Response = {
+    val response: StandaloneWSRequest#Response = Await.result(WsClient.url(url).get(), 5.seconds)
+    assert(response.status == 200)
+    response
   }
 }
+

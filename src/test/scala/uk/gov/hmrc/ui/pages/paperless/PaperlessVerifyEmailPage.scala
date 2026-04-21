@@ -20,8 +20,16 @@ import org.openqa.selenium.By
 import uk.gov.hmrc.ui.pages.BasePage
 
 object PaperlessVerifyEmailPage extends BasePage {
-  var paperlessEmailPageTitle: String = "Enter your email address"
+  var paperlessVerifyEmailPageTitle: String = "Verify your email address"
 
-  def contineVerifyEmailAddressPage(): Unit =
+  def continueVerifyEmailAddressPage(): Unit =
     click(By.ByCssSelector("#main-content > div > div > div:nth-child(5) > a"))
+    
+  def sendTheLinkAgain(): Unit =
+    click(By.cssSelector("#main-content > div > div > div > a"))
+
+  def useDifferentEmailAddress():Unit = {
+    click(By.cssSelector("#main-content > div > div > div > p > a"))
+    fluentWait.until(driver => driver.findElement(By.cssSelector("#form-submit-email-address > fieldset > legend > h1")).getText.equals("Enter your email address"))
+  }
 }
