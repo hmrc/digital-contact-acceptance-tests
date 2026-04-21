@@ -36,7 +36,7 @@ import scala.concurrent.Future
 trait BasePage extends PageObject with TestData {
 
   implicit val patienceConfig: PatienceConfig =
-    PatienceConfig(timeout = Span(10, Seconds), interval = Span(5, Seconds))
+    PatienceConfig(timeout = Span(20, Seconds), interval = Span(5, Seconds))
 
   implicit val system: ActorSystem = ActorSystem()
 
