@@ -20,6 +20,7 @@ import org.apache.pekko.actor.ActorSystem
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.support.ui.{FluentWait, Wait}
 import org.scalatest.concurrent.Futures.PatienceConfig
+import org.scalatest.concurrent.PatienceConfiguration.Timeout
 import play.api.libs.ws.StandaloneWSRequest
 import play.api.libs.ws.ahc.StandaloneAhcWSClient
 import uk.gov.hmrc.selenium.component.PageObject
@@ -104,8 +105,8 @@ trait BasePage extends PageObject with TestData {
 
     // To get entity ID via sa-api proxy
     val entityIdUrl: String                                       = saApiProxy + ("/entity-resolver/entity-resolver/paye/" + ninoNumber)
-    val entityIdUrlResponse: Future[StandaloneWSRequest#Response] = WsClient.url(entityIdUrl).get()
-    val resultBody                                                = entityIdUrlResponse.futureValue.body
+    val entityIdUrlResponse = WsClient.url(entityIdUrl).get().futureValue(Timeout(Span(10, Seconds)))
+    val resultBody = entityIdUrlResponse.body
     val bodyAsJson                                                = Json.parse(resultBody).\("_id").toString
     val extractedEntityId                                         = bodyAsJson.replaceAll(entityIdRegex, "")
     // To get verificaton token via sa-api proxy
