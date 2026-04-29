@@ -20,7 +20,7 @@ import org.apache.pekko.actor.ActorSystem
 import org.mongodb.scala.model.{Filters, Updates}
 import org.mongodb.scala.{Document, MongoClient, MongoCollection, MongoDatabase, SingleObservableFuture}
 import org.openqa.selenium.{By, WebDriver}
-import org.openqa.selenium.support.ui.{FluentWait, Wait}
+import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait, Wait}
 import org.scalatest.concurrent.Futures.PatienceConfig
 import play.api.libs.ws.StandaloneWSRequest
 import play.api.libs.ws.ahc.StandaloneAhcWSClient
@@ -113,10 +113,10 @@ trait BasePage extends PageObject with TestData with ApiPayLoad{
     fluentWait
   }
 
-  def verifyEmail(): Unit = {
+  def verifyEmail(nino:String = ninoNumber): Unit = {
 
     // To get entity ID via sa-api proxy
-    val entityIdUrl: String                                       = saApiProxy + ("/entity-resolver/entity-resolver/paye/" + ninoNumber)
+    val entityIdUrl: String                                       = saApiProxy + ("/entity-resolver/entity-resolver/paye/" + nino)
     val entityIdUrlResponse: StandaloneWSRequest#Response         = waitGetUrlResult(entityIdUrl)
     val resultBody                                                = entityIdUrlResponse.body
     val bodyAsJson                                                = Json.parse(resultBody).\("_id").toString
@@ -155,6 +155,39 @@ trait BasePage extends PageObject with TestData with ApiPayLoad{
     val response: StandaloneWSRequest#Response = Await.result(WsClient.url(url).get(), 5.seconds)
     assert(response.status == 200)
     response
+  }
+
+  def navigateToAccount(account: String = bta): Unit = {
+    val url = digitalContactDemoFrontend + account
+    Driver.instance.navigate.to(url)
+    fluentWait.until(ExpectedConditions.urlContains(url))
+  }
+
+  def selectLanguageWelsh(): Unit = {
+    val welshLink: By = By.cssSelector("body > header > section > div > nav > ul > li:nth-child(2) > a")
+    click(welshLink)
+  }
+
+  def selectLanguageEnglish(): Unit = {
+    val englishLink: By = By.cssSelector("body > header > section > div > nav > ul > li:nth-child(1) > a")
+    click(englishLink)
+  }
+
+  def clickOnBackLink(): Unit = {
+    click(By.cssSelector("body > div > div > div:nth-child(1) > div > a"))
+  }
+  
+  def navigateToUrl(url: String): Unit = {
+    Driver.instance.navigate.to(url)
+    fluentWait.until(ExpectedConditions.urlContains(url))
+  }
+
+  def bounceChangedEmail(): Unit = {
+    val bounceUrl = preferences + "test-only/preferences-admin/bounce-email"
+    val response = Await.result(WsClient.url(bounceUrl)
+      .addHttpHeaders("Content-Type" -> "application/json")
+      .post(payloadBounceEmail2), 5.seconds)
+    assert(response.status == 204)
   }
 }
 

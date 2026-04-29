@@ -17,21 +17,19 @@
 package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.By
-import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.email
 import uk.gov.hmrc.ui.pages.BasePage
+import uk.gov.hmrc.ui.pages.paperless.PaperlessOptOutSurveyPage.fluentWait
 
-
-object PaperlessEmailPage extends BasePage {
-  var paperlessEmailPageTitle: String = "Enter your email address"
+object PaperlessConfirmGettingTaxLettersPage extends BasePage {
+  var paperlessConfirmGettingTaxLettersTitle: String = "Confirm how you want to get your tax letters"
   
-  def waitUntilPageLoad(): Unit = {
-    fluentWait.until(driver => driver.findElement(By.cssSelector("#form-submit-email-address > fieldset > legend > h1")).getText.equals(paperlessEmailPageTitle))
+  def waitForPageLoad(): Unit = {
+    fluentWait.until(driver => driver.findElement(By.cssSelector("#main-content > div > div > header > h1")).getText.equals(paperlessConfirmGettingTaxLettersTitle))
   }
 
-  def fillEmailPage(): Unit = {
-    val getEmailTextField: By = By.id(getEmailTextFieldId)
-    sendKeys(getEmailTextField, email)
-    click(By.id("submitEmailButton"))
-    fluentWait
-  }
+  def clickOnGetLettersByPost(): Unit =
+    click(By.ByCssSelector("#confirm-opt-out"))
+
+  def clickOnKeepOnlineLetters(): Unit =
+    click(By.ByCssSelector("#cancel-link"))
 }

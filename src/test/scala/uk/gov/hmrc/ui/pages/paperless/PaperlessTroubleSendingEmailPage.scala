@@ -17,11 +17,13 @@
 package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.By
+import uk.gov.hmrc.selenium.webdriver.Driver
 import uk.gov.hmrc.ui.pages.BasePage
 
 object PaperlessTroubleSendingEmailPage extends BasePage{
   
   var PaperlessTroubleSendingEmailPageHeader: String = "We are having trouble sending you emails"
+
   def enterYourEmailAddress(): Unit = {
     click(By.cssSelector("#main-content > div > div > div.govuk-button-group > a"))
   }
@@ -30,4 +32,10 @@ object PaperlessTroubleSendingEmailPage extends BasePage{
     click(By.cssSelector("#main-content > div > div > p:nth-child(6) > a"))
   }
 
+  def enterEmailButtonExists(): Unit = {
+    assert(Driver.instance.findElements(By.cssSelector("#main-content > div > div > div.govuk-button-group > a")).size() > 0)
+  }
+  def doNotWantOnlineLettersLinkExists(): Unit = {
+    assert(Driver.instance.findElements(By.cssSelector("#main-content > div > div > p:nth-child(6) > a")).size() > 0)
+  }
 }

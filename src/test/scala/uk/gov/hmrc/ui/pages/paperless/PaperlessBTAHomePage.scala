@@ -19,6 +19,7 @@ package uk.gov.hmrc.ui.pages.paperless
 import org.openqa.selenium.{By, WebDriver}
 import uk.gov.hmrc.selenium.webdriver.Driver
 import uk.gov.hmrc.ui.pages.BasePage
+import uk.gov.hmrc.ui.pages.paperless.PaperlessPTAHomePage.fluentWait
 
 object PaperlessBTAHomePage extends BasePage {
 
@@ -47,4 +48,11 @@ object PaperlessBTAHomePage extends BasePage {
     assert(Driver.instance.findElement(By.cssSelector("#main-content > div > div.govuk-grid-column-two-thirds > div > div:nth-child(2) > span")).getText == pref)
   }
 
+  def waitUntilPageLoad(): Unit = {
+    fluentWait.until(driver => driver.findElement(By.cssSelector("#main-content > div > div.govuk-grid-column-two-thirds > h1")).getText.equals(paperlessBtaHomePageTitle))
+  }
+    
+  def noGetLettersOnlineLink(): Unit = {
+    assert(Driver.instance.findElements(By.id("Gettaxlettersonline")).size() == 0)
+  }
 }

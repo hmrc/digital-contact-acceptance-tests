@@ -19,9 +19,18 @@ package uk.gov.hmrc.ui.pages.paperless
 import org.openqa.selenium.By
 import uk.gov.hmrc.ui.pages.BasePage
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.sendKeys
+import uk.gov.hmrc.ui.pages.paperless.PaperlessBTAHomePage.fluentWait
 
 object PaperlessReOptInPage extends BasePage {
   var PaperlessReOptInPageHeader: String = "Keep getting your tax letters online"
+  var PaperlessReOptInPageHeaderWelsh: String = "Parhau i gael eich llythyrau treth ar-lein"
+
+  def waitUntilPageLoad(isWelsh: Boolean=false): Unit = {
+    if(isWelsh)
+      fluentWait.until(driver => driver.findElement(By.cssSelector("#main-content > div > div > header > h1")).getText.equals(PaperlessReOptInPageHeaderWelsh))
+    else
+      fluentWait.until(driver => driver.findElement(By.cssSelector("#main-content > div > div > header > h1")).getText.equals(PaperlessReOptInPageHeader))
+  }
 
   def reOptIn(emailBounced: Boolean = false): Unit = {
     click(By.id("sps-re-opt-in"))
@@ -43,6 +52,16 @@ object PaperlessReOptInPage extends BasePage {
   }
   
   def reOptInWithNewEmail(): Unit = {
+    click(By.id("sps-re-opt-in-2"))
+    reOptinEnterNewEmail()
+  }
+
+  def reOptOut(): Unit = {
+    click(By.id("sps-re-opt-in-2"))
+    click(By.id("submitEmailButton"))
+  }
+
+  def reOptInWithNewEmailPta(): Unit = {
     click(By.id("sps-re-opt-in-2"))
     reOptinEnterNewEmail()
   }

@@ -16,22 +16,18 @@
 
 package uk.gov.hmrc.ui.pages.paperless
 
-import org.openqa.selenium.By
-import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.email
+import org.openqa.selenium.{By, WebDriver}
+import uk.gov.hmrc.selenium.webdriver.Driver
 import uk.gov.hmrc.ui.pages.BasePage
 
+object PaperlessPTAInboxPage extends BasePage {
 
-object PaperlessEmailPage extends BasePage {
-  var paperlessEmailPageTitle: String = "Enter your email address"
-  
-  def waitUntilPageLoad(): Unit = {
-    fluentWait.until(driver => driver.findElement(By.cssSelector("#form-submit-email-address > fieldset > legend > h1")).getText.equals(paperlessEmailPageTitle))
+  // This is PTA Inbox page for paperless journey using digital-contact-demo-frontend
+  var paperlessPtaInboxPageTitle: String = "Messages"
+
+  def checkMessageSubject(subject: String): Boolean = {
+    val driver: WebDriver = Driver.instance
+    driver.findElement(By.cssSelector("#sa-messages-table > tbody > tr > td:nth-child(2)")).getText == subject
   }
 
-  def fillEmailPage(): Unit = {
-    val getEmailTextField: By = By.id(getEmailTextFieldId)
-    sendKeys(getEmailTextField, email)
-    click(By.id("submitEmailButton"))
-    fluentWait
-  }
 }
