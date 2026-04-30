@@ -16,8 +16,9 @@
 
 package uk.gov.hmrc.ui.pages.paperless
 
-import org.openqa.selenium.{By, WebDriver, WebElement}
+import org.openqa.selenium.{By, WebElement}
 import uk.gov.hmrc.selenium.webdriver.Driver
+import uk.gov.hmrc.ui.ElementLocators.{cysPageChangeEmailAddressLink, cysPageChangeEmailAddressVerifiedLink, cysPageTaxDocumentsChangeLink, cysPageContinueButton, cysPageEmailSentInChangeLink, cysPageEmailSentsIn, cysPageEmailSentsInVerified, cysPageFixthisLink, cysPageHeader, cysPageTaxDocument}
 import uk.gov.hmrc.ui.pages.BasePage
 
 object PaperlessCheckYourSettingsPage extends BasePage {
@@ -28,47 +29,45 @@ object PaperlessCheckYourSettingsPage extends BasePage {
 
   def waitUntilPageLoad(isWelsh: Boolean=false): Unit = {
     if(isWelsh){
-      fluentWait.until(driver => driver.findElement(By.cssSelector("#saCheckSettings")).getText.equals(paperlessPTACheckYourSettingsPageTitleWelsh))
-    }else {
-      fluentWait.until(driver => driver.findElement(By.cssSelector("#saCheckSettings")).getText.equals(paperlessPTACheckYourSettingsPageTitle))
+      waitForText(cysPageHeader, paperlessPTACheckYourSettingsPageTitleWelsh)
+      }else {
+      waitForText(cysPageHeader, paperlessPTACheckYourSettingsPageTitle)    
     }
   }
-
   def contentVerification(section:String, content: String): Unit = {
     var contentElement: WebElement = null
     section match {
-      case "Tax documents" => contentElement = Driver.instance.findElement(By.cssSelector("#main-content > div > div > dl > div:nth-child(1) > dd.govuk-summary-list__value"))
-      case "Emails sent in for verified" =>  contentElement = Driver.instance.findElement(By.cssSelector("#main-content > div > div > dl:nth-child(3) > div:nth-child(2) > dd.govuk-summary-list__value"))
-      case "Emails sent in" =>  contentElement = Driver.instance.findElement(By.cssSelector("#main-content > div > div > dl > div.govuk-summary-list__row.govuk-summary-list__row--no-actions > dd"))
-
+      case "Tax documents" => contentElement = Driver.instance.findElement(By.cssSelector(cysPageTaxDocument))
+      case "Emails sent in for verified" =>  contentElement = Driver.instance.findElement(By.cssSelector(cysPageEmailSentsInVerified))
+      case "Emails sent in" =>  contentElement = Driver.instance.findElement(By.cssSelector(cysPageEmailSentsIn))
       case _ => throw new IllegalArgumentException(s"Unknown Section")
     }
     assert (contentElement.getText == content)
   }
 
   def clickOnChangeEmailAddressLink(): Unit = {
-    click(By.cssSelector("#main-content > div > div > dl > div:nth-child(2) > dd.govuk-summary-list__actions > a"))
+    click(By.cssSelector(cysPageChangeEmailAddressLink))
   }
 
   def clickOnChangeEmailAddressLinkVerified(): Unit = {
-    click(By.cssSelector("#main-content > div > div > dl:nth-child(5) > div > dd.govuk-summary-list__actions > a"))
+    click(By.cssSelector(cysPageChangeEmailAddressVerifiedLink))
   }
 
   def clickOnContinueButton(): Unit = {
 
-    click(By.cssSelector("#main-content > div > div > a"))
+    click(By.cssSelector(cysPageContinueButton))
   }
 
   def clickOnEmailsSentInChangeLink(): Unit = {
-    click(By.cssSelector("#main-content > div > div > dl:nth-child(3) > div:nth-child(2) > dd.govuk-summary-list__actions > a"))
+    click(By.cssSelector(cysPageEmailSentInChangeLink))
   }
 
   def clickOnFixthisLink(): Unit = {
-    click(By.cssSelector("#main-content > div > div > dl > div:nth-child(2) > dd.govuk-summary-list__value > p > a"))
+    click(By.cssSelector(cysPageFixthisLink))
   }
 
   def clickOnChangeTaxDocumentsLink(): Unit = {
-    click(By.cssSelector("#main-content > div > div > dl:nth-child(3) > div:nth-child(1) > dd.govuk-summary-list__actions > a"))
+    click(By.cssSelector(cysPageTaxDocumentsChangeLink))
   }
   
 }

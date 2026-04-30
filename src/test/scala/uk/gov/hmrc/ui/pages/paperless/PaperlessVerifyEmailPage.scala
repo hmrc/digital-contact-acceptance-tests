@@ -18,23 +18,25 @@ package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.By
 import uk.gov.hmrc.selenium.webdriver.Driver
+import uk.gov.hmrc.ui.ElementLocators.{emailPageHeader, verifyEmailAddressPageContinue, verifyEmailAddressPageSendLinkAgain, verifyEmailAddressUseDifferentEmail}
 import uk.gov.hmrc.ui.pages.BasePage
 
 object PaperlessVerifyEmailPage extends BasePage {
   var paperlessVerifyEmailPageTitle: String = "Verify your email address"
 
   def continueVerifyEmailAddressPage(): Unit =
-    click(By.ByCssSelector("#main-content > div > div > div:nth-child(5) > a"))
-    
+    click(By.ByCssSelector(verifyEmailAddressPageContinue))
+
   def sendTheLinkAgain(): Unit =
-    click(By.cssSelector("#main-content > div > div > div > a"))
+    click(By.cssSelector(verifyEmailAddressPageSendLinkAgain))
 
   def useDifferentEmailAddress():Unit = {
-    click(By.cssSelector("#main-content > div > div > div > p > a"))
-    fluentWait.until(driver => driver.findElement(By.cssSelector("#form-submit-email-address > fieldset > legend > h1")).getText.equals("Enter your email address"))
+    click(By.cssSelector(verifyEmailAddressUseDifferentEmail))
+    waitForText(emailPageHeader, "Enter your email address")
   }
+  
   def useDifferentEmailAddressLinkExist(): Boolean = {
-    Driver.instance.findElements(By.cssSelector("#main-content > div > div > div > p > a")).size() > 0
+   Driver.instance.findElements(By.cssSelector(verifyEmailAddressUseDifferentEmail)).size() > 0
   }
 }
 

@@ -16,8 +16,9 @@
 
 package uk.gov.hmrc.ui.pages.paperless
 
-import org.openqa.selenium.{By, WebDriver}
+import org.openqa.selenium.By
 import uk.gov.hmrc.selenium.webdriver.Driver
+import uk.gov.hmrc.ui.ElementLocators.{optOutSurveyContinueButton, optOutSurveyPageHeader, optOutSurveyReason, optOutSurveySkipButton}
 import uk.gov.hmrc.ui.pages.BasePage
 
 object PaperlessOptOutSurveyPage extends BasePage {
@@ -27,10 +28,12 @@ object PaperlessOptOutSurveyPage extends BasePage {
   var paperlessReOptOutSurveyPageTitle: String = "Why did you choose to go back to paper letters?"
 
   def waitUntilPageLoad(reOptout: Boolean = false): Unit = {
-    if(reOptout)
-      fluentWait.until(driver => driver.findElement(By.cssSelector("#main-content > div > div > header > h1")).getText.equals(paperlessReOptOutSurveyPageTitle))
-    else
-      fluentWait.until(driver => driver.findElement(By.cssSelector("#main-content > div > div > header > h1")).getText.equals(paperlessOptOutSurveyPageTitle))
+    if (reOptout) {
+      waitForText(optOutSurveyPageHeader, paperlessReOptOutSurveyPageTitle)
+    } else {
+      waitForText(optOutSurveyPageHeader, paperlessOptOutSurveyPageTitle)
+    }
+
   }
 
   def optOutSurveyQuestionsSelection(): Unit = {
@@ -50,19 +53,19 @@ object PaperlessOptOutSurveyPage extends BasePage {
   }
 
   def enterSurveyReason(): Unit = {
-    sendKeys(By.cssSelector("#reason"), "Testing the survey functionality")
+    sendKeys(By.cssSelector(optOutSurveyReason), "Testing the survey functionality")
   }
 
   def clickOnContinueButton(): Unit = {
-    click(By.cssSelector("#submitSurveyButton"))
+    click(By.cssSelector(optOutSurveyContinueButton))
   }
 
   def clickOnSkipButton(): Unit = {
-    click(By.cssSelector("#skipSurveyButton"))
+    click(By.cssSelector(optOutSurveySkipButton))
   }
 
   def pageNotVisible(): Unit = {
-    assert(Driver.instance.findElements(By.cssSelector("#main-content > div > div > header > h1")).size() == 0)
+    assert(Driver.instance.findElements(By.cssSelector(optOutSurveyPageHeader)).size() == 0)
   }
 
 }

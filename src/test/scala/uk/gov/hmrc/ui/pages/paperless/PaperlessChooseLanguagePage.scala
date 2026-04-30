@@ -16,7 +16,8 @@
 
 package uk.gov.hmrc.ui.pages.paperless
 
-import org.openqa.selenium.{By, WebDriver}
+import org.openqa.selenium.By
+import uk.gov.hmrc.ui.ElementLocators.{chooseLanguagePageContinueButton, chooseLanguagePageEnglish, chooseLanguagePageHeader, chooseLanguagePageWelsh}
 import uk.gov.hmrc.ui.pages.BasePage
 
 object PaperlessChooseLanguagePage extends BasePage {
@@ -25,22 +26,21 @@ object PaperlessChooseLanguagePage extends BasePage {
   var paperlessChooseLanguagePageTitleWelsh: String = "Cael eich hysbysiadau di-bapur drwy e-bost yn Gymraeg"
 
   def waitUntilPageLoad(isWelsh: Boolean=false): Unit = {
-    if(isWelsh)
-      fluentWait.until(driver => driver.findElement(By.cssSelector("#form-submit-language > div > fieldset > legend > h1")).getText.equals(paperlessChooseLanguagePageTitleWelsh))
-    else
-      fluentWait.until(driver => driver.findElement(By.cssSelector("#form-submit-language > div > fieldset > legend > h1")).getText.equals(paperlessChooseLanguagePageTitle))
+    if(isWelsh) {
+      waitForText(chooseLanguagePageHeader, paperlessChooseLanguagePageTitleWelsh)
+    } else
+      waitForText(chooseLanguagePageHeader, paperlessChooseLanguagePageTitle)
   }
 
   def chooseSendPaperlessLanguage(isWelsh: Boolean = true): Unit = {
     if(isWelsh) 
-      click(By.cssSelector("#lang-2"))
+      click(By.cssSelector(chooseLanguagePageWelsh))
     else 
-      click(By.cssSelector("#lang"))
+      click(By.cssSelector(chooseLanguagePageEnglish ))
   }
 
   def clickOnContinueButton(): Unit = {
-    click(By.cssSelector("#form-submit-language > button"))
+    click(By.cssSelector(chooseLanguagePageContinueButton ))
   }
-
-
+  
 }

@@ -16,8 +16,9 @@
 
 package uk.gov.hmrc.ui.pages.paperless
 
-import org.openqa.selenium.{By, WebDriver}
+import org.openqa.selenium.By
 import uk.gov.hmrc.selenium.webdriver.Driver
+import uk.gov.hmrc.ui.ElementLocators.changeEmailAddressPageHeader
 import uk.gov.hmrc.ui.pages.BasePage
 
 object PaperlessChangeEmailAddressPage extends BasePage {
@@ -26,8 +27,8 @@ object PaperlessChangeEmailAddressPage extends BasePage {
   var paperlessPTAChangeEmailAddressPageTitle: String = "Change your email address"
 
   def waitUntilPageLoad(): Unit = {
-    fluentWait.until(driver => driver.findElement(By.cssSelector("#main-content > div > div > header > h1")).getText.equals(paperlessPTAChangeEmailAddressPageTitle))
-  }
+    waitForText(changeEmailAddressPageHeader, paperlessPTAChangeEmailAddressPageTitle)
+   }
 
   def fillChangeEmailPage(): String = {
     sendKeys(By.id("email.main"), email2)

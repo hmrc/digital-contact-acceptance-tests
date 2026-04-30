@@ -17,12 +17,13 @@
 package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.By
+import uk.gov.hmrc.ui.ElementLocators.verifyNewEmailPageContinueButton
 import uk.gov.hmrc.ui.pages.BasePage
 
 object PaperlessVerifyNewEmailPage extends BasePage {
   var paperlessVerifyEmailPageTitle: String = "Verify your new email address"
 
   def clickOnContinueButton(): Unit =
-    click(By.ByCssSelector("#return-to-dashboard-button"))
+    click(By.ByCssSelector(verifyNewEmailPageContinueButton))
 
 }

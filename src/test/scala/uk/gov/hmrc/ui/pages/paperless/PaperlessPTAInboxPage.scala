@@ -18,6 +18,7 @@ package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.{By, WebDriver}
 import uk.gov.hmrc.selenium.webdriver.Driver
+import uk.gov.hmrc.ui.ElementLocators.ptaInboxPageMessageSubject
 import uk.gov.hmrc.ui.pages.BasePage
 
 object PaperlessPTAInboxPage extends BasePage {
@@ -27,7 +28,7 @@ object PaperlessPTAInboxPage extends BasePage {
 
   def checkMessageSubject(subject: String): Boolean = {
     val driver: WebDriver = Driver.instance
-    driver.findElement(By.cssSelector("#sa-messages-table > tbody > tr > td:nth-child(2)")).getText == subject
+    driver.findElement(By.cssSelector(ptaInboxPageMessageSubject)).getText == subject
   }
 
 }

@@ -17,19 +17,19 @@
 package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.By
+import uk.gov.hmrc.ui.ElementLocators.{confirmGettingTaxLettersPageBOnline, confirmGettingTaxLettersPageByPost, confirmGettingTaxLettersPageHeader}
 import uk.gov.hmrc.ui.pages.BasePage
-import uk.gov.hmrc.ui.pages.paperless.PaperlessOptOutSurveyPage.fluentWait
 
 object PaperlessConfirmGettingTaxLettersPage extends BasePage {
   var paperlessConfirmGettingTaxLettersTitle: String = "Confirm how you want to get your tax letters"
   
   def waitForPageLoad(): Unit = {
-    fluentWait.until(driver => driver.findElement(By.cssSelector("#main-content > div > div > header > h1")).getText.equals(paperlessConfirmGettingTaxLettersTitle))
+    waitForText(confirmGettingTaxLettersPageHeader, paperlessConfirmGettingTaxLettersTitle)
   }
 
   def clickOnGetLettersByPost(): Unit =
-    click(By.ByCssSelector("#confirm-opt-out"))
+    click(By.ByCssSelector(confirmGettingTaxLettersPageByPost))
 
   def clickOnKeepOnlineLetters(): Unit =
-    click(By.ByCssSelector("#cancel-link"))
+    click(By.ByCssSelector(confirmGettingTaxLettersPageBOnline))
 }

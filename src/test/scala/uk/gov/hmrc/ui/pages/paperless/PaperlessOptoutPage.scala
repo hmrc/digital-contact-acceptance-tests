@@ -18,21 +18,21 @@ package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.By
 import uk.gov.hmrc.selenium.webdriver.Driver
+import uk.gov.hmrc.ui.ElementLocators.{optOutPageHeader, submitEmailButtonId}
 import uk.gov.hmrc.ui.pages.BasePage
-import uk.gov.hmrc.ui.pages.paperless.PaperlessChooseLanguagePage.fluentWait
 
 object PaperlessOptoutPage extends BasePage {
-  var paperlessOptoutPageHeader: String = "You now get tax letters by post"
+  var paperlessOptoutPageTitle: String = "You now get tax letters by post"
 
   def waitUntilPageLoad(): Unit = {
-    fluentWait.until(driver => driver.findElement(By.cssSelector("#form-submit-email-address > div > h1")).getText == paperlessOptoutPageHeader)
+    waitForText(optOutPageHeader, paperlessOptoutPageTitle)
   }
   
   def inPaperlessOptoutConfirmPage(): Unit = { 
-  assert(Driver.instance.findElement(By.cssSelector("#form-submit-email-address > div > h1")).getText == paperlessOptoutPageHeader)
+  assert(Driver.instance.findElement(By.cssSelector(optOutPageHeader)).getText == paperlessOptoutPageTitle)
  }
 
   def clickOnContinueButton(): Unit = {
-    click(By.id("submitEmailButton"))
+    click(By.id(submitEmailButtonId))
   }
 }

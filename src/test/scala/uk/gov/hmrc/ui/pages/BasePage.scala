@@ -189,5 +189,10 @@ trait BasePage extends PageObject with TestData with ApiPayLoad{
       .post(payloadBounceEmail2), 5.seconds)
     assert(response.status == 204)
   }
+  
+  def waitForText(selector:String, text: String): Unit = {
+    fluentWait.until(driver => driver.findElement(By.cssSelector(selector)).getText.equals(text))
+
+  }
 }
 

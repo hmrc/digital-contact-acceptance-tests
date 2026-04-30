@@ -16,8 +16,9 @@
 
 package uk.gov.hmrc.ui.pages.paperless
 
-import org.openqa.selenium.{By, WebDriver}
+import org.openqa.selenium.By
 import uk.gov.hmrc.selenium.webdriver.Driver
+import uk.gov.hmrc.ui.ElementLocators.{ptaHomePageGotoMessageLink, ptaHomePageHeader, ptaHomePageToCYSLink, ptaHomePageUnreadNotificationLink}
 import uk.gov.hmrc.ui.pages.BasePage
 
 object PaperlessPTAHomePage extends BasePage {
@@ -26,15 +27,15 @@ object PaperlessPTAHomePage extends BasePage {
   var paperlessPtaHomePageTitle: String = "Personal Tax Account"
 
   def waitUntilPageLoad(): Unit = {
-    fluentWait.until(driver => driver.findElement(By.cssSelector("#main-content > div > div.govuk-grid-column-two-thirds > h1")).getText.equals(paperlessPtaHomePageTitle))
+    waitForText(ptaHomePageHeader, paperlessPtaHomePageTitle)
   }
 
   def checkUnreadNotification(notification: String): Boolean = {
-    Driver.instance.findElement(By.cssSelector("#main-content > div > div.govuk-grid-column-one-third > p")).getText == notification
+    Driver.instance.findElement(By.cssSelector(ptaHomePageUnreadNotificationLink)).getText == notification
   }
 
   def clickGoToYourMessages(): Unit = {
-    click(By.cssSelector("#main-content > div > div.govuk-grid-column-one-third > a"))
+    click(By.cssSelector(ptaHomePageGotoMessageLink))
   }
 
   def messageVerification():Unit = {
@@ -44,6 +45,6 @@ object PaperlessPTAHomePage extends BasePage {
   }
   
   def navigateToCheckYourSettings(): Unit = {
-    click(By.cssSelector("#main-content > div > div.govuk-grid-column-two-thirds > div > a"))
+    click(By.cssSelector(ptaHomePageToCYSLink))
   }
 }

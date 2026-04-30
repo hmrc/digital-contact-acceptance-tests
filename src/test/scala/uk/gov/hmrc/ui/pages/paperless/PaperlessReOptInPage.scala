@@ -17,48 +17,52 @@
 package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.By
+import uk.gov.hmrc.ui.ElementLocators.{reOptInPageHeader, reOptInPageSubmitEmailFormHeader, spsReOptIn2Id, spsReOptInId, spsReOptInIdEmailId, submitEmailButtonId}
 import uk.gov.hmrc.ui.pages.BasePage
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.sendKeys
 import uk.gov.hmrc.ui.pages.paperless.PaperlessBTAHomePage.fluentWait
 
 object PaperlessReOptInPage extends BasePage {
-  var PaperlessReOptInPageHeader: String = "Keep getting your tax letters online"
-  var PaperlessReOptInPageHeaderWelsh: String = "Parhau i gael eich llythyrau treth ar-lein"
+  var PaperlessReOptInPageTitle: String = "Keep getting your tax letters online"
+  var PaperlessReOptInPageTitleWelsh: String = "Parhau i gael eich llythyrau treth ar-lein"
 
   def waitUntilPageLoad(isWelsh: Boolean=false): Unit = {
-    if(isWelsh)
-      fluentWait.until(driver => driver.findElement(By.cssSelector("#main-content > div > div > header > h1")).getText.equals(PaperlessReOptInPageHeaderWelsh))
-    else
-      fluentWait.until(driver => driver.findElement(By.cssSelector("#main-content > div > div > header > h1")).getText.equals(PaperlessReOptInPageHeader))
+    if (isWelsh) {
+      waitForText(reOptInPageHeader, PaperlessReOptInPageTitleWelsh)
+    } else {
+      waitForText(reOptInPageHeader, PaperlessReOptInPageTitle)
+    }
   }
 
   def reOptIn(emailBounced: Boolean = false): Unit = {
-    click(By.id("sps-re-opt-in"))
-    click(By.id("submitEmailButton"))
+    click(By.id(spsReOptInId))
+    click(By.id(submitEmailButtonId))
+
     if(! emailBounced)
-      fluentWait.until(driver => driver.findElement(By.cssSelector("#form-submit-email-address > div > fieldset > legend > h1")).getText.equals("Which email do you want to use for your tax letters?"))
+      fluentWait.until(driver => driver.findElement(By.cssSelector(reOptInPageSubmitEmailFormHeader)).getText.equals("Which email do you want to use for your tax letters?"))
     else
-      fluentWait.until(driver => driver.findElement(By.cssSelector("#form-submit-email-address > fieldset > legend > h1")).getText.equals("Enter your email address"))
+      fluentWait.until(driver => driver.findElement(By.cssSelector(reOptInPageSubmitEmailFormHeader)).getText.equals("Enter your email address"))
   }
   
   def reOptInWithVerifiedEmail(): Unit = {
-    click(By.id("sps-re-opt-in"))
-    click(By.id("submitEmailButton"))
+    click(By.id(spsReOptInId))
+    click(By.id(submitEmailButtonId))
   }
 
   def reOptinEnterNewEmail(): Unit = {
-    sendKeys(By.id("sps-re-opt-in-email"), email2)
-    click(By.id("submitEmailButton"))
+    sendKeys(By.id(spsReOptInIdEmailId), email2)
+    click(By.id(submitEmailButtonId))
+
   }
   
   def reOptInWithNewEmail(): Unit = {
-    click(By.id("sps-re-opt-in-2"))
+    click(By.id(spsReOptIn2Id))
     reOptinEnterNewEmail()
   }
 
   def reOptOut(): Unit = {
-    click(By.id("sps-re-opt-in-2"))
-    click(By.id("submitEmailButton"))
+    click(By.id(spsReOptIn2Id))
+    click(By.id(submitEmailButtonId))
   }
 
   def reOptInWithNewEmailPta(): Unit = {
