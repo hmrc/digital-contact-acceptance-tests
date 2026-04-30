@@ -25,5 +25,14 @@ object PaperlessOptoutPage extends BasePage {
 
   def inPaperlessOptoutConfirmPage() :Unit = 
   assert(Driver.instance.findElement(By.cssSelector("#form-submit-email-address > div > h1")).getText == paperlessOptoutPageHeader)
+
+  def youNowGetTaxLettersByPostTitle(): Unit =
+    getTitle.contains(paperlessOptoutPageHeader)
+
+  def clickOnContinueButton(): Unit = {
+    val continue: By = By.id(ContinueOptOut)
+    click(continue)
+    fluentWait
+  }
   
 }

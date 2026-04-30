@@ -47,4 +47,13 @@ object PaperlessReOptInPage extends BasePage {
     reOptinEnterNewEmail()
   }
 
+  def PaperlessReOptInPageTitle(): Unit = {
+    getTitle.contains(PaperlessReOptInPageHeader)
+    fluentWait
+  }
+
+  def clickCloseButton(): Unit = {
+    click(By.cssSelector("#main-content > div > div > div:nth-child(5) > a"))
+  }
+
 }

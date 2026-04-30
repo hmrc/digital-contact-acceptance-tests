@@ -18,6 +18,7 @@ package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.By
 import uk.gov.hmrc.ui.pages.BasePage
+import uk.gov.hmrc.ui.pages.paperless.PaperlessVerifyEmailPage.{getTitle, paperlessVerifyEmailPageTitle}
 
 object PaperlessTroubleSendingEmailPage extends BasePage{
   
@@ -29,5 +30,8 @@ object PaperlessTroubleSendingEmailPage extends BasePage{
   def doNotWantToGetOnlineTaxLetters(): Unit = {
     click(By.cssSelector("#main-content > div > div > p:nth-child(6) > a"))
   }
+
+  def PaperlessTroubleSendingEmailPageTitle(): Unit =
+    getTitle.contains(PaperlessTroubleSendingEmailPageHeader)
 
 }

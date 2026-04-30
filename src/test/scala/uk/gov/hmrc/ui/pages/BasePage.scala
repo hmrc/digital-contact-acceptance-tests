@@ -19,7 +19,7 @@ package uk.gov.hmrc.ui.pages
 import org.apache.pekko.actor.ActorSystem
 import org.mongodb.scala.model.{Filters, Updates}
 import org.mongodb.scala.{Document, MongoClient, MongoCollection, MongoDatabase, SingleObservableFuture}
-import org.openqa.selenium.{By, WebDriver}
+import org.openqa.selenium.{By, WebDriver, WebElement}
 import org.openqa.selenium.support.ui.{FluentWait, Wait}
 import org.scalatest.concurrent.Futures.PatienceConfig
 import play.api.libs.ws.StandaloneWSRequest
@@ -90,6 +90,9 @@ trait BasePage extends PageObject with TestData with ApiPayLoad{
   val confirmButtonId           = "confirm"
   val approveButtonId           = "approve"
   val decodeButtonId            = "decode"
+  val checkYourSettings         = "Checkyoursettings"
+  val close                     = "#main-content > div > div > div:nth-child(5) > a"
+  val ContinueOptOut            = "submitEmailButton"
 
   private val PREFERENCESDATABASE = "preferences"
   private val COLLECTION2 = "saIndividualPreferences"

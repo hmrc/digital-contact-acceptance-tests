@@ -32,4 +32,14 @@ object PaperlessVerifyEmailPage extends BasePage {
     click(By.cssSelector("#main-content > div > div > div > p > a"))
     fluentWait.until(driver => driver.findElement(By.cssSelector("#form-submit-email-address > fieldset > legend > h1")).getText.equals("Enter your email address"))
   }
+
+  def clickOnCloseButton(): Unit = {
+    val closeButton: By = By.cssSelector("a[role='button']")
+    click(closeButton)
+    fluentWait
+  }
+  
+  def verifyEmailAddressPageTitle(): Unit =
+    getTitle.contains(paperlessVerifyEmailPageTitle)
+    
 }

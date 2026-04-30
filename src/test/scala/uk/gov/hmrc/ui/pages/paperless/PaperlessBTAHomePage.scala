@@ -20,10 +20,11 @@ import org.openqa.selenium.{By, WebDriver}
 import uk.gov.hmrc.selenium.webdriver.Driver
 import uk.gov.hmrc.ui.pages.BasePage
 
-object PaperlessBTAHomePage extends BasePage {
+object PaperlessBTAHomePage extends BasePage{
 
   // This is BTA home page for paperless journey using digital-contact-demo-frontend
   var paperlessBtaHomePageTitle: String = "Business Tax Account"
+  var reviewUpdatedTermsText:  String = "you need to agree to our updated terms"
 
   def btaPageTitle(): Unit =
     getTitle.contains(paperlessBtaHomePageTitle)
@@ -45,6 +46,22 @@ object PaperlessBTAHomePage extends BasePage {
 
   def checkContactPreferenceText(pref: String): Unit = {
     assert(Driver.instance.findElement(By.cssSelector("#main-content > div > div.govuk-grid-column-two-thirds > div > div:nth-child(2) > span")).getText == pref)
+  }
+
+  def checkDisplayedLink(link: String): Unit = {
+    assert(Driver.instance.findElement(By.linkText(link)).isDisplayed)
+  }
+
+  def clickOnCheckYourSettingsLink(): Unit = {
+    val clickOnLink: By = By.id(checkYourSettings)
+    click(clickOnLink)
+    fluentWait
+  }
+
+  def clickOnCloseButton(): Unit = {
+    val closeButton: By = By.cssSelector(close)
+    click(closeButton)
+    fluentWait
   }
 
 }

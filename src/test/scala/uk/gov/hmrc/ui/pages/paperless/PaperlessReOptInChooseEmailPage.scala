@@ -18,23 +18,13 @@ package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.By
 import uk.gov.hmrc.ui.pages.BasePage
+import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.email
 
-object PaperlessInterruptPage extends BasePage {
-  var paperlessPageTitle: String = "Choose how to get your tax letters"
 
-  def fillInterruptPageForOptin(): Unit = {
-    val getOnlineRadioButton: By = By.id(onlineRadioButtonId)
-    selectCheckbox(getOnlineRadioButton)
-    click(By.id("submitEmailButton"))
-    fluentWait
-  }
+object PaperlessReOptInChooseEmailPage extends BasePage {
+  var paperlessChooseEmailPageTitle: String = "Which email do you want to use for your tax letters?"
 
-  def fillInterruptPageForOptout(): Unit = {
-    val getPostRadioButton: By = By.id(postRadioButtonId)
-    selectCheckbox(getPostRadioButton)
-    click(By.id("submitEmailButton"))
-  }
-
-  def chooseHowToGetYourTaxLettersTitle(): Unit =
-    getTitle.contains(paperlessPageTitle)
+  def chooseEmailPageTitle(): Unit =
+    getTitle.contains(paperlessChooseEmailPageTitle)
+    
 }

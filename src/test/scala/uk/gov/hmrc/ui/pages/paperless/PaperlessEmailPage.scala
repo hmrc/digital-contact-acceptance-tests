@@ -30,4 +30,14 @@ object PaperlessEmailPage extends BasePage {
     click(By.id("submitEmailButton"))
     fluentWait
   }
+
+  def clickOnCloseButton(): Unit = {
+    val closeButton: By = By.cssSelector(close)
+    click(closeButton)
+    fluentWait
+  }
+
+  def paperlessEmailAddressPageTitle(): Unit =
+    getTitle.contains(paperlessEmailPageTitle)
+
 }
