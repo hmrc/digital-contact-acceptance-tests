@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.By
-import uk.gov.hmrc.ui.ElementLocators.{reOptInPageHeader, reOptInPageSubmitEmailFormHeader, spsReOptIn2Id, spsReOptInId, spsReOptInIdEmailId, submitEmailButtonId}
+import uk.gov.hmrc.ui.ElementLocators.{emailPageHeader, reOptInPageHeader, reOptInPageSubmitEmailFormHeader, spsReOptIn2Id, spsReOptInId, spsReOptInIdEmailId, submitEmailButtonId}
 import uk.gov.hmrc.ui.pages.BasePage
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.sendKeys
 import uk.gov.hmrc.ui.pages.paperless.PaperlessBTAHomePage.fluentWait
@@ -41,7 +41,7 @@ object PaperlessReOptInPage extends BasePage {
     if(! emailBounced)
       fluentWait.until(driver => driver.findElement(By.cssSelector(reOptInPageSubmitEmailFormHeader)).getText.equals("Which email do you want to use for your tax letters?"))
     else
-      fluentWait.until(driver => driver.findElement(By.cssSelector(reOptInPageSubmitEmailFormHeader)).getText.equals("Enter your email address"))
+      fluentWait.until(driver => driver.findElement(By.cssSelector(emailPageHeader)).getText.equals("Enter your email address"))
   }
   
   def reOptInWithVerifiedEmail(): Unit = {

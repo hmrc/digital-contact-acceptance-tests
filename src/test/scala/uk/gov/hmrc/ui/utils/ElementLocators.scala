@@ -72,4 +72,7 @@ object ElementLocators {
   val spsReOptInId                                            = "sps-re-opt-in"
   val spsReOptInIdEmailId                                     = "sps-re-opt-in-email"
   val spsReOptIn2Id                                           = "sps-re-opt-in-2"
+  val emailMainId                                             = "email.main"
+  val emailConfirmId                                          ="email.confirm"
+  val submitChangedEmailButtonId                              = "submit-email-button"
 }
