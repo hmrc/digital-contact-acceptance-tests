@@ -88,7 +88,7 @@ object LoginUsingAuthWizardPage extends BasePage {
     fluentWait
   }
 
-  def lonIntoCustomerAdvisorMessageInboxPage(): Unit = {
+  def logIntoCustomerAdvisorMessageInboxPage(): Unit = {
     pageLoad()
     val getRedirectUrl: By = By.id(getRedirectUrlId)
     sendKeys(getRedirectUrl, mdtpMessageInbox)
@@ -96,7 +96,7 @@ object LoginUsingAuthWizardPage extends BasePage {
     fluentWait
   }
 
-  def lonIntoCustomerAdvisorMessageSautrPage(sautr: String): Unit = {
+  def logIntoCustomerAdvisorMessageSautrPage(sautr: String): Unit = {
     pageLoad()
     val getRedirectUrl: By = By.id(getRedirectUrlId)
     sendKeys(getRedirectUrl, mdtpMessageSautr + identifierValue)
