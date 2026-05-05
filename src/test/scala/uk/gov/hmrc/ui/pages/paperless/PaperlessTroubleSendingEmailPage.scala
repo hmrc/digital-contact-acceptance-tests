@@ -40,4 +40,8 @@ object PaperlessTroubleSendingEmailPage extends BasePage{
   def doNotWantOnlineLettersLinkExists(): Unit = {
     assert(Driver.instance.findElements(By.cssSelector(toubleSendingEmailPageNotWantOnlineLetters)).size() > 0)
   }
+
+  def PaperlessTroubleSendingEmailPageTitle(): Unit =
+    getTitle.contains(PaperlessTroubleSendingEmailPageHeader)
+    
 }

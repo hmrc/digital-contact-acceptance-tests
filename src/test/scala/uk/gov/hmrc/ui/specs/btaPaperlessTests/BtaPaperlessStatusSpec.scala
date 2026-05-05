@@ -51,7 +51,7 @@ class BtaPaperlessStatusSpec extends BaseSpec with BasePage {
       PaperlessBTAHomePage.clickOnCloseButton()
       And("I see the page: Business Tax Account")
       PaperlessBTAHomePage.btaPageTitle()
-      And("I see the status By post, until you verify your email address and the link Fix this")
+      Then("I see the status By post, until you verify your email address and the link Fix this")
       PaperlessBTAHomePage.checkContactPreferenceText("By post, until you verify your email address")
       PaperlessBTAHomePage.checkDisplayedLink("Fix this")
     }
@@ -70,7 +70,7 @@ class BtaPaperlessStatusSpec extends BaseSpec with BasePage {
       When("I am logged into the account")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr")
-      And("I see the page: Business Tax Account")
+      Then("I see the page: Business Tax Account")
       PaperlessBTAHomePage.checkContactPreferenceText("By post – we cannot contact you on your email address")
       PaperlessBTAHomePage.checkDisplayedLink("Fix this")
     }
@@ -91,7 +91,7 @@ class BtaPaperlessStatusSpec extends BaseSpec with BasePage {
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr")
       And("I see the page: Business Tax Account")
       PaperlessBTAHomePage.btaPageTitle()
-      And("I see the status Online – we will let you know by email and the link Check your settings")
+      Then("I see the status Online – we will let you know by email and the link Check your settings")
       PaperlessBTAHomePage.checkDisplayedLink("Check your settings")
     }
 
@@ -142,7 +142,7 @@ class BtaPaperlessStatusSpec extends BaseSpec with BasePage {
       PaperlessReOptInPage.reOptInWithNewEmail()
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr")
-      And("I see the page: Business Tax Account")
+      Then("I see the page: Business Tax Account")
       PaperlessBTAHomePage.btaPageTitle()
     }
 

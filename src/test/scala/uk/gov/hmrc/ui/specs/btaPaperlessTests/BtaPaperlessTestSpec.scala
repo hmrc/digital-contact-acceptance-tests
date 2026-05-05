@@ -43,7 +43,7 @@ class BtaPaperlessTestSpec extends BaseSpec with BasePage {
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr")
       And("I see the page: Business Tax Account")
       PaperlessBTAHomePage.btaPageTitle()
-      And("I see the status Online – we will let you know by email and the link Check your settings")
+      Then("I see the status Online – we will let you know by email and the link Check your settings")
       PaperlessBTAHomePage.checkContactPreferenceText("Online – we will let you know by email")
       PaperlessBTAHomePage.checkDisplayedLink("Check your settings")
       PaperlessBTAHomePage.clickOnCheckYourSettingsLink()
@@ -72,7 +72,7 @@ class BtaPaperlessTestSpec extends BaseSpec with BasePage {
       And("I navigate to BTA account")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr")
-      And("I see the page: Business Tax Account")
+      Then("I see the page: Business Tax Account")
       PaperlessBTAHomePage.btaPageTitle()
     }
 
@@ -136,7 +136,7 @@ class BtaPaperlessTestSpec extends BaseSpec with BasePage {
       PaperlessEmailPage.fillEmailPage()
       And("I click close button")
       PaperlessEmailPage.clickOnCloseButton()
-      And("I see the page: Business Tax Account")
+      Then("I see the page: Business Tax Account")
       PaperlessBTAHomePage.btaPageTitle()
     }
 
@@ -172,9 +172,9 @@ class BtaPaperlessTestSpec extends BaseSpec with BasePage {
       And("I see the page: You now get tax letters by post")
       PaperlessOptoutPage.youNowGetTaxLettersByPostTitle()
       PaperlessOptoutPage.clickOnContinueButton()
-      Then("I see the page: Business Tax Account")
+      And("I see the page: Business Tax Account")
       PaperlessBTAHomePage.btaPageTitle()
-      And("I see the status By Post and the link Get tax letters online")
+      Then("I see the status By Post and the link Get tax letters online")
       PaperlessBTAHomePage.checkContactPreferenceText("By post")
       PaperlessBTAHomePage.checkDisplayedLink("Get tax letters online")
     }
@@ -225,7 +225,7 @@ class BtaPaperlessTestSpec extends BaseSpec with BasePage {
       And("I see the page: Enter your email address")
       PaperlessEmailPage.paperlessEmailAddressPageTitle()
       PaperlessVerifyEmailPage.clickOnCloseButton()
-      And("I see the page: Business Tax Account")
+      Then("I see the page: Business Tax Account")
       PaperlessBTAHomePage.btaPageTitle()
     }
   }

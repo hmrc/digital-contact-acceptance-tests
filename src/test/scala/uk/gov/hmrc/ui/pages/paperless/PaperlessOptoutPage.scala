@@ -35,4 +35,8 @@ object PaperlessOptoutPage extends BasePage {
   def clickOnContinueButton(): Unit = {
     click(By.id(submitEmailButtonId))
   }
+
+  def youNowGetTaxLettersByPostTitle(): Unit =
+    getTitle.contains(paperlessOptoutPageTitle)
+  
 }
