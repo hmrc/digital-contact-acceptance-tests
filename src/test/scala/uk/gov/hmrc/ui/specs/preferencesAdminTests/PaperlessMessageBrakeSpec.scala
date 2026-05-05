@@ -31,7 +31,6 @@ class PaperlessMessageBrakeSpec extends BaseSpec with TestData {
 
     Scenario("Preferences Admin can reject the batch via message break", PreferencesAdminTests) {
       Given("I am logged into PTA account with nino enrolment and verify the email")
-      deleteMongoRecordsFromCollection("Preferences")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginPTAUsingAuthWizardByNinoOnly()
       PaperlessInterruptPage.fillInterruptPageForOptin()
@@ -55,7 +54,6 @@ class PaperlessMessageBrakeSpec extends BaseSpec with TestData {
 
     Scenario("Preferences Admin can approve the batch via message break", PreferencesAdminTests) {
       Given("I am logged into PTA account with nino enrolment and verify the email")
-      deleteMongoRecordsFromCollection("Preferences")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginPTAUsingAuthWizardByNinoOnly()
       PaperlessInterruptPage.fillInterruptPageForOptin()
@@ -76,5 +74,9 @@ class PaperlessMessageBrakeSpec extends BaseSpec with TestData {
       Then("I should see that no more that formId exits in message brake")
       PreferencesMessageBrakePage.messageBrakeListEmpty()
     }
+  }
+  override def beforeEach(): Unit = {
+    super.beforeEach()
+    deleteMongoRecordsFromCollection("preferences")
   }
 }

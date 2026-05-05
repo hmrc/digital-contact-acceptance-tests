@@ -39,7 +39,7 @@ import play.api.libs.ws.DefaultBodyWritables.writeableOf_String
 import java.time.Duration
 import scala.concurrent.Await
 
-trait BasePage extends PageObject with TestData with ApiPayLoad{
+trait BasePage extends PageObject with TestData with ApiPayLoad {
 
   implicit val patienceConfig: PatienceConfig =
     PatienceConfig(timeout = Span(10, Seconds), interval = Span(5, Seconds))
@@ -50,54 +50,61 @@ trait BasePage extends PageObject with TestData with ApiPayLoad{
 
   val entityIdRegex = "(\\bJsDefined\\b|\\(|\\)|\")"
 
-  val getRedirectUrlId          = "redirectionUrl"
-  val getCredentialStrengthId   = "credentialStrength"
-  val getConfidenceLevelId      = "confidenceLevel"
-  val getNinoId                 = "nino"
-  val onlineRadioButtonId       = "sps-opt-in"
-  val postRadioButtonId         = "sps-opt-in-2"
-  val getEmailTextFieldId       = "sps-opt-in-email"
-  val saUtrRadioButtonId        = "name"
-  val ninoRadioButtonId         = "name-2"
-  val ItsaIdRadioButtonId       = "name-3"
-  val emailIdRadioButtonId      = "name-4"
-  val identifierValueTextId     = "value"
-  val optUserOutLinkCssSelector = "#main-content > div > div > details > summary > span"
-  val optOutUserReasonTextId    = "reason"
-  val yesButtonOnSummaryPage    = "#confirm > form > div.govuk-button-group > button"
-  val searchButtonOnSearchPage  = "#main-content > div > div > form > button"
-  val uniqueReferenceId         = "externalRef.id"
-  val messageSourceId           = "externalRef.source"
-  val taxIdentifierNameId       = "recipient.taxIdentifier.name"
-  val taxIdentifierValueId      = "recipient.taxIdentifier.value"
-  val regimeId                  = "recipient.regime"
-  val emailId                   = "recipient.email"
-  val messageTypeId             = "messageType"
-  val alertQueueId              = "alertQueue"
-  val englishSubjectId          = "english-subject"
-  val welshSubjectId            = "english-subject"
-  val englishMessageId          = "english-message-content"
-  val welshMessageId            = "welsh-message-content"
-  val validFromId               = "validFrom"
-  val formIdId                  = "details.formId"
-  val issueDateId               = "details.issueDate"
-  val batchIdId                 = "details.batchId"
-  val sourceDataId              = "details.sourceData"
-  val newFormIdId               = "formId"
-  val reasonTextId              = "reasonText"
-  val encodedTextId             = "encoded-text"
-  val rejectButtonId            = "reject"
-  val confirmButtonId           = "confirm"
-  val approveButtonId           = "approve"
-  val decodeButtonId            = "decode"
+  val getRedirectUrlId              = "redirectionUrl"
+  val getCredentialStrengthId       = "credentialStrength"
+  val getConfidenceLevelId          = "confidenceLevel"
+  val getNinoId                     = "nino"
+  val onlineRadioButtonId           = "sps-opt-in"
+  val postRadioButtonId             = "sps-opt-in-2"
+  val getEmailTextFieldId           = "sps-opt-in-email"
+  val saUtrRadioButtonId            = "name"
+  val ninoRadioButtonId             = "name-2"
+  val ItsaIdRadioButtonId           = "name-3"
+  val emailIdRadioButtonId          = "name-4"
+  val identifierValueTextId         = "value"
+  val optUserOutLinkCssSelector     = "#main-content > div > div > details > summary > span"
+  val optOutUserReasonTextId        = "reason"
+  val yesButtonOnSummaryPage        = "#confirm > form > div.govuk-button-group > button"
+  val searchButtonOnSearchPage      = "#main-content > div > div > form > button"
+  val uniqueReferenceId             = "externalRef.id"
+  val messageSourceId               = "externalRef.source"
+  val taxIdentifierNameId           = "recipient.taxIdentifier.name"
+  val taxIdentifierValueId          = "recipient.taxIdentifier.value"
+  val regimeId                      = "recipient.regime"
+  val emailId                       = "recipient.email"
+  val messageTypeId                 = "messageType"
+  val alertQueueId                  = "alertQueue"
+  val englishSubjectId              = "english-subject"
+  val welshSubjectId                = "english-subject"
+  val englishMessageId              = "english-message-content"
+  val welshMessageId                = "welsh-message-content"
+  val validFromId                   = "validFrom"
+  val formIdId                      = "details.formId"
+  val issueDateId                   = "details.issueDate"
+  val batchIdId                     = "details.batchId"
+  val sourceDataId                  = "details.sourceData"
+  val newFormIdId                   = "formId"
+  val reasonTextId                  = "reasonText"
+  val encodedTextId                 = "encoded-text"
+  val rejectButtonId                = "reject"
+  val confirmButtonId               = "confirm"
+  val approveButtonId               = "approve"
+  val decodeButtonId                = "decode"
+  val messageContentId              = "content"
+  val messageSubjectId              = "subject"
+  val recipientTaxIdentifierNameId  = "recipientTaxidentifierName"
+  val recipientTaxIdentifierValueId = "recipientTaxidentifierValue"
+  val recipientEmailId              = "recipientEmail"
+  val recipientNameId               = "recipientNameLine1"
+  val messageFormId                 = "message"
 
   private val PREFERENCESDATABASE = "preferences"
-  private val COLLECTION2 = "saIndividualPreferences"
+  private val COLLECTION2         = "saIndividualPreferences"
 
-  def mongoClient: MongoClient = MongoClient()
-  def preferencesDb: MongoDatabase = mongoClient.getDatabase(PREFERENCESDATABASE)
+  def mongoClient: MongoClient                                     = MongoClient()
+  def preferencesDb: MongoDatabase                                 = mongoClient.getDatabase(PREFERENCESDATABASE)
   def saIndividualPreferencesCollection: MongoCollection[Document] = preferencesDb.getCollection(COLLECTION2)
-  
+
   def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
     .withTimeout(Duration.ofSeconds(3))
     .pollingEvery(Duration.ofSeconds(1))
@@ -122,34 +129,44 @@ trait BasePage extends PageObject with TestData with ApiPayLoad{
     val bodyAsJson                                                = Json.parse(resultBody).\("_id").toString
     val extractedEntityId                                         = bodyAsJson.replaceAll(entityIdRegex, "")
     // To get verificaton token via sa-api proxy
-    val verificationTokenUrl: String                              =
+    val verificationTokenUrl: String                      =
       saApiProxy + s"/preferences/test-only/preferences-admin/$extractedEntityId/verification-token"
-    val getToken: StandaloneWSRequest#Response                    = waitGetUrlResult(verificationTokenUrl)
-    val verificationToken                                         = getToken.body
+    val getToken: StandaloneWSRequest#Response            = waitGetUrlResult(verificationTokenUrl)
+    val verificationToken                                 = getToken.body
     // To verify email address using token
-    val emailVerificationUrl: String                              = preferenceFrontend + s"sa/print-preferences/verification/$verificationToken"
+    val emailVerificationUrl: String                      = preferenceFrontend + s"sa/print-preferences/verification/$verificationToken"
     waitGetUrlResult(emailVerificationUrl)
   }
 
   def bounceVerifyEmail(): Unit = {
     val bounceUrl = preferences + "test-only/preferences-admin/bounce-email"
-      val response = Await.result(WsClient.url(bounceUrl)
+    val response  = Await.result(
+      WsClient
+        .url(bounceUrl)
         .addHttpHeaders("Content-Type" -> "application/json")
-        .post(payloadBounceEmail1), 5.seconds)
-      assert(response.status == 204)
+        .post(payloadBounceEmail1),
+      5.seconds
+    )
+    assert(response.status == 204)
   }
 
   def setVersionMajor(): Unit = {
     val json: JsValue = Json.parse(saIndividualPreferencesCollection.find().first().toFuture().futureValue.toJson())
-    val entityId = (json \ "entityId").as[String]
-    val query = Filters.equal("entityId", entityId)
-    val update = Updates.set("termsAndConditions.generic.optInPage.version.major", 0)
+    val entityId      = (json \ "entityId").as[String]
+    val query         = Filters.equal("entityId", entityId)
+    val update        = Updates.set("termsAndConditions.generic.optInPage.version.major", 0)
     saIndividualPreferencesCollection.findOneAndUpdate(query, update).toFuture().futureValue
   }
 
-  def waitUntilHeader(header: String): Unit = {
-    fluentWait.until(driver => driver.findElement(By.cssSelector("#main-content > div > div > h1")).getText.equals(header))
-  }
+  def waitUntilHeader(header: String): Unit =
+    fluentWait.until(driver =>
+      driver.findElement(By.cssSelector("#main-content > div > div > h1")).getText.equals(header)
+    )
+
+  def waitUntilHeader2(header: String): Unit =
+    fluentWait.until(driver =>
+      driver.findElement(By.cssSelector("#main-content > div > div > h2")).getText.equals(header)
+    )
 
   def waitGetUrlResult(url: String): StandaloneWSRequest#Response = {
     val response: StandaloneWSRequest#Response = Await.result(WsClient.url(url).get(), 5.seconds)
@@ -195,4 +212,3 @@ trait BasePage extends PageObject with TestData with ApiPayLoad{
 
   }
 }
-

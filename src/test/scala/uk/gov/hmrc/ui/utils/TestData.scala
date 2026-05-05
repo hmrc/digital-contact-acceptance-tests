@@ -37,6 +37,8 @@ trait TestData {
   val preferences: String                = TestEnvironment.url("preferences")
   val secureMessage: String              = TestEnvironment.url("secure-message")
   val externalMessageAdapter: String     = TestEnvironment.url("external-message-adapter")
+  val customerAdvisorFrontend: String    = TestEnvironment.url("customer-advisors-frontend")
+  
 
   val credentialStrength: String     = "strong"
   val confidenceLevel: String        = "200"
@@ -61,13 +63,19 @@ trait TestData {
   val englishSubjectValue: String    = "Reminder to file Self Assessment return"
   val englishContentValue: String    =
     "PGgxPlRlc3QgTWVzc2FnZTxoMT4NCg0KPHNjcmlwdD53aW5kb3cuYWxlcnQoIkhlbGxvIik8L3NjcmlwdD4NCg0KPGgyPk5vIHBvcCB1cCBzaG91bGQgYXBwZWFyPC9oMj4NCg0KPHAgc3R5bGU9ImZvbnQtc2l6ZTogMTlweDtsaW5lLWhlaWdodDogMS4zMTU3ODk0NzQ7bWFyZ2luOiAwIDAgMzBweCAwOyI+DQogICAgRGVhciBDdXN0b21lcg0KPC9wPg0KDQo8cD5UaGlzIGlzIHlvdXIgbWVzc2FnZTwvcD4="
-  val validFromValue: String         = "2026-03-09"
-  val invalidFormIdValue: String     = "Test312"
-  val batchIdValue: String           = "1234567"
-  val sourceDataValue: String        = "ew0KICAgIm5hbWUiOiAiRGFuaWVsIiwNCiAgICJzZWF0IiA6ICJ5ZXMiDQp9"
-  val reasonTextForAdding: String    = "Adding a formId for testing"
-  val reasonTextForDeleting: String  = "Deleting a formId for testing"
-  val rejectReasonText: String       = "Not a valid formId"
-  val addReasonText: String          = "Approved valid formId for testing"
-
+  val validFromValue: String              = "2026-03-09"
+  val invalidFormIdValue: String          = "Test312"
+  val batchIdValue: String                = "1234567"
+  val sourceDataValue: String             = "ew0KICAgIm5hbWUiOiAiRGFuaWVsIiwNCiAgICJzZWF0IiA6ICJ5ZXMiDQp9"
+  val reasonTextForAdding: String         = "Adding a formId for testing"
+  val reasonTextForDeleting: String       = "Deleting a formId for testing"
+  val rejectReasonText: String            = "Not a valid formId"
+  val addReasonText: String               = "Approved valid formId for testing"
+  val contentValue: String                =
+    """<img src="https://www.qa.tax.service.gov.uk/assets/4.8.0/images/direct-debit-logo.png" alt="Direct Debit logo">"""
+  val subjectValue: String                = "Direct debit logo test"
+  val identifierNameValue: String         = "HMRC-OBTDS-ORG"
+  val identifierFHDDSValidValue: String   = "XZFH00000100022"
+  val identifierFHDDSInvalidValue: String = "XGER00000100022"
+  val nameValue: String                   = "Test User"
 }

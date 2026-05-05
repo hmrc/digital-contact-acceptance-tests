@@ -21,8 +21,8 @@ import uk.gov.hmrc.selenium.webdriver.Driver
 import uk.gov.hmrc.ui.ElementLocators.{toubleSendingEmailPageEnterAddress, toubleSendingEmailPageNotWantOnlineLetters}
 import uk.gov.hmrc.ui.pages.BasePage
 
-object PaperlessTroubleSendingEmailPage extends BasePage{
-  
+object PaperlessTroubleSendingEmailPage extends BasePage {
+
   var PaperlessTroubleSendingEmailPageHeader: String = "We are having trouble sending you emails"
 
   def enterYourEmailAddress(): Unit = {

@@ -15,5 +15,7 @@
  */
 
 package uk.gov.hmrc.ui.specs.tags
+
 import org.scalatest.Tag
-object ItsaPaperlessTests extends Tag("ItsaPaperlessTests") {}
+
+object OwsmTests extends Tag("OwsmTests") {}

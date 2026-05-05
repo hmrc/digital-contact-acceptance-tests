@@ -35,5 +35,5 @@ object PaperlessInterruptPage extends BasePage {
     selectCheckbox(getPostRadioButton)
     click(By.id(submitEmailButtonId))
   }
-  
+
 }
