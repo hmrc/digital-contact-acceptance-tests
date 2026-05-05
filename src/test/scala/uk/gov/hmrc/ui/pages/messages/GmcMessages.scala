@@ -38,9 +38,9 @@ object GmcMessages extends BasePage {
   val batchId: String            = batchIdId
   val sourceData: String         = sourceDataId
 
-  def createV4Message(messageType: String): Unit = {
+  def createV4Message(gmcMessageType: String): Unit = {
     logIntoDemoFrontendForV4()
-    val message: Unit = messageType.toLowerCase match {
+    val gmcMessage: Unit = gmcMessageType.toLowerCase match {
       case "invalid formid" => fillFormWithInvalidFormId()
     }
     click(By.id("submit-button"))

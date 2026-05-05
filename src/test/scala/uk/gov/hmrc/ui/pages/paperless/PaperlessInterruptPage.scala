@@ -36,6 +36,4 @@ object PaperlessInterruptPage extends BasePage {
     click(By.id(submitEmailButtonId))
   }
 
-  def chooseHowToGetYourTaxLettersTitle(): Unit =
-    getTitle.contains(paperlessPageTitle)
 }

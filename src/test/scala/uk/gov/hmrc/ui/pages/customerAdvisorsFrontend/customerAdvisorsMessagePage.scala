@@ -14,6 +14,22 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs.tags
-import org.scalatest.Tag
-object ItsaPaperlessTests extends Tag("ItsaPaperlessTests") {}
+package uk.gov.hmrc.ui.pages.customerAdvisorsFrontend
+
+import org.openqa.selenium.By
+import uk.gov.hmrc.ui.pages.BasePage
+
+object customerAdvisorsMessagePage extends BasePage {
+
+  def responseMessage(resMessage: String): Unit = {
+    getPageSource.contains(resMessage)
+    fluentWait
+  }
+
+  def fillFormToReply(): Unit = {
+    val getMessageArea: By = By.id(messageFormId)
+    sendKeys(getMessageArea, addReasonText)
+    click(By.id("submit-advice"))
+  }
+
+}

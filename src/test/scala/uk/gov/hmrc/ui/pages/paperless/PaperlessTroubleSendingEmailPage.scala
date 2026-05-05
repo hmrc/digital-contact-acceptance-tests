@@ -22,8 +22,8 @@ import uk.gov.hmrc.ui.ElementLocators.{toubleSendingEmailPageEnterAddress, toubl
 import uk.gov.hmrc.ui.pages.BasePage
 import uk.gov.hmrc.ui.pages.paperless.PaperlessVerifyEmailPage.{getTitle, paperlessVerifyEmailPageTitle}
 
-object PaperlessTroubleSendingEmailPage extends BasePage{
-  
+object PaperlessTroubleSendingEmailPage extends BasePage {
+
   var PaperlessTroubleSendingEmailPageHeader: String = "We are having trouble sending you emails"
 
   def enterYourEmailAddress(): Unit = {

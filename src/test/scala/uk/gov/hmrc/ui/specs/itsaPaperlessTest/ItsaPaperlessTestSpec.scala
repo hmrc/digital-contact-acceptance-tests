@@ -21,9 +21,7 @@ import uk.gov.hmrc.ui.pages.paperless.{PaperlessBTAHomePage, PaperlessEmailPage,
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.ItsaPaperlessTests
 
-
 class ItsaPaperlessTestSpec extends BaseSpec {
-
 
   Feature("ITSA Paperless Interrupt page") {
 
@@ -171,7 +169,6 @@ class ItsaPaperlessTestSpec extends BaseSpec {
       PaperlessBTAHomePage.checkContactPreferenceText("Online – we will let you know by email")
     }
 
-
     Scenario("ITSA Re-Opt-in journey - new email address", ItsaPaperlessTests) {
 
       Given("I am logged into ITSA account with nino and sautr enrolment")
@@ -224,5 +221,4 @@ class ItsaPaperlessTestSpec extends BaseSpec {
     super.beforeEach()
     deleteMongoRecordsFromCollection("preferences")
   }
-
 }

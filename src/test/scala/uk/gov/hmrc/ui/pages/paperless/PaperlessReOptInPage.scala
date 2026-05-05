@@ -43,7 +43,7 @@ object PaperlessReOptInPage extends BasePage {
     else
       fluentWait.until(driver => driver.findElement(By.cssSelector(emailPageHeader)).getText.equals("Enter your email address"))
   }
-  
+
   def reOptInWithVerifiedEmail(): Unit = {
     click(By.id(spsReOptInId))
     click(By.id(submitEmailButtonId))
@@ -54,7 +54,7 @@ object PaperlessReOptInPage extends BasePage {
     click(By.id(submitEmailButtonId))
 
   }
-  
+
   def reOptInWithNewEmail(): Unit = {
     click(By.id(spsReOptIn2Id))
     reOptinEnterNewEmail()

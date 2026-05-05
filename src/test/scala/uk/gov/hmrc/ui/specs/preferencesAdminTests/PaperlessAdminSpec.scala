@@ -30,7 +30,6 @@ class PaperlessAdminSpec extends BaseSpec {
 
     Scenario("Admin can opt-out the user who has already opted-in and verified using nino", PreferencesAdminTests) {
       Given("I am logged into PTA account with nino enrolment and verify the email")
-      deleteMongoRecordsFromCollection("Preferences")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginPTAUsingAuthWizardByNinoOnly()
       PaperlessInterruptPage.fillInterruptPageForOptin()
@@ -55,7 +54,6 @@ class PaperlessAdminSpec extends BaseSpec {
 
     Scenario("Admin can opt-out the user who has already opted-in and verified using email", PreferencesAdminTests) {
       Given("I am logged into PTA account with nino enrolment and verify the email")
-      deleteMongoRecordsFromCollection("Preferences")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginPTAUsingAuthWizardByNinoOnly()
       PaperlessInterruptPage.fillInterruptPageForOptin()
@@ -80,7 +78,6 @@ class PaperlessAdminSpec extends BaseSpec {
 
     Scenario("Admin can opt-out the user who has already opted-in and verified using sautr", PreferencesAdminTests) {
       Given("I am logged into BTA account with nino & sautr enrolment and verify the email")
-      deleteMongoRecordsFromCollection("Preferences")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr")
       PaperlessBTAHomePage.btaPageTitle()
@@ -110,7 +107,6 @@ class PaperlessAdminSpec extends BaseSpec {
       PreferencesAdminTests
     ) {
       Given("I am logged into BTA account with nino & sautr enrolment and verify the email")
-      deleteMongoRecordsFromCollection("Preferences")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr")
       PaperlessBTAHomePage.clickOnGetTaxLettersOnlineLink()
@@ -142,7 +138,6 @@ class PaperlessAdminSpec extends BaseSpec {
       PreferencesAdminTests
     ) {
       Given("I am logged into BTA account with nino & sautr enrolment and verify the email")
-      deleteMongoRecordsFromCollection("Preferences")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr")
       PaperlessBTAHomePage.clickOnGetTaxLettersOnlineLink()
@@ -178,7 +173,6 @@ class PaperlessAdminSpec extends BaseSpec {
       PreferencesAdminTests
     ) {
       Given("I am logged into BTA account with nino & sautr enrolment and verify the email")
-      deleteMongoRecordsFromCollection("Preferences")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr")
       PaperlessBTAHomePage.clickOnGetTaxLettersOnlineLink()
@@ -208,5 +202,9 @@ class PaperlessAdminSpec extends BaseSpec {
       PreferencesAdminUserSummaryPage.pageTitle()
       PreferencesAdminUserSummaryPage.userOptOutSuccessfullyMessage()
     }
+  }
+  override def beforeEach(): Unit = {
+    super.beforeEach()
+    deleteMongoRecordsFromCollection("preferences")
   }
 }

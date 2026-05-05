@@ -20,6 +20,7 @@ import org.openqa.selenium.By
 import org.openqa.selenium.support.ui.ExpectedConditions
 import uk.gov.hmrc.configuration.TestEnvironment
 import uk.gov.hmrc.ui.pages.BasePage
+import uk.gov.hmrc.ui.pages.messages.MdtpMessages.{identifierFHDDSInvalidValue, identifierFHDDSValidValue, sendKeys}
 import uk.gov.hmrc.ui.pages.preferencesAdmin.PreferencesAdminPage.{click, sendKeys}
 
 object LoginUsingAuthWizardPage extends BasePage {
@@ -28,6 +29,8 @@ object LoginUsingAuthWizardPage extends BasePage {
   val saApiProxyBaseUrl: String         = TestEnvironment.url("sa-api-proxy")
   var authPageTitle: String             = "Authority Wizard"
   val v4Message: String                 = digitalContactDemoFrontend + "/v4-message"
+  val mdtpMessageInbox: String          = customerAdvisorFrontend + "/customer-advisors-frontend/inbox"
+  val mdtpMessageSautr: String          = customerAdvisorFrontend + "/inbox/"
 
   def pageLoad(): Unit = {
     get(authWizardBaseUrl)
@@ -84,5 +87,25 @@ object LoginUsingAuthWizardPage extends BasePage {
     click(By.id("submit"))
     fluentWait
   }
-  
+
+  def logIntoCustomerAdvisorMessageInboxPage(): Unit = {
+    pageLoad()
+    val getRedirectUrl: By = By.id(getRedirectUrlId)
+    sendKeys(getRedirectUrl, mdtpMessageInbox)
+    click(By.id("submit"))
+    fluentWait
+  }
+
+  def logIntoCustomerAdvisorMessageSautrPage(sautr: String): Unit = {
+    pageLoad()
+    val getRedirectUrl: By = By.id(getRedirectUrlId)
+    sendKeys(getRedirectUrl, mdtpMessageSautr + identifierValue)
+    val sautrType          = sautr match {
+      case "correct" => sendKeys(getRedirectUrl, mdtpMessageSautr + identifierValue)
+      case "wrong"   => sendKeys(getRedirectUrl, mdtpMessageSautr + identifierValue2)
+    }
+    click(By.id("submit"))
+    fluentWait
+  }
+
 }
