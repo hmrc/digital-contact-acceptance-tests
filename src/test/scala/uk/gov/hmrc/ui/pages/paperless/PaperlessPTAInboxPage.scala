@@ -16,24 +16,19 @@
 
 package uk.gov.hmrc.ui.pages.paperless
 
-import org.openqa.selenium.By
-import uk.gov.hmrc.ui.ElementLocators.submitEmailButtonId
+import org.openqa.selenium.{By, WebDriver}
+import uk.gov.hmrc.selenium.webdriver.Driver
+import uk.gov.hmrc.ui.ElementLocators.ptaInboxPageMessageSubject
 import uk.gov.hmrc.ui.pages.BasePage
 
-object PaperlessInterruptPage extends BasePage {
-  var paperlessPageTitle: String = "Choose how to get your tax letters"
+object PaperlessPTAInboxPage extends BasePage {
 
-  def fillInterruptPageForOptin(): Unit = {
-    val getOnlineRadioButton: By = By.id(onlineRadioButtonId)
-    selectCheckbox(getOnlineRadioButton)
-    click(By.id(submitEmailButtonId))
-    fluentWait
+  // This is PTA Inbox page for paperless journey using digital-contact-demo-frontend
+  var paperlessPtaInboxPageTitle: String = "Messages"
+
+  def checkMessageSubject(subject: String): Boolean = {
+    val driver: WebDriver = Driver.instance
+    driver.findElement(By.cssSelector(ptaInboxPageMessageSubject)).getText == subject
   }
 
-  def fillInterruptPageForOptout(): Unit = {
-    val getPostRadioButton: By = By.id(postRadioButtonId)
-    selectCheckbox(getPostRadioButton)
-    click(By.id(submitEmailButtonId))
-  }
-  
 }

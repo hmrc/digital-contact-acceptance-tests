@@ -17,23 +17,13 @@
 package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.By
-import uk.gov.hmrc.ui.ElementLocators.submitEmailButtonId
+import uk.gov.hmrc.ui.ElementLocators.verifyNewEmailPageContinueButton
 import uk.gov.hmrc.ui.pages.BasePage
 
-object PaperlessInterruptPage extends BasePage {
-  var paperlessPageTitle: String = "Choose how to get your tax letters"
+object PaperlessVerifyNewEmailPage extends BasePage {
+  var paperlessVerifyEmailPageTitle: String = "Verify your new email address"
 
-  def fillInterruptPageForOptin(): Unit = {
-    val getOnlineRadioButton: By = By.id(onlineRadioButtonId)
-    selectCheckbox(getOnlineRadioButton)
-    click(By.id(submitEmailButtonId))
-    fluentWait
-  }
+  def clickOnContinueButton(): Unit =
+    click(By.ByCssSelector(verifyNewEmailPageContinueButton))
 
-  def fillInterruptPageForOptout(): Unit = {
-    val getPostRadioButton: By = By.id(postRadioButtonId)
-    selectCheckbox(getPostRadioButton)
-    click(By.id(submitEmailButtonId))
-  }
-  
 }

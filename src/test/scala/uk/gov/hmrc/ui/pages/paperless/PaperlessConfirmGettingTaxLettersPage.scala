@@ -17,23 +17,19 @@
 package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.By
-import uk.gov.hmrc.ui.ElementLocators.submitEmailButtonId
+import uk.gov.hmrc.ui.ElementLocators.{confirmGettingTaxLettersPageBOnline, confirmGettingTaxLettersPageByPost, confirmGettingTaxLettersPageHeader}
 import uk.gov.hmrc.ui.pages.BasePage
 
-object PaperlessInterruptPage extends BasePage {
-  var paperlessPageTitle: String = "Choose how to get your tax letters"
-
-  def fillInterruptPageForOptin(): Unit = {
-    val getOnlineRadioButton: By = By.id(onlineRadioButtonId)
-    selectCheckbox(getOnlineRadioButton)
-    click(By.id(submitEmailButtonId))
-    fluentWait
-  }
-
-  def fillInterruptPageForOptout(): Unit = {
-    val getPostRadioButton: By = By.id(postRadioButtonId)
-    selectCheckbox(getPostRadioButton)
-    click(By.id(submitEmailButtonId))
-  }
+object PaperlessConfirmGettingTaxLettersPage extends BasePage {
+  var paperlessConfirmGettingTaxLettersTitle: String = "Confirm how you want to get your tax letters"
   
+  def waitForPageLoad(): Unit = {
+    waitForText(confirmGettingTaxLettersPageHeader, paperlessConfirmGettingTaxLettersTitle)
+  }
+
+  def clickOnGetLettersByPost(): Unit =
+    click(By.ByCssSelector(confirmGettingTaxLettersPageByPost))
+
+  def clickOnKeepOnlineLetters(): Unit =
+    click(By.ByCssSelector(confirmGettingTaxLettersPageBOnline))
 }

@@ -16,9 +16,11 @@
 
 package uk.gov.hmrc.ui.pages.paperless
 
-import org.openqa.selenium.{By, WebDriver}
+import org.openqa.selenium.By
 import uk.gov.hmrc.selenium.webdriver.Driver
+import uk.gov.hmrc.ui.ElementLocators.{FixthisId, GettaxlettersonlineId, ReviewupdatedtermsId, btaHomePageContactPreferenceText, btaHomePageHeader, reOptinPageHeader}
 import uk.gov.hmrc.ui.pages.BasePage
+import uk.gov.hmrc.ui.pages.paperless.PaperlessPTAHomePage.fluentWait
 
 object PaperlessBTAHomePage extends BasePage {
 
@@ -29,22 +31,29 @@ object PaperlessBTAHomePage extends BasePage {
     getTitle.contains(paperlessBtaHomePageTitle)
 
   def clickOnGetTaxLettersOnlineLink(): Unit = {
-    val getTaxLettersOnlineLink: By = By.id("Gettaxlettersonline")
+    val getTaxLettersOnlineLink: By = By.id(GettaxlettersonlineId)
     click(getTaxLettersOnlineLink)
     fluentWait
   }
   def clickOnFixthisLink(): Unit = {
-    val fixThisLink: By = By.id("Fixthis")
+    val fixThisLink: By = By.id(FixthisId)
     click(fixThisLink)
   }
   
   def  clickOnReviewUpdatedTermsLink(): Unit = {
-    click(By.id("Reviewupdatedterms"))
-    fluentWait.until(driver => driver.findElement(By.cssSelector("#main-content > div > div > header > h1")).getText.equals("Keep getting your tax letters online"))
+    click(By.id(ReviewupdatedtermsId))
+    waitForText(reOptinPageHeader, "Keep getting your tax letters online")
   }
 
   def checkContactPreferenceText(pref: String): Unit = {
-    assert(Driver.instance.findElement(By.cssSelector("#main-content > div > div.govuk-grid-column-two-thirds > div > div:nth-child(2) > span")).getText == pref)
+    assert(Driver.instance.findElement(By.cssSelector(btaHomePageContactPreferenceText)).getText == pref)
   }
 
+  def waitUntilPageLoad(): Unit = {
+    waitForText(btaHomePageHeader, paperlessBtaHomePageTitle)
+  }
+    
+  def noGetLettersOnlineLink(): Unit = {
+    assert(Driver.instance.findElements(By.id(GettaxlettersonlineId)).size() == 0)
+  }
 }
