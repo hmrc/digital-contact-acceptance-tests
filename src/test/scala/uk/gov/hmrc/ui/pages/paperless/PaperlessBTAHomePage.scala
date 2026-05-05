@@ -33,18 +33,28 @@ object PaperlessBTAHomePage extends BasePage {
     click(getTaxLettersOnlineLink)
     fluentWait
   }
-  def clickOnFixthisLink(): Unit = {
+  def clickOnFixthisLink(): Unit             = {
     val fixThisLink: By = By.id("Fixthis")
     click(fixThisLink)
   }
-  
-  def  clickOnReviewUpdatedTermsLink(): Unit = {
+
+  def clickOnReviewUpdatedTermsLink(): Unit = {
     click(By.id("Reviewupdatedterms"))
-    fluentWait.until(driver => driver.findElement(By.cssSelector("#main-content > div > div > header > h1")).getText.equals("Keep getting your tax letters online"))
+    fluentWait.until(driver =>
+      driver
+        .findElement(By.cssSelector("#main-content > div > div > header > h1"))
+        .getText
+        .equals("Keep getting your tax letters online")
+    )
   }
 
-  def checkContactPreferenceText(pref: String): Unit = {
-    assert(Driver.instance.findElement(By.cssSelector("#main-content > div > div.govuk-grid-column-two-thirds > div > div:nth-child(2) > span")).getText == pref)
-  }
+  def checkContactPreferenceText(pref: String): Unit =
+    assert(
+      Driver.instance
+        .findElement(
+          By.cssSelector("#main-content > div > div.govuk-grid-column-two-thirds > div > div:nth-child(2) > span")
+        )
+        .getText == pref
+    )
 
 }

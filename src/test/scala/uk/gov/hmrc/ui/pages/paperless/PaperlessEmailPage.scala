@@ -20,7 +20,6 @@ import org.openqa.selenium.By
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.email
 import uk.gov.hmrc.ui.pages.BasePage
 
-
 object PaperlessEmailPage extends BasePage {
   var paperlessEmailPageTitle: String = "Enter your email address"
 

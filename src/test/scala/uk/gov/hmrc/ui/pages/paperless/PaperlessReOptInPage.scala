@@ -26,12 +26,22 @@ object PaperlessReOptInPage extends BasePage {
   def reOptIn(emailBounced: Boolean = false): Unit = {
     click(By.id("sps-re-opt-in"))
     click(By.id("submitEmailButton"))
-    if(! emailBounced)
-      fluentWait.until(driver => driver.findElement(By.cssSelector("#form-submit-email-address > div > fieldset > legend > h1")).getText.equals("Which email do you want to use for your tax letters?"))
+    if (!emailBounced)
+      fluentWait.until(driver =>
+        driver
+          .findElement(By.cssSelector("#form-submit-email-address > div > fieldset > legend > h1"))
+          .getText
+          .equals("Which email do you want to use for your tax letters?")
+      )
     else
-      fluentWait.until(driver => driver.findElement(By.cssSelector("#form-submit-email-address > fieldset > legend > h1")).getText.equals("Enter your email address"))
+      fluentWait.until(driver =>
+        driver
+          .findElement(By.cssSelector("#form-submit-email-address > fieldset > legend > h1"))
+          .getText
+          .equals("Enter your email address")
+      )
   }
-  
+
   def reOptInWithVerifiedEmail(): Unit = {
     click(By.id("sps-re-opt-in"))
     click(By.id("submitEmailButton"))
@@ -41,7 +51,7 @@ object PaperlessReOptInPage extends BasePage {
     sendKeys(By.id("sps-re-opt-in-email"), email2)
     click(By.id("submitEmailButton"))
   }
-  
+
   def reOptInWithNewEmail(): Unit = {
     click(By.id("sps-re-opt-in-2"))
     reOptinEnterNewEmail()

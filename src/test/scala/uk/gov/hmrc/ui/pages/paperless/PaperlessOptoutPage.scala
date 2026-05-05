@@ -23,7 +23,11 @@ import uk.gov.hmrc.ui.pages.BasePage
 object PaperlessOptoutPage extends BasePage {
   var paperlessOptoutPageHeader: String = "You now get tax letters by post"
 
-  def inPaperlessOptoutConfirmPage() :Unit = 
-  assert(Driver.instance.findElement(By.cssSelector("#form-submit-email-address > div > h1")).getText == paperlessOptoutPageHeader)
-  
+  def inPaperlessOptoutConfirmPage(): Unit =
+    assert(
+      Driver.instance
+        .findElement(By.cssSelector("#form-submit-email-address > div > h1"))
+        .getText == paperlessOptoutPageHeader
+    )
+
 }

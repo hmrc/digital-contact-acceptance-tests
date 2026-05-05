@@ -24,12 +24,17 @@ object PaperlessVerifyEmailPage extends BasePage {
 
   def continueVerifyEmailAddressPage(): Unit =
     click(By.ByCssSelector("#main-content > div > div > div:nth-child(5) > a"))
-    
+
   def sendTheLinkAgain(): Unit =
     click(By.cssSelector("#main-content > div > div > div > a"))
 
-  def useDifferentEmailAddress():Unit = {
+  def useDifferentEmailAddress(): Unit = {
     click(By.cssSelector("#main-content > div > div > div > p > a"))
-    fluentWait.until(driver => driver.findElement(By.cssSelector("#form-submit-email-address > fieldset > legend > h1")).getText.equals("Enter your email address"))
+    fluentWait.until(driver =>
+      driver
+        .findElement(By.cssSelector("#form-submit-email-address > fieldset > legend > h1"))
+        .getText
+        .equals("Enter your email address")
+    )
   }
 }
