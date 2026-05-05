@@ -17,21 +17,27 @@
 package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.By
+import uk.gov.hmrc.selenium.webdriver.Driver
+import uk.gov.hmrc.ui.ElementLocators.{toubleSendingEmailPageEnterAddress, toubleSendingEmailPageNotWantOnlineLetters}
 import uk.gov.hmrc.ui.pages.BasePage
 import uk.gov.hmrc.ui.pages.paperless.PaperlessVerifyEmailPage.{getTitle, paperlessVerifyEmailPageTitle}
 
 object PaperlessTroubleSendingEmailPage extends BasePage{
   
   var PaperlessTroubleSendingEmailPageHeader: String = "We are having trouble sending you emails"
+
   def enterYourEmailAddress(): Unit = {
-    click(By.cssSelector("#main-content > div > div > div.govuk-button-group > a"))
+    click(By.cssSelector(toubleSendingEmailPageEnterAddress))
   }
 
   def doNotWantToGetOnlineTaxLetters(): Unit = {
-    click(By.cssSelector("#main-content > div > div > p:nth-child(6) > a"))
+    click(By.cssSelector(toubleSendingEmailPageNotWantOnlineLetters))
   }
 
-  def PaperlessTroubleSendingEmailPageTitle(): Unit =
-    getTitle.contains(PaperlessTroubleSendingEmailPageHeader)
-
+  def enterEmailButtonExists(): Unit = {
+    assert(Driver.instance.findElements(By.cssSelector(toubleSendingEmailPageEnterAddress)).size() > 0)
+  }
+  def doNotWantOnlineLettersLinkExists(): Unit = {
+    assert(Driver.instance.findElements(By.cssSelector(toubleSendingEmailPageNotWantOnlineLetters)).size() > 0)
+  }
 }

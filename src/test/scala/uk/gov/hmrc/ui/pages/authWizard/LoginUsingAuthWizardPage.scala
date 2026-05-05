@@ -51,26 +51,28 @@ object LoginUsingAuthWizardPage extends BasePage {
     fluentWait
   }
 
-  def loginIntoAccountByAuthWizard(enrolmentType: String, account: String=bta): Unit = {
-    val getRedirectUrl: By        = By.id(getRedirectUrlId)
+  def loginIntoAccountByAuthWizard(enrolmentType: String, account: String=bta, nino: String=ninoNumber): Unit = {
+    val getRedirectUrl: By = By.id(getRedirectUrlId)
     val getCredentialStrength: By = By.id(getCredentialStrengthId)
-    val getConfidenceLevel: By    = By.id(getConfidenceLevelId)
-    val getNinoNumber: By         = By.id(getNinoId)
-    val enrolmentKeyId: By        = By.id("enrolment[0].name")
-    val enrolmentNameId: By       = By.id("input-0-0-name")
-    val enrolmentValueId: By      = By.id("input-0-0-value")
+    val getConfidenceLevel: By = By.id(getConfidenceLevelId)
+    val getNinoNumber: By = By.id(getNinoId)
+    val enrolmentKeyId: By = By.id("enrolment[0].name")
+    val enrolmentNameId: By = By.id("input-0-0-name")
+    val enrolmentValueId: By = By.id("input-0-0-value")
 
     sendKeys(getRedirectUrl, digitalContactDemoFrontend + account)
     selectByValue(getCredentialStrength, credentialStrength)
     selectByValue(getConfidenceLevel, confidenceLevel)
-    sendKeys(getNinoNumber, ninoNumber)
-    sendKeys(enrolmentKeyId, enrolmentKey)
-    sendKeys(enrolmentNameId, identifierName)
+    sendKeys(getNinoNumber, nino)
 
-    val enrolmentValue = enrolmentType match {
-      case "sautr"  => sendKeys(enrolmentValueId, identifierValue)
-      case "sautr2" => sendKeys(enrolmentValueId, identifierValue2)
-      case _        => throw new IllegalArgumentException(s"Unknown UTR Value")
+    if(enrolmentType != "NoSautr") {
+      sendKeys(enrolmentKeyId, enrolmentKey)
+      sendKeys(enrolmentNameId, identifierName)
+      enrolmentType match {
+        case "sautr" => sendKeys(enrolmentValueId, identifierValue)
+        case "sautr2" => sendKeys(enrolmentValueId, identifierValue2)
+        case _ => throw new IllegalArgumentException(s"Unknown UTR Value")
+      }
     }
     click(By.id("submit"))
   }
