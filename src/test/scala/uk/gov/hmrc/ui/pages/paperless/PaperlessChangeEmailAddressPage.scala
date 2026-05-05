@@ -18,21 +18,22 @@ package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.By
 import uk.gov.hmrc.selenium.webdriver.Driver
-import uk.gov.hmrc.ui.ElementLocators.{optOutPageHeader, submitEmailButtonId}
+import uk.gov.hmrc.ui.ElementLocators.{changeEmailAddressPageHeader, emailConfirmId, emailMainId, submitChangedEmailButtonId}
 import uk.gov.hmrc.ui.pages.BasePage
 
-object PaperlessOptoutPage extends BasePage {
-  var paperlessOptoutPageTitle: String = "You now get tax letters by post"
+object PaperlessChangeEmailAddressPage extends BasePage {
+
+  // This is Change Email Address page for paperless journey using digital-contact-demo-frontend
+  var paperlessPTAChangeEmailAddressPageTitle: String = "Change your email address"
 
   def waitUntilPageLoad(): Unit = {
-    waitForText(optOutPageHeader, paperlessOptoutPageTitle)
-  }
-  
-  def inPaperlessOptoutConfirmPage(): Unit = { 
-  assert(Driver.instance.findElement(By.cssSelector(optOutPageHeader)).getText == paperlessOptoutPageTitle)
- }
+    waitForText(changeEmailAddressPageHeader, paperlessPTAChangeEmailAddressPageTitle)
+   }
 
-  def clickOnContinueButton(): Unit = {
-    click(By.id(submitEmailButtonId))
+  def fillChangeEmailPage(): String = {
+    sendKeys(By.id(emailMainId), email2)
+    sendKeys(By.id(emailConfirmId), email2)
+    click(By.id(submitChangedEmailButtonId))
+    Driver.instance.getCurrentUrl
   }
 }

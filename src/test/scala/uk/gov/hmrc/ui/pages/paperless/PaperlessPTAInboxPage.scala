@@ -16,23 +16,19 @@
 
 package uk.gov.hmrc.ui.pages.paperless
 
-import org.openqa.selenium.By
+import org.openqa.selenium.{By, WebDriver}
 import uk.gov.hmrc.selenium.webdriver.Driver
-import uk.gov.hmrc.ui.ElementLocators.{optOutPageHeader, submitEmailButtonId}
+import uk.gov.hmrc.ui.ElementLocators.ptaInboxPageMessageSubject
 import uk.gov.hmrc.ui.pages.BasePage
 
-object PaperlessOptoutPage extends BasePage {
-  var paperlessOptoutPageTitle: String = "You now get tax letters by post"
+object PaperlessPTAInboxPage extends BasePage {
 
-  def waitUntilPageLoad(): Unit = {
-    waitForText(optOutPageHeader, paperlessOptoutPageTitle)
-  }
-  
-  def inPaperlessOptoutConfirmPage(): Unit = { 
-  assert(Driver.instance.findElement(By.cssSelector(optOutPageHeader)).getText == paperlessOptoutPageTitle)
- }
+  // This is PTA Inbox page for paperless journey using digital-contact-demo-frontend
+  var paperlessPtaInboxPageTitle: String = "Messages"
 
-  def clickOnContinueButton(): Unit = {
-    click(By.id(submitEmailButtonId))
+  def checkMessageSubject(subject: String): Boolean = {
+    val driver: WebDriver = Driver.instance
+    driver.findElement(By.cssSelector(ptaInboxPageMessageSubject)).getText == subject
   }
+
 }
