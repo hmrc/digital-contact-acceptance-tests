@@ -53,7 +53,7 @@ class CustomerAdvisorsFrontendSpec extends BaseSpec {
       When("I fill the form for FHDDS message and click send")
       createMDTPMessage("FHDDS", "valid")
       And("I resubmit the same form once again with same data")
-      lonIntoCustomerAdvisorMessageInboxPage()
+      logIntoCustomerAdvisorMessageInboxPage()
       createMDTPMessage("FHDDS", "valid")
       Then("I should see that message is created")
       responseMessage("Duplicate")
