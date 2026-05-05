@@ -60,7 +60,7 @@ class CustomerAdvisorsFrontendSpec extends BaseSpec {
     }
 
     Scenario("Customer advisors can submit a valid message to a sautr customer", OwsmTests) {
-      Given("I am logged into BTA account with nino & sautr enrolment and verify the emai")
+      Given("I am logged into BTA account with nino & sautr enrolment and verify the email")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr")
       PaperlessBTAHomePage.btaPageTitle()
@@ -79,7 +79,7 @@ class CustomerAdvisorsFrontendSpec extends BaseSpec {
     }
 
     Scenario("Customer advisors can't submit a valid message to a wrong sautr", OwsmTests) {
-      Given("I am logged into BTA account with nino & sautr enrolment and verify the emai")
+      Given("I am logged into BTA account with nino & sautr enrolment and verify the email")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr")
       PaperlessBTAHomePage.btaPageTitle()
