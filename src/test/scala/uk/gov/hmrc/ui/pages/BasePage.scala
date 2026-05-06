@@ -97,6 +97,8 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
   val recipientEmailId              = "recipientEmail"
   val recipientNameId               = "recipientNameLine1"
   val messageFormId                 = "message"
+  val checkYourSettings             = "Checkyoursettings"
+  val close                         = "#main-content > div > div > div:nth-child(5) > a"
 
   private val PREFERENCESDATABASE = "preferences"
   private val COLLECTION2         = "saIndividualPreferences"
