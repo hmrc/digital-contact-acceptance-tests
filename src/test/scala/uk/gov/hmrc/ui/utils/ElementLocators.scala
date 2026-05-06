@@ -46,7 +46,7 @@ object ElementLocators {
   val confirmGettingTaxLettersPageHeader                      = "#main-content > div > div > header > h1"
   val confirmGettingTaxLettersPageByPost                      = "#confirm-opt-out"
   val confirmGettingTaxLettersPageBOnline                     = "#cancel-link"
-  val emailPageHeader                                         = "#form-submit-email-address > fieldset > legend > h1"
+  val emailPageHeader                                         = "#form-submit-email-address > div > label > h1"
   val optOutPageHeader                                        = "#form-submit-email-address > div > h1"
   val optOutSurveyPageHeader                                  = "#main-content > div > div > header > h1"
   val optOutSurveyReason                                      = "#reason"
