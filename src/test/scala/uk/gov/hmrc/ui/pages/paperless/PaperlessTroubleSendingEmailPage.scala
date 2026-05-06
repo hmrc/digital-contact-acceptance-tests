@@ -20,6 +20,7 @@ import org.openqa.selenium.By
 import uk.gov.hmrc.selenium.webdriver.Driver
 import uk.gov.hmrc.ui.ElementLocators.{toubleSendingEmailPageEnterAddress, toubleSendingEmailPageNotWantOnlineLetters}
 import uk.gov.hmrc.ui.pages.BasePage
+import uk.gov.hmrc.ui.pages.paperless.PaperlessVerifyEmailPage.{getTitle, paperlessVerifyEmailPageTitle}
 
 object PaperlessTroubleSendingEmailPage extends BasePage {
 
@@ -39,4 +40,8 @@ object PaperlessTroubleSendingEmailPage extends BasePage {
   def doNotWantOnlineLettersLinkExists(): Unit = {
     assert(Driver.instance.findElements(By.cssSelector(toubleSendingEmailPageNotWantOnlineLetters)).size() > 0)
   }
+
+  def PaperlessTroubleSendingEmailPageTitle(): Unit =
+    getTitle.contains(PaperlessTroubleSendingEmailPageHeader)
+    
 }

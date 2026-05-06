@@ -23,14 +23,14 @@ import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.sendKeys
 import uk.gov.hmrc.ui.pages.paperless.PaperlessBTAHomePage.fluentWait
 
 object PaperlessReOptInPage extends BasePage {
-  var PaperlessReOptInPageTitle: String = "Keep getting your tax letters online"
+  var PaperlessReOptInPageTitleEnglish: String = "Keep getting your tax letters online"
   var PaperlessReOptInPageTitleWelsh: String = "Parhau i gael eich llythyrau treth ar-lein"
 
   def waitUntilPageLoad(isWelsh: Boolean=false): Unit = {
     if (isWelsh) {
       waitForText(reOptInPageHeader, PaperlessReOptInPageTitleWelsh)
     } else {
-      waitForText(reOptInPageHeader, PaperlessReOptInPageTitle)
+      waitForText(reOptInPageHeader, PaperlessReOptInPageTitleEnglish)
     }
   }
 
@@ -68,6 +68,15 @@ object PaperlessReOptInPage extends BasePage {
   def reOptInWithNewEmailPta(): Unit = {
     click(By.id("sps-re-opt-in-2"))
     reOptinEnterNewEmail()
+  }
+
+  def PaperlessReOptInPageTitle(): Unit = {
+    getTitle.contains(PaperlessReOptInPageTitleEnglish)
+    fluentWait
+  }
+
+  def clickCloseButton(): Unit = {
+    click(By.cssSelector("#main-content > div > div > div:nth-child(5) > a"))
   }
 
 }

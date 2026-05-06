@@ -22,10 +22,11 @@ import uk.gov.hmrc.ui.ElementLocators.{FixthisId, GettaxlettersonlineId, Reviewu
 import uk.gov.hmrc.ui.pages.BasePage
 import uk.gov.hmrc.ui.pages.paperless.PaperlessPTAHomePage.fluentWait
 
-object PaperlessBTAHomePage extends BasePage {
+object PaperlessBTAHomePage extends BasePage{
 
   // This is BTA home page for paperless journey using digital-contact-demo-frontend
   var paperlessBtaHomePageTitle: String = "Business Tax Account"
+  var reviewUpdatedTermsText:  String = "you need to agree to our updated terms"
 
   def btaPageTitle(): Unit =
     getTitle.contains(paperlessBtaHomePageTitle)
@@ -48,7 +49,7 @@ object PaperlessBTAHomePage extends BasePage {
   def checkContactPreferenceText(pref: String): Unit = {
     assert(Driver.instance.findElement(By.cssSelector(btaHomePageContactPreferenceText)).getText == pref)
   }
-
+  
   def waitUntilPageLoad(): Unit = {
     waitForText(btaHomePageHeader, paperlessBtaHomePageTitle)
   }
@@ -56,4 +57,21 @@ object PaperlessBTAHomePage extends BasePage {
   def noGetLettersOnlineLink(): Unit = {
     assert(Driver.instance.findElements(By.id(GettaxlettersonlineId)).size() == 0)
   }
+
+  def checkDisplayedLink(link: String): Unit = {
+    assert(Driver.instance.findElement(By.linkText(link)).isDisplayed)
+  }
+
+  def clickOnCheckYourSettingsLink(): Unit = {
+    val clickOnLink: By = By.id(checkYourSettings)
+    click(clickOnLink)
+    fluentWait
+  }
+
+  def clickOnCloseButton(): Unit = {
+    val closeButton: By = By.cssSelector(close)
+    click(closeButton)
+    fluentWait
+  }
+  
 }
