@@ -58,6 +58,8 @@ trait TestData {
   val sourceValue: String            = "gmc"
   val taxIdentifierNameValue: String = "nino"
   val regimeValue: String            = "paye"
+  val taxIdentifierNameSautrValue: String = "sautr"
+  val regimeSaValue: String = "sa"
   val messageTypeValue: String       = "mailout-batch"
   val alertQueueValue: String        = "DEFAULT"
   val englishSubjectValue: String    = "Reminder to file Self Assessment return"

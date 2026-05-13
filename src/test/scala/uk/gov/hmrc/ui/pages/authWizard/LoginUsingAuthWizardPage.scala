@@ -32,6 +32,8 @@ object LoginUsingAuthWizardPage extends BasePage {
   val mdtpMessageInbox: String          = customerAdvisorFrontend + "/customer-advisors-frontend/inbox"
   val mdtpMessageSautr: String          = customerAdvisorFrontend + "/inbox/"
 
+  def messagesUsingRegimeRedirectUrl(regimeType: String): String = digitalContactDemoFrontend.concat(s"/messages?regime=$regimeType")
+
   def pageLoad(): Unit = {
     get(authWizardBaseUrl)
     fluentWait.until(ExpectedConditions.urlContains(authWizardBaseUrl))
@@ -106,6 +108,34 @@ object LoginUsingAuthWizardPage extends BasePage {
     }
     click(By.id("submit"))
     fluentWait
+  }
+
+  def logIntoMessageUsingRegime(enrolmentType: String, account: String=bta, nino:String = ninoNumber, regime:String ="sautr"): Unit = {
+    val getRedirectUrl: By = By.id(getRedirectUrlId)
+    val getCredentialStrength: By = By.id(getCredentialStrengthId)
+    val getConfidenceLevel: By = By.id(getConfidenceLevelId)
+    val getNinoNumber: By = By.id(getNinoId)
+    val enrolmentKeyId: By = By.id("enrolment[0].name")
+    val enrolmentNameId: By = By.id("input-0-0-name")
+    val enrolmentValueId: By = By.id("input-0-0-value")
+
+    val redirectUrl = messagesUsingRegimeRedirectUrl(regime.toLowerCase())
+    pageLoad()
+    sendKeys(getRedirectUrl, redirectUrl)
+    selectByValue(getCredentialStrength, credentialStrength)
+    selectByValue(getConfidenceLevel, confidenceLevel)
+    sendKeys(getNinoNumber, nino)
+
+    if (enrolmentType != "NoSautr") {
+      sendKeys(enrolmentKeyId, enrolmentKey)
+      sendKeys(enrolmentNameId, identifierName)
+      enrolmentType match {
+        case "sautr" => sendKeys(enrolmentValueId, identifierValue)
+        case "sautr2" => sendKeys(enrolmentValueId, identifierValue2)
+        case _ => throw new IllegalArgumentException(s"Unknown UTR Value")
+      }
+    }
+    click(By.id("submit"))
   }
 
 }
