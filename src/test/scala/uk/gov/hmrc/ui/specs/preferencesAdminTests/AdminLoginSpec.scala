@@ -46,5 +46,16 @@ class AdminLoginSpec extends BaseSpec {
       And("I should be on user home page")
       PreferencesAdminPage.userHomePage()
     }
+
+    Scenario("Login into admin as sols user", PreferencesAdminTests) {
+      Given("I am on the auth wizard page")
+      PreferencesAdminPage.loadPage()
+      When("I enter the user login details")
+      PreferencesAdminPage.solsUserLogin()
+      Then("I should see the user page title")
+      PreferencesAdminPage.pageTitle()
+      And("I should be on user home page")
+      PreferencesAdminPage.userHomePage()
+    }
   }
 }
