@@ -62,7 +62,7 @@ class ItsaPaperlessTestSpec extends BaseSpec {
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr", itsa)
       And("I see the page: Verify your email address")
       PaperlessBTAHomePage.clickOnFixthisLink()
-      waitUntilHeader("Verify your email address")
+      PaperlessVerifyEmailPage.pageTitle()
       When("I click Send the link again")
       PaperlessVerifyEmailPage.sendTheLinkAgain()
       And("I verify email")
@@ -87,7 +87,7 @@ class ItsaPaperlessTestSpec extends BaseSpec {
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr", itsa)
       And("I see the page: Verify your email address")
       PaperlessBTAHomePage.clickOnFixthisLink()
-      waitUntilHeader("Verify your email address")
+      PaperlessVerifyEmailPage.pageTitle()
       When("I click Use a different email address")
       PaperlessVerifyEmailPage.useDifferentEmailAddress()
       And("I enter an email address")
@@ -189,7 +189,7 @@ class ItsaPaperlessTestSpec extends BaseSpec {
       PaperlessReOptInPage.reOptIn()
       PaperlessReOptInPage.reOptInWithNewEmail()
       Then("I see the page: Verify your email address")
-      waitUntilHeader("Verify your email address")
+      PaperlessVerifyEmailPage.pageTitle()
     }
 
     Scenario("ITSA Re-Opt-in Modified journey", ItsaPaperlessTests) {
@@ -214,7 +214,7 @@ class ItsaPaperlessTestSpec extends BaseSpec {
       PaperlessReOptInPage.reOptIn(true)
       PaperlessReOptInPage.reOptinEnterNewEmail()
       Then("I see the page: Verify your email address")
-      waitUntilHeader("Verify your email address")
+      PaperlessVerifyEmailPage.pageTitle()
     }
   }
   override def beforeEach(): Unit = {

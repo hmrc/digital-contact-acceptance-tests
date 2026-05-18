@@ -35,7 +35,7 @@ class PaperlessMessageBrakeAllowlistSpec extends BaseSpec with TestData {
       And("I click on Add new formId button")
       PreferencesMessageBrakeAllowlistPage.clickOnAddNewFormButton()
       And("I enter the formId, reason and click on confirm")
-      PreferencesMessageBrakeAllowlistPage.addNewFormId()
+      PreferencesMessageBrakeAllowlistPage.addNewFormId("SA316")
       Then("I should see that new formId added in the allowlist")
       PreferencesMessageBrakeAllowlistPage.formIdAdded()
     }
@@ -48,7 +48,7 @@ class PaperlessMessageBrakeAllowlistSpec extends BaseSpec with TestData {
       PreferencesAdminPage.clickOnMessageBrakeAllowlist()
       And("I added a formId in the message brake allowlist")
       PreferencesMessageBrakeAllowlistPage.clickOnAddNewFormButton()
-      PreferencesMessageBrakeAllowlistPage.addNewFormId()
+      PreferencesMessageBrakeAllowlistPage.addNewFormId("SA316")
       When("I click on Delete Form button and fill the reason")
       PreferencesMessageBrakeAllowlistPage.clickOnDeleteFormId()
       PreferencesMessageBrakeAllowlistPage.fillReasonToDeleteFormId()

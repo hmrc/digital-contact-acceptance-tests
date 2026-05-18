@@ -110,7 +110,7 @@ object LoginUsingAuthWizardPage extends BasePage {
     fluentWait
   }
 
-  def logIntoMessageUsingRegime(enrolmentType: String, account: String=bta, nino:String = ninoNumber, regime:String ="sautr"): Unit = {
+  def logIntoMessageUsingRegime(enrolmentType: String, regime:String ="sautr", nino:String = ninoNumber): Unit = {
     val getRedirectUrl: By = By.id(getRedirectUrlId)
     val getCredentialStrength: By = By.id(getCredentialStrengthId)
     val getConfidenceLevel: By = By.id(getConfidenceLevelId)
@@ -118,15 +118,51 @@ object LoginUsingAuthWizardPage extends BasePage {
     val enrolmentKeyId: By = By.id("enrolment[0].name")
     val enrolmentNameId: By = By.id("input-0-0-name")
     val enrolmentValueId: By = By.id("input-0-0-value")
-
+    
     val redirectUrl = messagesUsingRegimeRedirectUrl(regime.toLowerCase())
+    
     pageLoad()
     sendKeys(getRedirectUrl, redirectUrl)
     selectByValue(getCredentialStrength, credentialStrength)
     selectByValue(getConfidenceLevel, confidenceLevel)
     sendKeys(getNinoNumber, nino)
 
-    if (enrolmentType != "NoSautr") {
+    if (enrolmentType == "itsa") {
+      sendKeys(enrolmentKeyId, enrolmentKeyItsa)
+      sendKeys(enrolmentNameId, taxIdentifierNameItsaValue)
+      sendKeys(enrolmentValueId, itsaIdentifierValue)
+    }
+    else if(enrolmentType == "vat"){
+      sendKeys(enrolmentKeyId, enrolmentKeyVat)
+      sendKeys(enrolmentNameId, taxIdentifierNameVatValue)
+      sendKeys(enrolmentValueId, vatVrnIdentifierValue)
+    }
+    else if(enrolmentType == "ioss"){
+      sendKeys(enrolmentKeyId, enrolmentKeyIoss)
+      sendKeys(enrolmentNameId, taxIdentifierNameIossValue)
+      sendKeys(enrolmentValueId, iossIdentifierValue)
+    }
+    else if(enrolmentType == "ioss inter"){
+      sendKeys(enrolmentKeyId, enrolmentKeyIossInter)
+      sendKeys(enrolmentNameId, taxIdentifierNameIossInterValue)
+      sendKeys(enrolmentValueId, iossIdentifierValue)
+    }
+    else if(enrolmentType == "oss"){
+      sendKeys(enrolmentKeyId, enrolmentKeyOss)
+      sendKeys(enrolmentNameId, taxIdentifierNameOssValue)
+      sendKeys(enrolmentValueId, ossIdentifierValue)
+    }
+    else if(enrolmentType == "ad"){
+      sendKeys(enrolmentKeyId, enrolmentKeyAd)
+      sendKeys(enrolmentNameId, taxIdentifierNameAdValue)
+      sendKeys(enrolmentValueId, adIdentifierValue)
+    }
+    else if(enrolmentType == "ioss netp"){
+      sendKeys(enrolmentKeyId, enrolmentKeyIossNetp)
+      sendKeys(enrolmentNameId, taxIdentifierNameIossNetpValue)
+      sendKeys(enrolmentValueId, iossNetpIdentifierValue)
+    }
+    else if (enrolmentType != "NoSautr") {
       sendKeys(enrolmentKeyId, enrolmentKey)
       sendKeys(enrolmentNameId, identifierName)
       enrolmentType match {

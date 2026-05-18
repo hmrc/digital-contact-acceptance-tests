@@ -32,11 +32,11 @@ class PtaPaperlessBounceEmailPageTestSpec extends BaseSpec {
       Given("I am logged into PTA account with nino and sautr enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr", pta)
-      waitUntilHeader("Choose how to get your tax letters")
+      PaperlessInterruptPage.pageTitle()
       And("I am unverified for paperless")
       PaperlessInterruptPage.fillInterruptPageForOptin()
       PaperlessEmailPage.fillEmailPage()
-      waitUntilHeader("Verify your email address")
+      PaperlessVerifyEmailPage.pageTitle()
       And("the email is bounced")
       bounceVerifyEmail()
       And("I navigate to PTA account")
@@ -60,7 +60,7 @@ class PtaPaperlessBounceEmailPageTestSpec extends BaseSpec {
       And("I enter the Email address details")
       PaperlessEmailPage.fillEmailPage()
       Then("I see the page: Verify your email address")
-      waitUntilHeader("Verify your email address")
+      PaperlessVerifyEmailPage.pageTitle()
     }
   }
   override def beforeEach(): Unit = {
