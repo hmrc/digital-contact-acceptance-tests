@@ -53,6 +53,15 @@ object PreferencesAdminPage extends BasePage {
     fluentWait
   }
 
+  def solsUserLogin(): Unit = {
+    val adminUsername: By = By.id("username")
+    val adminPassword: By = By.id("password")
+    sendKeys(adminUsername, "solsUser")
+    sendKeys(adminPassword, "pwd")
+    click(By.ByCssSelector(signIn))
+    fluentWait
+  }
+
   def adminHomePage(): Unit = {
     val currentLocation: String = getCurrentUrl
     assert(currentLocation.equals(url + homePage))
