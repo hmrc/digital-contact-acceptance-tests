@@ -19,7 +19,6 @@ package uk.gov.hmrc.ui.specs.authWizard
 import org.scalatest.featurespec.AnyFeatureSpec
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
 import uk.gov.hmrc.ui.specs.BaseSpec
-import uk.gov.hmrc.ui.specs.tags.Wip
 
 class AuthWizardPageSpec extends BaseSpec {
 

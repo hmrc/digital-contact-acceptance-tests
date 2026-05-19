@@ -20,7 +20,7 @@ import org.openqa.selenium.By
 import uk.gov.hmrc.selenium.webdriver.Driver
 import uk.gov.hmrc.ui.ElementLocators.{toubleSendingEmailPageEnterAddress, toubleSendingEmailPageNotWantOnlineLetters}
 import uk.gov.hmrc.ui.pages.BasePage
-import uk.gov.hmrc.ui.pages.paperless.PaperlessVerifyEmailPage.{getTitle, paperlessVerifyEmailPageTitle}
+import uk.gov.hmrc.ui.pages.paperless.PaperlessVerifyEmailPage.getTitle
 
 object PaperlessTroubleSendingEmailPage extends BasePage {
 

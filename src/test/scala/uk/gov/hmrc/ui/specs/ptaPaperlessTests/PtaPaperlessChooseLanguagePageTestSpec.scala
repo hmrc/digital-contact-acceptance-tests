@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.specs.ptaPaperlessTests
 
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
-import uk.gov.hmrc.ui.pages.messages.GmcMessages.{clickOnBackLink, deleteMongoRecordsFromCollection, navigateToAccount, pta, selectLanguageEnglish, selectLanguageWelsh, verifyEmail, waitUntilHeader}
+import uk.gov.hmrc.ui.pages.messages.GmcMessages.{clickOnBackLink, deleteMongoRecordsFromCollection, navigateToAccount, pta, selectLanguageEnglish, selectLanguageWelsh, verifyEmail}
 import uk.gov.hmrc.ui.pages.paperless.*
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.PtaPaperlessTests

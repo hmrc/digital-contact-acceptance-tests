@@ -16,14 +16,12 @@
 
 package uk.gov.hmrc.ui.specs.owsm
 
-import uk.gov.hmrc.ui.ElementLocators.demoFrontEndInboxFirstMessageSubject
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
-import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.logIntoMessageUsingRegime
-import uk.gov.hmrc.ui.pages.messages.GmcMessages.{bounceVerifyEmail, createV4Message, deleteMongoRecordsFromCollection, itsa, pta, regimeValue, setVersionMajor, verifyEmail, waitForText, waitUntilHeader}
+import uk.gov.hmrc.ui.pages.messages.GmcMessages.{createV4Message, deleteMongoRecordsFromCollection, pta, verifyEmail}
 import uk.gov.hmrc.ui.pages.messages.SecureMessagesPage
 import uk.gov.hmrc.ui.pages.paperless.*
 import uk.gov.hmrc.ui.specs.BaseSpec
-import uk.gov.hmrc.ui.specs.tags.{ItsaPaperlessTests, OwsmTests, Wip}
+import uk.gov.hmrc.ui.specs.tags.OwsmTests
 
 class EmaGmcMessageErrorDetailsTestSpec extends BaseSpec {
 

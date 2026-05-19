@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.specs.ptaPaperlessTests
 
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
-import uk.gov.hmrc.ui.pages.messages.GmcMessages.{bounceChangedEmail, bounceVerifyEmail, deleteMongoRecordsFromCollection, navigateToAccount, navigateToUrl, pta, selectLanguageWelsh, setVersionMajor, verifyEmail, waitUntilHeader}
+import uk.gov.hmrc.ui.pages.messages.GmcMessages.{bounceChangedEmail, bounceVerifyEmail, deleteMongoRecordsFromCollection, navigateToAccount, navigateToUrl, pta, selectLanguageWelsh, setVersionMajor, verifyEmail}
 import uk.gov.hmrc.ui.pages.paperless.*
 import uk.gov.hmrc.ui.pages.preferencesAdmin.{PreferencesAdminPage, PreferencesAdminSearchPage, PreferencesAdminSummaryPage, PreferencesAdminUserSummaryPage}
 import uk.gov.hmrc.ui.specs.BaseSpec
@@ -201,7 +201,7 @@ class PtaPaperlessReOptInPageTestSpec extends BaseSpec {
       PaperlessPTAHomePage.waitUntilPageLoad()
     }
 
-    Scenario("7- Re-opt-in page display to existing PTA email opted-in, unverified, email changed, verified customer", PtaPaperlessTests) {
+    Scenario("Re-opt-in page display to existing PTA email opted-in, unverified, email changed, verified customer", PtaPaperlessTests) {
       Given("I am logged into PTA account with nino and sautr enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr", pta)
@@ -410,9 +410,9 @@ class PtaPaperlessReOptInPageTestSpec extends BaseSpec {
       navigateToAccount(pta)
       And("I see the page: Personal Tax Account")
       PaperlessPTAHomePage.waitUntilPageLoad()
-      When("I login to Admin Frontend as user")
+      When("I login to Admin Frontend as admin")
       PreferencesAdminPage.loadPage()
-      PreferencesAdminPage.userLogin()
+      PreferencesAdminPage.adminLogin()
       And("When click on the paperless admin link")
       PreferencesAdminPage.clickOnPaperlessAdmin()
       And("I select search by nino option")
@@ -451,9 +451,9 @@ class PtaPaperlessReOptInPageTestSpec extends BaseSpec {
       PaperlessReOptInPage.reOptInWithVerifiedEmail()
       Then("I see the page: Personal Tax Account")
       PaperlessPTAHomePage.waitUntilPageLoad()
-      When("I login to Admin Frontend as user")
+      When("I login to Admin Frontend as admin")
       PreferencesAdminPage.loadPage()
-      PreferencesAdminPage.userLogin()
+      PreferencesAdminPage.adminLogin()
       And("When click on the paperless admin link")
       PreferencesAdminPage.clickOnPaperlessAdmin()
       And("I select search by nino option")

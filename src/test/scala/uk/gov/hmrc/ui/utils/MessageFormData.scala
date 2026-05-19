@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.ui.utils
 
-import uk.gov.hmrc.ui.pages.messages.GmcMessages.{alertQueueValue, batchIdValue, email, englishContentValue, englishSubjectValue, identifierValue, messageTypeValue, ninoNumber1, referenceIdValue, regimeSaValue, sourceDataValue, sourceValue, taxIdentifierNameSautrValue, taxIdentifierNameValue, validFromValue}
+import uk.gov.hmrc.ui.pages.messages.GmcMessages.{alertQueueValue, batchIdValue, email, englishContentValue, englishSubjectValue, identifierValue, messageTypeValue, referenceIdValue, regimeSaValue, sourceDataValue, sourceValue, taxIdentifierNameSautrValue, validFromValue}
 
 case class MessageFormData(
                             externalRef: MessageFormData.ExternalRef,

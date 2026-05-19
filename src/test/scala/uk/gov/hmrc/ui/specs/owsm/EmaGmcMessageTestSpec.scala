@@ -17,7 +17,6 @@
 package uk.gov.hmrc.ui.specs.owsm
 
 import org.scalatest.featurespec.AnyFeatureSpec
-import uk.gov.hmrc.selenium.webdriver.Driver
 import uk.gov.hmrc.ui.ElementLocators.{demoFrontEndInboxFirstMessageSubject, demoFrontEndInboxIossMessageSubject}
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.logIntoMessageUsingRegime

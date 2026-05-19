@@ -57,7 +57,7 @@ object GmcMessages extends BasePage {
     val base64_encoded_content_niref1_en = Base64.encodeBase64String(NIREF1EnMessageHtmlContent.HtmlContentNiref1.getBytes("UTF-8"))
 
     logIntoDemoFrontendForV4()
-    val gmcMessage: Unit = gmcMessageType.toLowerCase match {
+    gmcMessageType.toLowerCase match {
       case "invalid formid" => fillFormWithInvalidFormId()
       case "nino" => fillFormNino(subject_p800, base64_encoded_content_p800)
       case "sautr for ats" => fillFormSautrAts("Your Annual Tax Summary for 2019 to 2020 is now", base64_encoded_content_atssautr)

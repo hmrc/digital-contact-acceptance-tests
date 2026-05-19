@@ -116,7 +116,7 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
     val deletePreferencesRecords: String   = preferences + "test-only/preferences-admin/print-suppression"
     val deleteSecureMessageRecords: String = secureMessage + "test-only/delete/secure-messages"
 
-    val collectionMatch = serviceCollection.toLowerCase() match {
+    serviceCollection.toLowerCase() match {
       case "preferences"    => WsClient.url(deletePreferencesRecords).delete()
       case "secure message" => WsClient.url(deleteSecureMessageRecords).delete()
     }

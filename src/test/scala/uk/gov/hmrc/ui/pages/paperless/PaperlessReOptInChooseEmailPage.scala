@@ -16,9 +16,7 @@
 
 package uk.gov.hmrc.ui.pages.paperless
 
-import org.openqa.selenium.By
 import uk.gov.hmrc.ui.pages.BasePage
-import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.email
 
 
 object PaperlessReOptInChooseEmailPage extends BasePage {
