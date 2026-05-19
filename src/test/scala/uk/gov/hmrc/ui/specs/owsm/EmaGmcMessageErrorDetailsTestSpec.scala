@@ -26,7 +26,6 @@ import uk.gov.hmrc.ui.specs.tags.OwsmTests
 class EmaGmcMessageErrorDetailsTestSpec extends BaseSpec {
 
   def setUpPreferences(): Unit = {
-    Given("I am logged into PTA account with nino enrolment")
     LoginUsingAuthWizardPage.pageLoad()
     LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("NoSautr", pta)
     PaperlessInterruptPage.pageTitle()
@@ -41,6 +40,8 @@ class EmaGmcMessageErrorDetailsTestSpec extends BaseSpec {
   Feature("GMC EMA error messages from Quadient new endpoint") {
 
     Scenario("Validating the message response with invalid alertQueue", OwsmTests) {
+      Given("I am logged into PTA account with nino enrolment")
+      setUpPreferences()
       When("A GMC message is created via EMA using invalidAlertQueue")
       createV4Message("invalidAlertQueue")
       Then("The response must contains: Invalid alert queue submitted")
@@ -48,6 +49,8 @@ class EmaGmcMessageErrorDetailsTestSpec extends BaseSpec {
     }
 
     Scenario("Validating the message response with empty alertQueue", OwsmTests) {
+      Given("I am logged into PTA account with nino enrolment")
+      setUpPreferences()
       When("A GMC message is created via EMA using emptyAlertQueue")
       createV4Message("emptyAlertQueue")
       Then("The response must contains: invalid alert queue provided")
@@ -55,6 +58,8 @@ class EmaGmcMessageErrorDetailsTestSpec extends BaseSpec {
     }
 
     Scenario("Validating the message response with invalid source data", OwsmTests) {
+      Given("I am logged into PTA account with nino enrolment")
+      setUpPreferences()
       When("A GMC message is created via EMA using invalidSourceData")
       createV4Message("invalidSourceData")
       Then("The response must contains: invalid source data provided")
@@ -62,6 +67,8 @@ class EmaGmcMessageErrorDetailsTestSpec extends BaseSpec {
     }
 
     Scenario("Validating the message response with unknown tax identifier", OwsmTests) {
+      Given("I am logged into PTA account with nino enrolment")
+      setUpPreferences()
       When("A GMC message is created via EMA using unknownTaxIdentifier")
       createV4Message("unknownTaxIdentifier")
       Then("The response must contains: The backend has rejected the message due to an unknown tax identifier")
@@ -69,6 +76,8 @@ class EmaGmcMessageErrorDetailsTestSpec extends BaseSpec {
     }
 
     Scenario("Validating the message response with missing tax identifier", OwsmTests) {
+      Given("I am logged into PTA account with nino enrolment")
+      setUpPreferences()
       When("A GMC message is created via EMA using missingTaxIdentifier")
       createV4Message("missingTaxIdentifier")
       Then("The response must contains: Missing mandatory fields: {$.recipient.taxIdentifier.'value'}")
@@ -76,6 +85,8 @@ class EmaGmcMessageErrorDetailsTestSpec extends BaseSpec {
     }
 
     Scenario("Validating the message response with missing details", OwsmTests) {
+      Given("I am logged into PTA account with nino enrolment")
+      setUpPreferences()
       When("A GMC message is created via EMA using missingDetails")
       createV4Message("missingDetails")
       Then("The response must contains: Missing mandatory fields: {$.details.issueDate: does not match the date pattern")
@@ -83,6 +94,8 @@ class EmaGmcMessageErrorDetailsTestSpec extends BaseSpec {
     }
 
     Scenario("Validating the message response with invalid email", OwsmTests) {
+      Given("I am logged into PTA account with nino enrolment")
+      setUpPreferences()
       When("A GMC message is created via EMA using invalidEmail")
       createV4Message("invalidEmail")
       Then("The response must contains: invalid email address provided")
@@ -94,6 +107,5 @@ class EmaGmcMessageErrorDetailsTestSpec extends BaseSpec {
     super.beforeEach()
     deleteMongoRecordsFromCollection("preferences")
     deleteMongoRecordsFromCollection("secure message")
-    setUpPreferences()
   }
 }

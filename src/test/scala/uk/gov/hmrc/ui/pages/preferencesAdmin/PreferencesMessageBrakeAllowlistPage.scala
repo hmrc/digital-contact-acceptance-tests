@@ -59,7 +59,6 @@ object PreferencesMessageBrakeAllowlistPage extends BasePage {
   }
 
   def clickOnDeleteFormId(id: String): Unit = {
-    //val encoded = URLEncoder.encode(id, StandardCharsets.UTF_8.toString)
     val xpathForId = s"//button[contains(@onclick,'${id.replace(" ", "%20")}')]"
     click(By.xpath(xpathForId))
   }

@@ -76,6 +76,7 @@ object GmcMessages extends BasePage {
       case "par1itsa" => fillFormItsaPar1En(EnMessageHtmlContentItsa.HtmlContentEnItsa_SubjectEnglish, base64_encoded_content_itsa_en)
       case "ioss netp" => fillFormIossNetp(V4MessageHtmlContentVat.htmlContentVat_SubjectEnglish, base64_encoded_content_vat_v4)
       case "niref1 en" => fillFormNiref1En(NIREF1EnMessageHtmlContent.HtmlContentNiref1_SubjectEnglish, base64_encoded_content_niref1_en)
+      case "niref4 en" => fillFormNiref4En(NIREF1EnMessageHtmlContent.HtmlContentNiref1_SubjectEnglish, base64_encoded_content_niref1_en)
       case "invalidalertqueue" => fillFormInvalidAlertQueue(subject_p800, base64_encoded_content_p800)
       case "emptyalertqueue" => fillFormEmptyAlertQueue(subject_p800, base64_encoded_content_p800)
       case "invalidsourcedata" => fillFormInvalidSourceData(subject_p800, base64_encoded_content_p800)
@@ -330,6 +331,18 @@ object GmcMessages extends BasePage {
       identifierValue = Some(ninoNumber),
       regime = Some(regimeValue),
       formId = Some("NIREF1"),
+      subjectEnglish = Some(subject),
+      contentEnglish = Some(content)
+    )
+    fillMessageForm(updated)
+  }
+
+  def fillFormNiref4En(subject: String, content: String): Unit = {
+    val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
+      identifierName = Some(taxIdentifierNameValue),
+      identifierValue = Some(ninoNumber),
+      regime = Some(regimeValue),
+      formId = Some("NIREF4"),
       subjectEnglish = Some(subject),
       contentEnglish = Some(content)
     )

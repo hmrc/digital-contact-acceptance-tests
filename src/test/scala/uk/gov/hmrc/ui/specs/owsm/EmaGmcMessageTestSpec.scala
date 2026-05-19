@@ -45,7 +45,8 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       "LPP1A_ITSA",
       "LPP2_ITSA",
       "PAR1_ITSA",
-      "NIREF1"
+      "NIREF1",
+      "NIREF4"
     )
    
     formIds.foreach { formId =>
@@ -376,6 +377,25 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       verifyEmail()
       When("A GMC message is created via EMA using niref1 en")
       createV4Message("niref1 en")
+      And("I open my messages for PTA using regime")
+      logIntoMessageUsingRegime("NoSautr", regimeValue)
+      Then("I see the message: National Insurance contributions - we may owe you a refund")
+      waitForText(demoFrontEndInboxFirstMessageSubject, "National Insurance contributions - we may owe you a refund")
+    }
+    
+    Scenario("Customer can view the NIREF4 ENN messages in PTA inbox", OwsmTests) {
+      Given("I am logged into PTA account with nino enrolment")
+      LoginUsingAuthWizardPage.pageLoad()
+      LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("NoSautr", pta)
+      PaperlessInterruptPage.pageTitle()
+      And("I am unverified for paperless")
+      PaperlessInterruptPage.fillInterruptPageForOptin()
+      PaperlessEmailPage.fillEmailPage()
+      PaperlessVerifyEmailPage.pageTitle()
+      And("I verify the email address")
+      verifyEmail()
+      When("A GMC message is created via EMA using niref4 en")
+      createV4Message("niref4 en")
       And("I open my messages for PTA using regime")
       logIntoMessageUsingRegime("NoSautr", regimeValue)
       Then("I see the message: National Insurance contributions - we may owe you a refund")
