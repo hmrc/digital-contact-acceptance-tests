@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.utils.data
+package uk.gov.hmrc.ui.utils
 
-import uk.gov.hmrc.ui.pages.messages.GmcMessages.{email, email2}
 
 trait ApiPayLoad {
 
+  val email = GeneratedTestData.email
+  val email2 = GeneratedTestData.email2
   val payloadBounceEmail1 =
     s"""{
             "emailAddress": "$email"

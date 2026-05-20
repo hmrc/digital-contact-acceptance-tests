@@ -27,7 +27,7 @@ trait TestData {
 
     taxIdentifier match {
       case "nino" =>
-        User(userType, Some(ninoNumber))
+        User(userType, Some(GeneratedTestData.ninoNumber))
     }
   }
 
@@ -43,15 +43,9 @@ trait TestData {
   val confidenceLevel: String                      = "200"
   val enrolmentKey: String                         = "IR-SA"
   val identifierName: String                       = "UTR"
-  val identifierValue: String                      = "1234567890"
-  val identifierValue2: String                     = "1234567891"
-  val ninoNumber: String                           = "YY000200A"
-  val ninoNumber1: String                          = "SP222333A"
   val pta: String                                  = "/personal-account"
   val bta: String                                  = "/business-account"
   val itsa: String                                 = "/itsa"
-  val email: String                                = "testuser123@gmail.com"
-  val email2: String                               = "testuser2@gmail.com"
   val optOutReasonText: String                     = "for testing purpose"
   val referenceIdValue: String                     = "1234243234242234"
   val sourceValue: String                          = "gmc"
@@ -60,30 +54,23 @@ trait TestData {
   val taxIdentifierNameSautrValue: String          = "sautr"
   val regimeSaValue: String                        = "sa"
   val taxIdentifierNameItsaValue: String           = "MTDITID"
-  val itsaIdentifierValue: String                  = "ITSA12345678901"
   val regimeItsaValue: String                      = "itsa"
   val enrolmentKeyItsa: String                     = "HMRC-MTD-IT"
   val taxIdentifierNameVatValue                    = "HMRC-MTD-VAT.VRN"
-  val vatVrnIdentifierValue: String                = "100200001"
   val regimeVatValue: String                       = "vat"
   val enrolmentKeyVat: String                      = "HMRC-MTD-VAT"
   val enrolmentKeyIoss: String                     = "HMRC-IOSS-ORG"
   val taxIdentifierNameIossValue: String           = "IOSSNumber"
-  val iossIdentifierValue: String                  = "GB1234567890"
   val regimeIossValue: String                      = "ioss"
   val enrolmentKeyIossInter: String                = "HMRC-IOSS-INT"
   val taxIdentifierNameIossInterValue: String      = "IntNumber"
-  val iossInterIdentifierValue: String             = "IN9001234567"
   val enrolmentKeyIossNetp: String                 = "HMRC-IOSS-NETP"
   val taxIdentifierNameIossNetpValue: String       = "IOSSNumber"
-  val iossNetpIdentifierValue: String              = "IN9001234567"
   val enrolmentKeyOss: String                      = "HMRC-OSS-ORG"
   val taxIdentifierNameOssValue: String            = "VRN"
   val regimeOssValue: String                       = "oss"
-  val ossIdentifierValue: String                   = "987654321"
   val enrolmentKeyAd: String                       = "HMRC-AD-ORG"
   val taxIdentifierNameAdValue: String             = "APPAID"
-  val adIdentifierValue: String                    = "XMADP1234567890"
   val regimeAdValue: String                        = "ad"
 
   val messageTypeValue: String                     = "mailout-batch"
@@ -103,8 +90,6 @@ trait TestData {
     """<img src="https://www.qa.tax.service.gov.uk/assets/4.8.0/images/direct-debit-logo.png" alt="Direct Debit logo">"""
   val subjectValue: String                         = "Direct debit logo test"
   val identifierNameValue: String                  = "HMRC-OBTDS-ORG"
-  val identifierFHDDSValidValue: String            = "XZFH00000100022"
-  val identifierFHDDSInvalidValue: String          = "XGER00000100022"
   val nameValue: String                            = "Test User"
                                                    
   val subject_p800: String                         = "Tax calculation for the year 6 April 2020 to 5 April 2021"

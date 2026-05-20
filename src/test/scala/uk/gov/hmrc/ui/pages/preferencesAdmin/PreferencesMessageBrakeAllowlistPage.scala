@@ -17,7 +17,6 @@
 package uk.gov.hmrc.ui.pages.preferencesAdmin
 
 import org.openqa.selenium.By
-import uk.gov.hmrc.selenium.webdriver.Driver
 import uk.gov.hmrc.ui.ElementLocators.{clickOnAddNewFormButtonId, clickOnDeleteFormButtonId}
 import uk.gov.hmrc.ui.pages.BasePage
 import uk.gov.hmrc.ui.pages.preferencesAdmin.PreferencesMessageBrakePage.getText
@@ -64,6 +63,6 @@ object PreferencesMessageBrakeAllowlistPage extends BasePage {
   }
 
   def confirmFormIdDeleted(id: String): Unit = {
-    assert(Driver.instance.getPageSource.contains(id).equals(false))
+    assert(getPageSource.contains(id).equals(false))
   }
 }

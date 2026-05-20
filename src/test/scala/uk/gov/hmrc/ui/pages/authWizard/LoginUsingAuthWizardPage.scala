@@ -21,6 +21,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions
 import uk.gov.hmrc.configuration.TestEnvironment
 import uk.gov.hmrc.ui.pages.BasePage
 import uk.gov.hmrc.ui.pages.preferencesAdmin.PreferencesAdminPage.{click, sendKeys}
+import uk.gov.hmrc.ui.utils.GeneratedTestData
 
 object LoginUsingAuthWizardPage extends BasePage {
 
@@ -50,12 +51,12 @@ object LoginUsingAuthWizardPage extends BasePage {
     sendKeys(getRedirectUrl, digitalContactDemoFrontend + pta)
     selectByValue(getCredentialStrength, credentialStrength)
     selectByValue(getConfidenceLevel, confidenceLevel)
-    sendKeys(getNinoNumber, ninoNumber)
+    sendKeys(getNinoNumber, GeneratedTestData.ninoNumber)
     click(By.id("submit"))
     fluentWait
   }
 
-  def loginIntoAccountByAuthWizard(enrolmentType: String, account: String=bta, nino: String=ninoNumber): Unit = {
+  def loginIntoAccountByAuthWizard(enrolmentType: String, account: String=bta, nino: String=GeneratedTestData.ninoNumber): Unit = {
     val getRedirectUrl: By = By.id(getRedirectUrlId)
     val getCredentialStrength: By = By.id(getCredentialStrengthId)
     val getConfidenceLevel: By = By.id(getConfidenceLevelId)
@@ -73,8 +74,8 @@ object LoginUsingAuthWizardPage extends BasePage {
       sendKeys(enrolmentKeyId, enrolmentKey)
       sendKeys(enrolmentNameId, identifierName)
       enrolmentType match {
-        case "sautr" => sendKeys(enrolmentValueId, identifierValue)
-        case "sautr2" => sendKeys(enrolmentValueId, identifierValue2)
+        case "sautr" => sendKeys(enrolmentValueId, GeneratedTestData.identifierValue)
+        case "sautr2" => sendKeys(enrolmentValueId, GeneratedTestData.identifierValue2)
         case _ => throw new IllegalArgumentException(s"Unknown UTR Value")
       }
     }
@@ -100,16 +101,16 @@ object LoginUsingAuthWizardPage extends BasePage {
   def logIntoCustomerAdvisorMessageSautrPage(sautr: String): Unit = {
     pageLoad()
     val getRedirectUrl: By = By.id(getRedirectUrlId)
-    sendKeys(getRedirectUrl, mdtpMessageSautr + identifierValue)
+    sendKeys(getRedirectUrl, mdtpMessageSautr + GeneratedTestData.identifierValue)
     sautr match {
-      case "correct" => sendKeys(getRedirectUrl, mdtpMessageSautr + identifierValue)
-      case "wrong"   => sendKeys(getRedirectUrl, mdtpMessageSautr + identifierValue2)
+      case "correct" => sendKeys(getRedirectUrl, mdtpMessageSautr + GeneratedTestData.identifierValue)
+      case "wrong"   => sendKeys(getRedirectUrl, mdtpMessageSautr + GeneratedTestData.identifierValue2)
     }
     click(By.id("submit"))
     fluentWait
   }
 
-  def logIntoMessageUsingRegime(enrolmentType: String, regime:String ="sautr", nino:String = ninoNumber): Unit = {
+  def logIntoMessageUsingRegime(enrolmentType: String, regime:String ="sautr", nino:String = GeneratedTestData.ninoNumber): Unit = {
     val getRedirectUrl: By = By.id(getRedirectUrlId)
     val getCredentialStrength: By = By.id(getCredentialStrengthId)
     val getConfidenceLevel: By = By.id(getConfidenceLevelId)
@@ -129,44 +130,44 @@ object LoginUsingAuthWizardPage extends BasePage {
     if (enrolmentType == "itsa") {
       sendKeys(enrolmentKeyId, enrolmentKeyItsa)
       sendKeys(enrolmentNameId, taxIdentifierNameItsaValue)
-      sendKeys(enrolmentValueId, itsaIdentifierValue)
+      sendKeys(enrolmentValueId, GeneratedTestData.itsaIdentifierValue)
     }
     else if(enrolmentType == "vat"){
       sendKeys(enrolmentKeyId, enrolmentKeyVat)
       sendKeys(enrolmentNameId, taxIdentifierNameVatValue)
-      sendKeys(enrolmentValueId, vatVrnIdentifierValue)
+      sendKeys(enrolmentValueId, GeneratedTestData.vatVrnIdentifierValue)
     }
     else if(enrolmentType == "ioss"){
       sendKeys(enrolmentKeyId, enrolmentKeyIoss)
       sendKeys(enrolmentNameId, taxIdentifierNameIossValue)
-      sendKeys(enrolmentValueId, iossIdentifierValue)
+      sendKeys(enrolmentValueId, GeneratedTestData.iossIdentifierValue)
     }
     else if(enrolmentType == "ioss inter"){
       sendKeys(enrolmentKeyId, enrolmentKeyIossInter)
       sendKeys(enrolmentNameId, taxIdentifierNameIossInterValue)
-      sendKeys(enrolmentValueId, iossIdentifierValue)
+      sendKeys(enrolmentValueId, GeneratedTestData.iossInterIdentifierValue)
     }
     else if(enrolmentType == "oss"){
       sendKeys(enrolmentKeyId, enrolmentKeyOss)
       sendKeys(enrolmentNameId, taxIdentifierNameOssValue)
-      sendKeys(enrolmentValueId, ossIdentifierValue)
+      sendKeys(enrolmentValueId, GeneratedTestData.ossIdentifierValue)
     }
     else if(enrolmentType == "ad"){
       sendKeys(enrolmentKeyId, enrolmentKeyAd)
       sendKeys(enrolmentNameId, taxIdentifierNameAdValue)
-      sendKeys(enrolmentValueId, adIdentifierValue)
+      sendKeys(enrolmentValueId, GeneratedTestData.adIdentifierValue)
     }
     else if(enrolmentType == "ioss netp"){
       sendKeys(enrolmentKeyId, enrolmentKeyIossNetp)
       sendKeys(enrolmentNameId, taxIdentifierNameIossNetpValue)
-      sendKeys(enrolmentValueId, iossNetpIdentifierValue)
+      sendKeys(enrolmentValueId, GeneratedTestData.iossNetpIdentifierValue)
     }
     else if (enrolmentType != "NoSautr") {
       sendKeys(enrolmentKeyId, enrolmentKey)
       sendKeys(enrolmentNameId, identifierName)
       enrolmentType match {
-        case "sautr" => sendKeys(enrolmentValueId, identifierValue)
-        case "sautr2" => sendKeys(enrolmentValueId, identifierValue2)
+        case "sautr" => sendKeys(enrolmentValueId, GeneratedTestData.identifierValue)
+        case "sautr2" => sendKeys(enrolmentValueId, GeneratedTestData.identifierValue2)
         case _ => throw new IllegalArgumentException(s"Unknown UTR Value")
       }
     }

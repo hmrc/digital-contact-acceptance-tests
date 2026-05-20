@@ -32,8 +32,7 @@ import org.scalatest.time.SpanSugar.convertIntToGrainOfTime
 import org.scalatest.time.{Seconds, Span}
 import play.api.libs.json.{JsValue, Json}
 import uk.gov.hmrc.ui.pages.messages.GmcMessages.preferences
-import uk.gov.hmrc.ui.utils.TestData
-import uk.gov.hmrc.ui.utils.data.ApiPayLoad
+import uk.gov.hmrc.ui.utils.{ApiPayLoad, GeneratedTestData, TestData}
 import play.api.libs.ws.DefaultBodyWritables.writeableOf_String
 import uk.gov.hmrc.ui.ElementLocators.{pageBackLink, pageHeader1, pageHeader2, pageLanguageEnglish, pageLanguageWelsh}
 
@@ -123,7 +122,7 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
     fluentWait
   }
 
-  def verifyEmail(nino:String = ninoNumber): Unit = {
+  def verifyEmail(nino:String = GeneratedTestData.ninoNumber): Unit = {
 
     // To get entity ID via sa-api proxy
     val entityIdUrl: String                                       = saApiProxy + ("/entity-resolver/entity-resolver/paye/" + nino)

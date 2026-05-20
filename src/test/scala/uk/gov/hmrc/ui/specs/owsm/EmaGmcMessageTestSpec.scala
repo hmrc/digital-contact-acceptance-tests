@@ -28,6 +28,7 @@ import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.OwsmTests
 import uk.gov.hmrc.ui.utils.TestData
 
+
 class EmaGmcMessageTestSpec extends BaseSpec with TestData {
 
   Feature("GMC messages from Quadient to EMA") {
@@ -382,8 +383,8 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       Then("I see the message: National Insurance contributions - we may owe you a refund")
       waitForText(demoFrontEndInboxFirstMessageSubject, "National Insurance contributions - we may owe you a refund")
     }
-    
-    Scenario("Customer can view the NIREF4 ENN messages in PTA inbox", OwsmTests) {
+
+    Scenario("Customer can view the NIREF4 EN messages in PTA inbox", OwsmTests) {
       Given("I am logged into PTA account with nino enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("NoSautr", pta)

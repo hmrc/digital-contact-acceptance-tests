@@ -17,7 +17,6 @@
 package uk.gov.hmrc.ui.pages.messages
 
 import org.openqa.selenium.By
-import uk.gov.hmrc.selenium.webdriver.Driver
 import uk.gov.hmrc.ui.ElementLocators.*
 import uk.gov.hmrc.ui.pages.BasePage
 
@@ -29,6 +28,6 @@ object SecureMessagesPage extends BasePage{
   }
   
   def pageContains(subject: String): Unit = {
-    assert(Driver.instance.getPageSource.contains(subject))
+    assert(getPageSource.contains(subject))
   }
 }

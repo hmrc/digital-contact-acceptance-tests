@@ -17,9 +17,9 @@
 package uk.gov.hmrc.ui.pages.preferencesAdmin
 
 import org.openqa.selenium.By
-import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.{email, identifierValue, ninoNumber}
 import uk.gov.hmrc.ui.pages.BasePage
 import PreferencesAdminUserSummaryPage.{fluentWait, getTitle}
+import uk.gov.hmrc.ui.utils.GeneratedTestData
 
 object PreferencesAdminSearchPage extends BasePage {
 
@@ -50,21 +50,21 @@ object PreferencesAdminSearchPage extends BasePage {
 
   def fillIdentifierValueUsingNino(): Unit = {
     val identifierValueTextArea: By = By.id(identifierValueText)
-    sendKeys(identifierValueTextArea, ninoNumber)
+    sendKeys(identifierValueTextArea, GeneratedTestData.ninoNumber)
     click(By.cssSelector(searchButtonOnSearchPage))
     fluentWait
   }
 
   def fillIdentifierValueUsingEmail(): Unit = {
     val identifierValueTextArea: By = By.id(identifierValueText)
-    sendKeys(identifierValueTextArea, email)
+    sendKeys(identifierValueTextArea, GeneratedTestData.email)
     click(By.cssSelector(searchButtonOnSearchPage))
     fluentWait
   }
 
   def fillIdentifierValueUsingSautr(): Unit = {
     val identifierValueTextArea: By = By.id(identifierValueText)
-    sendKeys(identifierValueTextArea, identifierValue)
+    sendKeys(identifierValueTextArea, GeneratedTestData.identifierValue)
     click(By.cssSelector(searchButtonOnSearchPage))
     fluentWait
   }

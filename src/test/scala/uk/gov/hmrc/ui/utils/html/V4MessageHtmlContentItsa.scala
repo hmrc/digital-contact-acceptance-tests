@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.utils.data.html
+package uk.gov.hmrc.ui.utils.html
 
 object V4MessageHtmlContentItsa {
   val HtmlContentSaItsa_SubjectEnglish = "Send your quarterly Income Tax update"

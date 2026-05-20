@@ -19,10 +19,10 @@ package uk.gov.hmrc.ui.pages.messages
 import org.openqa.selenium.By
 import uk.gov.hmrc.ui.pages.BasePage
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.*
-import uk.gov.hmrc.ui.utils.MessageFormData
+import uk.gov.hmrc.ui.utils.{GeneratedTestData, MessageFormData}
 import org.apache.commons.codec.binary.Base64
 import uk.gov.hmrc.ui.ElementLocators.sendMessageResponse
-import uk.gov.hmrc.ui.utils.data.html.{EnMessageHtmlContentItsa, MessageHtmlContent, NIREF1EnMessageHtmlContent, V4MessageHtmlContentItsa, V4MessageHtmlContentP800, V4MessageHtmlContentSa300, V4MessageHtmlContentVat}
+import uk.gov.hmrc.ui.utils.html.{EnMessageHtmlContentItsa, MessageHtmlContent, NIREF1EnMessageHtmlContent, V4MessageHtmlContentItsa, V4MessageHtmlContentP800, V4MessageHtmlContentSa300, V4MessageHtmlContentVat}
 
 object GmcMessages extends BasePage {
 
@@ -130,7 +130,7 @@ object GmcMessages extends BasePage {
   def fillFormWithInvalidFormId(): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       identifierName = Some(taxIdentifierNameValue),
-      identifierValue = Some(ninoNumber),
+      identifierValue = Some(GeneratedTestData.ninoNumber),
       formId = Some(invalidFormIdValue),
       regime = Some(regimeValue)
     )
@@ -140,7 +140,7 @@ object GmcMessages extends BasePage {
   def fillFormNino(subject: String, content: String):Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       identifierName = Some(taxIdentifierNameValue),
-      identifierValue = Some(ninoNumber),
+      identifierValue = Some(GeneratedTestData.ninoNumber),
       regime = Some(regimeValue),
       subjectEnglish = Some(subject),
       contentEnglish = Some(content)
@@ -159,7 +159,7 @@ object GmcMessages extends BasePage {
   def fillFormNinoEnglishAndWelsh(subjectEnglish: String, contentEnglish: String, subjectWelsh: String, contentWelsh: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       identifierName = Some(taxIdentifierNameValue),
-      identifierValue = Some(ninoNumber),
+      identifierValue = Some(GeneratedTestData.ninoNumber),
       regime = Some(regimeValue),
       subjectEnglish = Some(subjectEnglish),
       contentEnglish = Some(contentEnglish),
@@ -182,7 +182,7 @@ object GmcMessages extends BasePage {
   def fillFormItsaEnglishAndWelsh(subjectEnglish: String, contentEnglish: String, subjectWelsh: String, contentWelsh: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       identifierName = Some(taxIdentifierNameItsaValue),
-      identifierValue = Some(itsaIdentifierValue),
+      identifierValue = Some(GeneratedTestData.itsaIdentifierValue),
       regime = Some(regimeItsaValue),
       subjectEnglish = Some(subjectEnglish),
       contentEnglish = Some(contentEnglish),
@@ -195,7 +195,7 @@ object GmcMessages extends BasePage {
   def fillFormVatEnglishAndWelsh(subjectEnglish: String, contentEnglish: String, subjectWelsh: String, contentWelsh: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       identifierName = Some(taxIdentifierNameVatValue),
-      identifierValue = Some(vatVrnIdentifierValue),
+      identifierValue = Some(GeneratedTestData.vatVrnIdentifierValue),
       regime = Some(regimeVatValue),
       subjectEnglish = Some(subjectEnglish),
       contentEnglish = Some(contentEnglish),
@@ -208,7 +208,7 @@ object GmcMessages extends BasePage {
   def fillFormIoss(subjectEnglish: String, contentEnglish: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       identifierName = Some(enrolmentKeyIoss),
-      identifierValue = Some(iossIdentifierValue),
+      identifierValue = Some(GeneratedTestData.iossIdentifierValue),
       regime = Some(regimeIossValue),
       formId = Some("M01IOSS"),
       subjectEnglish = Some(subjectEnglish),
@@ -220,7 +220,7 @@ object GmcMessages extends BasePage {
   def fillFormIossInter(subjectEnglish: String, contentEnglish: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       identifierName = Some(enrolmentKeyIossInter),
-      identifierValue = Some(iossIdentifierValue),
+      identifierValue = Some(GeneratedTestData.iossInterIdentifierValue),
       regime = Some(regimeIossValue),
       formId = Some("M07GIOSS"),
       subjectEnglish = Some(subjectEnglish),
@@ -232,7 +232,7 @@ object GmcMessages extends BasePage {
   def fillFormOss(subjectEnglish: String, contentEnglish: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       identifierName = Some(enrolmentKeyOss),
-      identifierValue = Some(ossIdentifierValue),
+      identifierValue = Some(GeneratedTestData.ossIdentifierValue),
       regime = Some(regimeOssValue),
       formId = Some("M01IOSS"),
       subjectEnglish = Some(subjectEnglish),
@@ -244,7 +244,7 @@ object GmcMessages extends BasePage {
   def fillFormAd(subjectEnglish: String, contentEnglish: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       identifierName = Some(enrolmentKeyAd),
-      identifierValue = Some(adIdentifierValue),
+      identifierValue = Some(GeneratedTestData.adIdentifierValue),
       regime = Some(regimeAdValue),
       formId = Some("AD2"),
       subjectEnglish = Some(subjectEnglish),
@@ -256,7 +256,7 @@ object GmcMessages extends BasePage {
   def fillFormItsaEn(subjectEnglish: String, contentEnglish: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       identifierName = Some(taxIdentifierNameItsaValue),
-      identifierValue = Some(itsaIdentifierValue),
+      identifierValue = Some(GeneratedTestData.itsaIdentifierValue),
       formId = Some("LSP1_ITSA"),
       regime = Some(regimeItsaValue),
       subjectEnglish = Some(subjectEnglish),
@@ -268,7 +268,7 @@ object GmcMessages extends BasePage {
   def fillFormItsaMig1En(subjectEnglish: String, contentEnglish: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       identifierName = Some(taxIdentifierNameItsaValue),
-      identifierValue = Some(itsaIdentifierValue),
+      identifierValue = Some(GeneratedTestData.itsaIdentifierValue),
       formId = Some("ITSAMIG1"),
       regime = Some(regimeItsaValue),
       subjectEnglish = Some(subjectEnglish),
@@ -280,7 +280,7 @@ object GmcMessages extends BasePage {
   def fillFormItsaLpp1aEn(subjectEnglish: String, contentEnglish: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       identifierName = Some(taxIdentifierNameItsaValue),
-      identifierValue = Some(itsaIdentifierValue),
+      identifierValue = Some(GeneratedTestData.itsaIdentifierValue),
       formId = Some("LPP1A_ITSA"),
       regime = Some(regimeItsaValue),
       subjectEnglish = Some(subjectEnglish),
@@ -292,7 +292,7 @@ object GmcMessages extends BasePage {
   def fillFormItsaLpp2En(subjectEnglish: String, contentEnglish: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       identifierName = Some(taxIdentifierNameItsaValue),
-      identifierValue = Some(itsaIdentifierValue),
+      identifierValue = Some(GeneratedTestData.itsaIdentifierValue),
       formId = Some("LPP2_ITSA"),
       regime = Some(regimeItsaValue),
       subjectEnglish = Some(subjectEnglish),
@@ -304,7 +304,7 @@ object GmcMessages extends BasePage {
   def fillFormItsaPar1En(subjectEnglish: String, contentEnglish: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       identifierName = Some(taxIdentifierNameItsaValue),
-      identifierValue = Some(itsaIdentifierValue),
+      identifierValue = Some(GeneratedTestData.itsaIdentifierValue),
       formId = Some("PAR1_ITSA"),
       regime = Some(regimeItsaValue),
       subjectEnglish = Some(subjectEnglish),
@@ -316,7 +316,7 @@ object GmcMessages extends BasePage {
   def fillFormIossNetp(subjectEnglish: String, contentEnglish: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       identifierName = Some(enrolmentKeyIossNetp),
-      identifierValue = Some(iossNetpIdentifierValue),
+      identifierValue = Some(GeneratedTestData.iossNetpIdentifierValue),
       regime = Some(regimeIossValue),
       formId = Some("M05AGIOSS"),
       subjectEnglish = Some(subjectEnglish),
@@ -328,7 +328,7 @@ object GmcMessages extends BasePage {
   def fillFormNiref1En(subject: String, content: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       identifierName = Some(taxIdentifierNameValue),
-      identifierValue = Some(ninoNumber),
+      identifierValue = Some(GeneratedTestData.ninoNumber),
       regime = Some(regimeValue),
       formId = Some("NIREF1"),
       subjectEnglish = Some(subject),
@@ -340,7 +340,7 @@ object GmcMessages extends BasePage {
   def fillFormNiref4En(subject: String, content: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       identifierName = Some(taxIdentifierNameValue),
-      identifierValue = Some(ninoNumber),
+      identifierValue = Some(GeneratedTestData.ninoNumber),
       regime = Some(regimeValue),
       formId = Some("NIREF4"),
       subjectEnglish = Some(subject),
@@ -352,7 +352,7 @@ object GmcMessages extends BasePage {
   def fillFormInvalidAlertQueue(subject: String, content: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       identifierName = Some(taxIdentifierNameValue),
-      identifierValue = Some(ninoNumber),
+      identifierValue = Some(GeneratedTestData.ninoNumber),
       regime = Some(regimeValue),
       formId = Some("SA300"),
       alertQueue = Some("Test"),
@@ -365,7 +365,7 @@ object GmcMessages extends BasePage {
   def fillFormEmptyAlertQueue(subject: String, content: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       identifierName = Some(taxIdentifierNameValue),
-      identifierValue = Some(ninoNumber),
+      identifierValue = Some(GeneratedTestData.ninoNumber),
       regime = Some(regimeValue),
       formId = Some("SA300"),
       alertQueue = Some(""),
@@ -378,7 +378,7 @@ object GmcMessages extends BasePage {
   def fillFormInvalidSourceData(subject: String, content: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       identifierName = Some(taxIdentifierNameValue),
-      identifierValue = Some(ninoNumber),
+      identifierValue = Some(GeneratedTestData.ninoNumber),
       regime = Some(regimeValue),
       formId = Some("SA300"),
       sourceData = Some(""),
@@ -391,7 +391,7 @@ object GmcMessages extends BasePage {
   def fillFormUnknownTaxIdentifier(subject: String, content: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       identifierName = Some("nino1"),
-      identifierValue = Some(ninoNumber),
+      identifierValue = Some(GeneratedTestData.ninoNumber),
       regime = Some(regimeValue),
       formId = Some("SA300"),
       subjectEnglish = Some(subject),
@@ -415,7 +415,7 @@ object GmcMessages extends BasePage {
   def fillFormMissingDetails(subject: String, content: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       identifierName = Some(taxIdentifierNameValue),
-      identifierValue = Some(ninoNumber),
+      identifierValue = Some(GeneratedTestData.ninoNumber),
       regime = Some(regimeValue),
       formId = Some("SA300"),
       issueDate = Some(""),
@@ -428,7 +428,7 @@ object GmcMessages extends BasePage {
   def fillFormInvalidEmail(subject: String, content: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       identifierName = Some(enrolmentKeyAd),
-      identifierValue = Some(adIdentifierValue),
+      identifierValue = Some(GeneratedTestData.adIdentifierValue),
       regime = Some(regimeAdValue),
       formId = Some("AD2"),
       email = Some("testuser123"),

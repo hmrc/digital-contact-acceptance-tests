@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.utils.data.html
+package uk.gov.hmrc.ui.utils.html
 
 object V4MessageHtmlContentVat {
   val htmlContentVat_SubjectEnglish = "Late Payment Interest Due"

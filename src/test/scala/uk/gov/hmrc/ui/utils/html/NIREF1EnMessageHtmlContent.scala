@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.utils.data.html
+package uk.gov.hmrc.ui.utils.html
 
 object NIREF1EnMessageHtmlContent {
     val HtmlContentNiref1_SubjectEnglish = "National Insurance contributions - we may owe you a refund"

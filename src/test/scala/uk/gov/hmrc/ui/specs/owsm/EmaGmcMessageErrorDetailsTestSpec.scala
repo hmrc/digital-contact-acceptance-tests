@@ -22,16 +22,17 @@ import uk.gov.hmrc.ui.pages.messages.SecureMessagesPage
 import uk.gov.hmrc.ui.pages.paperless.*
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.OwsmTests
+import uk.gov.hmrc.ui.utils.GeneratedTestData
 
 class EmaGmcMessageErrorDetailsTestSpec extends BaseSpec {
 
   def setUpPreferences(): Unit = {
     LoginUsingAuthWizardPage.pageLoad()
-    LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("NoSautr", pta)
+    LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("NoSautr", pta, GeneratedTestData.ninoNumber)
     PaperlessInterruptPage.pageTitle()
     And("I am unverified for paperless")
     PaperlessInterruptPage.fillInterruptPageForOptin()
-    PaperlessEmailPage.fillEmailPage()
+    PaperlessEmailPage.fillEmailPage(GeneratedTestData.email)
     PaperlessVerifyEmailPage.pageTitle()
     And("I verify the email address")
     verifyEmail()

@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.ui.utils
 
-import uk.gov.hmrc.ui.pages.messages.GmcMessages.{alertQueueValue, batchIdValue, email, englishContentValue, englishSubjectValue, identifierValue, messageTypeValue, referenceIdValue, regimeSaValue, sourceDataValue, sourceValue, taxIdentifierNameSautrValue, validFromValue}
+import uk.gov.hmrc.ui.pages.messages.GmcMessages.{alertQueueValue, batchIdValue, englishContentValue, englishSubjectValue, messageTypeValue, referenceIdValue, regimeSaValue, sourceDataValue, sourceValue, taxIdentifierNameSautrValue, validFromValue}
 
 case class MessageFormData(
                             externalRef: MessageFormData.ExternalRef,
@@ -121,12 +121,12 @@ object MessageFormData {
     recipient = Recipient(
       taxIdentifier = TaxIdentifier(
         name = taxIdentifierNameSautrValue,
-        value = identifierValue
+        value = GeneratedTestData.identifierValue
       ),
       name = RecipientName(
         line1 = "P800"
       ),
-      email = email),
+      email = GeneratedTestData.email),
     regime = regimeSaValue,
     messageType = messageTypeValue,
     subjectEnglish = englishSubjectValue,
