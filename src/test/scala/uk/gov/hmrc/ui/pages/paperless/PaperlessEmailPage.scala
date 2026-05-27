@@ -18,8 +18,8 @@ package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.By
 import uk.gov.hmrc.ui.ElementLocators.{emailPageHeader, submitEmailButtonId}
-import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.email
 import uk.gov.hmrc.ui.pages.BasePage
+import uk.gov.hmrc.ui.utils.GeneratedTestData
 
 object PaperlessEmailPage extends BasePage {
   var paperlessEmailPageTitle: String = "Enter your email address"
@@ -28,7 +28,7 @@ object PaperlessEmailPage extends BasePage {
     waitForText(emailPageHeader, paperlessEmailPageTitle)
   }
 
-  def fillEmailPage(): Unit = {
+  def fillEmailPage(email: String = GeneratedTestData.email): Unit = {
     val getEmailTextField: By = By.id(getEmailTextFieldId)
     sendKeys(getEmailTextField, email)
     click(By.id(submitEmailButtonId))

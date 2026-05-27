@@ -17,12 +17,16 @@
 package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.By
+import org.openqa.selenium.support.ui.ExpectedConditions
 import uk.gov.hmrc.selenium.webdriver.Driver
 import uk.gov.hmrc.ui.ElementLocators.{emailPageHeader, verifyEmailAddressPageContinue, verifyEmailAddressPageSendLinkAgain, verifyEmailAddressUseDifferentEmail}
 import uk.gov.hmrc.ui.pages.BasePage
 
 object PaperlessVerifyEmailPage extends BasePage {
   var paperlessVerifyEmailPageTitle: String = "Verify your email address"
+
+  def pageTitle(): Unit =
+    fluentWait.until(ExpectedConditions.titleContains(paperlessVerifyEmailPageTitle))
 
   def continueVerifyEmailAddressPage(): Unit =
     click(By.ByCssSelector(verifyEmailAddressPageContinue))

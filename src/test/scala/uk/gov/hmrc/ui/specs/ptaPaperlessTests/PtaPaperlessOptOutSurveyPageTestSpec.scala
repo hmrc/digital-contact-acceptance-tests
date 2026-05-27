@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.specs.ptaPaperlessTests
 
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
-import uk.gov.hmrc.ui.pages.messages.GmcMessages.{deleteMongoRecordsFromCollection, pta, waitUntilHeader}
+import uk.gov.hmrc.ui.pages.messages.GmcMessages.{deleteMongoRecordsFromCollection, pta}
 import uk.gov.hmrc.ui.pages.paperless.*
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.PtaPaperlessTests
@@ -33,7 +33,7 @@ class PtaPaperlessOptOutSurveyPageTestSpec extends BaseSpec {
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr", pta)
       And("I see the page: Choose how to get your tax letters")
-      waitUntilHeader("Choose how to get your tax letters")
+      PaperlessInterruptPage.pageTitle()
       When("I opt-out from the Standard paperless interrupt page")
       PaperlessInterruptPage.fillInterruptPageForOptout()
       And("I see the page: You now get tax letters by post")
@@ -57,7 +57,7 @@ class PtaPaperlessOptOutSurveyPageTestSpec extends BaseSpec {
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr", pta)
       And("I see the page: Choose how to get your tax letters")
-      waitUntilHeader("Choose how to get your tax letters")
+      PaperlessInterruptPage.pageTitle()
       When("I opt-out from the Standard paperless interrupt page")
       PaperlessInterruptPage.fillInterruptPageForOptout()
       And("I see the page: You now get tax letters by post")
@@ -76,11 +76,11 @@ class PtaPaperlessOptOutSurveyPageTestSpec extends BaseSpec {
       Given("I am logged into PTA account with nino and sautr enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr", pta)
-      waitUntilHeader("Choose how to get your tax letters")
+      PaperlessInterruptPage.pageTitle()
       And("I am unverified for paperless")
       PaperlessInterruptPage.fillInterruptPageForOptin()
       PaperlessEmailPage.fillEmailPage()
-      waitUntilHeader("Verify your email address")
+      PaperlessVerifyEmailPage.pageTitle()
       And("I do not see the survey page")
       PaperlessOptOutSurveyPage.pageNotVisible()
       When("I click Close button")

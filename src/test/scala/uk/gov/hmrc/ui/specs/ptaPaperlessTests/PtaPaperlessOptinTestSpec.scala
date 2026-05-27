@@ -17,10 +17,11 @@
 package uk.gov.hmrc.ui.specs.ptaPaperlessTests
 
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
-import uk.gov.hmrc.ui.pages.messages.GmcMessages.{bta, deleteMongoRecordsFromCollection, navigateToAccount, ninoNumber1, pta, verifyEmail, waitUntilHeader}
+import uk.gov.hmrc.ui.pages.messages.GmcMessages.{bta, deleteMongoRecordsFromCollection, navigateToAccount, pta, verifyEmail, waitUntilHeader}
 import uk.gov.hmrc.ui.pages.paperless.*
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.PtaPaperlessTests
+import uk.gov.hmrc.ui.utils.GeneratedTestData
 
 
 class PtaPaperlessOptinTestSpec extends BaseSpec {
@@ -31,14 +32,14 @@ class PtaPaperlessOptinTestSpec extends BaseSpec {
     Scenario("Opt-in Welcome Secure Message with salutation for PTA customers", PtaPaperlessTests) {
       Given("I am logged into PTA account with nino enrolment")
       LoginUsingAuthWizardPage.pageLoad()
-      LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("NoSautr", pta, ninoNumber1)
-      waitUntilHeader("Choose how to get your tax letters")
+      LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("NoSautr", pta, GeneratedTestData.ninoNumber1)
+      PaperlessInterruptPage.pageTitle()
       And("I am unverified for paperless")
       PaperlessInterruptPage.fillInterruptPageForOptin()
       PaperlessEmailPage.fillEmailPage()
-      waitUntilHeader("Verify your email address")
+      PaperlessVerifyEmailPage.pageTitle()
       And("I verify the email address")
-      verifyEmail(ninoNumber1)
+      verifyEmail(GeneratedTestData.ninoNumber1)
       And("I navigate to PTA account")
       navigateToAccount(pta)
       And("I see the page: Personal Tax Account")
@@ -60,7 +61,7 @@ class PtaPaperlessOptinTestSpec extends BaseSpec {
     And("I am unverified for paperless")
     PaperlessInterruptPage.fillInterruptPageForOptin()
     PaperlessEmailPage.fillEmailPage()
-    waitUntilHeader("Verify your email address")
+    PaperlessVerifyEmailPage.pageTitle()
     And("I verify the email address")
     verifyEmail()
     And("I navigate to BTA account")

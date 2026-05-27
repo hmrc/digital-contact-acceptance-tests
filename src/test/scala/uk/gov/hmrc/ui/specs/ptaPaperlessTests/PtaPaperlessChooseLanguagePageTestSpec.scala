@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.specs.ptaPaperlessTests
 
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
-import uk.gov.hmrc.ui.pages.messages.GmcMessages.{clickOnBackLink, deleteMongoRecordsFromCollection, navigateToAccount, pta, selectLanguageEnglish, selectLanguageWelsh, verifyEmail, waitUntilHeader}
+import uk.gov.hmrc.ui.pages.messages.GmcMessages.{clickOnBackLink, deleteMongoRecordsFromCollection, navigateToAccount, pta, selectLanguageEnglish, selectLanguageWelsh, verifyEmail}
 import uk.gov.hmrc.ui.pages.paperless.*
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.PtaPaperlessTests
@@ -32,11 +32,11 @@ class PtaPaperlessChooseLanguagePageTestSpec extends BaseSpec {
       Given("I am logged into PTA account with nino and sautr enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr", pta)
-      waitUntilHeader("Choose how to get your tax letters")
+      PaperlessInterruptPage.pageTitle()
       And("I am unverified for paperless")
       PaperlessInterruptPage.fillInterruptPageForOptin()
       PaperlessEmailPage.fillEmailPage()
-      waitUntilHeader("Verify your email address")
+      PaperlessVerifyEmailPage.pageTitle()
       And("I verify the email address")
       verifyEmail()
       And("I navigate to PTA account")
@@ -74,11 +74,11 @@ class PtaPaperlessChooseLanguagePageTestSpec extends BaseSpec {
       Given("I am logged into PTA account with nino and sautr enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr", pta)
-      waitUntilHeader("Choose how to get your tax letters")
+      PaperlessInterruptPage.pageTitle()
       And("I am unverified for paperless")
       PaperlessInterruptPage.fillInterruptPageForOptin()
       PaperlessEmailPage.fillEmailPage()
-      waitUntilHeader("Verify your email address")
+      PaperlessVerifyEmailPage.pageTitle()
       And("I verify the email address")
       verifyEmail()
       And("I navigate to PTA account")
@@ -103,11 +103,11 @@ class PtaPaperlessChooseLanguagePageTestSpec extends BaseSpec {
       Given("I am logged into PTA account with nino and sautr enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr", pta)
-      waitUntilHeader("Choose how to get your tax letters")
+      PaperlessInterruptPage.pageTitle()
       And("I am unverified for paperless")
       PaperlessInterruptPage.fillInterruptPageForOptin()
       PaperlessEmailPage.fillEmailPage()
-      waitUntilHeader("Verify your email address")
+      PaperlessVerifyEmailPage.pageTitle()
       And("I verify the email address")
       verifyEmail()
       And("I navigate to PTA account")
@@ -132,11 +132,11 @@ class PtaPaperlessChooseLanguagePageTestSpec extends BaseSpec {
       Given("I am logged into PTA account with nino and sautr enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr", pta)
-      waitUntilHeader("Choose how to get your tax letters")
+      PaperlessInterruptPage.pageTitle()
       And("I am unverified for paperless")
       PaperlessInterruptPage.fillInterruptPageForOptin()
       PaperlessEmailPage.fillEmailPage()
-      waitUntilHeader("Verify your email address")
+      PaperlessVerifyEmailPage.pageTitle()
       And("I verify the email address")
       verifyEmail()
       And("I navigate to PTA account")

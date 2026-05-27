@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2026 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,20 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.utils.data
+package uk.gov.hmrc.ui.pages.messages
 
-import uk.gov.hmrc.ui.pages.messages.GmcMessages.{email, email2}
+import org.openqa.selenium.By
+import uk.gov.hmrc.ui.ElementLocators.*
+import uk.gov.hmrc.ui.pages.BasePage
 
-trait ApiPayLoad {
-
-  val payloadBounceEmail1 =
-    s"""{
-            "emailAddress": "$email"
-    }""".stripMargin
-
-  val payloadBounceEmail2 =
-    s"""{
-            "emailAddress": "$email2"
-    }""".stripMargin
+object SecureMessagesPage extends BasePage{
+  
+  def clickOnSubject(): Unit = {
+    val subjectLink: By = By.cssSelector(demoFrontEndInboxFirstMessageSubject)
+    click(subjectLink)
+  }
+  
+  def pageContains(subject: String): Unit = {
+    assert(getPageSource.contains(subject))
+  }
 }

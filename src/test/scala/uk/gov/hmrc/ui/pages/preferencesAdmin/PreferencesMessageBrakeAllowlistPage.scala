@@ -21,6 +21,8 @@ import uk.gov.hmrc.ui.ElementLocators.{clickOnAddNewFormButtonId, clickOnDeleteF
 import uk.gov.hmrc.ui.pages.BasePage
 import uk.gov.hmrc.ui.pages.preferencesAdmin.PreferencesMessageBrakePage.getText
 
+
+
 object PreferencesMessageBrakeAllowlistPage extends BasePage {
 
   var searchPageTitle: String = "Message Form IDs Allowlist"
@@ -31,14 +33,6 @@ object PreferencesMessageBrakeAllowlistPage extends BasePage {
   def clickOnAddNewFormButton(): Unit =
     click(By.cssSelector(clickOnAddNewFormButtonId))
 
-  def addNewFormId(): Unit = {
-    val formId: By     = By.id(newFormIdId)
-    val reasonText: By = By.id(reasonTextId)
-    sendKeys(formId, "SA316")
-    sendKeys(reasonText, reasonTextForAdding)
-    click(By.name("confirm"))
-    fluentWait
-  }
 
   def clickOnDeleteFormId(): Unit = {
     click(By.cssSelector(clickOnDeleteFormButtonId))
@@ -54,4 +48,21 @@ object PreferencesMessageBrakeAllowlistPage extends BasePage {
 
   def formIdAdded(): Unit =
     getText(By.cssSelector("#main-content > div > div")).contains("SA316")
+
+  def addNewFormId(id: String): Unit = {
+    val formId: By = By.id(newFormIdId)
+    val reasonText: By = By.id(reasonTextId)
+    sendKeys(formId, id)
+    sendKeys(reasonText, reasonTextForAdding)
+    click(By.name("confirm"))
+  }
+
+  def clickOnDeleteFormId(id: String): Unit = {
+    val xpathForId = s"//button[contains(@onclick,'${id.replace(" ", "%20")}')]"
+    click(By.xpath(xpathForId))
+  }
+
+  def confirmFormIdDeleted(id: String): Unit = {
+    assert(getPageSource.contains(id).equals(false))
+  }
 }

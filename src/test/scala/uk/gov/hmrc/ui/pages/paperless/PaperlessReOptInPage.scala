@@ -21,6 +21,7 @@ import uk.gov.hmrc.ui.ElementLocators.{emailPageHeader2, reOptInPageHeader, reOp
 import uk.gov.hmrc.ui.pages.BasePage
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.sendKeys
 import uk.gov.hmrc.ui.pages.paperless.PaperlessBTAHomePage.fluentWait
+import uk.gov.hmrc.ui.utils.GeneratedTestData
 
 object PaperlessReOptInPage extends BasePage {
   var PaperlessReOptInPageTitleEnglish: String = "Keep getting your tax letters online"
@@ -50,7 +51,7 @@ object PaperlessReOptInPage extends BasePage {
   }
 
   def reOptinEnterNewEmail(): Unit = {
-    sendKeys(By.id(spsReOptInIdEmailId), email2)
+    sendKeys(By.id(spsReOptInIdEmailId), GeneratedTestData.email2)
     click(By.id(submitEmailButtonId))
 
   }

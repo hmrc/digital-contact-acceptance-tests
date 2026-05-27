@@ -32,9 +32,9 @@ import org.scalatest.time.SpanSugar.convertIntToGrainOfTime
 import org.scalatest.time.{Seconds, Span}
 import play.api.libs.json.{JsValue, Json}
 import uk.gov.hmrc.ui.pages.messages.GmcMessages.preferences
-import uk.gov.hmrc.ui.utils.TestData
-import uk.gov.hmrc.ui.utils.data.ApiPayLoad
+import uk.gov.hmrc.ui.utils.{ApiPayLoad, GeneratedTestData, TestData}
 import play.api.libs.ws.DefaultBodyWritables.writeableOf_String
+import uk.gov.hmrc.ui.ElementLocators.{pageBackLink, pageHeader1, pageHeader2, pageLanguageEnglish, pageLanguageWelsh}
 
 import java.time.Duration
 import scala.concurrent.Await
@@ -75,7 +75,7 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
   val messageTypeId                 = "messageType"
   val alertQueueId                  = "alertQueue"
   val englishSubjectId              = "english-subject"
-  val welshSubjectId                = "english-subject"
+  val welshSubjectId                = "welsh-subject"
   val englishMessageId              = "english-message-content"
   val welshMessageId                = "welsh-message-content"
   val validFromId                   = "validFrom"
@@ -115,14 +115,14 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
     val deletePreferencesRecords: String   = preferences + "test-only/preferences-admin/print-suppression"
     val deleteSecureMessageRecords: String = secureMessage + "test-only/delete/secure-messages"
 
-    val collectionMatch = serviceCollection.toLowerCase() match {
+    serviceCollection.toLowerCase() match {
       case "preferences"    => WsClient.url(deletePreferencesRecords).delete()
       case "secure message" => WsClient.url(deleteSecureMessageRecords).delete()
     }
     fluentWait
   }
 
-  def verifyEmail(nino:String = ninoNumber): Unit = {
+  def verifyEmail(nino:String = GeneratedTestData.ninoNumber): Unit = {
 
     // To get entity ID via sa-api proxy
     val entityIdUrl: String                                       = saApiProxy + ("/entity-resolver/entity-resolver/paye/" + nino)
@@ -162,12 +162,12 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
 
   def waitUntilHeader(header: String): Unit =
     fluentWait.until(driver =>
-      driver.findElement(By.cssSelector("#main-content > div > div > h1")).getText.equals(header)
+      driver.findElement(By.cssSelector(pageHeader1)).getText.equals(header)
     )
 
   def waitUntilHeader2(header: String): Unit =
     fluentWait.until(driver =>
-      driver.findElement(By.cssSelector("#main-content > div > div > h2")).getText.equals(header)
+      driver.findElement(By.cssSelector(pageHeader2)).getText.equals(header)
     )
 
   def waitGetUrlResult(url: String): StandaloneWSRequest#Response = {
@@ -183,17 +183,17 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
   }
 
   def selectLanguageWelsh(): Unit = {
-    val welshLink: By = By.cssSelector("body > header > section > div > nav > ul > li:nth-child(2) > a")
+    val welshLink: By = By.cssSelector(pageLanguageWelsh)
     click(welshLink)
   }
 
   def selectLanguageEnglish(): Unit = {
-    val englishLink: By = By.cssSelector("body > header > section > div > nav > ul > li:nth-child(1) > a")
+    val englishLink: By = By.cssSelector(pageLanguageEnglish)
     click(englishLink)
   }
 
   def clickOnBackLink(): Unit = {
-    click(By.cssSelector("body > div > div > div:nth-child(1) > div > a"))
+    click(By.cssSelector(pageBackLink))
   }
   
   def navigateToUrl(url: String): Unit = {

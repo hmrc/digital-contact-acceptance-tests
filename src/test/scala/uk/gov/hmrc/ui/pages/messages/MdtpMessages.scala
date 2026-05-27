@@ -18,6 +18,7 @@ package uk.gov.hmrc.ui.pages.messages
 
 import org.openqa.selenium.By
 import uk.gov.hmrc.ui.pages.BasePage
+import uk.gov.hmrc.ui.utils.GeneratedTestData
 
 object MdtpMessages extends BasePage {
 
@@ -47,13 +48,13 @@ object MdtpMessages extends BasePage {
     sendKeys(contentInputField, contentValue)
     sendKeys(subjectInputField, subjectValue)
     sendKeys(identifierNameInputField, identifierNameValue)
-    sendKeys(emailInputField, email)
+    sendKeys(emailInputField, GeneratedTestData.email)
     sendKeys(nameInputField, nameValue)
     sendKeys(messageTypeInputField, messageTypeValue)
 
     val indentifierValue = typeMessage match {
-      case "valid"   => sendKeys(identifierValueInputField, identifierFHDDSValidValue)
-      case "invalid" => sendKeys(identifierValueInputField, identifierFHDDSInvalidValue)
+      case "valid"   => sendKeys(identifierValueInputField, GeneratedTestData.identifierFHDDSValidValue)
+      case "invalid" => sendKeys(identifierValueInputField, GeneratedTestData.identifierFHDDSInvalidValue)
       case _         => throw new IllegalArgumentException(s"Unknown Value")
     }
   }

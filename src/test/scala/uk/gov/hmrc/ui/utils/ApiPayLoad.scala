@@ -1,5 +1,5 @@
 /*
- * Copyright 2026 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,20 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages.paperless
-
-import uk.gov.hmrc.ui.pages.BasePage
+package uk.gov.hmrc.ui.utils
 
 
-object PaperlessReOptInChooseEmailPage extends BasePage {
-  var paperlessChooseEmailPageTitle: String = "Which email do you want to use for your tax letters?"
+trait ApiPayLoad {
 
-  def chooseEmailPageTitle(): Unit =
-    getTitle.contains(paperlessChooseEmailPageTitle)
-    
+  val email = GeneratedTestData.email
+  val email2 = GeneratedTestData.email2
+  val payloadBounceEmail1 =
+    s"""{
+            "emailAddress": "$email"
+    }""".stripMargin
+
+  val payloadBounceEmail2 =
+    s"""{
+            "emailAddress": "$email2"
+    }""".stripMargin
 }

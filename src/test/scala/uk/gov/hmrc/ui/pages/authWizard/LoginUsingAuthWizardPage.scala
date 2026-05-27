@@ -20,8 +20,8 @@ import org.openqa.selenium.By
 import org.openqa.selenium.support.ui.ExpectedConditions
 import uk.gov.hmrc.configuration.TestEnvironment
 import uk.gov.hmrc.ui.pages.BasePage
-import uk.gov.hmrc.ui.pages.messages.MdtpMessages.{identifierFHDDSInvalidValue, identifierFHDDSValidValue, sendKeys}
 import uk.gov.hmrc.ui.pages.preferencesAdmin.PreferencesAdminPage.{click, sendKeys}
+import uk.gov.hmrc.ui.utils.GeneratedTestData
 
 object LoginUsingAuthWizardPage extends BasePage {
 
@@ -31,6 +31,8 @@ object LoginUsingAuthWizardPage extends BasePage {
   val v4Message: String                 = digitalContactDemoFrontend + "/v4-message"
   val mdtpMessageInbox: String          = customerAdvisorFrontend + "/customer-advisors-frontend/inbox"
   val mdtpMessageSautr: String          = customerAdvisorFrontend + "/inbox/"
+
+  def messagesUsingRegimeRedirectUrl(regimeType: String): String = digitalContactDemoFrontend.concat(s"/messages?regime=$regimeType")
 
   def pageLoad(): Unit = {
     get(authWizardBaseUrl)
@@ -49,12 +51,12 @@ object LoginUsingAuthWizardPage extends BasePage {
     sendKeys(getRedirectUrl, digitalContactDemoFrontend + pta)
     selectByValue(getCredentialStrength, credentialStrength)
     selectByValue(getConfidenceLevel, confidenceLevel)
-    sendKeys(getNinoNumber, ninoNumber)
+    sendKeys(getNinoNumber, GeneratedTestData.ninoNumber)
     click(By.id("submit"))
     fluentWait
   }
 
-  def loginIntoAccountByAuthWizard(enrolmentType: String, account: String=bta, nino: String=ninoNumber): Unit = {
+  def loginIntoAccountByAuthWizard(enrolmentType: String, account: String=bta, nino: String=GeneratedTestData.ninoNumber): Unit = {
     val getRedirectUrl: By = By.id(getRedirectUrlId)
     val getCredentialStrength: By = By.id(getCredentialStrengthId)
     val getConfidenceLevel: By = By.id(getConfidenceLevelId)
@@ -72,8 +74,8 @@ object LoginUsingAuthWizardPage extends BasePage {
       sendKeys(enrolmentKeyId, enrolmentKey)
       sendKeys(enrolmentNameId, identifierName)
       enrolmentType match {
-        case "sautr" => sendKeys(enrolmentValueId, identifierValue)
-        case "sautr2" => sendKeys(enrolmentValueId, identifierValue2)
+        case "sautr" => sendKeys(enrolmentValueId, GeneratedTestData.identifierValue)
+        case "sautr2" => sendKeys(enrolmentValueId, GeneratedTestData.identifierValue2)
         case _ => throw new IllegalArgumentException(s"Unknown UTR Value")
       }
     }
@@ -99,13 +101,77 @@ object LoginUsingAuthWizardPage extends BasePage {
   def logIntoCustomerAdvisorMessageSautrPage(sautr: String): Unit = {
     pageLoad()
     val getRedirectUrl: By = By.id(getRedirectUrlId)
-    sendKeys(getRedirectUrl, mdtpMessageSautr + identifierValue)
-    val sautrType          = sautr match {
-      case "correct" => sendKeys(getRedirectUrl, mdtpMessageSautr + identifierValue)
-      case "wrong"   => sendKeys(getRedirectUrl, mdtpMessageSautr + identifierValue2)
+    sendKeys(getRedirectUrl, mdtpMessageSautr + GeneratedTestData.identifierValue)
+    sautr match {
+      case "correct" => sendKeys(getRedirectUrl, mdtpMessageSautr + GeneratedTestData.identifierValue)
+      case "wrong"   => sendKeys(getRedirectUrl, mdtpMessageSautr + GeneratedTestData.identifierValue2)
     }
     click(By.id("submit"))
     fluentWait
+  }
+
+  def logIntoMessageUsingRegime(enrolmentType: String, regime:String ="sautr", nino:String = GeneratedTestData.ninoNumber): Unit = {
+    val getRedirectUrl: By = By.id(getRedirectUrlId)
+    val getCredentialStrength: By = By.id(getCredentialStrengthId)
+    val getConfidenceLevel: By = By.id(getConfidenceLevelId)
+    val getNinoNumber: By = By.id(getNinoId)
+    val enrolmentKeyId: By = By.id("enrolment[0].name")
+    val enrolmentNameId: By = By.id("input-0-0-name")
+    val enrolmentValueId: By = By.id("input-0-0-value")
+    
+    val redirectUrl = messagesUsingRegimeRedirectUrl(regime.toLowerCase())
+    
+    pageLoad()
+    sendKeys(getRedirectUrl, redirectUrl)
+    selectByValue(getCredentialStrength, credentialStrength)
+    selectByValue(getConfidenceLevel, confidenceLevel)
+    sendKeys(getNinoNumber, nino)
+
+    if (enrolmentType == "itsa") {
+      sendKeys(enrolmentKeyId, enrolmentKeyItsa)
+      sendKeys(enrolmentNameId, taxIdentifierNameItsaValue)
+      sendKeys(enrolmentValueId, GeneratedTestData.itsaIdentifierValue)
+    }
+    else if(enrolmentType == "vat"){
+      sendKeys(enrolmentKeyId, enrolmentKeyVat)
+      sendKeys(enrolmentNameId, taxIdentifierNameVatValue)
+      sendKeys(enrolmentValueId, GeneratedTestData.vatVrnIdentifierValue)
+    }
+    else if(enrolmentType == "ioss"){
+      sendKeys(enrolmentKeyId, enrolmentKeyIoss)
+      sendKeys(enrolmentNameId, taxIdentifierNameIossValue)
+      sendKeys(enrolmentValueId, GeneratedTestData.iossIdentifierValue)
+    }
+    else if(enrolmentType == "ioss inter"){
+      sendKeys(enrolmentKeyId, enrolmentKeyIossInter)
+      sendKeys(enrolmentNameId, taxIdentifierNameIossInterValue)
+      sendKeys(enrolmentValueId, GeneratedTestData.iossInterIdentifierValue)
+    }
+    else if(enrolmentType == "oss"){
+      sendKeys(enrolmentKeyId, enrolmentKeyOss)
+      sendKeys(enrolmentNameId, taxIdentifierNameOssValue)
+      sendKeys(enrolmentValueId, GeneratedTestData.ossIdentifierValue)
+    }
+    else if(enrolmentType == "ad"){
+      sendKeys(enrolmentKeyId, enrolmentKeyAd)
+      sendKeys(enrolmentNameId, taxIdentifierNameAdValue)
+      sendKeys(enrolmentValueId, GeneratedTestData.adIdentifierValue)
+    }
+    else if(enrolmentType == "ioss netp"){
+      sendKeys(enrolmentKeyId, enrolmentKeyIossNetp)
+      sendKeys(enrolmentNameId, taxIdentifierNameIossNetpValue)
+      sendKeys(enrolmentValueId, GeneratedTestData.iossNetpIdentifierValue)
+    }
+    else if (enrolmentType != "NoSautr") {
+      sendKeys(enrolmentKeyId, enrolmentKey)
+      sendKeys(enrolmentNameId, identifierName)
+      enrolmentType match {
+        case "sautr" => sendKeys(enrolmentValueId, GeneratedTestData.identifierValue)
+        case "sautr2" => sendKeys(enrolmentValueId, GeneratedTestData.identifierValue2)
+        case _ => throw new IllegalArgumentException(s"Unknown UTR Value")
+      }
+    }
+    click(By.id("submit"))
   }
 
 }

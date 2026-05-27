@@ -17,9 +17,9 @@
 package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.By
-import uk.gov.hmrc.selenium.webdriver.Driver
 import uk.gov.hmrc.ui.ElementLocators.{changeEmailAddressPageHeader, emailConfirmId, emailMainId, submitChangedEmailButtonId}
 import uk.gov.hmrc.ui.pages.BasePage
+import uk.gov.hmrc.ui.utils.GeneratedTestData
 
 object PaperlessChangeEmailAddressPage extends BasePage {
 
@@ -31,9 +31,9 @@ object PaperlessChangeEmailAddressPage extends BasePage {
    }
 
   def fillChangeEmailPage(): String = {
-    sendKeys(By.id(emailMainId), email2)
-    sendKeys(By.id(emailConfirmId), email2)
+    sendKeys(By.id(emailMainId), GeneratedTestData.email2)
+    sendKeys(By.id(emailConfirmId), GeneratedTestData.email2)
     click(By.id(submitChangedEmailButtonId))
-    Driver.instance.getCurrentUrl
+    getCurrentUrl
   }
 }

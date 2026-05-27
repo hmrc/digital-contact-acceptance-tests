@@ -76,4 +76,14 @@ object ElementLocators {
   val emailMainId                                             = "email.main"
   val emailConfirmId                                          ="email.confirm"
   val submitChangedEmailButtonId                              = "submit-email-button"
+  val demoFrontEndInboxFirstMessageSubject                    = "#sa-messages-table > tbody > tr > td:nth-child(2) > div > span > a > span > span"
+  val demoFrontEndInboxIossMessageSubject                     = "#sa-messages-table > tbody > tr > td:nth-child(2) > a > span"
+  val pageHeader1                                             = "#main-content > div > div > h1"
+  val pageHeader2                                             = "#main-content > div > div > h2"
+  val pageLanguageEnglish                                     = "body > header > section > div > nav > ul > li:nth-child(1) > a"
+  val pageLanguageWelsh                                       = "body > header > section > div > nav > ul > li:nth-child(2) > a"
+  val pageBackLink                                            = "body > div > div > div:nth-child(1) > div > a"
+  val sendMessageResponse                                     = "#main-content > div > div > div.data > p > span"   
+  
+
 }
