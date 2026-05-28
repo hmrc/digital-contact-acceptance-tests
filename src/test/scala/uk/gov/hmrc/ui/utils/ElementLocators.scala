@@ -83,7 +83,10 @@ object ElementLocators {
   val pageLanguageEnglish                                     = "body > header > section > div > nav > ul > li:nth-child(1) > a"
   val pageLanguageWelsh                                       = "body > header > section > div > nav > ul > li:nth-child(2) > a"
   val pageBackLink                                            = "body > div > div > div:nth-child(1) > div > a"
-  val sendMessageResponse                                     = "#main-content > div > div > div.data > p > span"   
+  val sendMessageResponse                                     = "#main-content > div > div > div.data > p > span"
+  val cdsMessagePageHeader                                    = "#main-content > div > div > div > div > h1"
+  val cdsMessagePageFirstMessageSubject                       = "#message-0 > span.govuk-\\!-font-weight-bold.black-text"
+
   
 
 }

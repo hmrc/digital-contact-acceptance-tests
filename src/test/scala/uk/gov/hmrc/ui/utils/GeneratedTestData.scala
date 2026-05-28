@@ -46,7 +46,19 @@ object GeneratedTestData {
 
   val identifierFHDDSInvalidValue: String = s"XGER${randomDigits(11)}"
 
-  val email: String = "testuser123@example.com"
+  val referenceIdValue: String = randomDigits(12)
 
-  val email2: String = "testuser123@example.org"
+  val identifierValueVatSdil: String = s"XZSD${randomDigits(11)}"
+
+  val identifierValueVatFhdds: String = s"XZFH${randomDigits(11)}"
+
+  val identifierValuePpt: String = s"XMPPT${randomDigits(10)}"
+
+  val identifierValueEori: String = s"GB${randomDigits(10)}"
+
+  val epayeTaxOfficeNumberAndReferenceValue: String = s"840PR${randomDigits(8)}"
+
+  val email: String = s"testuser${randomDigits(6)}@example.com"
+
+  val email2: String = s"testuser${randomDigits(6)}@example.org"
 }

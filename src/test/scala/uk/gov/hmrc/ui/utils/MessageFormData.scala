@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.ui.utils
 
-import uk.gov.hmrc.ui.pages.messages.GmcMessages.{alertQueueValue, batchIdValue, englishContentValue, englishSubjectValue, messageTypeValue, referenceIdValue, regimeSaValue, sourceDataValue, sourceValue, taxIdentifierNameSautrValue, validFromValue}
+import uk.gov.hmrc.ui.pages.messages.GmcMessages.{alertQueueValue, batchIdValue, englishContentValue, englishSubjectValue, messageTypeValue, regimeSaValue, sourceDataValue, sourceValue, taxIdentifierNameSautrValue, validFromValue}
 
 case class MessageFormData(
                             externalRef: MessageFormData.ExternalRef,
@@ -79,7 +79,8 @@ object MessageFormData {
               contentWelsh: Option[String] = None,
               regime: Option[String] = None,
               validFrom: Option[String] = None,
-              alertQueue: Option[String] = None
+              alertQueue: Option[String] = None,
+              messageType: Option[String] = None
             ): MessageFormData = {
     formData.copy(
       externalRef = formData.externalRef.copy(
@@ -97,7 +98,7 @@ object MessageFormData {
         email = email.getOrElse(formData.recipient.email)
       ),
       regime = regime.getOrElse(formData.regime),
-      messageType = formData.messageType,
+      messageType = messageType.getOrElse(formData.messageType),
       subjectEnglish = subjectEnglish.getOrElse(formData.subjectEnglish),
       contentEnglish = contentEnglish.getOrElse(formData.contentEnglish),
       subjectWelsh = subjectWelsh.getOrElse(formData.subjectWelsh),
@@ -115,7 +116,7 @@ object MessageFormData {
 
   val default: MessageFormData = MessageFormData(
     externalRef = ExternalRef(
-      id = referenceIdValue,
+      id = GeneratedTestData.referenceIdValue,
       source = sourceValue
     ),
     recipient = Recipient(

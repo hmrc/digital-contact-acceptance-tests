@@ -34,6 +34,8 @@ object LoginUsingAuthWizardPage extends BasePage {
 
   def messagesUsingRegimeRedirectUrl(regimeType: String): String = digitalContactDemoFrontend.concat(s"/messages?regime=$regimeType")
 
+//  def messageCountUsingEnrolmentKeyAndRegimeRedirectUrl(taxIdentifiers: String, regime: String): String = messageBaseUrl.concat(s"/messages/count?regimes=$regime&taxIdentifiers=$taxIdentifiers")
+
   def pageLoad(): Unit = {
     get(authWizardBaseUrl)
     fluentWait.until(ExpectedConditions.urlContains(authWizardBaseUrl))
@@ -118,59 +120,53 @@ object LoginUsingAuthWizardPage extends BasePage {
     val enrolmentKeyId: By = By.id("enrolment[0].name")
     val enrolmentNameId: By = By.id("input-0-0-name")
     val enrolmentValueId: By = By.id("input-0-0-value")
-    
+    val enrolmentListNoNinos = List("sdil", "fhdds", "epaye", "ppt", "cds")
+
     val redirectUrl = messagesUsingRegimeRedirectUrl(regime.toLowerCase())
-    
     pageLoad()
     sendKeys(getRedirectUrl, redirectUrl)
-    selectByValue(getCredentialStrength, credentialStrength)
-    selectByValue(getConfidenceLevel, confidenceLevel)
-    sendKeys(getNinoNumber, nino)
+//    if (enrolmentType != "sdil" || enrolmentType != "fhdds" || enrolmentType != "epaye" || enrolmentType != "ppt") {
+    if (!enrolmentListNoNinos.contains(enrolmentType)) {
+      selectByValue(getCredentialStrength, credentialStrength)
+      selectByValue(getConfidenceLevel, confidenceLevel)
+      sendKeys(getNinoNumber, nino)
+    }
+    if (enrolmentType != "NoSautr") {
+      val enrolmentKeyMap: Map[String, (String, String, String)] = Map(
+        "itsa" -> (enrolmentKeyItsa, taxIdentifierNameItsaValue, GeneratedTestData.itsaIdentifierValue),
+        "vat" -> (enrolmentKeyVat, taxIdentifierNameVatValue, GeneratedTestData.vatVrnIdentifierValue),
+        "ioss" -> (enrolmentKeyIoss, taxIdentifierNameIossValue, GeneratedTestData.iossIdentifierValue),
+        "ioss inter" -> (enrolmentKeyIossInter, taxIdentifierNameIossInterValue, GeneratedTestData.iossInterIdentifierValue),
+        "oss" -> (enrolmentKeyOss, taxIdentifierNameOssValue, GeneratedTestData.ossIdentifierValue),
+        "ad" -> (enrolmentKeyAd, taxIdentifierNameAdValue, GeneratedTestData.adIdentifierValue),
+        "ioss netp" -> (enrolmentKeyIossNetp, taxIdentifierNameIossNetpValue, GeneratedTestData.iossNetpIdentifierValue),
+        "sdil" ->(enrolmentKeyVatObtds, taxIdentifierNameObtdsValue, GeneratedTestData.identifierValueVatSdil),
+        "fhdds" ->(enrolmentKeyVatObtds, taxIdentifierNameObtdsValue, GeneratedTestData.identifierValueVatFhdds),
+        "epaye" ->(enrolmentKeyEpaye, taxIdentifierNameEpayeValue, GeneratedTestData.epayeTaxOfficeNumberAndReferenceValue),
+        "ppt" ->(enrolmentKeyPpt, taxIdentifierNamePptValue, GeneratedTestData.identifierValuePpt),
+      ).withDefaultValue(enrolmentKeyCds, taxIdentifierNameCds, GeneratedTestData.identifierValueEori)
+      val (key, name, value) = enrolmentKeyMap(enrolmentType)
+      sendKeys(enrolmentKeyId, key)
+      sendKeys(enrolmentNameId, name)
+      sendKeys(enrolmentValueId, value)
+    }
 
-    if (enrolmentType == "itsa") {
-      sendKeys(enrolmentKeyId, enrolmentKeyItsa)
-      sendKeys(enrolmentNameId, taxIdentifierNameItsaValue)
-      sendKeys(enrolmentValueId, GeneratedTestData.itsaIdentifierValue)
-    }
-    else if(enrolmentType == "vat"){
-      sendKeys(enrolmentKeyId, enrolmentKeyVat)
-      sendKeys(enrolmentNameId, taxIdentifierNameVatValue)
-      sendKeys(enrolmentValueId, GeneratedTestData.vatVrnIdentifierValue)
-    }
-    else if(enrolmentType == "ioss"){
-      sendKeys(enrolmentKeyId, enrolmentKeyIoss)
-      sendKeys(enrolmentNameId, taxIdentifierNameIossValue)
-      sendKeys(enrolmentValueId, GeneratedTestData.iossIdentifierValue)
-    }
-    else if(enrolmentType == "ioss inter"){
-      sendKeys(enrolmentKeyId, enrolmentKeyIossInter)
-      sendKeys(enrolmentNameId, taxIdentifierNameIossInterValue)
-      sendKeys(enrolmentValueId, GeneratedTestData.iossInterIdentifierValue)
-    }
-    else if(enrolmentType == "oss"){
-      sendKeys(enrolmentKeyId, enrolmentKeyOss)
-      sendKeys(enrolmentNameId, taxIdentifierNameOssValue)
-      sendKeys(enrolmentValueId, GeneratedTestData.ossIdentifierValue)
-    }
-    else if(enrolmentType == "ad"){
-      sendKeys(enrolmentKeyId, enrolmentKeyAd)
-      sendKeys(enrolmentNameId, taxIdentifierNameAdValue)
-      sendKeys(enrolmentValueId, GeneratedTestData.adIdentifierValue)
-    }
-    else if(enrolmentType == "ioss netp"){
-      sendKeys(enrolmentKeyId, enrolmentKeyIossNetp)
-      sendKeys(enrolmentNameId, taxIdentifierNameIossNetpValue)
-      sendKeys(enrolmentValueId, GeneratedTestData.iossNetpIdentifierValue)
-    }
-    else if (enrolmentType != "NoSautr") {
-      sendKeys(enrolmentKeyId, enrolmentKey)
-      sendKeys(enrolmentNameId, identifierName)
-      enrolmentType match {
-        case "sautr" => sendKeys(enrolmentValueId, GeneratedTestData.identifierValue)
-        case "sautr2" => sendKeys(enrolmentValueId, GeneratedTestData.identifierValue2)
-        case _ => throw new IllegalArgumentException(s"Unknown UTR Value")
-      }
-    }
+    click(By.id("submit"))
+  }
+
+  def logIntoCDSMessagePage(): Unit = {
+
+    val enrolmentKeyId: By = By.id("enrolment[0].name")
+    val enrolmentNameId: By = By.id("input-0-0-name")
+    val enrolmentValueId: By = By.id("input-0-0-value")
+    val getRedirectUrl: By = By.id(getRedirectUrlId)
+
+    pageLoad()
+
+    sendKeys(getRedirectUrl, secureMessagingBaseUrl + secureMessageStub + conversationList)
+    sendKeys(enrolmentKeyId, enrolmentKeyCds)
+    sendKeys(enrolmentNameId, taxIdentifierNameCds)
+    sendKeys(enrolmentValueId, GeneratedTestData.identifierValueEori)
     click(By.id("submit"))
   }
 
