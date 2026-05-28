@@ -46,6 +46,10 @@ object GeneratedTestData {
 
   val identifierFHDDSInvalidValue: String = s"XGER${randomDigits(11)}"
 
+  val identifierSDILValidValue: String = s"XZFH${randomDigits(11)}"
+
+  val identifierSDILInvalidValue: String = s"XGER${randomDigits(11)}"
+
   val email: String = "testuser123@example.com"
 
   val email2: String = "testuser123@example.org"

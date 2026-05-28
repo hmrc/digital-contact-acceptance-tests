@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs.owsm
+package uk.gov.hmrc.ui.specs.owsm.ema
 
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
 import uk.gov.hmrc.ui.pages.messages.GmcMessages.{createV4Message, deleteMongoRecordsFromCollection, pta, verifyEmail}
-import uk.gov.hmrc.ui.pages.messages.SecureMessagesPage
+import uk.gov.hmrc.ui.pages.messages.SecureMessages
 import uk.gov.hmrc.ui.pages.paperless.*
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.OwsmTests
@@ -46,7 +46,7 @@ class EmaGmcMessageErrorDetailsTestSpec extends BaseSpec {
       When("A GMC message is created via EMA using invalidAlertQueue")
       createV4Message("invalidAlertQueue")
       Then("The response must contains: Invalid alert queue submitted")
-      SecureMessagesPage.pageContains("Invalid alert queue submitted")
+      SecureMessages.pageContains("Invalid alert queue submitted")
     }
 
     Scenario("Validating the message response with empty alertQueue", OwsmTests) {
@@ -55,7 +55,7 @@ class EmaGmcMessageErrorDetailsTestSpec extends BaseSpec {
       When("A GMC message is created via EMA using emptyAlertQueue")
       createV4Message("emptyAlertQueue")
       Then("The response must contains: invalid alert queue provided")
-      SecureMessagesPage.pageContains("invalid alert queue provided")
+      SecureMessages.pageContains("invalid alert queue provided")
     }
 
     Scenario("Validating the message response with invalid source data", OwsmTests) {
@@ -64,7 +64,7 @@ class EmaGmcMessageErrorDetailsTestSpec extends BaseSpec {
       When("A GMC message is created via EMA using invalidSourceData")
       createV4Message("invalidSourceData")
       Then("The response must contains: invalid source data provided")
-      SecureMessagesPage.pageContains("invalid source data provided")
+      SecureMessages.pageContains("invalid source data provided")
     }
 
     Scenario("Validating the message response with unknown tax identifier", OwsmTests) {
@@ -73,7 +73,7 @@ class EmaGmcMessageErrorDetailsTestSpec extends BaseSpec {
       When("A GMC message is created via EMA using unknownTaxIdentifier")
       createV4Message("unknownTaxIdentifier")
       Then("The response must contains: The backend has rejected the message due to an unknown tax identifier")
-      SecureMessagesPage.pageContains("The backend has rejected the message due to an unknown tax identifier")
+      SecureMessages.pageContains("The backend has rejected the message due to an unknown tax identifier")
     }
 
     Scenario("Validating the message response with missing tax identifier", OwsmTests) {
@@ -82,7 +82,7 @@ class EmaGmcMessageErrorDetailsTestSpec extends BaseSpec {
       When("A GMC message is created via EMA using missingTaxIdentifier")
       createV4Message("missingTaxIdentifier")
       Then("The response must contains: Missing mandatory fields: {$.recipient.taxIdentifier.'value'}")
-      SecureMessagesPage.pageContains("Missing mandatory fields: {$.recipient.taxIdentifier.'value'}")
+      SecureMessages.pageContains("Missing mandatory fields: {$.recipient.taxIdentifier.'value'}")
     }
 
     Scenario("Validating the message response with missing details", OwsmTests) {
@@ -91,7 +91,7 @@ class EmaGmcMessageErrorDetailsTestSpec extends BaseSpec {
       When("A GMC message is created via EMA using missingDetails")
       createV4Message("missingDetails")
       Then("The response must contains: Missing mandatory fields: {$.details.issueDate: does not match the date pattern")
-      SecureMessagesPage.pageContains("Missing mandatory fields: {$.details.issueDate: does not match the date pattern")
+      SecureMessages.pageContains("Missing mandatory fields: {$.details.issueDate: does not match the date pattern")
     }
 
     Scenario("Validating the message response with invalid email", OwsmTests) {
@@ -100,7 +100,7 @@ class EmaGmcMessageErrorDetailsTestSpec extends BaseSpec {
       When("A GMC message is created via EMA using invalidEmail")
       createV4Message("invalidEmail")
       Then("The response must contains: invalid email address provided")
-      SecureMessagesPage.pageContains("invalid email address provided")
+      SecureMessages.pageContains("invalid email address provided")
     }
   }
 

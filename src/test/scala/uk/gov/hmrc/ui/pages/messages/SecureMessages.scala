@@ -20,7 +20,7 @@ import org.openqa.selenium.By
 import uk.gov.hmrc.ui.ElementLocators.*
 import uk.gov.hmrc.ui.pages.BasePage
 
-object SecureMessagesPage extends BasePage{
+object SecureMessages extends BasePage{
   
   def clickOnSubject(): Unit = {
     val subjectLink: By = By.cssSelector(demoFrontEndInboxFirstMessageSubject)

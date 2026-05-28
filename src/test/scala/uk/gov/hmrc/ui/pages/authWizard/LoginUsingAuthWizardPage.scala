@@ -33,6 +33,8 @@ object LoginUsingAuthWizardPage extends BasePage {
   val mdtpMessageSautr: String          = customerAdvisorFrontend + "/inbox/"
 
   def messagesUsingRegimeRedirectUrl(regimeType: String): String = digitalContactDemoFrontend.concat(s"/messages?regime=$regimeType")
+  def messagesUsingEnrolmentKeyRedirectUrl(enrolmentKey: String): String = messageFrontend.concat(s"/messages?taxIdentifiers=$enrolmentKey")
+  def messagesUsingEnrolmentKeyAndRegimeRedirectUrl(enrolmentKey: String, regimeType: String): String = digitalContactDemoFrontend.concat(s"/messages?regime=$regimeType&taxIdentifiers=$enrolmentKey")
 
   def pageLoad(): Unit = {
     get(authWizardBaseUrl)
@@ -110,7 +112,7 @@ object LoginUsingAuthWizardPage extends BasePage {
     fluentWait
   }
 
-  def logIntoMessageUsingRegime(enrolmentType: String, regime:String ="sautr", nino:String = GeneratedTestData.ninoNumber): Unit = {
+  def logIntoMessage(enrolmentType: String, redirectType: String, regime: String = "sautr", nino:String = GeneratedTestData.ninoNumber): Unit = {
     val getRedirectUrl: By = By.id(getRedirectUrlId)
     val getCredentialStrength: By = By.id(getCredentialStrengthId)
     val getConfidenceLevel: By = By.id(getConfidenceLevelId)
@@ -118,9 +120,36 @@ object LoginUsingAuthWizardPage extends BasePage {
     val enrolmentKeyId: By = By.id("enrolment[0].name")
     val enrolmentNameId: By = By.id("input-0-0-name")
     val enrolmentValueId: By = By.id("input-0-0-value")
-    
-    val redirectUrl = messagesUsingRegimeRedirectUrl(regime.toLowerCase())
-    
+
+    val selectedEnrolmentKey: String =
+      enrolmentType match {
+        case "sdil" => enrolmentKeySdil
+        case "fhdds" => enrolmentKeyFhdds
+        case _ => enrolmentKey
+      }
+
+    val redirectUrl =
+      redirectType match {
+
+        case "regime" =>
+          messagesUsingRegimeRedirectUrl(
+            regime.toLowerCase()
+          )
+
+        case "enrolmentKey" =>
+          messagesUsingEnrolmentKeyRedirectUrl(selectedEnrolmentKey)
+
+        case "regimeAndEnrolmentKey" =>
+          messagesUsingEnrolmentKeyAndRegimeRedirectUrl(
+            selectedEnrolmentKey,
+            regime.toLowerCase()
+          )
+        case _ =>
+          throw new IllegalArgumentException(
+            s"Unknown redirect type: $redirectType"
+          )
+      }
+
     pageLoad()
     sendKeys(getRedirectUrl, redirectUrl)
     selectByValue(getCredentialStrength, credentialStrength)
@@ -162,6 +191,16 @@ object LoginUsingAuthWizardPage extends BasePage {
       sendKeys(enrolmentNameId, taxIdentifierNameIossNetpValue)
       sendKeys(enrolmentValueId, GeneratedTestData.iossNetpIdentifierValue)
     }
+    else if(enrolmentType == "sdil"){
+      sendKeys(enrolmentKeyId, enrolmentKeySdil)
+      sendKeys(enrolmentNameId, taxIdentifierNameSdilValue)
+      sendKeys(enrolmentValueId, GeneratedTestData.identifierSDILValidValue)
+    }
+    else if(enrolmentType == "fhdds"){
+      sendKeys(enrolmentKeyId, enrolmentKeyFhdds)
+      sendKeys(enrolmentNameId, taxIdentifierNameFhddsValue)
+      sendKeys(enrolmentValueId, GeneratedTestData.identifierFHDDSValidValue)
+    }
     else if (enrolmentType != "NoSautr") {
       sendKeys(enrolmentKeyId, enrolmentKey)
       sendKeys(enrolmentNameId, identifierName)
@@ -173,5 +212,4 @@ object LoginUsingAuthWizardPage extends BasePage {
     }
     click(By.id("submit"))
   }
-
 }
