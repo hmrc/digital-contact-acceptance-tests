@@ -46,6 +46,10 @@ object GeneratedTestData {
 
   val identifierFHDDSInvalidValue: String = s"XGER${randomDigits(11)}"
 
+  val identifierSDILValidValue: String = s"XZFH${randomDigits(11)}"
+
+  val identifierSDILInvalidValue: String = s"XGER${randomDigits(11)}"
+
   val referenceIdValue: String = randomDigits(12)
 
   val identifierValueVatSdil: String = s"XZSD${randomDigits(11)}"

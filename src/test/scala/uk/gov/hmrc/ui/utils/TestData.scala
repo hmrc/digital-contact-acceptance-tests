@@ -39,7 +39,7 @@ trait TestData {
   val externalMessageAdapter: String               = TestEnvironment.url("external-message-adapter")
   val customerAdvisorFrontend: String              = TestEnvironment.url("customer-advisors-frontend")
   val secureMessagingBaseUrl: String               = TestEnvironment.url("secure-message-stub")
-  
+
   val credentialStrength: String                   = "strong"
   val confidenceLevel: String                      = "200"
   val enrolmentKey: String                         = "IR-SA"
@@ -88,7 +88,6 @@ trait TestData {
   val regimeCdsValue: String                       = "cds"
 
   val messageTypeValue: String                     = "mailout-batch"
-  val messageTypeSddsValue: String                 = "sdds_ddi_cancelled_dcs_alert"
   val alertQueueValue: String                      = "DEFAULT"
   val englishSubjectValue: String                  = "Reminder to file Self Assessment return"
   val englishContentValue: String                  =

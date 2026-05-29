@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs.owsm
+package uk.gov.hmrc.ui.specs.owsm.ema
 
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
 import uk.gov.hmrc.ui.pages.messages.GmcMessages.{createV4Message, deleteMongoRecordsFromCollection, pta, verifyEmail}
