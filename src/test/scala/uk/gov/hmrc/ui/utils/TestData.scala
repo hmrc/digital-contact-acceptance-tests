@@ -38,6 +38,8 @@ trait TestData {
   val secureMessage: String                        = TestEnvironment.url("secure-message")
   val externalMessageAdapter: String               = TestEnvironment.url("external-message-adapter")
   val customerAdvisorFrontend: String              = TestEnvironment.url("customer-advisors-frontend")
+  val messageFrontend:String                       = TestEnvironment.url("message-frontend")
+  val message:String                               = TestEnvironment.url("message")
   
   val credentialStrength: String                   = "strong"
   val confidenceLevel: String                      = "200"
@@ -69,9 +71,15 @@ trait TestData {
   val enrolmentKeyOss: String                      = "HMRC-OSS-ORG"
   val taxIdentifierNameOssValue: String            = "VRN"
   val regimeOssValue: String                       = "oss"
+  
   val enrolmentKeyAd: String                       = "HMRC-AD-ORG"
   val taxIdentifierNameAdValue: String             = "APPAID"
   val regimeAdValue: String                        = "ad"
+  
+  val enrolmentKeyObdts: String                     = "HMRC-OBTDS-ORG"
+  val taxIdentifierNameObdtsValue: String           = "EtmpRegistrationNumber"
+  val regimeSdilValue: String                      = "sdil"
+  val regimeFhddsValue: String                      = "fhdds"
 
   val messageTypeValue: String                     = "mailout-batch"
   val alertQueueValue: String                      = "DEFAULT"

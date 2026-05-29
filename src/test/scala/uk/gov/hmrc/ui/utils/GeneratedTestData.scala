@@ -42,9 +42,9 @@ object GeneratedTestData {
 
   val adIdentifierValue: String = s"XMADP${randomDigits(9)}"
 
-  val identifierFHDDSValidValue: String = s"XZFH${randomDigits(11)}"
+  val identifierObdtsValidValue: String = s"XZFH${randomDigits(11)}"
 
-  val identifierFHDDSInvalidValue: String = s"XGER${randomDigits(11)}"
+  val identifierObdtsInvalidValue: String = s"XGER${randomDigits(11)}"
 
   val email: String = "testuser123@example.com"
 

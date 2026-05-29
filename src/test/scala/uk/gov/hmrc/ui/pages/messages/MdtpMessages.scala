@@ -22,28 +22,47 @@ import uk.gov.hmrc.ui.utils.GeneratedTestData
 
 object MdtpMessages extends BasePage {
 
-  val contentId: String         = messageContentId
-  val subjectId: String         = messageSubjectId
-  val identifierNameId: String  = recipientTaxIdentifierNameId
+  val contentId: String = messageContentId
+  val subjectId: String = messageSubjectId
+  val identifierNameId: String = recipientTaxIdentifierNameId
   val identifierValueId: String = recipientTaxIdentifierValueId
-  val userEmailId: String       = recipientEmailId
-  val userNameId: String        = recipientNameId
+  val userEmailId: String = recipientEmailId
+  val userNameId: String = recipientNameId
 
-  def createMDTPMessage(mdtpMessageType: String, typeMessage: String): Unit = {
-    val mdtpMessage: Unit = mdtpMessageType.toLowerCase match {
-      case "fhdds" => fillFormForFHDDSMessage(typeMessage)
+  def createMDTPMessage(
+                         mdtpMessageType: String,
+                         typeMessage: String
+                       ): Unit = {
+    mdtpMessageType.toLowerCase match {
+
+      case "fhdds" | "sdil" =>
+        fillFormForMessage(
+          typeMessage,
+          GeneratedTestData.identifierObdtsValidValue,
+          GeneratedTestData.identifierObdtsInvalidValue
+        ) 
+      case _ =>
+        throw new IllegalArgumentException(
+          s"Unknown message type: $mdtpMessageType"
+        )
     }
+
     click(By.id("submit-advice"))
   }
 
-  def fillFormForFHDDSMessage(typeMessage: String): Unit = {
-    val contentInputField: By         = By.id(contentId)
-    val subjectInputField: By         = By.id(subjectId)
-    val identifierNameInputField: By  = By.id(identifierNameId)
+  def fillFormForMessage(
+                          typeMessage: String,
+                          validIdentifierValue: String,
+                          invalidIdentifierValue: String
+                        ): Unit = {
+
+    val contentInputField: By = By.id(contentId)
+    val subjectInputField: By = By.id(subjectId)
+    val identifierNameInputField: By = By.id(identifierNameId)
     val identifierValueInputField: By = By.id(identifierValueId)
-    val emailInputField: By           = By.id(userEmailId)
-    val nameInputField: By            = By.id(userNameId)
-    val messageTypeInputField: By     = By.id(messageTypeId)
+    val emailInputField: By = By.id(userEmailId)
+    val nameInputField: By = By.id(userNameId)
+    val messageTypeInputField: By = By.id(messageTypeId)
 
     sendKeys(contentInputField, contentValue)
     sendKeys(subjectInputField, subjectValue)
@@ -52,10 +71,16 @@ object MdtpMessages extends BasePage {
     sendKeys(nameInputField, nameValue)
     sendKeys(messageTypeInputField, messageTypeValue)
 
-    val indentifierValue = typeMessage match {
-      case "valid"   => sendKeys(identifierValueInputField, GeneratedTestData.identifierFHDDSValidValue)
-      case "invalid" => sendKeys(identifierValueInputField, GeneratedTestData.identifierFHDDSInvalidValue)
-      case _         => throw new IllegalArgumentException(s"Unknown Value")
+    val identifierValue = typeMessage match {
+      case "valid" => validIdentifierValue
+      case "invalid" => invalidIdentifierValue
+
+      case _ =>
+        throw new IllegalArgumentException(
+          s"Unknown value: $typeMessage"
+        )
     }
+
+    sendKeys(identifierValueInputField, identifierValue)
   }
 }
