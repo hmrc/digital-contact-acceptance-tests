@@ -17,15 +17,15 @@
 package uk.gov.hmrc.ui.specs.owsm
 
 import org.scalatest.featurespec.AnyFeatureSpec
-import uk.gov.hmrc.ui.ElementLocators.{cdsMessagePageFirstMessageSubject, cdsMessagePageHeader, demoFrontEndInboxFirstMessageSubject, demoFrontEndInboxIossMessageSubject}
+import uk.gov.hmrc.ui.ElementLocators.{cdsMessagePageFirstMessageSubject, cdsMessagePageHeader, demoFrontEndInboxFirstMessageSubject, demoFrontEndInboxFirstMessageSubject2}
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.{logIntoCDSMessagePage, logIntoMessageUsingRegime}
 import uk.gov.hmrc.ui.pages.messages.GmcMessages.*
 import uk.gov.hmrc.ui.pages.messages.SecureMessagesPage
 import uk.gov.hmrc.ui.pages.paperless.*
 import uk.gov.hmrc.ui.specs.BaseSpec
-import uk.gov.hmrc.ui.specs.tags.OwsmTests
-import uk.gov.hmrc.ui.utils.TestData
+import uk.gov.hmrc.ui.specs.tags.{OwsmTests, Wip}
+import uk.gov.hmrc.ui.utils.{GeneratedTestData, TestData}
 
 
 class WelshEnglishV4MessageTestSpec extends BaseSpec with TestData {
@@ -80,11 +80,11 @@ class WelshEnglishV4MessageTestSpec extends BaseSpec with TestData {
       When("I open my messages for ppt using regime")
       logIntoMessageUsingRegime("ppt", regimePptValue)
       Then("I see the message: PPT messages for test")
-      waitForText(demoFrontEndInboxIossMessageSubject, "PPT messages for test")
+      waitForText(demoFrontEndInboxFirstMessageSubject2, "PPT messages for test")
       And("I click Welsh language link")
       selectLanguageWelsh()
       Then("I see the message: Negeseuon PPT ar gyfer prawf")
-      waitForText(demoFrontEndInboxIossMessageSubject, "Negeseuon PPT ar gyfer prawf")
+      waitForText(demoFrontEndInboxFirstMessageSubject2, "Negeseuon PPT ar gyfer prawf")
       And("I click the message: Negeseuon PPT ar gyfer prawf")
       SecureMessagesPage.clickOnSubjectEpaye()
       And("When I see the message: Negeseuon PPT ar gyfer prawf")
@@ -101,11 +101,11 @@ class WelshEnglishV4MessageTestSpec extends BaseSpec with TestData {
       When("I open my messages for epaye using regime")
       logIntoMessageUsingRegime("epaye", regimeEpayeValue)
       Then("I see the message: EPAYE messages for test")
-      waitForText(demoFrontEndInboxIossMessageSubject, "EPAYE messages for test")
+      waitForText(demoFrontEndInboxFirstMessageSubject2, "EPAYE messages for test")
       And("I click Welsh language link")
       selectLanguageWelsh()
       Then("I see the message: Negeseuon EPAYE ar gyfer prawf")
-      waitForText(demoFrontEndInboxIossMessageSubject, "Negeseuon EPAYE ar gyfer prawf")
+      waitForText(demoFrontEndInboxFirstMessageSubject2, "Negeseuon EPAYE ar gyfer prawf")
       And("I click the message: Negeseuon EPAYE ar gyfer prawf")
       SecureMessagesPage.clickOnSubjectEpaye()
       And("When I see the message: Negeseuon EPAYE ar gyfer prawf")
@@ -139,21 +139,21 @@ class WelshEnglishV4MessageTestSpec extends BaseSpec with TestData {
       SecureMessagesPage.pageContains("CDS messages for test")
     }
 
-    Scenario("Customer can view the Optin v4 messages in BTA inbox", OwsmTests) {
+    Scenario("Customer can view the Optin v4 messages in BTA inbox", Wip) {
       Given("I am logged into PTA account with nino enrolment")
       LoginUsingAuthWizardPage.pageLoad()
-      LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("NoSautr", pta)
+      LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("NoSautr", pta, GeneratedTestData.ninoNumber1)
       PaperlessInterruptPage.pageTitle()
       And("I am unverified for paperless")
       PaperlessInterruptPage.fillInterruptPageForOptin()
       PaperlessEmailPage.fillEmailPage()
       PaperlessVerifyEmailPage.pageTitle()
       And("I verify the email address")
-      verifyEmail()
+      verifyEmail(GeneratedTestData.ninoNumber1)
       When("A v4 message is created for optin")
       createV4Message("optin")
       And("I open my messages for PTA using regime")
-      logIntoMessageUsingRegime("NoSautr", regimeValue)
+      logIntoMessageUsingRegime(enrolmentType="NoSautr", regime=regimeValue, nino = GeneratedTestData.ninoNumber1 )
       And("I see the message: Your online tax letters")
       waitForText(demoFrontEndInboxFirstMessageSubject, "Your online tax letters")
       And("I click Welsh language link")

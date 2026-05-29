@@ -28,7 +28,7 @@ object SecureMessagesPage extends BasePage{
   }
 
   def clickOnSubjectEpaye(): Unit = {
-    val subjectLink: By = By.cssSelector(demoFrontEndInboxIossMessageSubject)
+    val subjectLink: By = By.cssSelector(demoFrontEndInboxFirstMessageSubject2)
     click(subjectLink)
   }
 

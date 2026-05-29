@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.specs.owsm
 
 import org.scalatest.featurespec.AnyFeatureSpec
-import uk.gov.hmrc.ui.ElementLocators.{demoFrontEndInboxFirstMessageSubject, demoFrontEndInboxIossMessageSubject}
+import uk.gov.hmrc.ui.ElementLocators.{demoFrontEndInboxFirstMessageSubject, demoFrontEndInboxFirstMessageSubject2}
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.logIntoMessageUsingRegime
 import uk.gov.hmrc.ui.pages.messages.GmcMessages.*
@@ -230,7 +230,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       And("I open my messages for ioss using regime")
       logIntoMessageUsingRegime("ioss inter", regimeIossValue)
       Then("I see the message: Late Payment Interest Due")
-      waitForText(demoFrontEndInboxIossMessageSubject, "Late Payment Interest Due")
+      waitForText(demoFrontEndInboxFirstMessageSubject2, "Late Payment Interest Due")
     }
 
     Scenario("Customer can view the OSS messages in secure message inbox", OwsmTests) {
@@ -239,7 +239,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       And("I open my messages for oss using regime")
       logIntoMessageUsingRegime("oss", regimeOssValue)
       Then("I see the message: Late Payment Interest Due")
-      waitForText(demoFrontEndInboxIossMessageSubject, "Late Payment Interest Due")
+      waitForText(demoFrontEndInboxFirstMessageSubject2, "Late Payment Interest Due")
     }
 
     Scenario("Customer can view the Alcohol Duty messages in secure message inbox", OwsmTests) {
@@ -248,7 +248,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       And("I open my messages for ad using regime")
       logIntoMessageUsingRegime("ad", regimeAdValue)
       Then("I see the message: Late Payment Interest Due")
-      waitForText(demoFrontEndInboxIossMessageSubject, "Late Payment Interest Due")
+      waitForText(demoFrontEndInboxFirstMessageSubject2, "Late Payment Interest Due")
     }
 
     Scenario("Customer can view the ITSA new English messages in BTA inbox", OwsmTests) {
@@ -362,7 +362,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       And("I open my messages for ioss using regime")
       logIntoMessageUsingRegime("ioss netp", regimeIossValue)
       Then("I see the message: Late Payment Interest Due")
-      waitForText(demoFrontEndInboxIossMessageSubject, "Late Payment Interest Due")
+      waitForText(demoFrontEndInboxFirstMessageSubject2, "Late Payment Interest Due")
     }
 
     Scenario("Customer can view the NIREF1 En messages in PTA inbox", OwsmTests) {

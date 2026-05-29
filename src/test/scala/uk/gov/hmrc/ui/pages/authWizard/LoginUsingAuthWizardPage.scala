@@ -34,8 +34,6 @@ object LoginUsingAuthWizardPage extends BasePage {
 
   def messagesUsingRegimeRedirectUrl(regimeType: String): String = digitalContactDemoFrontend.concat(s"/messages?regime=$regimeType")
 
-//  def messageCountUsingEnrolmentKeyAndRegimeRedirectUrl(taxIdentifiers: String, regime: String): String = messageBaseUrl.concat(s"/messages/count?regimes=$regime&taxIdentifiers=$taxIdentifiers")
-
   def pageLoad(): Unit = {
     get(authWizardBaseUrl)
     fluentWait.until(ExpectedConditions.urlContains(authWizardBaseUrl))
@@ -120,13 +118,11 @@ object LoginUsingAuthWizardPage extends BasePage {
     val enrolmentKeyId: By = By.id("enrolment[0].name")
     val enrolmentNameId: By = By.id("input-0-0-name")
     val enrolmentValueId: By = By.id("input-0-0-value")
-    val enrolmentListNoNinos = List("sdil", "fhdds", "epaye", "ppt", "cds")
-
+    val enrolmentListNino = List("NoSautr", "sautr", "itsa")
     val redirectUrl = messagesUsingRegimeRedirectUrl(regime.toLowerCase())
     pageLoad()
     sendKeys(getRedirectUrl, redirectUrl)
-//    if (enrolmentType != "sdil" || enrolmentType != "fhdds" || enrolmentType != "epaye" || enrolmentType != "ppt") {
-    if (!enrolmentListNoNinos.contains(enrolmentType)) {
+    if (enrolmentListNino.contains(enrolmentType)) {
       selectByValue(getCredentialStrength, credentialStrength)
       selectByValue(getConfidenceLevel, confidenceLevel)
       sendKeys(getNinoNumber, nino)
@@ -144,7 +140,7 @@ object LoginUsingAuthWizardPage extends BasePage {
         "fhdds" ->(enrolmentKeyVatObtds, taxIdentifierNameObtdsValue, GeneratedTestData.identifierValueVatFhdds),
         "epaye" ->(enrolmentKeyEpaye, taxIdentifierNameEpayeValue, GeneratedTestData.epayeTaxOfficeNumberAndReferenceValue),
         "ppt" ->(enrolmentKeyPpt, taxIdentifierNamePptValue, GeneratedTestData.identifierValuePpt),
-      ).withDefaultValue(enrolmentKeyCds, taxIdentifierNameCds, GeneratedTestData.identifierValueEori)
+      ).withDefaultValue(enrolmentKey, identifierName, GeneratedTestData.identifierValue)
       val (key, name, value) = enrolmentKeyMap(enrolmentType)
       sendKeys(enrolmentKeyId, key)
       sendKeys(enrolmentNameId, name)

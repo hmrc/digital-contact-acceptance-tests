@@ -520,13 +520,14 @@ object GmcMessages extends BasePage {
   def fillFormOptinEnglishAndWelsh(subjectEnglish: String, contentEnglish: String, subjectWelsh: String, contentWelsh: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       identifierName = Some(taxIdentifierNameValue),
-      identifierValue = Some(GeneratedTestData.ninoNumber),
+      identifierValue = Some(GeneratedTestData.ninoNumber1),
       regime = Some(regimeValue),
       subjectEnglish = Some(subjectEnglish),
       contentEnglish = Some(contentEnglish),
       subjectWelsh = Some(subjectWelsh),
       contentWelsh = Some(contentWelsh),
-      messageType = Some("digitalOptInConfirmation")
+      messageType = Some("digitalOptInConfirmation"),
+      formId = Some("")
     )
     fillMessageForm(updated)
   }
