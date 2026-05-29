@@ -76,12 +76,9 @@ trait TestData {
   val taxIdentifierNameAdValue: String             = "APPAID"
   val regimeAdValue: String                        = "ad"
   
-  val enrolmentKeySdil: String                     = "HMRC-OBTDS-ORG"
-  val taxIdentifierNameSdilValue: String           = "EtmpRegistrationNumber"
+  val enrolmentKeyObdts: String                     = "HMRC-OBTDS-ORG"
+  val taxIdentifierNameObdtsValue: String           = "EtmpRegistrationNumber"
   val regimeSdilValue: String                      = "sdil"
-  
-  val enrolmentKeyFhdds: String                     = "HMRC-OBTDS-ORG"
-  val taxIdentifierNameFhddsValue: String           = "EtmpRegistrationNumber"
   val regimeFhddsValue: String                      = "fhdds"
 
   val messageTypeValue: String                     = "mailout-batch"

@@ -123,8 +123,7 @@ object LoginUsingAuthWizardPage extends BasePage {
     
     val selectedEnrolmentKey: String =
       enrolmentType match {
-        case "sdil" => enrolmentKeySdil
-        case "fhdds" => enrolmentKeyFhdds
+        case "sdil" | "fhdds" => enrolmentKeyObdts
         case _       => ""
       }
     
@@ -191,16 +190,12 @@ object LoginUsingAuthWizardPage extends BasePage {
       sendKeys(enrolmentNameId, taxIdentifierNameIossNetpValue)
       sendKeys(enrolmentValueId, GeneratedTestData.iossNetpIdentifierValue)
     }
-    else if(enrolmentType == "sdil"){
-      sendKeys(enrolmentKeyId, enrolmentKeySdil)
-      sendKeys(enrolmentNameId, taxIdentifierNameSdilValue)
-      sendKeys(enrolmentValueId, GeneratedTestData.identifierSDILValidValue)
+    else if (enrolmentType == "sdil" || enrolmentType == "fhdds") {
+      sendKeys(enrolmentKeyId, enrolmentKeyObdts)
+      sendKeys(enrolmentNameId, taxIdentifierNameObdtsValue)
+      sendKeys(enrolmentValueId, GeneratedTestData.identifierObdtsValidValue)
     }
-    else if(enrolmentType == "fhdds"){
-      sendKeys(enrolmentKeyId, enrolmentKeyFhdds)
-      sendKeys(enrolmentNameId, taxIdentifierNameFhddsValue)
-      sendKeys(enrolmentValueId, GeneratedTestData.identifierFHDDSValidValue)
-    }
+      
     else if (enrolmentType != "NoSautr") {
       sendKeys(enrolmentKeyId, enrolmentKey)
       sendKeys(enrolmentNameId, identifierName)
