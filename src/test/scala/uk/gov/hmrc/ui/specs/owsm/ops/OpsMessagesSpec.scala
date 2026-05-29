@@ -20,7 +20,7 @@ import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.{logIntoCustomerAdvisorMessageInboxPage, logIntoMessage}
 import uk.gov.hmrc.ui.pages.messages.GmcMessages.{regimeFhddsValue, regimeSdilValue}
 import uk.gov.hmrc.ui.pages.messages.MdtpMessages.createMDTPMessage
-import uk.gov.hmrc.ui.pages.messages.{MdtpMessages, SecureMessages}
+import uk.gov.hmrc.ui.pages.messages.{MdtpMessages, SecureMessagesPage}
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.OwsmTests
 
@@ -33,9 +33,9 @@ class OpsMessagesSpec extends BaseSpec {
       logIntoCustomerAdvisorMessageInboxPage()
       createMDTPMessage("sdil", "valid")
       When("I open my messages for SDIL using regime for sdil")
-      logIntoMessage("sdil","regime", regimeSdilValue)
+      logIntoMessage("sdil", "regime",regimeSdilValue)
       Then("I see the message: Direct debit logo test")
-      SecureMessages.pageContains("Direct debit logo test")
+      SecureMessagesPage.pageContains("Direct debit logo test")
     }
 
     Scenario("Customer can view their FHDDS messages in inbox", OwsmTests) {
@@ -45,7 +45,7 @@ class OpsMessagesSpec extends BaseSpec {
       When("I open my messages for FHDDS using regime for fhdds")
       logIntoMessage("fhdds", "regime", regimeFhddsValue)
       Then("I see the message: Direct debit logo test")
-      SecureMessages.pageContains("Direct debit logo test")
+      SecureMessagesPage.pageContains("Direct debit logo test")
     }
 
     Scenario("Customer can view their SDIL messages in inbox using enrolment key", OwsmTests) {
@@ -55,7 +55,7 @@ class OpsMessagesSpec extends BaseSpec {
       When("I open my messages with HMRC-OBTDS-ORG enrolment for SDIL")
       logIntoMessage("sdil", "enrolmentKey")
       Then("I see the message: Direct debit logo test")
-      SecureMessages.pageContains("Direct debit logo test")
+      SecureMessagesPage.pageContains("Direct debit logo test")
     }
 
     Scenario("Customer can view their FHDDS messages in inbox using enrolment key", OwsmTests) {
@@ -65,7 +65,7 @@ class OpsMessagesSpec extends BaseSpec {
       When("I open my messages with HMRC-OBTDS-ORG enrolment for FHDDS")
       logIntoMessage("fhdds", "enrolmentKey")
       Then("I see the message: Direct debit logo test")
-      SecureMessages.pageContains("Direct debit logo test")
+      SecureMessagesPage.pageContains("Direct debit logo test")
     }
 
     Scenario("Customer can view their SDIL messages in inbox using enrolment key & regime", OwsmTests) {
@@ -75,7 +75,7 @@ class OpsMessagesSpec extends BaseSpec {
       When("I open my messages with HMRC-OBTDS-ORG enrolment key & SDIL regime for SDIL")
       logIntoMessage("sdil", "regimeAndEnrolmentKey", regimeSdilValue)
       Then("I see the message: Direct debit logo test")
-      SecureMessages.pageContains("Direct debit logo test")
+      SecureMessagesPage.pageContains("Direct debit logo test")
     }
 
     Scenario("Customer can view their FHDDS messages in inbox using enrolment key & regime", OwsmTests) {
@@ -85,7 +85,7 @@ class OpsMessagesSpec extends BaseSpec {
       When("I open my messages with HMRC-OBTDS-ORG enrolment key & FHDDS regime for FHDDS")
       logIntoMessage("fhdds", "regimeAndEnrolmentKey", regimeFhddsValue)
       Then("I see the message: Direct debit logo test")
-      SecureMessages.pageContains("Direct debit logo test")
+      SecureMessagesPage.pageContains("Direct debit logo test")
     }
   }
 }

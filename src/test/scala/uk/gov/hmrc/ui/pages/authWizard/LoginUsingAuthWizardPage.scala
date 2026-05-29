@@ -112,7 +112,7 @@ object LoginUsingAuthWizardPage extends BasePage {
     fluentWait
   }
 
-  def logIntoMessage(enrolmentType: String, redirectType: String, regime: String = "sautr", nino:String = GeneratedTestData.ninoNumber): Unit = {
+  def logIntoMessage(enrolmentType: String, redirectType: String, regime: String = "sautr", nino: String=GeneratedTestData.ninoNumber): Unit = {
     val getRedirectUrl: By = By.id(getRedirectUrlId)
     val getCredentialStrength: By = By.id(getCredentialStrengthId)
     val getConfidenceLevel: By = By.id(getConfidenceLevelId)
@@ -120,14 +120,14 @@ object LoginUsingAuthWizardPage extends BasePage {
     val enrolmentKeyId: By = By.id("enrolment[0].name")
     val enrolmentNameId: By = By.id("input-0-0-name")
     val enrolmentValueId: By = By.id("input-0-0-value")
-
+    
     val selectedEnrolmentKey: String =
       enrolmentType match {
         case "sdil" => enrolmentKeySdil
         case "fhdds" => enrolmentKeyFhdds
-        case _ => enrolmentKey
+        case _       => ""
       }
-
+    
     val redirectUrl =
       redirectType match {
 
@@ -155,8 +155,8 @@ object LoginUsingAuthWizardPage extends BasePage {
     selectByValue(getCredentialStrength, credentialStrength)
     selectByValue(getConfidenceLevel, confidenceLevel)
     sendKeys(getNinoNumber, nino)
-
-    if (enrolmentType == "itsa") {
+    
+    if(enrolmentType == "itsa") {
       sendKeys(enrolmentKeyId, enrolmentKeyItsa)
       sendKeys(enrolmentNameId, taxIdentifierNameItsaValue)
       sendKeys(enrolmentValueId, GeneratedTestData.itsaIdentifierValue)
