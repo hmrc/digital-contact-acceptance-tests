@@ -56,6 +56,22 @@ object GmcMessages extends BasePage {
     val base64_encoded_content_itsa_en = Base64.encodeBase64String(EnMessageHtmlContentItsa.HtmlContentEnItsa.getBytes("UTF-8"))
     val base64_encoded_content_niref1_en = Base64.encodeBase64String(NIREF1EnMessageHtmlContent.HtmlContentNiref1.getBytes("UTF-8"))
 
+    //source = mdtp
+    val v4_sub_sdil_en = "Soft Drinks Industry Levy Direct Debit cancelled"
+    val v4_sub_sdil_cy = "Debyd Uniongyrchol Ardoll y Diwydiant Diodydd Meddal wedii ganslol"
+    val v4_sub_fhdds_en = "FHDDS messages for test"
+    val v4_sub_fhdds_cy = "Negeseuon FHDDS ar gyfer prawf"
+    val v4_sub_ppt_en = "PPT messages for test"
+    val v4_sub_ppt_cy = "Negeseuon PPT ar gyfer prawf"
+    val v4_sub_epaye_en = "EPAYE messages for test"
+    val v4_sub_epaye_cy = "Negeseuon EPAYE ar gyfer prawf"
+    val v4_sub_cds_en = "CDS messages for test"
+    val v4_sub_cds_cy = "Negeseuon CDS ar gyfer prawf"
+
+    //source = preferences
+    val v4_sub_optinconfirm_en = "Your online tax letters"
+    val v4_sub_optinconfirm_cy = "Eich llythyrau treth ar-lein"
+
     logIntoDemoFrontendForV4()
     gmcMessageType.toLowerCase match {
       case "invalid formid" => fillFormWithInvalidFormId()
@@ -84,6 +100,12 @@ object GmcMessages extends BasePage {
       case "missingtaxidentifier" => fillFormMissingTaxIdentifier(subject_p800, base64_encoded_content_p800)
       case "missingdetails" => fillFormMissingDetails(subject_p800, base64_encoded_content_p800)
       case "invalidemail" => fillFormInvalidEmail(subject_p800, base64_encoded_content_p800)
+      case "sdil" => fillFormSdilEnglishAndWelsh(v4_sub_sdil_en, base64_encoded_content_p800_v4, v4_sub_sdil_cy, base64_encoded_content_p800_v4)
+      case "fhdds" => fillFormFhddsEnglishAndWelsh(v4_sub_fhdds_en, base64_encoded_content_p800_v4, v4_sub_fhdds_cy, base64_encoded_content_p800_v4)
+      case "epaye" => fillFormEpayeEnglishAndWelsh(v4_sub_epaye_en, base64_encoded_content_p800_v4, v4_sub_epaye_cy, base64_encoded_content_p800_v4)
+      case "ppt" => fillFormPptEnglishAndWelsh(v4_sub_ppt_en, base64_encoded_content_p800_v4, v4_sub_ppt_cy, base64_encoded_content_p800_v4)
+      case "optin" => fillFormOptinEnglishAndWelsh(v4_sub_optinconfirm_en, base64_encoded_content_p800_v4, v4_sub_optinconfirm_cy, base64_encoded_content_p800_v4)
+      case "cds" => fillFormCdsEnglishAndWelsh(v4_sub_cds_en, base64_encoded_content_p800_v4, v4_sub_cds_cy, base64_encoded_content_p800_v4)
       case _ => throw new IllegalArgumentException(s"Unknown Message Type")
     }
     click(By.id("submit-button"))
@@ -434,6 +456,93 @@ object GmcMessages extends BasePage {
       email = Some("testuser123"),
       subjectEnglish = Some(subject),
       contentEnglish = Some(content),
+    )
+    fillMessageForm(updated)
+  }
+
+  def fillFormSdilEnglishAndWelsh(subjectEnglish: String, contentEnglish: String, subjectWelsh: String, contentWelsh: String): Unit = {
+    val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
+      externalRefSource = Some(sourceMdtpValue),
+      identifierName = Some(enrolmentKeyObtds),
+      identifierValue = Some(GeneratedTestData.identifierSdilValidValue),
+      regime = Some(regimeSdilValue),
+      subjectEnglish = Some(subjectEnglish),
+      contentEnglish = Some(contentEnglish),
+      subjectWelsh = Some(subjectWelsh),
+      contentWelsh = Some(contentWelsh),
+      messageType = Some("sdds_ddi_cancelled_dcs_alert")
+    )
+    fillMessageForm(updated)
+  }
+
+  def fillFormFhddsEnglishAndWelsh(subjectEnglish: String, contentEnglish: String, subjectWelsh: String, contentWelsh: String): Unit = {
+    val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
+      externalRefSource = Some(sourceMdtpValue),
+      identifierName = Some(enrolmentKeyObtds),
+      identifierValue = Some(GeneratedTestData.identifierObtdsValidValue),
+      regime = Some(regimeFhddsValue),
+      subjectEnglish = Some(subjectEnglish),
+      contentEnglish = Some(contentEnglish),
+      subjectWelsh = Some(subjectWelsh),
+      contentWelsh = Some(contentWelsh),
+    )
+    fillMessageForm(updated)
+  }
+
+  def fillFormEpayeEnglishAndWelsh(subjectEnglish: String, contentEnglish: String, subjectWelsh: String, contentWelsh: String): Unit = {
+    val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
+      externalRefSource = Some(sourceMdtpValue),
+      identifierName = Some(taxIdentifierNameEpayeValue),
+      identifierValue = Some(GeneratedTestData.epayeTaxOfficeNumberAndReferenceValue),
+      regime = Some(regimeEpayeValue),
+      subjectEnglish = Some(subjectEnglish),
+      contentEnglish = Some(contentEnglish),
+      subjectWelsh = Some(subjectWelsh),
+      contentWelsh = Some(contentWelsh),
+    )
+    fillMessageForm(updated)
+  }
+
+  def fillFormPptEnglishAndWelsh(subjectEnglish: String, contentEnglish: String, subjectWelsh: String, contentWelsh: String): Unit = {
+    val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
+      externalRefSource = Some(sourceMdtpValue),
+      identifierName = Some(taxIdentifierNamePptValue),
+      identifierValue = Some(GeneratedTestData.identifierValuePpt),
+      regime = Some(regimePptValue),
+      subjectEnglish = Some(subjectEnglish),
+      contentEnglish = Some(contentEnglish),
+      subjectWelsh = Some(subjectWelsh),
+      contentWelsh = Some(contentWelsh),
+    )
+    fillMessageForm(updated)
+  }
+
+  def fillFormOptinEnglishAndWelsh(subjectEnglish: String, contentEnglish: String, subjectWelsh: String, contentWelsh: String): Unit = {
+    val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
+      identifierName = Some(taxIdentifierNameValue),
+      identifierValue = Some(GeneratedTestData.ninoNumber1),
+      regime = Some(regimeValue),
+      subjectEnglish = Some(subjectEnglish),
+      contentEnglish = Some(contentEnglish),
+      subjectWelsh = Some(subjectWelsh),
+      contentWelsh = Some(contentWelsh),
+      messageType = Some("digitalOptInConfirmation"),
+      formId = Some("")
+    )
+    fillMessageForm(updated)
+  }
+
+  def fillFormCdsEnglishAndWelsh(subjectEnglish: String, contentEnglish: String, subjectWelsh: String, contentWelsh: String): Unit = {
+    val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
+      externalRefSource = Some(sourceMdtpValue),
+      identifierName = Some(enrolmentKeyCds),
+      identifierValue = Some(GeneratedTestData.identifierValueEori),
+      regime = Some(regimeCdsValue),
+      subjectEnglish = Some(subjectEnglish),
+      contentEnglish = Some(contentEnglish),
+      subjectWelsh = Some(subjectWelsh),
+      contentWelsh = Some(contentWelsh),
+      messageType = Some("cds_ddi_setup_dcs_alert")
     )
     fillMessageForm(updated)
   }

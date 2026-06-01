@@ -35,19 +35,18 @@ object MdtpMessages extends BasePage {
                        ): Unit = {
     mdtpMessageType.toLowerCase match {
 
-      case "fhdds" | "sdil" =>
+      case "fhdds" =>
         fillFormForMessage(
           typeMessage,
-          GeneratedTestData.identifierObdtsValidValue,
-          GeneratedTestData.identifierObdtsInvalidValue
+          GeneratedTestData.identifierObtdsValidValue,
+          GeneratedTestData.identifierObtdsInvalidValue
         )
-      case "ppt" =>
+      case "sdil" =>
         fillFormForMessage(
           typeMessage,
-          GeneratedTestData.identifierPptValidValue,
-          GeneratedTestData.identifierPptInvalidValue
+          GeneratedTestData.identifierSdilValidValue,
+          GeneratedTestData.identifierObtdsInvalidValue
         )
-
       case _ =>
         throw new IllegalArgumentException(
           s"Unknown message type: $mdtpMessageType"
