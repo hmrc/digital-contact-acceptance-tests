@@ -40,7 +40,14 @@ object MdtpMessages extends BasePage {
           typeMessage,
           GeneratedTestData.identifierObdtsValidValue,
           GeneratedTestData.identifierObdtsInvalidValue
-        ) 
+        )
+      case "ppt" =>
+        fillFormForMessage(
+          typeMessage,
+          GeneratedTestData.identifierPptValidValue,
+          GeneratedTestData.identifierPptInvalidValue
+        )
+
       case _ =>
         throw new IllegalArgumentException(
           s"Unknown message type: $mdtpMessageType"

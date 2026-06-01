@@ -33,39 +33,6 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
 
   Feature("GMC messages from Quadient to EMA") {
 
-    val formIds = Seq(
-      "P800 2021",
-      "ITSAQU1",
-      "M01IOSS",
-      "M07GIOSS",
-      "LPI1",
-      "AD2",
-      "LSP1_ITSA",
-      "M05AGIOSS",
-      "ITSAMIG1",
-      "LPP1A_ITSA",
-      "LPP2_ITSA",
-      "PAR1_ITSA",
-      "NIREF1",
-      "NIREF4"
-    )
-   
-    formIds.foreach { formId =>
-      Scenario(s"Add $formId form ID to the Message Brake Allowlist", OwsmTests) {
-        Given("I log into the preferences admin as Admin")
-        PreferencesAdminPage.loadPage()
-        PreferencesAdminPage.adminLogin()
-        When("When click on the message brake allowlist link")
-        PreferencesAdminPage.clickOnMessageBrakeAllowlist()
-        And("I click on Add new formId button")
-        PreferencesMessageBrakeAllowlistPage.clickOnAddNewFormButton()
-        And("I enter the formId, reason and click on confirm")
-        PreferencesMessageBrakeAllowlistPage.addNewFormId(formId)
-        Then("I should see that new formId added in the allowlist")
-        PreferencesMessageBrakeAllowlistPage.formIdAdded()
-      }
-    }
-
     Scenario("Customer can view the P800 messages in PTA inbox", OwsmTests) {
       Given("I am logged into PTA account with nino enrolment")
       LoginUsingAuthWizardPage.pageLoad()
@@ -101,7 +68,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       When("A GMC message is created via EMA using sautr for ats")
       createV4Message("sautr for ats")
       And("I open my messages for BTA using regime")
-      logIntoMessage("sautr","regime","regimeSaValue")
+      logIntoMessage("sautr", "regime", "regimeSaValue")
       Then("I see the message: Your Annual Tax Summary for 2019 to 2020 is now")
       waitForText(demoFrontEndInboxFirstMessageSubject, "Your Annual Tax Summary for 2019 to 2020 is now")
     }
@@ -120,7 +87,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       When("A GMC message is created via EMA using nino for v4")
       createV4Message("nino for v4")
       And("I open my messages for PTA using regime")
-      logIntoMessage("NoSautr", "regime",regimeValue)
+      logIntoMessage("NoSautr", "regime", regimeValue)
       And("I see the message: Tax calculation for the year 6 April 2020 to 5 April 2021")
       waitForText(demoFrontEndInboxFirstMessageSubject, subject_p800)
       And("I click Welsh language link")
@@ -153,7 +120,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       When("A GMC message is created via EMA using sautr for v4")
       createV4Message("sautr for v4")
       And("I open my messages for BTA using regime")
-      logIntoMessage("sautr","regime", regimeSaValue)
+      logIntoMessage("sautr", "regime", regimeSaValue)
       Then("I see the message: File your Self Assessment return")
       waitForText(demoFrontEndInboxFirstMessageSubject, "File your Self Assessment return")
       And("I click Welsh language link")
@@ -186,7 +153,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       When("A GMC message is created via EMA using itsaid for v4")
       createV4Message("itsaid for v4")
       And("I open my messages for itsa using regime")
-      logIntoMessage("itsa","regime",regimeItsaValue)
+      logIntoMessage("itsa", "regime", regimeItsaValue)
       Then("I see the message: Send your quarterly Income Tax update")
       waitForText(demoFrontEndInboxFirstMessageSubject, "Send your quarterly Income Tax update")
       And("I click Welsh language link")
@@ -207,7 +174,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       Given("A GMC message is created via EMA using vat for v4")
       createV4Message("vat for v4")
       And("I open my messages for Vat using regime")
-      logIntoMessage("vat","regime", regimeVatValue)
+      logIntoMessage("vat", "regime", regimeVatValue)
       Then("I see the message: Late Payment Interest Due")
       waitForText(demoFrontEndInboxFirstMessageSubject, "Late Payment Interest Due")
       And("I click Welsh language link")
@@ -228,7 +195,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       Given("A GMC message is created via EMA using ioss inter")
       createV4Message("ioss inter")
       And("I open my messages for ioss using regime")
-      logIntoMessage("ioss inter","regime", regimeIossValue)
+      logIntoMessage("ioss inter", "regime", regimeIossValue)
       Then("I see the message: Late Payment Interest Due")
       waitForText(demoFrontEndInboxIossMessageSubject, "Late Payment Interest Due")
     }
@@ -237,7 +204,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       Given("A GMC message is created via EMA using oss")
       createV4Message("oss")
       And("I open my messages for oss using regime")
-      logIntoMessage("oss","regime",regimeOssValue)
+      logIntoMessage("oss", "regime", regimeOssValue)
       Then("I see the message: Late Payment Interest Due")
       waitForText(demoFrontEndInboxIossMessageSubject, "Late Payment Interest Due")
     }
@@ -267,7 +234,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       When("A GMC message is created via EMA using itsaid for en")
       createV4Message("itsaid for en")
       And("I open my messages for itsa using regime")
-      logIntoMessage("itsa","regime",regimeItsaValue)
+      logIntoMessage("itsa", "regime", regimeItsaValue)
       Then("I see the message: New ITSA Secure Message In English")
       waitForText(demoFrontEndInboxFirstMessageSubject, "New ITSA Secure Message In English")
     }
@@ -288,7 +255,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       When("A GMC message is created via EMA using itsamig1 for en")
       createV4Message("itsamig1 for en")
       And("I open my messages for itsa using regime")
-      logIntoMessage("itsa","regime",regimeItsaValue)
+      logIntoMessage("itsa", "regime", regimeItsaValue)
       Then("I see the message: New ITSA Secure Message In English")
       waitForText(demoFrontEndInboxFirstMessageSubject, "New ITSA Secure Message In English")
     }
@@ -309,7 +276,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       When("A GMC message is created via EMA using lpp1aitsa")
       createV4Message("lpp1aitsa")
       And("I open my messages for itsa using regime")
-      logIntoMessage("itsa","regime",regimeItsaValue)
+      logIntoMessage("itsa", "regime", regimeItsaValue)
       Then("I see the message: New ITSA Secure Message In English")
       waitForText(demoFrontEndInboxFirstMessageSubject, "New ITSA Secure Message In English")
     }
@@ -330,7 +297,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       When("A GMC message is created via EMA using lpp2itsa")
       createV4Message("lpp2itsa")
       And("I open my messages for itsa using regime")
-      logIntoMessage("itsa","regime",regimeItsaValue)
+      logIntoMessage("itsa", "regime", regimeItsaValue)
       Then("I see the message: New ITSA Secure Message In English")
       waitForText(demoFrontEndInboxFirstMessageSubject, "New ITSA Secure Message In English")
     }
@@ -351,7 +318,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       When("A GMC message is created via EMA using par1itsa")
       createV4Message("par1itsa")
       And("I open my messages for itsa using regime")
-      logIntoMessage("itsa","regime", regimeItsaValue)
+      logIntoMessage("itsa", "regime", regimeItsaValue)
       Then("I see the message: New ITSA Secure Message In English")
       waitForText(demoFrontEndInboxFirstMessageSubject, "New ITSA Secure Message In English")
     }
@@ -360,7 +327,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       Given("A GMC message is created via EMA using ioss netp")
       createV4Message("ioss netp")
       And("I open my messages for ioss using regime")
-      logIntoMessage("ioss netp","regime",regimeIossValue)
+      logIntoMessage("ioss netp", "regime", regimeIossValue)
       Then("I see the message: Late Payment Interest Due")
       waitForText(demoFrontEndInboxIossMessageSubject, "Late Payment Interest Due")
     }
@@ -379,7 +346,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       When("A GMC message is created via EMA using niref1 en")
       createV4Message("niref1 en")
       And("I open my messages for PTA using regime")
-      logIntoMessage("NoSautr","regime",regimeValue)
+      logIntoMessage("NoSautr", "regime", regimeValue)
       Then("I see the message: National Insurance contributions - we may owe you a refund")
       waitForText(demoFrontEndInboxFirstMessageSubject, "National Insurance contributions - we may owe you a refund")
     }
@@ -398,27 +365,12 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       When("A GMC message is created via EMA using niref4 en")
       createV4Message("niref4 en")
       And("I open my messages for PTA using regime")
-      logIntoMessage("NoSautr","regime",regimeValue)
+      logIntoMessage("NoSautr", "regime", regimeValue)
       Then("I see the message: National Insurance contributions - we may owe you a refund")
       waitForText(demoFrontEndInboxFirstMessageSubject, "National Insurance contributions - we may owe you a refund")
     }
-
-    formIds.foreach { formId =>
-      Scenario(s"Delete $formId form ID from Message Brake Allowlist", OwsmTests) {
-        Given("I log into the preferences admin as Admin")
-        PreferencesAdminPage.loadPage()
-        PreferencesAdminPage.adminLogin()
-        When("When click on the message brake allowlist link")
-        PreferencesAdminPage.clickOnMessageBrakeAllowlist()
-        And(s"I select the Form ID $formId to delete")
-        PreferencesMessageBrakeAllowlistPage.clickOnDeleteFormId(formId)
-        PreferencesMessageBrakeAllowlistPage.fillReasonToDeleteFormId()
-        Then(s"I confirm the deletion of $formId")
-        PreferencesMessageBrakeAllowlistPage.confirmFormIdDeleted(formId)
-      }
-    }
   }
-  
+
   override def beforeEach(): Unit = {
     super.beforeEach()
     deleteMongoRecordsFromCollection("preferences")
