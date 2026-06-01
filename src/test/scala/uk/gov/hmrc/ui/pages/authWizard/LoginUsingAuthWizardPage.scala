@@ -120,19 +120,18 @@ object LoginUsingAuthWizardPage extends BasePage {
     val enrolmentKeyId: By = By.id("enrolment[0].name")
     val enrolmentNameId: By = By.id("input-0-0-name")
     val enrolmentValueId: By = By.id("input-0-0-value")
-    val enrolmentListNino = List("NoSautr", "sautr", "itsa")
-    val redirectUrl = messagesUsingRegimeRedirectUrl(regime.toLowerCase())
+    val enrolmentListNino = List("pta", "sautr", "itsa")
+
 
     val selectedEnrolmentKey: String =
       enrolmentType match {
-        case "sdil" => enrolmentKeySdil
-        case "fhdds" => enrolmentKeyFhdds
+        case "sdil" | "fhdds" => enrolmentKeyObtds
         case _       => ""
       }
 
     val redirectUrl =
       redirectType match {
-
+        case "secure-message-stub" =>  secureMessagingBaseUrl + secureMessageStub + conversationList
         case "regime" =>
           messagesUsingRegimeRedirectUrl(
             regime.toLowerCase()
@@ -159,7 +158,7 @@ object LoginUsingAuthWizardPage extends BasePage {
       selectByValue(getConfidenceLevel, confidenceLevel)
       sendKeys(getNinoNumber, nino)
     }
-    if (enrolmentType != "NoSautr") {
+    if (enrolmentType != "pta") {
       val enrolmentKeyMap: Map[String, (String, String, String)] = Map(
         "itsa" -> (enrolmentKeyItsa, taxIdentifierNameItsaValue, GeneratedTestData.itsaIdentifierValue),
         "vat" -> (enrolmentKeyVat, taxIdentifierNameVatValue, GeneratedTestData.vatVrnIdentifierValue),
@@ -168,34 +167,17 @@ object LoginUsingAuthWizardPage extends BasePage {
         "oss" -> (enrolmentKeyOss, taxIdentifierNameOssValue, GeneratedTestData.ossIdentifierValue),
         "ad" -> (enrolmentKeyAd, taxIdentifierNameAdValue, GeneratedTestData.adIdentifierValue),
         "ioss netp" -> (enrolmentKeyIossNetp, taxIdentifierNameIossNetpValue, GeneratedTestData.iossNetpIdentifierValue),
-        "sdil" ->(enrolmentKeyVatObtds, taxIdentifierNameObtdsValue, GeneratedTestData.identifierValueVatSdil),
-        "fhdds" ->(enrolmentKeyVatObtds, taxIdentifierNameObtdsValue, GeneratedTestData.identifierValueVatFhdds),
+        "sdil" ->(enrolmentKeyObtds, taxIdentifierNameObtdsValue, GeneratedTestData.identifierSdilValidValue),
+        "fhdds" ->(enrolmentKeyObtds, taxIdentifierNameObtdsValue, GeneratedTestData.identifierObtdsValidValue),
         "epaye" ->(enrolmentKeyEpaye, taxIdentifierNameEpayeValue, GeneratedTestData.epayeTaxOfficeNumberAndReferenceValue),
         "ppt" ->(enrolmentKeyPpt, taxIdentifierNamePptValue, GeneratedTestData.identifierValuePpt),
+        "cds" ->(enrolmentKeyCds, taxIdentifierNameCds, GeneratedTestData.identifierValueEori)
       ).withDefaultValue(enrolmentKey, identifierName, GeneratedTestData.identifierValue)
+
       val (key, name, value) = enrolmentKeyMap(enrolmentType)
       sendKeys(enrolmentKeyId, key)
       sendKeys(enrolmentNameId, name)
       sendKeys(enrolmentValueId, value)
-    }
-    else if(enrolmentType == "sdil"){
-      sendKeys(enrolmentKeyId, enrolmentKeySdil)
-      sendKeys(enrolmentNameId, taxIdentifierNameSdilValue)
-      sendKeys(enrolmentValueId, GeneratedTestData.identifierSDILValidValue)
-    }
-    else if(enrolmentType == "fhdds"){
-      sendKeys(enrolmentKeyId, enrolmentKeyFhdds)
-      sendKeys(enrolmentNameId, taxIdentifierNameFhddsValue)
-      sendKeys(enrolmentValueId, GeneratedTestData.identifierFHDDSValidValue)
-    }
-    else if (enrolmentType != "NoSautr") {
-      sendKeys(enrolmentKeyId, enrolmentKey)
-      sendKeys(enrolmentNameId, identifierName)
-      enrolmentType match {
-        case "sautr" => sendKeys(enrolmentValueId, GeneratedTestData.identifierValue)
-        case "sautr2" => sendKeys(enrolmentValueId, GeneratedTestData.identifierValue2)
-        case _ => throw new IllegalArgumentException(s"Unknown UTR Value")
-      }
     }
     click(By.id("submit"))
   }

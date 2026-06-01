@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs.owsm
+package uk.gov.hmrc.ui.specs.owsm.v4welsh
 
 import org.scalatest.featurespec.AnyFeatureSpec
 import uk.gov.hmrc.ui.ElementLocators.{cdsMessagePageFirstMessageSubject, cdsMessagePageHeader, demoFrontEndInboxFirstMessageSubject, demoFrontEndInboxFirstMessageSubject2}
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
-import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.{logIntoCDSMessagePage, logIntoMessageUsingRegime}
+import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.logIntoMessage
 import uk.gov.hmrc.ui.pages.messages.GmcMessages.*
 import uk.gov.hmrc.ui.pages.messages.SecureMessagesPage
 import uk.gov.hmrc.ui.pages.paperless.*
@@ -36,7 +36,7 @@ class WelshEnglishV4MessageTestSpec extends BaseSpec with TestData {
       Given("A v4 message is created for sdil")
       createV4Message("sdil")
       When("I open my messages for sdil using regime")
-      logIntoMessageUsingRegime("sdil", regimeSdilValue)
+      logIntoMessage("sdil", "regime", regimeSdilValue)
       Then("I see the message: Soft Drinks Industry Levy Direct Debit cancelled")
       waitForText(demoFrontEndInboxFirstMessageSubject, "Soft Drinks Industry Levy Direct Debit cancelled")
       And("I click Welsh language link")
@@ -57,7 +57,7 @@ class WelshEnglishV4MessageTestSpec extends BaseSpec with TestData {
       Given("A v4 message is created for fhdds")
       createV4Message("fhdds")
       When("I open my messages for fhdds using regime")
-      logIntoMessageUsingRegime("fhdds", regimeFhddsValue)
+      logIntoMessage("fhdds",  "regime", regimeFhddsValue)
       Then("I see the message: FHDDS messages for test")
       waitForText(demoFrontEndInboxFirstMessageSubject, "FHDDS messages for test")
       And("I click Welsh language link")
@@ -78,7 +78,7 @@ class WelshEnglishV4MessageTestSpec extends BaseSpec with TestData {
       Given("A v4 message is created for ppt")
       createV4Message("ppt")
       When("I open my messages for ppt using regime")
-      logIntoMessageUsingRegime("ppt", regimePptValue)
+      logIntoMessage("ppt", "regime", regimePptValue)
       Then("I see the message: PPT messages for test")
       waitForText(demoFrontEndInboxFirstMessageSubject2, "PPT messages for test")
       And("I click Welsh language link")
@@ -99,7 +99,7 @@ class WelshEnglishV4MessageTestSpec extends BaseSpec with TestData {
       Given("A v4 message is created for epaye")
       createV4Message("epaye")
       When("I open my messages for epaye using regime")
-      logIntoMessageUsingRegime("epaye", regimeEpayeValue)
+      logIntoMessage("epaye",  "regime", regimeEpayeValue)
       Then("I see the message: EPAYE messages for test")
       waitForText(demoFrontEndInboxFirstMessageSubject2, "EPAYE messages for test")
       And("I click Welsh language link")
@@ -120,7 +120,7 @@ class WelshEnglishV4MessageTestSpec extends BaseSpec with TestData {
       Given("A v4 message is created for cds")
       createV4Message("cds")
       When("I navigate to messages list page using eori enrollment")
-      logIntoCDSMessagePage()
+      logIntoMessage("cds", "secure-message-stub")
       Then("I see the text: Messages between you and HMRC")
       waitForText(cdsMessagePageHeader, "Messages between you and HMRC")
       Then("I see the Message: CDS messages for test")
@@ -139,7 +139,7 @@ class WelshEnglishV4MessageTestSpec extends BaseSpec with TestData {
       SecureMessagesPage.pageContains("CDS messages for test")
     }
 
-    Scenario("Customer can view the Optin v4 messages in BTA inbox", Wip) {
+    Scenario("Customer can view the Optin v4 messages in BTA inbox", OwsmTests) {
       Given("I am logged into PTA account with nino enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("NoSautr", pta, GeneratedTestData.ninoNumber1)
@@ -153,7 +153,7 @@ class WelshEnglishV4MessageTestSpec extends BaseSpec with TestData {
       When("A v4 message is created for optin")
       createV4Message("optin")
       And("I open my messages for PTA using regime")
-      logIntoMessageUsingRegime(enrolmentType="NoSautr", regime=regimeValue, nino = GeneratedTestData.ninoNumber1 )
+      logIntoMessage("pta",  "regime", regimeValue, GeneratedTestData.ninoNumber1)
       And("I see the message: Your online tax letters")
       waitForText(demoFrontEndInboxFirstMessageSubject, "Your online tax letters")
       And("I click Welsh language link")

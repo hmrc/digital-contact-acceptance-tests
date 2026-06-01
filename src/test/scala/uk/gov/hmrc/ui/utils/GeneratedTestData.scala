@@ -42,19 +42,13 @@ object GeneratedTestData {
 
   val adIdentifierValue: String = s"XMADP${randomDigits(9)}"
 
-  val identifierFHDDSValidValue: String = s"XZFH${randomDigits(11)}"
+  val identifierObtdsValidValue: String = s"XZFH${randomDigits(11)}"
 
-  val identifierFHDDSInvalidValue: String = s"XGER${randomDigits(11)}"
-
-  val identifierSDILValidValue: String = s"XZFH${randomDigits(11)}"
-
-  val identifierSDILInvalidValue: String = s"XGER${randomDigits(11)}"
+  val identifierObtdsInvalidValue: String = s"XGER${randomDigits(11)}"
 
   val referenceIdValue: String = randomDigits(12)
 
-  val identifierValueVatSdil: String = s"XZSD${randomDigits(11)}"
-
-  val identifierValueVatFhdds: String = s"XZFH${randomDigits(11)}"
+  val identifierSdilValidValue: String = s"XZSD${randomDigits(11)}"
 
   val identifierValuePpt: String = s"XMPPT${randomDigits(10)}"
 

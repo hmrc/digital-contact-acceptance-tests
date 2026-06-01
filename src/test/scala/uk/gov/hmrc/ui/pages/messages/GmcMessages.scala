@@ -463,8 +463,8 @@ object GmcMessages extends BasePage {
   def fillFormSdilEnglishAndWelsh(subjectEnglish: String, contentEnglish: String, subjectWelsh: String, contentWelsh: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       externalRefSource = Some(sourceMdtpValue),
-      identifierName = Some(enrolmentKeyVatObtds),
-      identifierValue = Some(GeneratedTestData.identifierValueVatSdil),
+      identifierName = Some(enrolmentKeyObtds),
+      identifierValue = Some(GeneratedTestData.identifierSdilValidValue),
       regime = Some(regimeSdilValue),
       subjectEnglish = Some(subjectEnglish),
       contentEnglish = Some(contentEnglish),
@@ -478,8 +478,8 @@ object GmcMessages extends BasePage {
   def fillFormFhddsEnglishAndWelsh(subjectEnglish: String, contentEnglish: String, subjectWelsh: String, contentWelsh: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       externalRefSource = Some(sourceMdtpValue),
-      identifierName = Some(enrolmentKeyVatObtds),
-      identifierValue = Some(GeneratedTestData.identifierValueVatFhdds),
+      identifierName = Some(enrolmentKeyObtds),
+      identifierValue = Some(GeneratedTestData.identifierObtdsValidValue),
       regime = Some(regimeFhddsValue),
       subjectEnglish = Some(subjectEnglish),
       contentEnglish = Some(contentEnglish),

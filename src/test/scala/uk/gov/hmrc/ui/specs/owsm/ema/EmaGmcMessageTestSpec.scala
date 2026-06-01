@@ -80,7 +80,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       When("A GMC message is created via EMA using nino")
       createV4Message("nino")
       And("I open my messages for PTA using regime")
-      logIntoMessage("NoSautr", "regime", regimeValue)
+      logIntoMessage("pta", "regime", regimeValue)
       Then("I see the message: Tax calculation for the year 6 April 2020 to 5 April 2021")
       waitForText(demoFrontEndInboxFirstMessageSubject, subject_p800)
     }
@@ -120,7 +120,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       When("A GMC message is created via EMA using nino for v4")
       createV4Message("nino for v4")
       And("I open my messages for PTA using regime")
-      logIntoMessage("NoSautr", "regime",regimeValue)
+      logIntoMessage("pta", "regime",regimeValue)
       And("I see the message: Tax calculation for the year 6 April 2020 to 5 April 2021")
       waitForText(demoFrontEndInboxFirstMessageSubject, subject_p800)
       And("I click Welsh language link")
@@ -379,7 +379,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       When("A GMC message is created via EMA using niref1 en")
       createV4Message("niref1 en")
       And("I open my messages for PTA using regime")
-      logIntoMessage("NoSautr","regime",regimeValue)
+      logIntoMessage("pta","regime",regimeValue)
       Then("I see the message: National Insurance contributions - we may owe you a refund")
       waitForText(demoFrontEndInboxFirstMessageSubject, "National Insurance contributions - we may owe you a refund")
     }
@@ -398,7 +398,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       When("A GMC message is created via EMA using niref4 en")
       createV4Message("niref4 en")
       And("I open my messages for PTA using regime")
-      logIntoMessage("NoSautr","regime",regimeValue)
+      logIntoMessage("pta","regime",regimeValue)
       Then("I see the message: National Insurance contributions - we may owe you a refund")
       waitForText(demoFrontEndInboxFirstMessageSubject, "National Insurance contributions - we may owe you a refund")
     }
