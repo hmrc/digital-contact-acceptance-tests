@@ -86,12 +86,15 @@ trait TestData {
   val taxIdentifierNameEpayeValue: String          = "IR-PAYE.EMPREF"
   val regimeEpayeValue: String                     = "epaye"
   val enrolmentKeyPpt: String                      = "HMRC-PPT-ORG"
+  val enrolmentNamePpt: String                     = "ETMPREGISTRATIONNUMBER"
   val taxIdentifierNamePptValue: String            = "HMRC-PPT-ORG.ETMPREGISTRATIONNUMBER"
+  val taxIdentifierNamePptUpperCaseValue: String   = "HMRC-PPT-ORG.ETMPREGISTRATIONNUMBER"
+  val taxIdentifierNamePptLowerCaseValue: String   = "HMRC-PPT-ORG.etmpregistrationnumber"
+  val taxIdentifierNamePptCamelCaseValue: String   = "HMRC-PPT-ORG.etmpRegistrationNumber"
   val regimePptValue: String                       = "ppt"
   val enrolmentKeyCds: String                      = "HMRC-CUS-ORG"
   val taxIdentifierNameCds: String                 = "EORINumber"
   val regimeCdsValue: String                       = "cds"
-
   val messageTypeValue: String                     = "mailout-batch"
   val alertQueueValue: String                      = "DEFAULT"
   val englishSubjectValue: String                  = "Reminder to file Self Assessment return"
@@ -108,9 +111,9 @@ trait TestData {
   val contentValue: String                         =
     """<img src="https://www.qa.tax.service.gov.uk/assets/4.8.0/images/direct-debit-logo.png" alt="Direct Debit logo">"""
   val subjectValue: String                         = "Direct debit logo test"
-  val identifierNameValue: String                  = "HMRC-OBTDS-ORG"
+//  val identifierNameValue: String                  = "HMRC-OBTDS-ORG"
   val nameValue: String                            = "Test User"
-                                                   
+
   val subject_p800: String                         = "Tax calculation for the year 6 April 2020 to 5 April 2021"
   val messageContent: String                       = "Actual message content should be here"
   val atsmessageContent: String                    = "DQoNCjxwPlRoaXMgc2hvd3MgaG93IGdvdmVybm1lbnQgc3BlbmRzIHlvdXIgdGF4IGFuZCBOYXRpb25hbCBJbnN1cmFuY2UgY29udHJpYnV0aW9ucy48L3A+DQoNCjxwPlNlZSB5b3VyIDxhIGhyZWY9Imh0dHBzOi8vd3d3LnRheC5zZXJ2aWNlLmdvdi51ay9hbm51YWwtdGF4LXN1bW1hcnkiPkFubnVhbCBUYXggU3VtbWFyeTwvYT4uPC9wPg0KDQo8cD5UYXggc3VtbWFyaWVzIGFyZSBmb3IgaW5mb3JtYXRpb24gb25seSwgc28geW91IGRvIG5vdCBuZWVkIHRvIGNvbnRhY3QgSE1SQy48L3A+DQoNCg0KDQoNCg=="

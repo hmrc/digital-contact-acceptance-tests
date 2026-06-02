@@ -18,6 +18,7 @@ package uk.gov.hmrc.ui.pages.messages
 
 import org.openqa.selenium.By
 import uk.gov.hmrc.ui.pages.BasePage
+import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.*
 import uk.gov.hmrc.ui.utils.GeneratedTestData
 
 object MdtpMessages extends BasePage {
@@ -37,15 +38,41 @@ object MdtpMessages extends BasePage {
 
       case "fhdds" =>
         fillFormForMessage(
+          mdtpMessageType,
           typeMessage,
-          GeneratedTestData.identifierObtdsValidValue,
-          GeneratedTestData.identifierObtdsInvalidValue
+          GeneratedTestData.identifierFhhdsValidValue,
+          GeneratedTestData.identifierFhhdsInvalidValue
         )
+
       case "sdil" =>
         fillFormForMessage(
+          mdtpMessageType,
           typeMessage,
           GeneratedTestData.identifierSdilValidValue,
-          GeneratedTestData.identifierObtdsInvalidValue
+          GeneratedTestData.identifierSdilInvalidValue
+        )
+
+      case "pptuppercase" =>
+        fillFormForMessage(
+          mdtpMessageType,
+          typeMessage,
+          GeneratedTestData.identifierPptValidValue,
+          GeneratedTestData.identifierPptInvalidValue
+        )
+        
+      case "pptlowercase"=>
+        fillFormForMessage(
+          mdtpMessageType,
+          typeMessage,
+          GeneratedTestData.identifierPptValidValue,
+          GeneratedTestData.identifierPptInvalidValue
+        )
+      case "pptcamelcase"=>
+        fillFormForMessage(
+          mdtpMessageType,
+          typeMessage,
+          GeneratedTestData.identifierPptValidValue,
+          GeneratedTestData.identifierPptInvalidValue
         )
       case _ =>
         throw new IllegalArgumentException(
@@ -57,6 +84,7 @@ object MdtpMessages extends BasePage {
   }
 
   def fillFormForMessage(
+                          mdtpMessageType: String,
                           typeMessage: String,
                           validIdentifierValue: String,
                           invalidIdentifierValue: String
@@ -72,7 +100,18 @@ object MdtpMessages extends BasePage {
 
     sendKeys(contentInputField, contentValue)
     sendKeys(subjectInputField, subjectValue)
-    sendKeys(identifierNameInputField, identifierNameValue)
+
+    val identifierName = mdtpMessageType.toLowerCase match {
+      case "fhdds" | "sdil" => enrolmentKeyObtds
+      case "ppt"          => taxIdentifierNamePptValue
+      case "pptuppercase" => taxIdentifierNamePptUpperCaseValue
+      case "pptlowercase" => taxIdentifierNamePptLowerCaseValue
+      case "pptcamelcase" => taxIdentifierNamePptCamelCaseValue
+      case _ => throw new IllegalArgumentException(s"Unknown mdtp message type: $mdtpMessageType")
+    }
+
+    sendKeys(identifierNameInputField, identifierName)
+
     sendKeys(emailInputField, GeneratedTestData.email)
     sendKeys(nameInputField, nameValue)
     sendKeys(messageTypeInputField, messageTypeValue)
@@ -80,11 +119,7 @@ object MdtpMessages extends BasePage {
     val identifierValue = typeMessage match {
       case "valid" => validIdentifierValue
       case "invalid" => invalidIdentifierValue
-
-      case _ =>
-        throw new IllegalArgumentException(
-          s"Unknown value: $typeMessage"
-        )
+      case _ => throw new IllegalArgumentException(s"Unknown value: $typeMessage")
     }
 
     sendKeys(identifierValueInputField, identifierValue)

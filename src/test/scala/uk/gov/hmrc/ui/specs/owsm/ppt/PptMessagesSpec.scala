@@ -16,11 +16,12 @@
 
 package uk.gov.hmrc.ui.specs.owsm.ppt
 
+import uk.gov.hmrc.ui.ElementLocators.{demoFrontEndInboxFirstMessageSubject, demoFrontEndInboxFirstMessageSubject2}
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.{logIntoCustomerAdvisorMessageInboxPage, logIntoMessage}
-import uk.gov.hmrc.ui.pages.messages.GmcMessages.{regimeFhddsValue, regimePptValue, regimeSdilValue}
+import uk.gov.hmrc.ui.pages.messages.GmcMessages.{deleteMongoRecordsFromCollection, regimePptValue, waitForText}
 import uk.gov.hmrc.ui.pages.messages.MdtpMessages.createMDTPMessage
-import uk.gov.hmrc.ui.pages.messages.{MdtpMessages, SecureMessagesPage}
+import uk.gov.hmrc.ui.pages.messages.{GmcMessages, MdtpMessages, SecureMessagesPage}
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.OwsmTests
 
@@ -31,53 +32,61 @@ class PptMessagesSpec extends BaseSpec {
     Scenario("Customer can view their PPT messages in inbox using regime", OwsmTests) {
       Given("a message for PPT with uppercase enrolment name created")
       logIntoCustomerAdvisorMessageInboxPage()
-      createMDTPMessage("ppt", "valid")
+      createMDTPMessage("pptUpperCase", "valid")
       When("I open my messages for ppt using regime for PPT")
       logIntoMessage("ppt", "regime", regimePptValue)
-      Then("I see the message: Direct debit test")
-      SecureMessagesPage.pageContains("Direct debit logo test")
+      Then("I see the message: Direct debit logo test")
+      waitForText(demoFrontEndInboxFirstMessageSubject2, "Direct debit logo test")
     }
-
-    Scenario("Customer can view their PPT messages in inbox using enrolment key & regime") {
+    Scenario("Customer can view their PPT messages in inbox using enrolment key", OwsmTests) {
       Given("a message for PPT with uppercase enrolment name created")
-      When("I open my messages with HMRC-PPT-ORG enrolment key & PPT regime for PPT")
-      Then("I see the message: Direct debit test")
+      logIntoCustomerAdvisorMessageInboxPage()
+      createMDTPMessage("pptUpperCase", "valid")
+      When("I open my messages with ETMPREGISTRATIONNUMBER enrolment key for PPT")
+      logIntoMessage("pptEnrolmentName", "enrolmentKey")
+      Then("I see the message: Direct debit logo test")
+      waitForText(demoFrontEndInboxFirstMessageSubject, "Direct debit logo test")
     }
 
+    Scenario("Customer can view their PPT messages in inbox using enrolment key & regime", OwsmTests) {
+      Given("a message for PPT with uppercase enrolment name created")
+      logIntoCustomerAdvisorMessageInboxPage()
+      createMDTPMessage("pptUpperCase", "valid")
+      When("I open my messages with HMRC - PPT - ORG enrolment key & PPT regime for PPT")
+      logIntoMessage("ppt", "regimeAndEnrolmentKey", regimePptValue)
+      Then("I see the message: Direct debit logo test")
+      waitForText(demoFrontEndInboxFirstMessageSubject2, "Direct debit logo test")
+    }
     Scenario("Customer can view their messages count using enrolment key & regime") {
-
       Given("a message for PPT with uppercase enrolment name created")
-
-      When("I navigate with HMRC-PPT-ORG enrolment key & PPT regime for PPT messages count")
-
-      Then("I see the messages count: 1")
+      logIntoCustomerAdvisorMessageInboxPage()
+      createMDTPMessage("pptUpperCase", "valid")
+      When("I open my messages with HMRC - PPT - ORG enrolment key & PPT regime for PPT message count")
+      logIntoMessage("ppt", "regimeAndEnrolmentKeyMessageCount", regimePptValue)
+      Then("I see the message count: 1")
+      SecureMessagesPage.pageContains("count\":1")
     }
-
-    Scenario("Customer can view their messages using enrolment key") {
-
-      Given("a message for PPT with uppercase enrolment name created")
-
-      When("I open my messages with ETMPREGISTRATIONNUMBER enrolment for PPT")
-
-      Then("I see the message: Direct debit test")
-    }
-
-    Scenario("HMRC can create message with lowercase using enrolment name") {
-
+    Scenario("HMRC can create message with lowercase using enrolment name", OwsmTests) {
       Given("a message for PPT with lowercase enrolment name created")
-
+      logIntoCustomerAdvisorMessageInboxPage()
+      createMDTPMessage("pptLowerCase", "valid")
       When("I open my messages for ppt using regime for PPT")
-
-      Then("I see the message: Direct debit test")
+      logIntoMessage("ppt", "regime", regimePptValue)
+      Then("I see the message: Direct debit logo test")
+      waitForText(demoFrontEndInboxFirstMessageSubject2, "Direct debit logo test")
     }
-
-    Scenario("HMRC can create message with camelcase using enrolment name") {
-
+    Scenario("HMRC can create message with camelcase using enrolment name", OwsmTests) {
       Given("a message for PPT with camelcase enrolment name created")
-
+      logIntoCustomerAdvisorMessageInboxPage()
+      createMDTPMessage("pptCamelCase", "valid")
       When("I open my messages for ppt using regime for PPT")
-
-      Then("I see the message: Direct debit test")
+      logIntoMessage("ppt", "regime", regimePptValue)
+      Then("I see the message: Direct debit logo test")
+      waitForText(demoFrontEndInboxFirstMessageSubject2, "Direct debit logo test")
     }
+  }
+  override def beforeEach(): Unit = {
+    super.beforeEach()
+    deleteMongoRecordsFromCollection("secure message")
   }
 }
