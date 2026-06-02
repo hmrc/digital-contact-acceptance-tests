@@ -38,9 +38,10 @@ trait TestData {
   val secureMessage: String                        = TestEnvironment.url("secure-message")
   val externalMessageAdapter: String               = TestEnvironment.url("external-message-adapter")
   val customerAdvisorFrontend: String              = TestEnvironment.url("customer-advisors-frontend")
-  val messageFrontend:String                       = TestEnvironment.url("message-frontend")
-  val message:String                               = TestEnvironment.url("message")
-  
+  val secureMessagingBaseUrl: String               = TestEnvironment.url("secure-message-stub")
+  val messageFrontend: String = TestEnvironment.url("message-frontend")
+  val message: String = TestEnvironment.url("message")
+
   val credentialStrength: String                   = "strong"
   val confidenceLevel: String                      = "200"
   val enrolmentKey: String                         = "IR-SA"
@@ -49,8 +50,8 @@ trait TestData {
   val bta: String                                  = "/business-account"
   val itsa: String                                 = "/itsa"
   val optOutReasonText: String                     = "for testing purpose"
-  val referenceIdValue: String                     = "1234243234242234"
   val sourceValue: String                          = "gmc"
+  val sourceMdtpValue: String                      = "mdtp"
   val taxIdentifierNameValue: String               = "nino"
   val regimeValue: String                          = "paye"
   val taxIdentifierNameSautrValue: String          = "sautr"
@@ -71,15 +72,25 @@ trait TestData {
   val enrolmentKeyOss: String                      = "HMRC-OSS-ORG"
   val taxIdentifierNameOssValue: String            = "VRN"
   val regimeOssValue: String                       = "oss"
-  
   val enrolmentKeyAd: String                       = "HMRC-AD-ORG"
   val taxIdentifierNameAdValue: String             = "APPAID"
   val regimeAdValue: String                        = "ad"
   
-  val enrolmentKeyObdts: String                     = "HMRC-OBTDS-ORG"
-  val taxIdentifierNameObdtsValue: String           = "EtmpRegistrationNumber"
+  val enrolmentKeyObtds: String                    = "HMRC-OBTDS-ORG"
+  val taxIdentifierNameObtdsValue: String          = "EtmpRegistrationNumber"
   val regimeSdilValue: String                      = "sdil"
-  val regimeFhddsValue: String                      = "fhdds"
+  val regimeFhddsValue: String                     = "fhdds"
+ 
+  
+  val enrolmentKeyEpaye: String                    = "IR-PAYE"
+  val taxIdentifierNameEpayeValue: String          = "IR-PAYE.EMPREF"
+  val regimeEpayeValue: String                     = "epaye"
+  val enrolmentKeyPpt: String                      = "HMRC-PPT-ORG"
+  val taxIdentifierNamePptValue: String            = "HMRC-PPT-ORG.ETMPREGISTRATIONNUMBER"
+  val regimePptValue: String                       = "ppt"
+  val enrolmentKeyCds: String                      = "HMRC-CUS-ORG"
+  val taxIdentifierNameCds: String                 = "EORINumber"
+  val regimeCdsValue: String                       = "cds"
 
   val messageTypeValue: String                     = "mailout-batch"
   val alertQueueValue: String                      = "DEFAULT"
@@ -104,4 +115,6 @@ trait TestData {
   val messageContent: String                       = "Actual message content should be here"
   val atsmessageContent: String                    = "DQoNCjxwPlRoaXMgc2hvd3MgaG93IGdvdmVybm1lbnQgc3BlbmRzIHlvdXIgdGF4IGFuZCBOYXRpb25hbCBJbnN1cmFuY2UgY29udHJpYnV0aW9ucy48L3A+DQoNCjxwPlNlZSB5b3VyIDxhIGhyZWY9Imh0dHBzOi8vd3d3LnRheC5zZXJ2aWNlLmdvdi51ay9hbm51YWwtdGF4LXN1bW1hcnkiPkFubnVhbCBUYXggU3VtbWFyeTwvYT4uPC9wPg0KDQo8cD5UYXggc3VtbWFyaWVzIGFyZSBmb3IgaW5mb3JtYXRpb24gb25seSwgc28geW91IGRvIG5vdCBuZWVkIHRvIGNvbnRhY3QgSE1SQy48L3A+DQoNCg0KDQoNCg=="
 
+  val secureMessageStub: String                    = "secure-message-stub"
+  val conversationList: String                     = "/messages"
 }

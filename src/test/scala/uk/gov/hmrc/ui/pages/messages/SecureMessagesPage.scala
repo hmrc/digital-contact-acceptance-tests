@@ -26,6 +26,16 @@ object SecureMessagesPage extends BasePage{
     val subjectLink: By = By.cssSelector(demoFrontEndInboxFirstMessageSubject)
     click(subjectLink)
   }
+
+  def clickOnSubjectEpaye(): Unit = {
+    val subjectLink: By = By.cssSelector(demoFrontEndInboxFirstMessageSubject2)
+    click(subjectLink)
+  }
+
+  def clickOnSubjectCds(): Unit = {
+    val subjectLink: By = By.cssSelector(cdsMessagePageFirstMessageSubject)
+    click(subjectLink)
+  }
   
   def pageContains(subject: String): Unit = {
     assert(getPageSource.contains(subject))

@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.specs.owsm.ema
 
 import org.scalatest.featurespec.AnyFeatureSpec
-import uk.gov.hmrc.ui.ElementLocators.{demoFrontEndInboxFirstMessageSubject, demoFrontEndInboxIossMessageSubject}
+import uk.gov.hmrc.ui.ElementLocators.{demoFrontEndInboxFirstMessageSubject, demoFrontEndInboxFirstMessageSubject2}
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.logIntoMessage
 import uk.gov.hmrc.ui.pages.messages.GmcMessages.*
@@ -80,7 +80,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       When("A GMC message is created via EMA using nino")
       createV4Message("nino")
       And("I open my messages for PTA using regime")
-      logIntoMessage("NoSautr", "regime", regimeValue)
+      logIntoMessage("pta", "regime", regimeValue)
       Then("I see the message: Tax calculation for the year 6 April 2020 to 5 April 2021")
       waitForText(demoFrontEndInboxFirstMessageSubject, subject_p800)
     }
@@ -120,7 +120,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       When("A GMC message is created via EMA using nino for v4")
       createV4Message("nino for v4")
       And("I open my messages for PTA using regime")
-      logIntoMessage("NoSautr", "regime",regimeValue)
+      logIntoMessage("pta", "regime",regimeValue)
       And("I see the message: Tax calculation for the year 6 April 2020 to 5 April 2021")
       waitForText(demoFrontEndInboxFirstMessageSubject, subject_p800)
       And("I click Welsh language link")
@@ -230,7 +230,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       And("I open my messages for ioss using regime")
       logIntoMessage("ioss inter","regime", regimeIossValue)
       Then("I see the message: Late Payment Interest Due")
-      waitForText(demoFrontEndInboxIossMessageSubject, "Late Payment Interest Due")
+      waitForText(demoFrontEndInboxFirstMessageSubject2, "Late Payment Interest Due")
     }
 
     Scenario("Customer can view the OSS messages in secure message inbox", OwsmTests) {
@@ -239,7 +239,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       And("I open my messages for oss using regime")
       logIntoMessage("oss","regime",regimeOssValue)
       Then("I see the message: Late Payment Interest Due")
-      waitForText(demoFrontEndInboxIossMessageSubject, "Late Payment Interest Due")
+      waitForText(demoFrontEndInboxFirstMessageSubject2, "Late Payment Interest Due")
     }
 
     Scenario("Customer can view the Alcohol Duty messages in secure message inbox", OwsmTests) {
@@ -248,7 +248,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       And("I open my messages for ad using regime")
       logIntoMessage("ad", "regime", regimeAdValue)
       Then("I see the message: Late Payment Interest Due")
-      waitForText(demoFrontEndInboxIossMessageSubject, "Late Payment Interest Due")
+      waitForText(demoFrontEndInboxFirstMessageSubject2, "Late Payment Interest Due")
     }
 
     Scenario("Customer can view the ITSA new English messages in BTA inbox", OwsmTests) {
@@ -362,7 +362,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       And("I open my messages for ioss using regime")
       logIntoMessage("ioss netp","regime",regimeIossValue)
       Then("I see the message: Late Payment Interest Due")
-      waitForText(demoFrontEndInboxIossMessageSubject, "Late Payment Interest Due")
+      waitForText(demoFrontEndInboxFirstMessageSubject2, "Late Payment Interest Due")
     }
 
     Scenario("Customer can view the NIREF1 En messages in PTA inbox", OwsmTests) {
@@ -379,7 +379,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       When("A GMC message is created via EMA using niref1 en")
       createV4Message("niref1 en")
       And("I open my messages for PTA using regime")
-      logIntoMessage("NoSautr","regime",regimeValue)
+      logIntoMessage("pta","regime",regimeValue)
       Then("I see the message: National Insurance contributions - we may owe you a refund")
       waitForText(demoFrontEndInboxFirstMessageSubject, "National Insurance contributions - we may owe you a refund")
     }
@@ -398,7 +398,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       When("A GMC message is created via EMA using niref4 en")
       createV4Message("niref4 en")
       And("I open my messages for PTA using regime")
-      logIntoMessage("NoSautr","regime",regimeValue)
+      logIntoMessage("pta","regime",regimeValue)
       Then("I see the message: National Insurance contributions - we may owe you a refund")
       waitForText(demoFrontEndInboxFirstMessageSubject, "National Insurance contributions - we may owe you a refund")
     }
