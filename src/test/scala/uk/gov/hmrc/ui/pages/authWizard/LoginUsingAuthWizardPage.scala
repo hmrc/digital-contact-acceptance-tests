@@ -20,6 +20,7 @@ import org.openqa.selenium.By
 import org.openqa.selenium.support.ui.ExpectedConditions
 import uk.gov.hmrc.configuration.TestEnvironment
 import uk.gov.hmrc.ui.pages.BasePage
+import uk.gov.hmrc.ui.pages.messages.MdtpMessages.taxIdentifierNameObtdsValue
 import uk.gov.hmrc.ui.pages.preferencesAdmin.PreferencesAdminPage.{click, sendKeys}
 import uk.gov.hmrc.ui.utils.GeneratedTestData
 
@@ -35,6 +36,7 @@ object LoginUsingAuthWizardPage extends BasePage {
   def messagesUsingRegimeRedirectUrl(regimeType: String): String = digitalContactDemoFrontend.concat(s"/messages?regime=$regimeType")
   def messagesUsingEnrolmentKeyRedirectUrl(enrolmentKey: String): String = messageFrontend.concat(s"/messages?taxIdentifiers=$enrolmentKey")
   def messagesUsingEnrolmentKeyAndRegimeRedirectUrl(enrolmentKey: String, regimeType: String): String = digitalContactDemoFrontend.concat(s"/messages?regime=$regimeType&taxIdentifiers=$enrolmentKey")
+  def messageCountUsingEnrolmentKeyAndRegimeRedirectUrl(taxIdentifiers: String, regime: String): String =  messageFrontend.concat(s"/messages/count?regimes=$regime&taxIdentifiers=$taxIdentifiers")
 
   def pageLoad(): Unit = {
     get(authWizardBaseUrl)
@@ -125,13 +127,16 @@ object LoginUsingAuthWizardPage extends BasePage {
 
     val selectedEnrolmentKey: String =
       enrolmentType match {
-        case "sdil" | "fhdds" => enrolmentKeyObtds
-        case _       => ""
+        case "sdil" | "fhdds"   => enrolmentKeyObtds
+        case "ppt"              => enrolmentKeyPpt
+        case "pptEnrolmentName" => enrolmentNamePpt
+        case _       => "Invalid enrolment type"
       }
 
     val redirectUrl =
       redirectType match {
         case "secure-message-stub" =>  secureMessagingBaseUrl + secureMessageStub + conversationList
+
         case "regime" =>
           messagesUsingRegimeRedirectUrl(
             regime.toLowerCase()
@@ -145,6 +150,13 @@ object LoginUsingAuthWizardPage extends BasePage {
             selectedEnrolmentKey,
             regime.toLowerCase()
           )
+          
+        case "regimeAndEnrolmentKeyMessageCount" =>
+          messageCountUsingEnrolmentKeyAndRegimeRedirectUrl(
+            selectedEnrolmentKey,
+            regime.toLowerCase()
+          )
+          
         case _ =>
           throw new IllegalArgumentException(
             s"Unknown redirect type: $redirectType"
@@ -168,9 +180,10 @@ object LoginUsingAuthWizardPage extends BasePage {
         "ad" -> (enrolmentKeyAd, taxIdentifierNameAdValue, GeneratedTestData.adIdentifierValue),
         "ioss netp" -> (enrolmentKeyIossNetp, taxIdentifierNameIossNetpValue, GeneratedTestData.iossNetpIdentifierValue),
         "sdil" ->(enrolmentKeyObtds, taxIdentifierNameObtdsValue, GeneratedTestData.identifierSdilValidValue),
-        "fhdds" ->(enrolmentKeyObtds, taxIdentifierNameObtdsValue, GeneratedTestData.identifierObtdsValidValue),
+        "fhdds" ->(enrolmentKeyObtds, taxIdentifierNameObtdsValue, GeneratedTestData.identifierFhhdsValidValue),
         "epaye" ->(enrolmentKeyEpaye, taxIdentifierNameEpayeValue, GeneratedTestData.epayeTaxOfficeNumberAndReferenceValue),
-        "ppt" ->(enrolmentKeyPpt, taxIdentifierNamePptValue, GeneratedTestData.identifierValuePpt),
+        "ppt" ->(enrolmentKeyPpt, taxIdentifierNamePptValue, GeneratedTestData.identifierPptValidValue),
+        "pptEnrolmentName" ->(enrolmentKeyPpt, taxIdentifierNamePptValue, GeneratedTestData.identifierPptValidValue),
         "cds" ->(enrolmentKeyCds, taxIdentifierNameCds, GeneratedTestData.identifierValueEori)
       ).withDefaultValue(enrolmentKey, identifierName, GeneratedTestData.identifierValue)
 
