@@ -506,7 +506,7 @@ object GmcMessages extends BasePage {
   def fillFormPptEnglishAndWelsh(subjectEnglish: String, contentEnglish: String, subjectWelsh: String, contentWelsh: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       externalRefSource = Some(sourceMdtpValue),
-      identifierName = Some(taxIdentifierNamePptValue),
+      identifierName = Some(taxIdentifierNamePptValueUc),
       identifierValue = Some(GeneratedTestData.identifierValuePpt),
       regime = Some(regimePptValue),
       subjectEnglish = Some(subjectEnglish),

@@ -56,6 +56,8 @@ object GeneratedTestData {
 
   val epayeTaxOfficeNumberAndReferenceValue: String = s"840PR${randomDigits(8)}"
 
+  val pptIdentifierValue: String = s"840PR${randomDigits(8)}"
+
   val email: String = s"testuser${randomDigits(6)}@example.com"
 
   val email2: String = s"testuser${randomDigits(6)}@example.org"

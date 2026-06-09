@@ -129,6 +129,7 @@ object LoginUsingAuthWizardPage extends BasePage {
         case "sdil" | "fhdds" => enrolmentKeyObtds
         case "epaye" => enrolmentKeyEpaye
         case "epayeTaxIdentifier" => enrolmentKeytaxIdentifierEpaye
+        case "pptTaxIdentifier" => enrolmentKeytaxIdentifierPpt
         case _       => ""
       }
 
@@ -181,7 +182,8 @@ object LoginUsingAuthWizardPage extends BasePage {
         "fhdds" ->(enrolmentKeyObtds, taxIdentifierNameObtdsValue, GeneratedTestData.identifierObtdsValidValue),
         "epaye" ->(enrolmentKeyEpaye, taxIdentifierNameEpayeValueUc, GeneratedTestData.epayeTaxOfficeNumberAndReferenceValue),
         "epayeTaxIdentifier" ->(enrolmentKeyEpaye, taxIdentifierNameEpayeValueUc, GeneratedTestData.epayeTaxOfficeNumberAndReferenceValue),
-        "ppt" ->(enrolmentKeyPpt, taxIdentifierNamePptValue, GeneratedTestData.identifierValuePpt),
+        "ppt" ->(enrolmentKeyPpt, taxIdentifierNamePptValueUc, GeneratedTestData.identifierValuePpt),
+        "pptTaxIdentifier" ->(enrolmentKeyPpt, taxIdentifierNamePptValueUc, GeneratedTestData.identifierValuePpt),
         "cds" ->(enrolmentKeyCds, taxIdentifierNameCds, GeneratedTestData.identifierValueEori)
       ).withDefaultValue(enrolmentKey, identifierName, GeneratedTestData.identifierValue)
 
