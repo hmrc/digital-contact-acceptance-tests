@@ -55,6 +55,13 @@ object MdtpMessages extends BasePage {
           typeMessage,
           GeneratedTestData.epayeTaxOfficeNumberAndReferenceValue
         )
+
+      case "pptuppercase" | "pptlowercase" | "pptcamelcase"=>
+        fillFormForMessage(
+          mdtpMessageType,
+          typeMessage,
+          GeneratedTestData.identifierValuePpt
+        )
       case _ =>
         throw new IllegalArgumentException(
           s"Unknown message type: $mdtpMessageType"
@@ -84,10 +91,12 @@ object MdtpMessages extends BasePage {
 
     val identifierName = mdtpMessageType.toLowerCase match {
       case "fhdds" | "sdil" => enrolmentKeyObtds
-      case "ppt" => taxIdentifierNamePptValue
       case "epayeuppercase" => taxIdentifierNameEpayeValueUc
       case "epayelowercase" => taxIdentifierNameEpayeValueLc
       case "epayecamelcase" => taxIdentifierNameEpayeValueCc
+      case "pptuppercase" => taxIdentifierNamePptValueUc
+      case "pptlowercase" => taxIdentifierNamePptValueLc
+      case "pptcamelcase" => taxIdentifierNamePptValueCc
       case _ => throw new IllegalArgumentException(s"Unknown mdtp message type: $mdtpMessageType")
     }
 
