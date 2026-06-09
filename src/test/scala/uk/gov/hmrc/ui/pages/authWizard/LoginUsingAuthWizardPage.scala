@@ -35,6 +35,7 @@ object LoginUsingAuthWizardPage extends BasePage {
   def messagesUsingRegimeRedirectUrl(regimeType: String): String = digitalContactDemoFrontend.concat(s"/messages?regime=$regimeType")
   def messagesUsingEnrolmentKeyRedirectUrl(enrolmentKey: String): String = messageFrontend.concat(s"/messages?taxIdentifiers=$enrolmentKey")
   def messagesUsingEnrolmentKeyAndRegimeRedirectUrl(enrolmentKey: String, regimeType: String): String = digitalContactDemoFrontend.concat(s"/messages?regime=$regimeType&taxIdentifiers=$enrolmentKey")
+  def messageCountUsingEnrolmentKeyAndRegimeRedirectUrl(taxIdentifiers: String, regime: String): String =  messageFrontend.concat(s"/messages/count?regimes=$regime&taxIdentifiers=$taxIdentifiers")
 
   def pageLoad(): Unit = {
     get(authWizardBaseUrl)
@@ -126,6 +127,8 @@ object LoginUsingAuthWizardPage extends BasePage {
     val selectedEnrolmentKey: String =
       enrolmentType match {
         case "sdil" | "fhdds" => enrolmentKeyObtds
+        case "epaye" => enrolmentKeyEpaye
+        case "epayeTaxIdentifier" => enrolmentKeytaxIdentifierEpaye
         case _       => ""
       }
 
@@ -145,6 +148,13 @@ object LoginUsingAuthWizardPage extends BasePage {
             selectedEnrolmentKey,
             regime.toLowerCase()
           )
+
+        case "regimeAndEnrolmentKeyMessageCount" =>
+          messageCountUsingEnrolmentKeyAndRegimeRedirectUrl(
+            selectedEnrolmentKey,
+            regime.toLowerCase()
+          )
+
         case _ =>
           throw new IllegalArgumentException(
             s"Unknown redirect type: $redirectType"
@@ -169,7 +179,8 @@ object LoginUsingAuthWizardPage extends BasePage {
         "ioss netp" -> (enrolmentKeyIossNetp, taxIdentifierNameIossNetpValue, GeneratedTestData.iossNetpIdentifierValue),
         "sdil" ->(enrolmentKeyObtds, taxIdentifierNameObtdsValue, GeneratedTestData.identifierSdilValidValue),
         "fhdds" ->(enrolmentKeyObtds, taxIdentifierNameObtdsValue, GeneratedTestData.identifierObtdsValidValue),
-        "epaye" ->(enrolmentKeyEpaye, taxIdentifierNameEpayeValue, GeneratedTestData.epayeTaxOfficeNumberAndReferenceValue),
+        "epaye" ->(enrolmentKeyEpaye, taxIdentifierNameEpayeValueUc, GeneratedTestData.epayeTaxOfficeNumberAndReferenceValue),
+        "epayeTaxIdentifier" ->(enrolmentKeyEpaye, taxIdentifierNameEpayeValueUc, GeneratedTestData.epayeTaxOfficeNumberAndReferenceValue),
         "ppt" ->(enrolmentKeyPpt, taxIdentifierNamePptValue, GeneratedTestData.identifierValuePpt),
         "cds" ->(enrolmentKeyCds, taxIdentifierNameCds, GeneratedTestData.identifierValueEori)
       ).withDefaultValue(enrolmentKey, identifierName, GeneratedTestData.identifierValue)

@@ -37,15 +37,23 @@ object MdtpMessages extends BasePage {
 
       case "fhdds" =>
         fillFormForMessage(
+          mdtpMessageType,
           typeMessage,
           GeneratedTestData.identifierObtdsValidValue,
           GeneratedTestData.identifierObtdsInvalidValue
         )
       case "sdil" =>
         fillFormForMessage(
+          mdtpMessageType,
           typeMessage,
           GeneratedTestData.identifierSdilValidValue,
           GeneratedTestData.identifierObtdsInvalidValue
+        )
+      case "epayeuppercase" | "epayelowercase" | "epayecamelcase"=>
+        fillFormForMessage(
+          mdtpMessageType,
+          typeMessage,
+          GeneratedTestData.epayeTaxOfficeNumberAndReferenceValue
         )
       case _ =>
         throw new IllegalArgumentException(
@@ -56,10 +64,10 @@ object MdtpMessages extends BasePage {
     click(By.id("submit-advice"))
   }
 
-  def fillFormForMessage(
+  def fillFormForMessage( mdtpMessageType: String,
                           typeMessage: String,
                           validIdentifierValue: String,
-                          invalidIdentifierValue: String
+                          invalidIdentifierValue: String = ""
                         ): Unit = {
 
     val contentInputField: By = By.id(contentId)
@@ -72,7 +80,18 @@ object MdtpMessages extends BasePage {
 
     sendKeys(contentInputField, contentValue)
     sendKeys(subjectInputField, subjectValue)
-    sendKeys(identifierNameInputField, identifierNameValue)
+
+
+    val identifierName = mdtpMessageType.toLowerCase match {
+      case "fhdds" | "sdil" => enrolmentKeyObtds
+      case "ppt" => taxIdentifierNamePptValue
+      case "epayeuppercase" => taxIdentifierNameEpayeValueUc
+      case "epayelowercase" => taxIdentifierNameEpayeValueLc
+      case "epayecamelcase" => taxIdentifierNameEpayeValueCc
+      case _ => throw new IllegalArgumentException(s"Unknown mdtp message type: $mdtpMessageType")
+    }
+
+    sendKeys(identifierNameInputField, identifierName)
     sendKeys(emailInputField, GeneratedTestData.email)
     sendKeys(nameInputField, nameValue)
     sendKeys(messageTypeInputField, messageTypeValue)
@@ -80,7 +99,6 @@ object MdtpMessages extends BasePage {
     val identifierValue = typeMessage match {
       case "valid" => validIdentifierValue
       case "invalid" => invalidIdentifierValue
-
       case _ =>
         throw new IllegalArgumentException(
           s"Unknown value: $typeMessage"

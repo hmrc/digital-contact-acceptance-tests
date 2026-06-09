@@ -492,7 +492,7 @@ object GmcMessages extends BasePage {
   def fillFormEpayeEnglishAndWelsh(subjectEnglish: String, contentEnglish: String, subjectWelsh: String, contentWelsh: String): Unit = {
     val updated: MessageFormData = MessageFormData.update(MessageFormData.default,
       externalRefSource = Some(sourceMdtpValue),
-      identifierName = Some(taxIdentifierNameEpayeValue),
+      identifierName = Some(taxIdentifierNameEpayeValueUc),
       identifierValue = Some(GeneratedTestData.epayeTaxOfficeNumberAndReferenceValue),
       regime = Some(regimeEpayeValue),
       subjectEnglish = Some(subjectEnglish),

@@ -83,7 +83,10 @@ trait TestData {
  
   
   val enrolmentKeyEpaye: String                    = "IR-PAYE"
-  val taxIdentifierNameEpayeValue: String          = "IR-PAYE.EMPREF"
+  val enrolmentKeytaxIdentifierEpaye: String       = "EMPREF"
+  val taxIdentifierNameEpayeValueUc: String        = "IR-PAYE.EMPREF"
+  val taxIdentifierNameEpayeValueLc: String        = "IR-PAYE.empref"
+  val taxIdentifierNameEpayeValueCc: String        = "IR-PAYE.empRef"
   val regimeEpayeValue: String                     = "epaye"
   val enrolmentKeyPpt: String                      = "HMRC-PPT-ORG"
   val taxIdentifierNamePptValue: String            = "HMRC-PPT-ORG.ETMPREGISTRATIONNUMBER"
