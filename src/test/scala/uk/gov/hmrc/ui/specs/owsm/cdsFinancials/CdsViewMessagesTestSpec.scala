@@ -1,0 +1,55 @@
+/*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package uk.gov.hmrc.ui.specs.owsm.cdsFinancials
+
+import org.scalatest.featurespec.AnyFeatureSpec
+import uk.gov.hmrc.ui.ElementLocators.*
+import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
+import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.logIntoMessage
+import uk.gov.hmrc.ui.pages.messages.CdsMessages.{CreateCDSMessageWithMultipleTag, CreateCDSMessageWithTag, emptyInbox}
+import uk.gov.hmrc.ui.pages.messages.GmcMessages.*
+import uk.gov.hmrc.ui.pages.messages.SecureMessagesPage.pageContains
+import uk.gov.hmrc.ui.specs.BaseSpec
+import uk.gov.hmrc.ui.specs.tags.{OwsmTests, Wip}
+import uk.gov.hmrc.ui.utils.TestData
+
+
+class CdsViewMessagesTestSpec extends BaseSpec with TestData {
+
+  Feature("Allow customers to view their messages") {
+
+    Scenario("Messages can be filter by a tag", Wip) {
+      Given("Given a message for CDS with tag created")
+      CreateCDSMessageWithTag()
+      When("I navigate to messages list page using eori enrollment with tag filter")
+      logIntoMessage("cds", "secure-message-stub-tag")
+      Then("I can see Messages between you and HMRC text on the page")
+      waitForText(cdsMessagePageHeader, "Messages between you and HMRC")
+      And("I can see Direct debit test text on the page")
+      waitForText(cdsMessagePageFirstMessageSubject, "Direct debit test")
+      And("I can see 1 count in inbox list")
+      waitForText(cdsMessageCount, "1")
+    }
+    
+  }
+
+  override def beforeEach(): Unit = {
+    super.beforeEach()
+    deleteMongoRecordsFromCollection("preferences")
+    deleteMongoRecordsFromCollection("secure message")
+  }
+}

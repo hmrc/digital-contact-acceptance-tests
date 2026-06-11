@@ -122,6 +122,7 @@ object LoginUsingAuthWizardPage extends BasePage {
     val enrolmentNameId: By = By.id("input-0-0-name")
     val enrolmentValueId: By = By.id("input-0-0-value")
     val enrolmentListNino = List("pta", "sautr", "itsa")
+    val multipleEoriList = List("secure-message-stub-tags", "secure-message-stub-multipleEnrolment", "secure-message-stub-enrolment-tag", "secure-message-stub-enrolmentKey-tag", "secure-message-stub-enrolmentKey-enrolment", "secure-message-stub-enrolmentKey-enrolment-tag")
 
 
     val selectedEnrolmentKey: String =
@@ -136,6 +137,17 @@ object LoginUsingAuthWizardPage extends BasePage {
     val redirectUrl =
       redirectType match {
         case "secure-message-stub" =>  secureMessagingBaseUrl + secureMessageStub + conversationList
+        case "secure-message-stub-tag" => secureMessagingBaseUrl + secureMessageStub + conversationList + tagMessageFiltering
+        case "secure-message-stub-tags" => secureMessagingBaseUrl + secureMessageStub + conversationList + tagsMessageFiltering
+        case "secure-message-stub-enrolment" => secureMessagingBaseUrl + secureMessageStub + conversationList + s"?enrolment=HMRC-CUS-ORG~EORINumber~${GeneratedTestData.identifierValueEori}"
+        case "secure-message-stub-enrolmentKey" => secureMessagingBaseUrl + secureMessageStub + conversationList + enrolmentKeyMessageFiltering
+        case "secure-message-stub-multipleEnrolment" => secureMessagingBaseUrl + secureMessageStub + conversationList + s"?enrolment=HMRC-CUS-ORG~EORINumber~${GeneratedTestData.identifierValueEori}&enrolment=HMRC-CUS-ORG~EORINumber~${GeneratedTestData.identifierValueEori2}"
+        case "secure-message-stub-enrolment-tag" => secureMessagingBaseUrl + secureMessageStub + conversationList +s"?enrolment=HMRC-CUS-ORG~EORINumber~${GeneratedTestData.identifierValueEori}"+"&tag=notificationType~Direct%20Debit"
+        case "secure-message-stub-enrolmentKey-tag" => secureMessagingBaseUrl + secureMessageStub + conversationList + enrolmentKeyAndTagMessageFiltering
+        case "secure-message-stub-enrolmentKey-enrolment" => secureMessagingBaseUrl + secureMessageStub + conversationList + "?enrolmentKey=HMRC-CUS-ORG&enrolment=HMRC-CUS-ORG~EORINumber~"+s"${GeneratedTestData.identifierValueEori}"
+        case "secure-message-stub-enrolmentKey-enrolment-tag" => secureMessagingBaseUrl + secureMessageStub + conversationList + "?enrolmentKey=HMCE-VATDEC-ORG&enrolment=HMRC-CUS-ORG~EORINumber~"+s"${GeneratedTestData.identifierValueEori}"+"&tag=notificationType~Direct%20Debit"
+        case "secure-message-stub-vat-dec-enrolment" => secureMessagingBaseUrl + secureMessageStub + conversationList + enrolmentKeyAndVatdecMessageFiltering
+
         case "regime" =>
           messagesUsingRegimeRedirectUrl(
             regime.toLowerCase()
@@ -191,6 +203,14 @@ object LoginUsingAuthWizardPage extends BasePage {
       sendKeys(enrolmentKeyId, key)
       sendKeys(enrolmentNameId, name)
       sendKeys(enrolmentValueId, value)
+    }
+    if (multipleEoriList.contains(redirectType) ){
+      val enrolmentKeyId1: By = By.id("enrolment[1].name")
+      val enrolmentNameId1: By = By.id("input-1-0-name")
+      val enrolmentValueId1: By = By.id("input-1-0-value")
+      sendKeys(enrolmentKeyId1, enrolmentKeyCds)
+      sendKeys(enrolmentNameId1, taxIdentifierNameCds)
+      sendKeys(enrolmentValueId1, GeneratedTestData.identifierValueEori2)
     }
     click(By.id("submit"))
   }

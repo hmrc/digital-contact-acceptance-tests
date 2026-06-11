@@ -123,4 +123,12 @@ trait TestData {
 
   val secureMessageStub: String                    = "secure-message-stub"
   val conversationList: String                     = "/messages"
+  val caseworkerMessage: String                    = "RGVhciBza3kgdHJhZGVyLAoKQXMgeW91IGltcG9ydGluZyB3aXRoIHJlZmVyZW5jZSBudW1iZXIgMTIzNDU2NiwgeW91IG5lZWQgdG8gcHJvdmlkZSBzb21lIGV4dHJhIGluZm9ybWF0aW9uIHRvIHJlbGVhc2UgZm9ybSB0aGUgY3VzdG9tLgpXZSBuZWVkIGltcG9ydCBsaWNlbmNlLCBpbnN1cmFuY2UgZGV0aWFscyBhbmQgc2FsZSBhZ3JlZW1lbnQgYmV0d2VlbiB5b3UgYW5kIGNvbXBhbnkuCgpGcm9tCkhNUkMgQ3VzdG9tcw=="
+  val tagMessageFiltering: String                  = "?tag=notificationType~Direct%20Debit"
+  val tagsMessageFiltering: String                 = "?tag=notificationType~Direct%20Debit&tag=notificationType~Direct%20Credit"
+  val enrolmentKeyMessageFiltering: String         = "?enrolmentKey=HMRC-CUS-ORG"
+  val enrolmentKeyAndTagMessageFiltering: String   = "?enrolmentKey=HMRC-CUS-ORG&tag=notificationType~Direct%20Credit"
+  val enrolmentKeyAndVatdecMessageFiltering: String = "?enrolmentKey=HMCE-VATDEC-ORG"
+
+
 }

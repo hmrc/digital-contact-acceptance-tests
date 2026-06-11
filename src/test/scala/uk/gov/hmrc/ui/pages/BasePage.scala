@@ -122,6 +122,11 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
     fluentWait
   }
 
+  def deleteConversationRecord(id: String): Unit = {
+    val conversationRecordUrl: String = secureMessage + "/test-only/delete/conversation/" + id
+    WsClient.url(conversationRecordUrl).delete()
+  }
+
   def verifyEmail(nino:String = GeneratedTestData.ninoNumber): Unit = {
 
     // To get entity ID via sa-api proxy
@@ -212,5 +217,17 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
   def waitForText(selector:String, text: String): Unit = {
     fluentWait.until(driver => driver.findElement(By.cssSelector(selector)).getText.equals(text))
 
+  }
+
+  def postMessage(payload: String): Unit = {
+    val response = Await.result(
+      WsClient
+        .url(message)
+        .addHttpHeaders("Content-Type" -> "application/json")
+        .post(payload),
+      5.seconds
+    )
+    println(response.status)
+    assert(response.status == 201)
   }
 }

@@ -77,7 +77,7 @@ object ElementLocators {
   val emailConfirmId                                          ="email.confirm"
   val submitChangedEmailButtonId                              = "submit-email-button"
   val demoFrontEndInboxFirstMessageSubject                    = "#sa-messages-table > tbody > tr > td:nth-child(2) > div > span > a > span > span"
-  val demoFrontEndInboxFirstMessageSubject2                     = "#sa-messages-table > tbody > tr > td:nth-child(2) > a > span"
+  val demoFrontEndInboxFirstMessageSubject2                   = "#sa-messages-table > tbody > tr > td:nth-child(2) > a > span"
   val pageHeader1                                             = "#main-content > div > div > h1"
   val pageHeader2                                             = "#main-content > div > div > h2"
   val pageLanguageEnglish                                     = "body > header > section > div > nav > ul > li:nth-child(1) > a"
@@ -86,6 +86,8 @@ object ElementLocators {
   val sendMessageResponse                                     = "#main-content > div > div > div.data > p > span"
   val cdsMessagePageHeader                                    = "#main-content > div > div > div > div > h1"
   val cdsMessagePageFirstMessageSubject                       = "#message-0 > span.govuk-\\!-font-weight-bold.black-text"
+  val cdsMessagePageSecondMessageSubject                      = "#message-1 > span.govuk-\\!-font-weight-bold.black-text"
+  val cdsMessageCount                                         = "body > header > div:nth-child(3) > a > span"
 
   
 
