@@ -123,6 +123,7 @@ trait TestData {
 
   val secureMessageStub: String                    = "secure-message-stub"
   val conversationList: String                     = "/messages"
+  val caseSubject: String                          = "MRN20210219105505513 Case D-89019"
   val caseworkerMessage: String                    = "RGVhciBza3kgdHJhZGVyLAoKQXMgeW91IGltcG9ydGluZyB3aXRoIHJlZmVyZW5jZSBudW1iZXIgMTIzNDU2NiwgeW91IG5lZWQgdG8gcHJvdmlkZSBzb21lIGV4dHJhIGluZm9ybWF0aW9uIHRvIHJlbGVhc2UgZm9ybSB0aGUgY3VzdG9tLgpXZSBuZWVkIGltcG9ydCBsaWNlbmNlLCBpbnN1cmFuY2UgZGV0aWFscyBhbmQgc2FsZSBhZ3JlZW1lbnQgYmV0d2VlbiB5b3UgYW5kIGNvbXBhbnkuCgpGcm9tCkhNUkMgQ3VzdG9tcw=="
   val tagMessageFiltering: String                  = "?tag=notificationType~Direct%20Debit"
   val tagsMessageFiltering: String                 = "?tag=notificationType~Direct%20Debit&tag=notificationType~Direct%20Credit"
@@ -130,5 +131,20 @@ trait TestData {
   val enrolmentKeyAndTagMessageFiltering: String   = "?enrolmentKey=HMRC-CUS-ORG&tag=notificationType~Direct%20Credit"
   val enrolmentKeyAndVatdecMessageFiltering: String = "?enrolmentKey=HMCE-VATDEC-ORG"
 
-
+  val name: String                                 = "CDCM"
+  val conversationId: String                       = "D-89019-20210219"
+  val conversationId2: String                      = "D-89019-20210220"
+  val displayName: String                          = "National Clearance Hub"
+  val displayName2: String                         = "Border Force Hub"
+  val customerName: String                         = "Sky trader"
+  val customerEmail: String                        = "customerName@gmail.com"
+  val emailTemplate: String                        = "newMessageAlert_CDS_exp"
+  val tagsKey1Name: String                         = "notificationType"
+  val tagsKey2Name: String                         = "mrn"
+  val tagsKey3Name: String                         = "queryId"
+  val tagsKey1Value: String                        = "CDS-EXPORTS"
+  val tagsKey2Value: String                        = "DMS7324874993"
+  val tagsKey3Value: String                        = "D-89019-20210219"
+  val unreadStatus: String                         = "Unread message. "
+  val readStatus: String                           = "Previously viewed message. "
 }

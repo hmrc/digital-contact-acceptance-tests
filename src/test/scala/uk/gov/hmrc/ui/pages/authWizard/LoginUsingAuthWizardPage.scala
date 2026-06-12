@@ -147,6 +147,7 @@ object LoginUsingAuthWizardPage extends BasePage {
         case "secure-message-stub-enrolmentKey-enrolment" => secureMessagingBaseUrl + secureMessageStub + conversationList + "?enrolmentKey=HMRC-CUS-ORG&enrolment=HMRC-CUS-ORG~EORINumber~"+s"${GeneratedTestData.identifierValueEori}"
         case "secure-message-stub-enrolmentKey-enrolment-tag" => secureMessagingBaseUrl + secureMessageStub + conversationList + "?enrolmentKey=HMCE-VATDEC-ORG&enrolment=HMRC-CUS-ORG~EORINumber~"+s"${GeneratedTestData.identifierValueEori}"+"&tag=notificationType~Direct%20Debit"
         case "secure-message-stub-vat-dec-enrolment" => secureMessagingBaseUrl + secureMessageStub + conversationList + enrolmentKeyAndVatdecMessageFiltering
+        case "secure-message-conversation" => secureMessagingBaseUrl + secureMessageStub
 
         case "regime" =>
           messagesUsingRegimeRedirectUrl(
@@ -181,7 +182,7 @@ object LoginUsingAuthWizardPage extends BasePage {
       selectByValue(getConfidenceLevel, confidenceLevel)
       sendKeys(getNinoNumber, nino)
     }
-    if (enrolmentType != "pta") {
+    if (enrolmentType != "pta" & redirectType != "secure-message-conversation") {
       val enrolmentKeyMap: Map[String, (String, String, String)] = Map(
         "itsa" -> (enrolmentKeyItsa, taxIdentifierNameItsaValue, GeneratedTestData.itsaIdentifierValue),
         "vat" -> (enrolmentKeyVat, taxIdentifierNameVatValue, GeneratedTestData.vatVrnIdentifierValue),
