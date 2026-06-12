@@ -23,21 +23,12 @@ import uk.gov.hmrc.ui.pages.BasePage
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.*
 import uk.gov.hmrc.ui.utils.GeneratedTestData
 import java.time.format.DateTimeFormatter
-import java.time.{LocalDateTime, ZoneId, ZonedDateTime}
+import java.time.LocalDateTime
 
 
 
 object CdsMessages extends BasePage {
 
-  val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-  val today = ZonedDateTime.now(ZoneId.of("UTC"))
-  val tomorrow = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1)
-  val priorDate = ZonedDateTime.now(ZoneId.of("UTC")).minusDays(5)
-  val laterDate = formatter format tomorrow
-  val earlierDate = formatter format priorDate
-  val todayDate = formatter format today
-  
-  
   def cdsRecipient(EORINumber: String): String = {
     s"""  "recipient":{
             "taxIdentifier":{

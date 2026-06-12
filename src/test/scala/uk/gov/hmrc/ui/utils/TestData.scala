@@ -39,8 +39,8 @@ trait TestData {
   val externalMessageAdapter: String               = TestEnvironment.url("external-message-adapter")
   val customerAdvisorFrontend: String              = TestEnvironment.url("customer-advisors-frontend")
   val secureMessagingBaseUrl: String               = TestEnvironment.url("secure-message-stub")
-  val messageFrontend: String = TestEnvironment.url("message-frontend")
-  val message: String = TestEnvironment.url("message")
+  val messageFrontend: String                      = TestEnvironment.url("message-frontend")
+  val message: String                              = TestEnvironment.url("message")
 
   val credentialStrength: String                   = "strong"
   val confidenceLevel: String                      = "200"
