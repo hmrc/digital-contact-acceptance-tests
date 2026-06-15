@@ -213,4 +213,16 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
     fluentWait.until(driver => driver.findElement(By.cssSelector(selector)).getText.equals(text))
 
   }
+
+  def postCDSMessage(payload: String): Unit = {
+    val response = Await.result(
+      WsClient
+        .url(message)
+        .addHttpHeaders("Content-Type" -> "application/json")
+        .post(payload),
+      5.seconds
+    )
+    println(response.status)
+    assert(response.status == 201)
+  }
 }

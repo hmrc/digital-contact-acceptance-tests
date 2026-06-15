@@ -23,9 +23,8 @@ import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.{logIntoCustomer
 import uk.gov.hmrc.ui.pages.messages.GmcMessages.*
 import uk.gov.hmrc.ui.pages.messages.MdtpMessages.createMDTPMessage
 import uk.gov.hmrc.ui.pages.messages.SecureMessagesPage
-import uk.gov.hmrc.ui.pages.paperless.*
 import uk.gov.hmrc.ui.specs.BaseSpec
-import uk.gov.hmrc.ui.specs.tags.{OwsmTests, Wip}
+import uk.gov.hmrc.ui.specs.tags.OwsmTests
 import uk.gov.hmrc.ui.utils.TestData
 
 
