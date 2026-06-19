@@ -75,7 +75,7 @@ object GmcMessages extends BasePage {
     logIntoDemoFrontendForV4()
     gmcMessageType.toLowerCase match {
       case "invalid formid" => fillFormWithInvalidFormId()
-      case "nino" => fillFormNino(subject_p800, base64_encoded_content_p800)
+      case "nino" => fillFormNino(subject_p800, base64_encoded_content_p800_v4)
       case "sautr for ats" => fillFormSautrAts("Your Annual Tax Summary for 2019 to 2020 is now", base64_encoded_content_atssautr)
       case "nino for v4" => fillFormNinoEnglishAndWelsh(V4MessageHtmlContentP800.htmlContentP800_SubjectEnglish, base64_encoded_content_p800_v4, V4MessageHtmlContentP800.htmlContentP800_SubjectWelsh,base64_encoded_content_p800_v4)
       case "sautr for v4" => fillFormSautrEnglishAndWelsh(V4MessageHtmlContentSa300.HtmlContentSa300_SubjectEnglish, base64_encoded_content_sautr_v4, V4MessageHtmlContentSa300.HtmlContentSa300_SubjectWelsh, base64_encoded_content_sautr_v4)
