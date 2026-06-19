@@ -222,7 +222,6 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
         .post(payload),
       5.seconds
     )
-    println(response.status)
     assert(response.status == 201)
   }
 }

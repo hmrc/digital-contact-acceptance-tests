@@ -48,7 +48,6 @@ object GmcMessages extends BasePage {
   def createV4Message(gmcMessageType: String = ""): Unit = {
 
     val base64_encoded_content_atssautr = Base64.encodeBase64String(atsmessageContent.getBytes("UTF-8"))
-//    val base64_encoded_content_p800 = Base64.encodeBase64String(MessageHtmlContent.p800HtmlContent.getBytes("UTF-8"))
     val base64_encoded_content_p800_v4 = Base64.encodeBase64String(V4MessageHtmlContentP800.HtmlContentP800.getBytes("UTF-8"))
     val base64_encoded_content_itsa_v4 = Base64.encodeBase64String(V4MessageHtmlContentItsa.HtmlContentSaItsa.getBytes("UTF-8"))
     val base64_encoded_content_sautr_v4 = Base64.encodeBase64String(V4MessageHtmlContentSa300.HtmlContentSa300.getBytes("UTF-8"))
