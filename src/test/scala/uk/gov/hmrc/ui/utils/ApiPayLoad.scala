@@ -19,15 +19,54 @@ package uk.gov.hmrc.ui.utils
 
 trait ApiPayLoad {
 
-  val email = GeneratedTestData.email
-  val email2 = GeneratedTestData.email2
-  val payloadBounceEmail1 =
+  val email: String = GeneratedTestData.email
+  val email2: String = GeneratedTestData.email2
+  
+  val payloadBounceEmail1: String =
     s"""{
             "emailAddress": "$email"
     }""".stripMargin
 
-  val payloadBounceEmail2 =
+  val payloadBounceEmail2: String =
     s"""{
             "emailAddress": "$email2"
     }""".stripMargin
+
+  val digitalSuppressionDataToNpsThruHip: String =
+    s"""
+       |{
+       |"nationalInsuranceNumber": "YY000200A",
+       |"bouncedFlag": false,
+       |"currentOptimisticLock": 4,
+       |"printPreferences": [{
+       |"outputFormType": "P2",
+       |"printStatus": "DIGITAL",
+       |"lastUpdatedDate": "2025-04-11"}]
+       |}""".stripMargin
+
+  val paperSuppressionDataToNpsThruHip: String =
+    s"""
+       |{
+       |"nationalInsuranceNumber": "YY000200A",
+       |"bouncedFlag": false,
+       |"currentOptimisticLock": 4,
+       |"printPreferences": [{
+       |"outputFormType": "P2",
+       |"printStatus": "PAPER",
+       |"lastUpdatedDate": "2025-04-11"}]
+       |}""".stripMargin
+
+  val bouncedSuppressionDataToNpsThruHip: String =
+    s"""
+       |{
+       |"nationalInsuranceNumber": "YY000200A",
+       |"bouncedFlag": true,
+       |"currentOptimisticLock": 4,
+       |"printPreferences": [{
+       |"outputFormType": "P2",
+       |"printStatus": "PAPER",
+       |"lastUpdatedDate": "2025-04-11"}]
+       |}""".stripMargin  
+
 }
+

@@ -46,7 +46,7 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
 
   implicit val system: ActorSystem = ActorSystem()
 
-  val WsClient = StandaloneAhcWSClient()
+  val WsClient: StandaloneAhcWSClient = StandaloneAhcWSClient()
 
   val entityIdRegex = "(\\bJsDefined\\b|\\(|\\)|\")"
 
@@ -222,6 +222,27 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
         .post(payload),
       5.seconds
     )
+    println(response.status)
     assert(response.status == 201)
+  }
+
+  def suppressionDataToNpsThruHip(scenario: String): Unit = {
+    val payload = scenario match {
+      case "digital" => digitalSuppressionDataToNpsThruHip
+      case "paper" => paperSuppressionDataToNpsThruHip
+      case "bounced" => bouncedSuppressionDataToNpsThruHip
+      case _ => throw new IllegalArgumentException(s"Unknown scenario: $scenario")
+    }
+
+    val p2HipNpsUrl = digitalContactStub + "/paye/individual/print-preferences"
+
+    val response = Await.result(
+      WsClient
+        .url(p2HipNpsUrl)
+        .addHttpHeaders("Content-Type" -> "application/json")
+        .post(payload),
+      5.seconds
+    )
+    assert(response.status == 200)
   }
 }

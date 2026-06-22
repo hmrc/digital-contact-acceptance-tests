@@ -27,7 +27,9 @@ object GeneratedTestData {
   val ninoNumber: String = s"YY${randomDigits(6)}A"
 
   val ninoNumber1: String = s"SP${randomDigits(6)}A"
-
+  
+  val epsNinoNumber: String = "YY000200A"
+  
   val itsaIdentifierValue: String = s"ITSA${randomDigits(11)}"
 
   val vatVrnIdentifierValue: String = randomDigits(9)
