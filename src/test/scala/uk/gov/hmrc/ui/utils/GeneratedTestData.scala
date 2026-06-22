@@ -55,6 +55,8 @@ object GeneratedTestData {
   val identifierValuePpt: String = s"XMPPT${randomDigits(10)}"
 
   val identifierValueEori: String = s"GB${randomDigits(10)}"
+  
+  val identifierValueEori2: String = s"GB${randomDigits(10)}"
 
   val epayeTaxOfficeNumberAndReferenceValue: String = s"840PR${randomDigits(8)}"
 
