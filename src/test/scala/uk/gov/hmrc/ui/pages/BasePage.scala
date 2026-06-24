@@ -35,6 +35,7 @@ import uk.gov.hmrc.ui.pages.messages.GmcMessages.preferences
 import uk.gov.hmrc.ui.utils.{ApiPayLoad, GeneratedTestData, TestData}
 import play.api.libs.ws.DefaultBodyWritables.writeableOf_String
 import uk.gov.hmrc.ui.ElementLocators.{pageBackLink, pageHeader1, pageHeader2, pageLanguageEnglish, pageLanguageWelsh}
+import uk.gov.hmrc.ui.pages.messages.CdsMessages.{caseworkerReplyMessage, caseworkerReplyPayload, conversationId, name}
 
 import java.time.Duration
 import scala.concurrent.Await
@@ -183,17 +184,18 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
   }
 
   def selectLanguageWelsh(): Unit = {
-    val welshLink: By = By.cssSelector(pageLanguageWelsh)
+    val welshLink: By = By.partialLinkText("Cymraeg")
     click(welshLink)
   }
 
   def selectLanguageEnglish(): Unit = {
-    val englishLink: By = By.cssSelector(pageLanguageEnglish)
+    val englishLink: By = By.partialLinkText("English")
     click(englishLink)
   }
 
   def clickOnBackLink(): Unit = {
     click(By.cssSelector(pageBackLink))
+    fluentWait
   }
   
   def navigateToUrl(url: String): Unit = {
@@ -210,8 +212,8 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
   }
   
   def waitForText(selector:String, text: String): Unit = {
-    fluentWait.until(driver => driver.findElement(By.cssSelector(selector)).getText.equals(text))
-
+    val getText = fluentWait.until(driver => driver.findElement(By.cssSelector(selector)).getText)
+    getText.equals(text)
   }
 
   def postCDSMessage(payload: String): Unit = {
@@ -222,7 +224,19 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
         .post(payload),
       5.seconds
     )
-    println(response.status)
     assert(response.status == 201)
   }
+
+  def caseWorkerReply(): Unit = {
+    val caseWorkerReplyUrl: String = secureMessage.concat(s"secure-messaging/conversation/$name/$conversationId/caseworker-message")
+    val response = Await.result(
+      WsClient
+        .url(caseWorkerReplyUrl)
+        .addHttpHeaders("Content-Type" -> "application/json")
+        .post(caseworkerReplyPayload),
+      5.seconds
+    )
+    assert(response.status == 201)
+  }
+
 }

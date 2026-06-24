@@ -32,5 +32,15 @@ object ViewConversationPage extends BasePage{
   def clickOnConversationBackLink(): Unit = {
     val backLink: By = By.cssSelector(conversationBackLink)
     click(backLink)
+    fluentWait
   }
+
+  def clickOnReplyToThisMessageLink(): Unit = {
+    val replyToThisMessageLink: By = By.id(replyLinkId)
+    click(replyToThisMessageLink)
+    fluentWait
+  }
+  
+  
+  
 }

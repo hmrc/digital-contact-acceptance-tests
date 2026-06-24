@@ -32,10 +32,14 @@ object LoginUsingAuthWizardPage extends BasePage {
   val mdtpMessageInbox: String          = customerAdvisorFrontend + "/customer-advisors-frontend/inbox"
   val mdtpMessageSautr: String          = customerAdvisorFrontend + "/inbox/"
 
-  def messagesUsingRegimeRedirectUrl(regimeType: String): String = digitalContactDemoFrontend.concat(s"/messages?regime=$regimeType")
-  def messagesUsingEnrolmentKeyRedirectUrl(enrolmentKey: String): String = messageFrontend.concat(s"/messages?taxIdentifiers=$enrolmentKey")
-  def messagesUsingEnrolmentKeyAndRegimeRedirectUrl(enrolmentKey: String, regimeType: String): String = digitalContactDemoFrontend.concat(s"/messages?regime=$regimeType&taxIdentifiers=$enrolmentKey")
-  def messageCountUsingEnrolmentKeyAndRegimeRedirectUrl(taxIdentifiers: String, regime: String): String =  messageFrontend.concat(s"/messages/count?regimes=$regime&taxIdentifiers=$taxIdentifiers")
+  def messagesUsingRegimeRedirectUrl(regimeType: String): String                                        =
+    digitalContactDemoFrontend.concat(s"/messages?regime=$regimeType")
+  def messagesUsingEnrolmentKeyRedirectUrl(enrolmentKey: String): String                                =
+    messageFrontend.concat(s"/messages?taxIdentifiers=$enrolmentKey")
+  def messagesUsingEnrolmentKeyAndRegimeRedirectUrl(enrolmentKey: String, regimeType: String): String   =
+    digitalContactDemoFrontend.concat(s"/messages?regime=$regimeType&taxIdentifiers=$enrolmentKey")
+  def messageCountUsingEnrolmentKeyAndRegimeRedirectUrl(taxIdentifiers: String, regime: String): String =
+    messageFrontend.concat(s"/messages/count?regimes=$regime&taxIdentifiers=$taxIdentifiers")
 
   def pageLoad(): Unit = {
     get(authWizardBaseUrl)
@@ -59,27 +63,31 @@ object LoginUsingAuthWizardPage extends BasePage {
     fluentWait
   }
 
-  def loginIntoAccountByAuthWizard(enrolmentType: String, account: String=bta, nino: String=GeneratedTestData.ninoNumber): Unit = {
-    val getRedirectUrl: By = By.id(getRedirectUrlId)
+  def loginIntoAccountByAuthWizard(
+    enrolmentType: String,
+    account: String = bta,
+    nino: String = GeneratedTestData.ninoNumber
+  ): Unit = {
+    val getRedirectUrl: By        = By.id(getRedirectUrlId)
     val getCredentialStrength: By = By.id(getCredentialStrengthId)
-    val getConfidenceLevel: By = By.id(getConfidenceLevelId)
-    val getNinoNumber: By = By.id(getNinoId)
-    val enrolmentKeyId: By = By.id("enrolment[0].name")
-    val enrolmentNameId: By = By.id("input-0-0-name")
-    val enrolmentValueId: By = By.id("input-0-0-value")
+    val getConfidenceLevel: By    = By.id(getConfidenceLevelId)
+    val getNinoNumber: By         = By.id(getNinoId)
+    val enrolmentKeyId: By        = By.id("enrolment[0].name")
+    val enrolmentNameId: By       = By.id("input-0-0-name")
+    val enrolmentValueId: By      = By.id("input-0-0-value")
 
     sendKeys(getRedirectUrl, digitalContactDemoFrontend + account)
     selectByValue(getCredentialStrength, credentialStrength)
     selectByValue(getConfidenceLevel, confidenceLevel)
     sendKeys(getNinoNumber, nino)
 
-    if(enrolmentType != "NoSautr") {
+    if (enrolmentType != "NoSautr") {
       sendKeys(enrolmentKeyId, enrolmentKey)
       sendKeys(enrolmentNameId, identifierName)
       enrolmentType match {
-        case "sautr" => sendKeys(enrolmentValueId, GeneratedTestData.identifierValue)
+        case "sautr"  => sendKeys(enrolmentValueId, GeneratedTestData.identifierValue)
         case "sautr2" => sendKeys(enrolmentValueId, GeneratedTestData.identifierValue2)
-        case _ => throw new IllegalArgumentException(s"Unknown UTR Value")
+        case _        => throw new IllegalArgumentException(s"Unknown UTR Value")
       }
     }
     click(By.id("submit"))
@@ -113,41 +121,64 @@ object LoginUsingAuthWizardPage extends BasePage {
     fluentWait
   }
 
-  def logIntoMessage(enrolmentType: String, redirectType: String, regime: String = "sautr", nino: String=GeneratedTestData.ninoNumber): Unit = {
-    val getRedirectUrl: By = By.id(getRedirectUrlId)
+  def logIntoMessage(
+    enrolmentType: String,
+    redirectType: String,
+    regime: String = "sautr",
+    nino: String = GeneratedTestData.ninoNumber
+  ): Unit = {
+    val getRedirectUrl: By        = By.id(getRedirectUrlId)
     val getCredentialStrength: By = By.id(getCredentialStrengthId)
-    val getConfidenceLevel: By = By.id(getConfidenceLevelId)
-    val getNinoNumber: By = By.id(getNinoId)
-    val enrolmentKeyId: By = By.id("enrolment[0].name")
-    val enrolmentNameId: By = By.id("input-0-0-name")
-    val enrolmentValueId: By = By.id("input-0-0-value")
-    val enrolmentListNino = List("pta", "sautr", "itsa")
-    val multipleEoriList = List("secure-message-stub-tags", "secure-message-stub-multipleEnrolment", "secure-message-stub-enrolment-tag", "secure-message-stub-enrolmentKey-tag", "secure-message-stub-enrolmentKey-enrolment", "secure-message-stub-enrolmentKey-enrolment-tag")
-
+    val getConfidenceLevel: By    = By.id(getConfidenceLevelId)
+    val getNinoNumber: By         = By.id(getNinoId)
+    val enrolmentKeyId: By        = By.id("enrolment[0].name")
+    val enrolmentNameId: By       = By.id("input-0-0-name")
+    val enrolmentValueId: By      = By.id("input-0-0-value")
+    val enrolmentListNino         = List("pta", "sautr", "itsa")
+    val multipleEoriList          = List(
+      "secure-message-stub-tags",
+      "secure-message-stub-multipleEnrolment",
+      "secure-message-stub-enrolment-tag",
+      "secure-message-stub-enrolmentKey-tag",
+      "secure-message-stub-enrolmentKey-enrolment",
+      "secure-message-stub-enrolmentKey-enrolment-tag"
+    )
 
     val selectedEnrolmentKey: String =
       enrolmentType match {
-        case "sdil" | "fhdds" => enrolmentKeyObtds
-        case "epaye" => enrolmentKeyEpaye
+        case "sdil" | "fhdds"     => enrolmentKeyObtds
+        case "epaye"              => enrolmentKeyEpaye
         case "epayeTaxIdentifier" => enrolmentKeytaxIdentifierEpaye
-        case "pptTaxIdentifier" => enrolmentKeytaxIdentifierPpt
-        case _       => ""
+        case "pptTaxIdentifier"   => enrolmentKeytaxIdentifierPpt
+        case _                    => ""
       }
 
     val redirectUrl =
       redirectType match {
-        case "secure-message-stub" =>  secureMessagingBaseUrl + secureMessageStub + conversationList
-        case "secure-message-stub-tag" => secureMessagingBaseUrl + secureMessageStub + conversationList + tagMessageFiltering
-        case "secure-message-stub-tags" => secureMessagingBaseUrl + secureMessageStub + conversationList + tagsMessageFiltering
-        case "secure-message-stub-enrolment" => secureMessagingBaseUrl + secureMessageStub + conversationList + s"?enrolment=HMRC-CUS-ORG~EORINumber~${GeneratedTestData.identifierValueEori}"
-        case "secure-message-stub-enrolmentKey" => secureMessagingBaseUrl + secureMessageStub + conversationList + enrolmentKeyMessageFiltering
-        case "secure-message-stub-multipleEnrolment" => secureMessagingBaseUrl + secureMessageStub + conversationList + s"?enrolment=HMRC-CUS-ORG~EORINumber~${GeneratedTestData.identifierValueEori}&enrolment=HMRC-CUS-ORG~EORINumber~${GeneratedTestData.identifierValueEori2}"
-        case "secure-message-stub-enrolment-tag" => secureMessagingBaseUrl + secureMessageStub + conversationList +s"?enrolment=HMRC-CUS-ORG~EORINumber~${GeneratedTestData.identifierValueEori}"+"&tag=notificationType~Direct%20Debit"
-        case "secure-message-stub-enrolmentKey-tag" => secureMessagingBaseUrl + secureMessageStub + conversationList + enrolmentKeyAndTagMessageFiltering
-        case "secure-message-stub-enrolmentKey-enrolment" => secureMessagingBaseUrl + secureMessageStub + conversationList + "?enrolmentKey=HMRC-CUS-ORG&enrolment=HMRC-CUS-ORG~EORINumber~"+s"${GeneratedTestData.identifierValueEori}"
-        case "secure-message-stub-enrolmentKey-enrolment-tag" => secureMessagingBaseUrl + secureMessageStub + conversationList + "?enrolmentKey=HMCE-VATDEC-ORG&enrolment=HMRC-CUS-ORG~EORINumber~"+s"${GeneratedTestData.identifierValueEori}"+"&tag=notificationType~Direct%20Debit"
-        case "secure-message-stub-vat-dec-enrolment" => secureMessagingBaseUrl + secureMessageStub + conversationList + enrolmentKeyAndVatdecMessageFiltering
-        case "secure-message-conversation" => secureMessagingBaseUrl + secureMessageStub
+        case "secure-message-stub"                            => 
+          secureMessagingBaseUrl + secureMessageStub + conversationList
+        case "secure-message-stub-tag"                        =>
+          secureMessagingBaseUrl + secureMessageStub + conversationList + tagMessageFiltering
+        case "secure-message-stub-tags"                       =>
+          secureMessagingBaseUrl + secureMessageStub + conversationList + tagsMessageFiltering
+        case "secure-message-stub-enrolment"                  =>
+          secureMessagingBaseUrl + secureMessageStub + conversationList + s"?enrolment=HMRC-CUS-ORG~EORINumber~${GeneratedTestData.identifierValueEori}"
+        case "secure-message-stub-enrolmentKey"               =>
+          secureMessagingBaseUrl + secureMessageStub + conversationList + enrolmentKeyMessageFiltering
+        case "secure-message-stub-multipleEnrolment"          =>
+          secureMessagingBaseUrl + secureMessageStub + conversationList + s"?enrolment=HMRC-CUS-ORG~EORINumber~${GeneratedTestData.identifierValueEori}&enrolment=HMRC-CUS-ORG~EORINumber~${GeneratedTestData.identifierValueEori2}"
+        case "secure-message-stub-enrolment-tag"              =>
+          secureMessagingBaseUrl + secureMessageStub + conversationList + s"?enrolment=HMRC-CUS-ORG~EORINumber~${GeneratedTestData.identifierValueEori}" + "&tag=notificationType~Direct%20Debit"
+        case "secure-message-stub-enrolmentKey-tag"           =>
+          secureMessagingBaseUrl + secureMessageStub + conversationList + enrolmentKeyAndTagMessageFiltering
+        case "secure-message-stub-enrolmentKey-enrolment"     =>
+          secureMessagingBaseUrl + secureMessageStub + conversationList + "?enrolmentKey=HMRC-CUS-ORG&enrolment=HMRC-CUS-ORG~EORINumber~" + s"${GeneratedTestData.identifierValueEori}"
+        case "secure-message-stub-enrolmentKey-enrolment-tag" =>
+          secureMessagingBaseUrl + secureMessageStub + conversationList + "?enrolmentKey=HMCE-VATDEC-ORG&enrolment=HMRC-CUS-ORG~EORINumber~" + s"${GeneratedTestData.identifierValueEori}" + "&tag=notificationType~Direct%20Debit"
+        case "secure-message-stub-vat-dec-enrolment"          =>
+          secureMessagingBaseUrl + secureMessageStub + conversationList + enrolmentKeyAndVatdecMessageFiltering
+        case "secure-message-conversation"                    => 
+          secureMessagingBaseUrl + secureMessageStub
 
         case "regime" =>
           messagesUsingRegimeRedirectUrl(
@@ -184,20 +215,20 @@ object LoginUsingAuthWizardPage extends BasePage {
     }
     if (enrolmentType != "pta" & redirectType != "secure-message-conversation") {
       val enrolmentKeyMap: Map[String, (String, String, String)] = Map(
-        "itsa" -> (enrolmentKeyItsa, taxIdentifierNameItsaValue, GeneratedTestData.itsaIdentifierValue),
-        "vat" -> (enrolmentKeyVat, taxIdentifierNameVatValue, GeneratedTestData.vatVrnIdentifierValue),
-        "ioss" -> (enrolmentKeyIoss, taxIdentifierNameIossValue, GeneratedTestData.iossIdentifierValue),
-        "ioss inter" -> (enrolmentKeyIossInter, taxIdentifierNameIossInterValue, GeneratedTestData.iossInterIdentifierValue),
-        "oss" -> (enrolmentKeyOss, taxIdentifierNameOssValue, GeneratedTestData.ossIdentifierValue),
-        "ad" -> (enrolmentKeyAd, taxIdentifierNameAdValue, GeneratedTestData.adIdentifierValue),
-        "ioss netp" -> (enrolmentKeyIossNetp, taxIdentifierNameIossNetpValue, GeneratedTestData.iossNetpIdentifierValue),
-        "sdil" ->(enrolmentKeyObtds, taxIdentifierNameObtdsValue, GeneratedTestData.identifierSdilValidValue),
-        "fhdds" ->(enrolmentKeyObtds, taxIdentifierNameObtdsValue, GeneratedTestData.identifierObtdsValidValue),
-        "epaye" ->(enrolmentKeyEpaye, taxIdentifierNameEpayeValueUc, GeneratedTestData.epayeTaxOfficeNumberAndReferenceValue),
-        "epayeTaxIdentifier" ->(enrolmentKeyEpaye, taxIdentifierNameEpayeValueUc, GeneratedTestData.epayeTaxOfficeNumberAndReferenceValue),
-        "ppt" ->(enrolmentKeyPpt, taxIdentifierNamePptValueUc, GeneratedTestData.identifierValuePpt),
-        "pptTaxIdentifier" ->(enrolmentKeyPpt, taxIdentifierNamePptValueUc, GeneratedTestData.identifierValuePpt),
-        "cds" ->(enrolmentKeyCds, taxIdentifierNameCds, GeneratedTestData.identifierValueEori)
+        "itsa"               -> (enrolmentKeyItsa, taxIdentifierNameItsaValue, GeneratedTestData.itsaIdentifierValue),
+        "vat"                -> (enrolmentKeyVat, taxIdentifierNameVatValue, GeneratedTestData.vatVrnIdentifierValue),
+        "ioss"               -> (enrolmentKeyIoss, taxIdentifierNameIossValue, GeneratedTestData.iossIdentifierValue),
+        "ioss inter"         -> (enrolmentKeyIossInter, taxIdentifierNameIossInterValue, GeneratedTestData.iossInterIdentifierValue),
+        "oss"                -> (enrolmentKeyOss, taxIdentifierNameOssValue, GeneratedTestData.ossIdentifierValue),
+        "ad"                 -> (enrolmentKeyAd, taxIdentifierNameAdValue, GeneratedTestData.adIdentifierValue),
+        "ioss netp"          -> (enrolmentKeyIossNetp, taxIdentifierNameIossNetpValue, GeneratedTestData.iossNetpIdentifierValue),
+        "sdil"               -> (enrolmentKeyObtds, taxIdentifierNameObtdsValue, GeneratedTestData.identifierSdilValidValue),
+        "fhdds"              -> (enrolmentKeyObtds, taxIdentifierNameObtdsValue, GeneratedTestData.identifierObtdsValidValue),
+        "epaye"              -> (enrolmentKeyEpaye, taxIdentifierNameEpayeValueUc, GeneratedTestData.epayeTaxOfficeNumberAndReferenceValue),
+        "epayeTaxIdentifier" -> (enrolmentKeyEpaye, taxIdentifierNameEpayeValueUc, GeneratedTestData.epayeTaxOfficeNumberAndReferenceValue),
+        "ppt"                -> (enrolmentKeyPpt, taxIdentifierNamePptValueUc, GeneratedTestData.identifierValuePpt),
+        "pptTaxIdentifier"   -> (enrolmentKeyPpt, taxIdentifierNamePptValueUc, GeneratedTestData.identifierValuePpt),
+        "cds"                -> (enrolmentKeyCds, taxIdentifierNameCds, GeneratedTestData.identifierValueEori)
       ).withDefaultValue(enrolmentKey, identifierName, GeneratedTestData.identifierValue)
 
       val (key, name, value) = enrolmentKeyMap(enrolmentType)
@@ -205,9 +236,9 @@ object LoginUsingAuthWizardPage extends BasePage {
       sendKeys(enrolmentNameId, name)
       sendKeys(enrolmentValueId, value)
     }
-    if (multipleEoriList.contains(redirectType) ){
-      val enrolmentKeyId1: By = By.id("enrolment[1].name")
-      val enrolmentNameId1: By = By.id("input-1-0-name")
+    if (multipleEoriList.contains(redirectType)) {
+      val enrolmentKeyId1: By   = By.id("enrolment[1].name")
+      val enrolmentNameId1: By  = By.id("input-1-0-name")
       val enrolmentValueId1: By = By.id("input-1-0-value")
       sendKeys(enrolmentKeyId1, enrolmentKeyCds)
       sendKeys(enrolmentNameId1, taxIdentifierNameCds)
@@ -215,5 +246,5 @@ object LoginUsingAuthWizardPage extends BasePage {
     }
     click(By.id("submit"))
   }
-
+  Thread.sleep(20000)
 }

@@ -22,7 +22,7 @@ import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.*
 import uk.gov.hmrc.ui.utils.{GeneratedTestData, MessageFormData}
 import org.apache.commons.codec.binary.Base64
 import uk.gov.hmrc.ui.ElementLocators.sendMessageResponse
-import uk.gov.hmrc.ui.utils.html.{EnMessageHtmlContentItsa, MessageHtmlContent, NIREF1EnMessageHtmlContent, V4MessageHtmlContentItsa, V4MessageHtmlContentP800, V4MessageHtmlContentSa300, V4MessageHtmlContentVat}
+import uk.gov.hmrc.ui.utils.html.*
 
 object GmcMessages extends BasePage {
 

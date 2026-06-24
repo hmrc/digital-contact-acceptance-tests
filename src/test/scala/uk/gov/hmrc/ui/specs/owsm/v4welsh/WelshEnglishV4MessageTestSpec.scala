@@ -130,7 +130,7 @@ class WelshEnglishV4MessageTestSpec extends BaseSpec with TestData {
       Then("I see the message: Negeseuon CDS ar gyfer prawf")
       waitForText(cdsMessagePageFirstMessageSubject, "Negeseuon CDS ar gyfer prawf")
       And("I click the message: Negeseuon CDS ar gyfer prawf")
-      SecureMessagesPage.clickOnSubjectCds()
+      SecureMessagesPage.clickOnUnreadSubjectCds()
       And("When I see the message: Negeseuon CDS ar gyfer prawf")
       SecureMessagesPage.pageContains("Negeseuon CDS ar gyfer prawf")
       And("I click English language link")

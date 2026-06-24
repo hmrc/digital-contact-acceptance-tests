@@ -18,16 +18,30 @@ package uk.gov.hmrc.ui.pages.messages
 
 import org.openqa.selenium.By
 import uk.gov.hmrc.selenium.webdriver.Driver
-import uk.gov.hmrc.ui.ElementLocators.{cdsMessagePageFirstMessageSubject, conversationAlertTemplate, conversationClientName, conversationConversationIdentifierName, conversationConversationIdentifierValue, conversationCustomerEmail, conversationCustomerEnrolmentKey, conversationCustomerEnrolmentName, conversationCustomerEnrolmentValue, conversationCustomerName, conversationDisplayName, conversationMessage, conversationQueryButton, conversationSenderId, conversationSubject, readConversationStatus, tagsKey1Id, tagsKey1ValueId, tagsKey2Id, tagsKey2ValueId, unreadConversationStatus}
+import uk.gov.hmrc.ui.ElementLocators.*
 import uk.gov.hmrc.ui.pages.BasePage
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.*
 import uk.gov.hmrc.ui.utils.GeneratedTestData
+
 import java.time.format.DateTimeFormatter
 import java.time.LocalDateTime
 
 
-
 object CdsMessages extends BasePage {
+
+  val caseworkerReplyPayload: String =
+    s"""{
+                 "sender": {
+                    "system": {
+                      "identifier": {
+                      "name": "$name",
+                      "value": "$conversationId"
+                    }
+                 }
+          },
+          "content": "$caseworkerReplyMessage"
+         }""".stripMargin
+
 
   def cdsRecipient(EORINumber: String): String = {
     s"""  "recipient":{
@@ -142,7 +156,7 @@ object CdsMessages extends BasePage {
     sendKeys(cdsTagsKey2Id, tagsKey2Name)
     sendKeys(cdsTagsKey2ValueId, tagsKey2Value)
     click(cdsQueryButton)
-
+    fluentWait
   }
 
   def messageReadStatus(): Unit = {
@@ -152,5 +166,5 @@ object CdsMessages extends BasePage {
   def messageUnReadStatus(): Unit = {
     assert(getText(By.cssSelector(unreadConversationStatus)).equals(unreadStatus))
   }
-
+  
 }
