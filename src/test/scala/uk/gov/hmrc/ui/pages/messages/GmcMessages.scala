@@ -45,9 +45,7 @@ object GmcMessages extends BasePage {
   val sourceData: String         = sourceDataId
 
   def createV4Message(gmcMessageType: String = ""): Unit = {
-
     val base64_encoded_content_atssautr  = Base64.encodeBase64String(atsmessageContent.getBytes("UTF-8"))
-    val base64_encoded_content_p800      = Base64.encodeBase64String(MessageHtmlContent.p800HtmlContent.getBytes("UTF-8"))
     val base64_encoded_content_p800_v4   =
       Base64.encodeBase64String(V4MessageHtmlContentP800.HtmlContentP800.getBytes("UTF-8"))
     val base64_encoded_content_itsa_v4   =
@@ -80,7 +78,7 @@ object GmcMessages extends BasePage {
     logIntoDemoFrontendForV4()
     gmcMessageType.toLowerCase match {
       case "invalid formid"       => fillFormWithInvalidFormId()
-      case "nino"                 => fillFormNino(subject_p800, base64_encoded_content_p800)
+      case "nino"                 => fillFormNino(subject_p800, base64_encoded_content_p800_v4)
       case "sautr for ats"        =>
         fillFormSautrAts("Your Annual Tax Summary for 2019 to 2020 is now", base64_encoded_content_atssautr)
       case "nino for v4"          =>
@@ -132,13 +130,13 @@ object GmcMessages extends BasePage {
         fillFormNiref1En(NIREF1EnMessageHtmlContent.HtmlContentNiref1_SubjectEnglish, base64_encoded_content_niref1_en)
       case "niref4 en"            =>
         fillFormNiref4En(NIREF1EnMessageHtmlContent.HtmlContentNiref1_SubjectEnglish, base64_encoded_content_niref1_en)
-      case "invalidalertqueue"    => fillFormInvalidAlertQueue(subject_p800, base64_encoded_content_p800)
-      case "emptyalertqueue"      => fillFormEmptyAlertQueue(subject_p800, base64_encoded_content_p800)
-      case "invalidsourcedata"    => fillFormInvalidSourceData(subject_p800, base64_encoded_content_p800)
-      case "unknowntaxidentifier" => fillFormUnknownTaxIdentifier(subject_p800, base64_encoded_content_p800)
-      case "missingtaxidentifier" => fillFormMissingTaxIdentifier(subject_p800, base64_encoded_content_p800)
-      case "missingdetails"       => fillFormMissingDetails(subject_p800, base64_encoded_content_p800)
-      case "invalidemail"         => fillFormInvalidEmail(subject_p800, base64_encoded_content_p800)
+      case "invalidalertqueue"    => fillFormInvalidAlertQueue(subject_p800, base64_encoded_content_p800_v4)
+      case "emptyalertqueue"      => fillFormEmptyAlertQueue(subject_p800, base64_encoded_content_p800_v4)
+      case "invalidsourcedata"    => fillFormInvalidSourceData(subject_p800, base64_encoded_content_p800_v4)
+      case "unknowntaxidentifier" => fillFormUnknownTaxIdentifier(subject_p800, base64_encoded_content_p800_v4)
+      case "missingtaxidentifier" => fillFormMissingTaxIdentifier(subject_p800, base64_encoded_content_p800_v4)
+      case "missingdetails"       => fillFormMissingDetails(subject_p800, base64_encoded_content_p800_v4)
+      case "invalidemail"         => fillFormInvalidEmail(subject_p800, base64_encoded_content_p800_v4)
       case "sdil"                 =>
         fillFormSdilEnglishAndWelsh(
           v4_sub_sdil_en,
@@ -186,7 +184,7 @@ object GmcMessages extends BasePage {
     click(By.id("submit-button"))
     waitForText(sendMessageResponse, "The message response is")
   }
-  def fillMessageForm(formData: MessageFormData): Unit = {
+  def fillMessageForm(formData: MessageFormData): Unit   = {
     val referenceIdInputField: By     = By.id(referenceId)
     val sourceInputField: By          = By.id(sourceType)
     val identifierNameInputField: By  = By.id(taxIdentifierName)

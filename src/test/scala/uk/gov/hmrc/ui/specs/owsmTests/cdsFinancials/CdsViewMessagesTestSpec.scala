@@ -36,7 +36,6 @@ class CdsViewMessagesTestSpec extends BaseSpec with TestData {
     Scenario("Customer can view list of messages", OwsmTests) {
       Given("A message and conversation created")
       CreateCDSMessageWithTag()
-      And("I navigate to messages list page using eori enrollment")
       logIntoMessage("cds", "secure-message-conversation")
       submitFormWithCustomerName()
       When("I navigate to messages list page using eori enrollment")
