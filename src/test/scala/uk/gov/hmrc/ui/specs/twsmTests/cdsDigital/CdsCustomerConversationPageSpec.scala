@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs.twsm.cdsDigital
+package uk.gov.hmrc.ui.specs.twsmTests.cdsDigital
 
 import uk.gov.hmrc.ui.ElementLocators.{cdsMessageDetailHeader, errorMessage, errorSummary}
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.logIntoMessage
@@ -32,7 +32,7 @@ class CdsCustomerConversationPageSpec extends BaseSpec with TestData {
 
   Feature("Error Validations on Conversation Page") {
 
-    Scenario("Customer see an error validation when an empty message field is entered", TwsmTests){
+    Scenario("Customer see an error validation when an empty message field is entered", TwsmTests) {
       Given("I navigate to secure message page and submitted With Customer Name")
       logIntoMessage("cds", "secure-message-conversation")
       submitFormWithCustomerName()

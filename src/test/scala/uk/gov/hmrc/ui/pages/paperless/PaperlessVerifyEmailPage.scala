@@ -34,23 +34,21 @@ object PaperlessVerifyEmailPage extends BasePage {
   def sendTheLinkAgain(): Unit =
     click(By.cssSelector(verifyEmailAddressPageSendLinkAgain))
 
-  def useDifferentEmailAddress():Unit = {
+  def useDifferentEmailAddress(): Unit = {
     click(By.cssSelector(verifyEmailAddressUseDifferentEmail))
     waitForText(emailPageHeader, "Enter your email address")
   }
-  
-  def useDifferentEmailAddressLinkExist(): Boolean = {
-   Driver.instance.findElements(By.cssSelector(verifyEmailAddressUseDifferentEmail)).size() > 0
-  }
+
+  def useDifferentEmailAddressLinkExist(): Boolean =
+    Driver.instance.findElements(By.cssSelector(verifyEmailAddressUseDifferentEmail)).size() > 0
 
   def clickOnCloseButton(): Unit = {
     val closeButton: By = By.cssSelector("a[role='button']")
     click(closeButton)
     fluentWait
   }
-  
+
   def verifyEmailAddressPageTitle(): Unit =
     getTitle.contains(paperlessVerifyEmailPageTitle)
-    
-}
 
+}

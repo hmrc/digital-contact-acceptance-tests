@@ -146,7 +146,7 @@ class BtaPaperlessStatusSpec extends BaseSpec with BasePage {
       PaperlessBTAHomePage.btaPageTitle()
     }
 
-    Scenario("BTA paperless status for an opted-out customer", BtaPaperlessTests){
+    Scenario("BTA paperless status for an opted-out customer", BtaPaperlessTests) {
       Given("Given I logged into BTA account with nino with sautr enrolment for opt-out customer")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr")
@@ -161,9 +161,9 @@ class BtaPaperlessStatusSpec extends BaseSpec with BasePage {
     }
   }
 
-    override def beforeEach(): Unit = {
-      super.beforeEach()
-      deleteMongoRecordsFromCollection("preferences")
-    }
+  override def beforeEach(): Unit = {
+    super.beforeEach()
+    deleteMongoRecordsFromCollection("preferences")
+  }
 
 }

@@ -17,9 +17,9 @@
 package uk.gov.hmrc.ui.utils.html
 
 object NIREF1EnMessageHtmlContent {
-    val HtmlContentNiref1_SubjectEnglish = "National Insurance contributions - we may owe you a refund"
-    val HtmlContentNiref1 =
-      s"""{
+  val HtmlContentNiref1_SubjectEnglish = "National Insurance contributions - we may owe you a refund"
+  val HtmlContentNiref1                =
+    s"""{
       <section lang="en" Subject="National Insurance contributions - we may owe you a refund"
       <div class="govuk-grid-row grid-row">
       <div class="govuk-grid-column-two-thirds column-two-thirds">

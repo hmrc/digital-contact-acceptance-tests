@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs.owsm.cdsFinancials
+package uk.gov.hmrc.ui.specs.owsmTests.cdsFinancials
 
 import org.scalatest.featurespec.AnyFeatureSpec
 import uk.gov.hmrc.ui.ElementLocators.{cdsMessagePageFirstMessageSubject, cdsMessagePageHeader, cdsMessagePageSecondMessageSubject, cdsMessageReadCount, cdsMessageUnreadCount}
@@ -26,7 +26,6 @@ import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.OwsmTests
 import uk.gov.hmrc.ui.utils.DBTestSupport.deleteDatabase
 import uk.gov.hmrc.ui.utils.TestData
-
 
 class CdsMessageApiFilteringTestSpec extends BaseSpec with TestData {
 
@@ -126,7 +125,7 @@ class CdsMessageApiFilteringTestSpec extends BaseSpec with TestData {
       And("I can see 1 count in inbox list")
       waitForText(cdsMessageUnreadCount, "1")
     }
-    
+
     Scenario("Messages can be filter by enrolmentKey and enrolment", OwsmTests) {
       Given("Given a message for Multiple CDS with tag created")
       CreateCDSMessageWithMultipleTag()
@@ -141,11 +140,13 @@ class CdsMessageApiFilteringTestSpec extends BaseSpec with TestData {
       And("I can see 2 count in inbox list")
       waitForText(cdsMessageUnreadCount, "2")
     }
-    
+
     Scenario("Messages can be filter by enrolmentKey, enrolment and tag", OwsmTests) {
       Given("Given a message for Multiple CDS with tag created")
       CreateCDSMessageWithMultipleTag()
-      When("I navigate to messages list page using multiple-eori enrollment with enrolmentKey, enrolment and tag filter")
+      When(
+        "I navigate to messages list page using multiple-eori enrollment with enrolmentKey, enrolment and tag filter"
+      )
       logIntoMessage("cds", "secure-message-stub-enrolmentKey-enrolment-tag")
       Then("I can see Messages between you and HMRC text on the page")
       waitForText(cdsMessagePageHeader, "Messages between you and HMRC")

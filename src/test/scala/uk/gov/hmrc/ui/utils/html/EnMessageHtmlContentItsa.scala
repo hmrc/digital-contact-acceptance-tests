@@ -18,7 +18,7 @@ package uk.gov.hmrc.ui.utils.html
 
 object EnMessageHtmlContentItsa {
   val HtmlContentEnItsa_SubjectEnglish = "New ITSA Secure Message In English"
-  val HtmlContentEnItsa =
+  val HtmlContentEnItsa                =
     s"""{
            <section lang="en" Subject="New ITSA Secure Message In English" From="HMRC">
            <div class="govuk-grid-row grid-row">

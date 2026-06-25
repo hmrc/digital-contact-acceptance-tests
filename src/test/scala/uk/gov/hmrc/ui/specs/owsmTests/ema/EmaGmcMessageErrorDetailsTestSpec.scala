@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs.owsm.ema
+package uk.gov.hmrc.ui.specs.owsmTests.ema
 
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
 import uk.gov.hmrc.ui.pages.messages.GmcMessages.{createV4Message, deleteMongoRecordsFromCollection, pta, verifyEmail}
@@ -90,7 +90,9 @@ class EmaGmcMessageErrorDetailsTestSpec extends BaseSpec {
       setUpPreferences()
       When("A GMC message is created via EMA using missingDetails")
       createV4Message("missingDetails")
-      Then("The response must contains: Missing mandatory fields: {$.details.issueDate: does not match the date pattern")
+      Then(
+        "The response must contains: Missing mandatory fields: {$.details.issueDate: does not match the date pattern"
+      )
       SecureMessagesPage.pageContains("Missing mandatory fields: {$.details.issueDate: does not match the date pattern")
     }
 

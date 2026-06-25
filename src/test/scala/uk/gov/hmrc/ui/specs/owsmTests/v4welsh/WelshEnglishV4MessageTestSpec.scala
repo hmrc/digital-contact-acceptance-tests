@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs.owsm.v4welsh
+package uk.gov.hmrc.ui.specs.owsmTests.v4welsh
 
 import org.scalatest.featurespec.AnyFeatureSpec
 import uk.gov.hmrc.ui.ElementLocators.{cdsMessagePageFirstMessageSubject, cdsMessagePageHeader, demoFrontEndInboxFirstMessageSubject, demoFrontEndInboxFirstMessageSubject2}
@@ -26,7 +26,6 @@ import uk.gov.hmrc.ui.pages.paperless.*
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.OwsmTests
 import uk.gov.hmrc.ui.utils.{GeneratedTestData, TestData}
-
 
 class WelshEnglishV4MessageTestSpec extends BaseSpec with TestData {
 
@@ -42,7 +41,10 @@ class WelshEnglishV4MessageTestSpec extends BaseSpec with TestData {
       And("I click Welsh language link")
       selectLanguageWelsh()
       Then("I see the message: Debyd Uniongyrchol Ardoll y Diwydiant Diodydd Meddal wedii ganslol")
-      waitForText(demoFrontEndInboxFirstMessageSubject, "Debyd Uniongyrchol Ardoll y Diwydiant Diodydd Meddal wedii ganslol")
+      waitForText(
+        demoFrontEndInboxFirstMessageSubject,
+        "Debyd Uniongyrchol Ardoll y Diwydiant Diodydd Meddal wedii ganslol"
+      )
       And("I click the message: Debyd Uniongyrchol Ardoll y Diwydiant Diodydd Meddal wedii ganslol")
       SecureMessagesPage.clickOnSubject()
       And("When I see the message: Debyd Uniongyrchol Ardoll y Diwydiant Diodydd Meddal wedii ganslol")
@@ -57,7 +59,7 @@ class WelshEnglishV4MessageTestSpec extends BaseSpec with TestData {
       Given("A v4 message is created for fhdds")
       createV4Message("fhdds")
       When("I open my messages for fhdds using regime")
-      logIntoMessage("fhdds",  "regime", regimeFhddsValue)
+      logIntoMessage("fhdds", "regime", regimeFhddsValue)
       Then("I see the message: FHDDS messages for test")
       waitForText(demoFrontEndInboxFirstMessageSubject, "FHDDS messages for test")
       And("I click Welsh language link")
@@ -99,7 +101,7 @@ class WelshEnglishV4MessageTestSpec extends BaseSpec with TestData {
       Given("A v4 message is created for epaye")
       createV4Message("epaye")
       When("I open my messages for epaye using regime")
-      logIntoMessage("epaye",  "regime", regimeEpayeValue)
+      logIntoMessage("epaye", "regime", regimeEpayeValue)
       Then("I see the message: EPAYE messages for test")
       waitForText(demoFrontEndInboxFirstMessageSubject2, "EPAYE messages for test")
       And("I click Welsh language link")
@@ -153,7 +155,7 @@ class WelshEnglishV4MessageTestSpec extends BaseSpec with TestData {
       When("A v4 message is created for optin")
       createV4Message("optin")
       And("I open my messages for PTA using regime")
-      logIntoMessage("pta",  "regime", regimeValue, GeneratedTestData.ninoNumber1)
+      logIntoMessage("pta", "regime", regimeValue, GeneratedTestData.ninoNumber1)
       And("I see the message: Your online tax letters")
       waitForText(demoFrontEndInboxFirstMessageSubject, "Your online tax letters")
       And("I click Welsh language link")

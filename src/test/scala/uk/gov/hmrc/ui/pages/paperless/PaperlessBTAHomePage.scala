@@ -22,11 +22,11 @@ import uk.gov.hmrc.ui.ElementLocators.{FixthisId, GettaxlettersonlineId, Reviewu
 import uk.gov.hmrc.ui.pages.BasePage
 import uk.gov.hmrc.ui.pages.paperless.PaperlessPTAHomePage.fluentWait
 
-object PaperlessBTAHomePage extends BasePage{
+object PaperlessBTAHomePage extends BasePage {
 
   // This is BTA home page for paperless journey using digital-contact-demo-frontend
   var paperlessBtaHomePageTitle: String = "Business Tax Account"
-  var reviewUpdatedTermsText:  String = "you need to agree to our updated terms"
+  var reviewUpdatedTermsText: String    = "you need to agree to our updated terms"
 
   def btaPageTitle(): Unit =
     getTitle.contains(paperlessBtaHomePageTitle)
@@ -36,31 +36,27 @@ object PaperlessBTAHomePage extends BasePage{
     click(getTaxLettersOnlineLink)
     fluentWait
   }
-  def clickOnFixthisLink(): Unit = {
+  def clickOnFixthisLink(): Unit             = {
     val fixThisLink: By = By.id(FixthisId)
     click(fixThisLink)
   }
-  
-  def  clickOnReviewUpdatedTermsLink(): Unit = {
+
+  def clickOnReviewUpdatedTermsLink(): Unit = {
     click(By.id(ReviewupdatedtermsId))
     waitForText(reOptinPageHeader, "Keep getting your tax letters online")
   }
 
-  def checkContactPreferenceText(pref: String): Unit = {
+  def checkContactPreferenceText(pref: String): Unit =
     assert(Driver.instance.findElement(By.cssSelector(btaHomePageContactPreferenceText)).getText == pref)
-  }
-  
-  def waitUntilPageLoad(): Unit = {
-    waitForText(btaHomePageHeader, paperlessBtaHomePageTitle)
-  }
-    
-  def noGetLettersOnlineLink(): Unit = {
-    assert(Driver.instance.findElements(By.id(GettaxlettersonlineId)).size() == 0)
-  }
 
-  def checkDisplayedLink(link: String): Unit = {
+  def waitUntilPageLoad(): Unit =
+    waitForText(btaHomePageHeader, paperlessBtaHomePageTitle)
+
+  def noGetLettersOnlineLink(): Unit =
+    assert(Driver.instance.findElements(By.id(GettaxlettersonlineId)).size() == 0)
+
+  def checkDisplayedLink(link: String): Unit =
     assert(Driver.instance.findElement(By.linkText(link)).isDisplayed)
-  }
 
   def clickOnCheckYourSettingsLink(): Unit = {
     val clickOnLink: By = By.id(checkYourSettings)
@@ -73,5 +69,5 @@ object PaperlessBTAHomePage extends BasePage{
     click(closeButton)
     fluentWait
   }
-  
+
 }

@@ -16,9 +16,9 @@
 
 package uk.gov.hmrc.ui.utils.html
 
-object MessageHtmlContent{
-        val p800HtmlContent=
-        s"""{
+object MessageHtmlContent {
+  val p800HtmlContent =
+    s"""{
        |
  |<div class="govuk-grid-row grid-row">
        |<div class="govuk-grid-column-two-thirds column-two-thirds">
@@ -175,4 +175,4 @@ object MessageHtmlContent{
  |
     }""".stripMargin
 
-        }
+}

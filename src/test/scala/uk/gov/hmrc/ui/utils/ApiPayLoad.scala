@@ -16,11 +16,10 @@
 
 package uk.gov.hmrc.ui.utils
 
-
 trait ApiPayLoad {
 
-  val email = GeneratedTestData.email
-  val email2 = GeneratedTestData.email2
+  val email               = GeneratedTestData.email
+  val email2              = GeneratedTestData.email2
   val payloadBounceEmail1 =
     s"""{
             "emailAddress": "$email"

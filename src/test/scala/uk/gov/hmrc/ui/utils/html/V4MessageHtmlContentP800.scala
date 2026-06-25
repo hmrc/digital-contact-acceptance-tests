@@ -18,8 +18,8 @@ package uk.gov.hmrc.ui.utils.html
 
 object V4MessageHtmlContentP800 {
   val htmlContentP800_SubjectEnglish = "Tax calculation for the year 6 April 2020 to 5 April 2021"
-  val htmlContentP800_SubjectWelsh = "Cyfrifiad treth ar gyfer y flwyddyn 6 Ebrill 2020 i 5 Ebrill 2021"
-  val HtmlContentP800: String =
+  val htmlContentP800_SubjectWelsh   = "Cyfrifiad treth ar gyfer y flwyddyn 6 Ebrill 2020 i 5 Ebrill 2021"
+  val HtmlContentP800: String        =
     s"""{
         <section lang="en", subject="Tax calculation for the year 6 April 2020 to 5 April 2021">
         <p class="govuk-body">You must send us your income and expenses update for your foreign property income for the quarter ending 05 July 2020.</p>

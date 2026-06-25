@@ -21,21 +21,21 @@ import uk.gov.hmrc.ui.ElementLocators.*
 import uk.gov.hmrc.ui.pages.BasePage
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.sendKeys
 
-object ReplyToConversationPage extends BasePage{
+object ReplyToConversationPage extends BasePage {
 
   def clickOnSend(): Unit = {
     val sendButton: By = By.cssSelector(replySendButton)
     click(sendButton)
     fluentWait
   }
-  
+
   def enterMessage(customerMessage: String): Unit = {
     val messageTextArea: By = By.id(replyTextId)
     customerMessage.toLowerCase match {
-      case "valid" => sendKeys(messageTextArea, validCustomerMessage)
-      case "error" => sendKeys(messageTextArea, errorCustomerMessage)
+      case "valid"                  => sendKeys(messageTextArea, validCustomerMessage)
+      case "error"                  => sendKeys(messageTextArea, errorCustomerMessage)
       case "valid message for hint" => sendKeys(messageTextArea, validHintCustomerMessage)
-      case _ => throw new IllegalArgumentException(s"$customerMessage is not a message")
+      case _                        => throw new IllegalArgumentException(s"$customerMessage is not a message")
     }
     fluentWait
   }

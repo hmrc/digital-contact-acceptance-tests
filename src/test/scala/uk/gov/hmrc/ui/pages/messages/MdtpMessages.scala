@@ -22,47 +22,47 @@ import uk.gov.hmrc.ui.utils.GeneratedTestData
 
 object MdtpMessages extends BasePage {
 
-  val contentId: String = messageContentId
-  val subjectId: String = messageSubjectId
-  val identifierNameId: String = recipientTaxIdentifierNameId
+  val contentId: String         = messageContentId
+  val subjectId: String         = messageSubjectId
+  val identifierNameId: String  = recipientTaxIdentifierNameId
   val identifierValueId: String = recipientTaxIdentifierValueId
-  val userEmailId: String = recipientEmailId
-  val userNameId: String = recipientNameId
+  val userEmailId: String       = recipientEmailId
+  val userNameId: String        = recipientNameId
 
   def createMDTPMessage(
-                         mdtpMessageType: String,
-                         typeMessage: String
-                       ): Unit = {
+    mdtpMessageType: String,
+    typeMessage: String
+  ): Unit = {
     mdtpMessageType.toLowerCase match {
 
-      case "fhdds" =>
+      case "fhdds"                                                =>
         fillFormForMessage(
           mdtpMessageType,
           typeMessage,
           GeneratedTestData.identifierObtdsValidValue,
           GeneratedTestData.identifierObtdsInvalidValue
         )
-      case "sdil" =>
+      case "sdil"                                                 =>
         fillFormForMessage(
           mdtpMessageType,
           typeMessage,
           GeneratedTestData.identifierSdilValidValue,
           GeneratedTestData.identifierObtdsInvalidValue
         )
-      case "epayeuppercase" | "epayelowercase" | "epayecamelcase"=>
+      case "epayeuppercase" | "epayelowercase" | "epayecamelcase" =>
         fillFormForMessage(
           mdtpMessageType,
           typeMessage,
           GeneratedTestData.epayeTaxOfficeNumberAndReferenceValue
         )
 
-      case "pptuppercase" | "pptlowercase" | "pptcamelcase"=>
+      case "pptuppercase" | "pptlowercase" | "pptcamelcase" =>
         fillFormForMessage(
           mdtpMessageType,
           typeMessage,
           GeneratedTestData.identifierValuePpt
         )
-      case _ =>
+      case _                                                =>
         throw new IllegalArgumentException(
           s"Unknown message type: $mdtpMessageType"
         )
@@ -71,33 +71,33 @@ object MdtpMessages extends BasePage {
     click(By.id("submit-advice"))
   }
 
-  def fillFormForMessage( mdtpMessageType: String,
-                          typeMessage: String,
-                          validIdentifierValue: String,
-                          invalidIdentifierValue: String = ""
-                        ): Unit = {
+  def fillFormForMessage(
+    mdtpMessageType: String,
+    typeMessage: String,
+    validIdentifierValue: String,
+    invalidIdentifierValue: String = ""
+  ): Unit = {
 
-    val contentInputField: By = By.id(contentId)
-    val subjectInputField: By = By.id(subjectId)
-    val identifierNameInputField: By = By.id(identifierNameId)
+    val contentInputField: By         = By.id(contentId)
+    val subjectInputField: By         = By.id(subjectId)
+    val identifierNameInputField: By  = By.id(identifierNameId)
     val identifierValueInputField: By = By.id(identifierValueId)
-    val emailInputField: By = By.id(userEmailId)
-    val nameInputField: By = By.id(userNameId)
-    val messageTypeInputField: By = By.id(messageTypeId)
+    val emailInputField: By           = By.id(userEmailId)
+    val nameInputField: By            = By.id(userNameId)
+    val messageTypeInputField: By     = By.id(messageTypeId)
 
     sendKeys(contentInputField, contentValue)
     sendKeys(subjectInputField, subjectValue)
-
 
     val identifierName = mdtpMessageType.toLowerCase match {
       case "fhdds" | "sdil" => enrolmentKeyObtds
       case "epayeuppercase" => taxIdentifierNameEpayeValueUc
       case "epayelowercase" => taxIdentifierNameEpayeValueLc
       case "epayecamelcase" => taxIdentifierNameEpayeValueCc
-      case "pptuppercase" => taxIdentifierNamePptValueUc
-      case "pptlowercase" => taxIdentifierNamePptValueLc
-      case "pptcamelcase" => taxIdentifierNamePptValueCc
-      case _ => throw new IllegalArgumentException(s"Unknown mdtp message type: $mdtpMessageType")
+      case "pptuppercase"   => taxIdentifierNamePptValueUc
+      case "pptlowercase"   => taxIdentifierNamePptValueLc
+      case "pptcamelcase"   => taxIdentifierNamePptValueCc
+      case _                => throw new IllegalArgumentException(s"Unknown mdtp message type: $mdtpMessageType")
     }
 
     sendKeys(identifierNameInputField, identifierName)
@@ -106,9 +106,9 @@ object MdtpMessages extends BasePage {
     sendKeys(messageTypeInputField, messageTypeValue)
 
     val identifierValue = typeMessage match {
-      case "valid" => validIdentifierValue
+      case "valid"   => validIdentifierValue
       case "invalid" => invalidIdentifierValue
-      case _ =>
+      case _         =>
         throw new IllegalArgumentException(
           s"Unknown value: $typeMessage"
         )

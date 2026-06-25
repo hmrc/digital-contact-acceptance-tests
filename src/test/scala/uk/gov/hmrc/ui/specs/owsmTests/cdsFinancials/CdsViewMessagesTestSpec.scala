@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs.owsm.cdsFinancials
+package uk.gov.hmrc.ui.specs.owsmTests.cdsFinancials
 
 import org.scalatest.featurespec.AnyFeatureSpec
 import uk.gov.hmrc.ui.ElementLocators.*
@@ -28,7 +28,6 @@ import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.OwsmTests
 import uk.gov.hmrc.ui.utils.DBTestSupport.deleteDatabase
 import uk.gov.hmrc.ui.utils.TestData
-
 
 class CdsViewMessagesTestSpec extends BaseSpec with TestData {
 
@@ -68,7 +67,10 @@ class CdsViewMessagesTestSpec extends BaseSpec with TestData {
       SecureMessagesPage.pageContains("Dear sky trader")
     }
 
-    Scenario("Customer can navigate back to messages list and message should be read status from message detail", OwsmTests) {
+    Scenario(
+      "Customer can navigate back to messages list and message should be read status from message detail",
+      OwsmTests
+    ) {
       Given("A message for CDS with tag created")
       CreateCDSMessageWithTag()
       And("I navigate to messages list page using eori enrollment")
@@ -182,7 +184,10 @@ class CdsViewMessagesTestSpec extends BaseSpec with TestData {
       waitForText(cdsMessageReadCount, "0")
     }
 
-    Scenario("Customer can see read status of conversation second time when they navigate to messages list", OwsmTests) {
+    Scenario(
+      "Customer can see read status of conversation second time when they navigate to messages list",
+      OwsmTests
+    ) {
       Given("I navigate to secure message page and submitted With Customer Name")
       logIntoMessage("cds", "secure-message-conversation")
       submitFormWithCustomerName()

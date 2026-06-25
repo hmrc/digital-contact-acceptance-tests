@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs.owsm.ops
+package uk.gov.hmrc.ui.specs.owsmTests.ops
 
 import uk.gov.hmrc.ui.ElementLocators.demoFrontEndInboxFirstMessageSubject
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
@@ -34,7 +34,7 @@ class OpsMessagesSpec extends BaseSpec {
       logIntoCustomerAdvisorMessageInboxPage()
       createMDTPMessage("sdil", "valid")
       When("I open my messages for SDIL using regime for sdil")
-      logIntoMessage("sdil", "regime",regimeSdilValue)
+      logIntoMessage("sdil", "regime", regimeSdilValue)
       Then("I see the message: Direct debit logo test")
       waitForText(demoFrontEndInboxFirstMessageSubject, "Direct debit logo test")
     }

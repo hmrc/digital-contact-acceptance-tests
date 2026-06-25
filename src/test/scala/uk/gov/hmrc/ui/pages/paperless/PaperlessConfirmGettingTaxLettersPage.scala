@@ -22,10 +22,9 @@ import uk.gov.hmrc.ui.pages.BasePage
 
 object PaperlessConfirmGettingTaxLettersPage extends BasePage {
   var paperlessConfirmGettingTaxLettersTitle: String = "Confirm how you want to get your tax letters"
-  
-  def waitForPageLoad(): Unit = {
+
+  def waitForPageLoad(): Unit =
     waitForText(confirmGettingTaxLettersPageHeader, paperlessConfirmGettingTaxLettersTitle)
-  }
 
   def clickOnGetLettersByPost(): Unit =
     click(By.ByCssSelector(confirmGettingTaxLettersPageByPost))

@@ -26,25 +26,20 @@ object PaperlessPTAHomePage extends BasePage {
   // This is PTA home page for paperless journey using digital-contact-demo-frontend
   var paperlessPtaHomePageTitle: String = "Personal Tax Account"
 
-  def waitUntilPageLoad(): Unit = {
+  def waitUntilPageLoad(): Unit =
     waitForText(ptaHomePageHeader, paperlessPtaHomePageTitle)
-  }
 
-  def checkUnreadNotification(notification: String): Boolean = {
+  def checkUnreadNotification(notification: String): Boolean =
     Driver.instance.findElement(By.cssSelector(ptaHomePageUnreadNotificationLink)).getText == notification
-  }
 
-  def clickGoToYourMessages(): Unit = {
+  def clickGoToYourMessages(): Unit =
     click(By.cssSelector(ptaHomePageGotoMessageLink))
-  }
 
-  def messageVerification():Unit = {
-    if(checkUnreadNotification("1 unread Notification")) {
+  def messageVerification(): Unit =
+    if (checkUnreadNotification("1 unread Notification")) {
       clickGoToYourMessages()
     }
-  }
-  
-  def navigateToCheckYourSettings(): Unit = {
+
+  def navigateToCheckYourSettings(): Unit =
     click(By.cssSelector(ptaHomePageToCYSLink))
-  }
 }

@@ -141,7 +141,9 @@ object LoginUsingAuthWizardPage extends BasePage {
       "secure-message-stub-enrolment-tag",
       "secure-message-stub-enrolmentKey-tag",
       "secure-message-stub-enrolmentKey-enrolment",
-      "secure-message-stub-enrolmentKey-enrolment-tag"
+      "secure-message-stub-enrolmentKey-enrolment-tag",
+      "twsm-enrolmentKey-and-tag",
+      "twsm-enrolmentKey-enrolment-tag"
     )
 
     val selectedEnrolmentKey: String =
@@ -155,7 +157,7 @@ object LoginUsingAuthWizardPage extends BasePage {
 
     val redirectUrl =
       redirectType match {
-        case "secure-message-stub"                            => 
+        case "secure-message-stub"                            =>
           secureMessagingBaseUrl + secureMessageStub + conversationList
         case "secure-message-stub-tag"                        =>
           secureMessagingBaseUrl + secureMessageStub + conversationList + tagMessageFiltering
@@ -177,8 +179,18 @@ object LoginUsingAuthWizardPage extends BasePage {
           secureMessagingBaseUrl + secureMessageStub + conversationList + "?enrolmentKey=HMCE-VATDEC-ORG&enrolment=HMRC-CUS-ORG~EORINumber~" + s"${GeneratedTestData.identifierValueEori}" + "&tag=notificationType~Direct%20Debit"
         case "secure-message-stub-vat-dec-enrolment"          =>
           secureMessagingBaseUrl + secureMessageStub + conversationList + enrolmentKeyAndVatdecMessageFiltering
-        case "secure-message-conversation"                    => 
+        case "secure-message-conversation"                    =>
           secureMessagingBaseUrl + secureMessageStub
+        case "twsm-tag"                                       => secureMessagingBaseUrl + secureMessageStub + conversationList + tagCdsMessageFiltering
+        case "twsm-multiple-tag"                              =>
+          secureMessagingBaseUrl + secureMessageStub + conversationList + tagCdsMessageFiltering
+        case "twsm-enrolment"                                 => secureMessagingBaseUrl + secureMessageStub + conversationList + enrolmentKeyFiltering
+        case "twsm-enrolment-and-tag"                         =>
+          secureMessagingBaseUrl + secureMessageStub + conversationList + s"?enrolment=HMRC-CUS-ORG~EORINumber~${GeneratedTestData.identifierValueEori}" + "&tag=notificationType~CDS-EXPORTS"
+        case "twsm-enrolmentKey-and-tag"                      =>
+          secureMessagingBaseUrl + secureMessageStub + conversationList + enrolmentKeyAndTagFiltering
+        case "twsm-enrolmentKey-enrolment-tag"                =>
+          secureMessagingBaseUrl + secureMessageStub + conversationList + "?enrolmentKey=HMCE-VATDEC-ORG&enrolment=HMRC-CUS-ORG~EORINumber~" + s"${GeneratedTestData.identifierValueEori2}" + "&tag=notificationType~CDS-EXPORTS"
 
         case "regime" =>
           messagesUsingRegimeRedirectUrl(
@@ -246,5 +258,4 @@ object LoginUsingAuthWizardPage extends BasePage {
     }
     click(By.id("submit"))
   }
-  Thread.sleep(20000)
 }

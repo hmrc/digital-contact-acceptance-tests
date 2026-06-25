@@ -18,8 +18,8 @@ package uk.gov.hmrc.ui.utils.html
 
 object V4MessageHtmlContentItsa {
   val HtmlContentSaItsa_SubjectEnglish = "Send your quarterly Income Tax update"
-  val HtmlContentSaItsa_SubjectWelsh = "Anfonwch eich diweddariad Treth Incwm chwarterol"
-  val HtmlContentSaItsa =
+  val HtmlContentSaItsa_SubjectWelsh   = "Anfonwch eich diweddariad Treth Incwm chwarterol"
+  val HtmlContentSaItsa                =
     s"""{
         <section lang="en", subject="Send your quarterly Income Tax update">
         <p class="govuk-body">You must send us your income and expenses update for your foreign property income for the quarter ending 05 July 2020.</p>

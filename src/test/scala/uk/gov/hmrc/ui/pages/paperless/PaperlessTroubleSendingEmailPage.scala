@@ -26,22 +26,18 @@ object PaperlessTroubleSendingEmailPage extends BasePage {
 
   var PaperlessTroubleSendingEmailPageHeader: String = "We are having trouble sending you emails"
 
-  def enterYourEmailAddress(): Unit = {
+  def enterYourEmailAddress(): Unit =
     click(By.cssSelector(toubleSendingEmailPageEnterAddress))
-  }
 
-  def doNotWantToGetOnlineTaxLetters(): Unit = {
+  def doNotWantToGetOnlineTaxLetters(): Unit =
     click(By.cssSelector(toubleSendingEmailPageNotWantOnlineLetters))
-  }
 
-  def enterEmailButtonExists(): Unit = {
+  def enterEmailButtonExists(): Unit           =
     assert(Driver.instance.findElements(By.cssSelector(toubleSendingEmailPageEnterAddress)).size() > 0)
-  }
-  def doNotWantOnlineLettersLinkExists(): Unit = {
+  def doNotWantOnlineLettersLinkExists(): Unit =
     assert(Driver.instance.findElements(By.cssSelector(toubleSendingEmailPageNotWantOnlineLetters)).size() > 0)
-  }
 
   def PaperlessTroubleSendingEmailPageTitle(): Unit =
     getTitle.contains(PaperlessTroubleSendingEmailPageHeader)
-    
+
 }

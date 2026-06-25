@@ -18,6 +18,4 @@ package uk.gov.hmrc.ui.specs.tags
 
 import org.scalatest.Tag
 
-object PtaPaperlessTests extends Tag("PtaPaperlessTests"){
-
-}
+object PtaPaperlessTests extends Tag("PtaPaperlessTests") {}

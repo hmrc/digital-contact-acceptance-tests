@@ -123,14 +123,14 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
     fluentWait
   }
 
-  def verifyEmail(nino:String = GeneratedTestData.ninoNumber): Unit = {
+  def verifyEmail(nino: String = GeneratedTestData.ninoNumber): Unit = {
 
     // To get entity ID via sa-api proxy
-    val entityIdUrl: String                                       = saApiProxy + ("/entity-resolver/entity-resolver/paye/" + nino)
-    val entityIdUrlResponse: StandaloneWSRequest#Response         = waitGetUrlResult(entityIdUrl)
-    val resultBody                                                = entityIdUrlResponse.body
-    val bodyAsJson                                                = Json.parse(resultBody).\("_id").toString
-    val extractedEntityId                                         = bodyAsJson.replaceAll(entityIdRegex, "")
+    val entityIdUrl: String                               = saApiProxy + ("/entity-resolver/entity-resolver/paye/" + nino)
+    val entityIdUrlResponse: StandaloneWSRequest#Response = waitGetUrlResult(entityIdUrl)
+    val resultBody                                        = entityIdUrlResponse.body
+    val bodyAsJson                                        = Json.parse(resultBody).\("_id").toString
+    val extractedEntityId                                 = bodyAsJson.replaceAll(entityIdRegex, "")
     // To get verificaton token via sa-api proxy
     val verificationTokenUrl: String                      =
       saApiProxy + s"/preferences/test-only/preferences-admin/$extractedEntityId/verification-token"
@@ -162,14 +162,10 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
   }
 
   def waitUntilHeader(header: String): Unit =
-    fluentWait.until(driver =>
-      driver.findElement(By.cssSelector(pageHeader1)).getText.equals(header)
-    )
+    fluentWait.until(driver => driver.findElement(By.cssSelector(pageHeader1)).getText.equals(header))
 
   def waitUntilHeader2(header: String): Unit =
-    fluentWait.until(driver =>
-      driver.findElement(By.cssSelector(pageHeader2)).getText.equals(header)
-    )
+    fluentWait.until(driver => driver.findElement(By.cssSelector(pageHeader2)).getText.equals(header))
 
   def waitGetUrlResult(url: String): StandaloneWSRequest#Response = {
     val response: StandaloneWSRequest#Response = Await.result(WsClient.url(url).get(), 5.seconds)
@@ -197,7 +193,7 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
     click(By.cssSelector(pageBackLink))
     fluentWait
   }
-  
+
   def navigateToUrl(url: String): Unit = {
     Driver.instance.navigate.to(url)
     fluentWait.until(ExpectedConditions.urlContains(url))
@@ -205,13 +201,17 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
 
   def bounceChangedEmail(): Unit = {
     val bounceUrl = preferences + "test-only/preferences-admin/bounce-email"
-    val response = Await.result(WsClient.url(bounceUrl)
-      .addHttpHeaders("Content-Type" -> "application/json")
-      .post(payloadBounceEmail2), 5.seconds)
+    val response  = Await.result(
+      WsClient
+        .url(bounceUrl)
+        .addHttpHeaders("Content-Type" -> "application/json")
+        .post(payloadBounceEmail2),
+      5.seconds
+    )
     assert(response.status == 204)
   }
-  
-  def waitForText(selector:String, text: String): Unit = {
+
+  def waitForText(selector: String, text: String): Unit = {
     val getText = fluentWait.until(driver => driver.findElement(By.cssSelector(selector)).getText)
     getText.equals(text)
   }
@@ -228,8 +228,9 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
   }
 
   def caseWorkerReply(): Unit = {
-    val caseWorkerReplyUrl: String = secureMessage.concat(s"secure-messaging/conversation/$name/$conversationId/caseworker-message")
-    val response = Await.result(
+    val caseWorkerReplyUrl: String =
+      secureMessage.concat(s"secure-messaging/conversation/$name/$conversationId/caseworker-message")
+    val response                   = Await.result(
       WsClient
         .url(caseWorkerReplyUrl)
         .addHttpHeaders("Content-Type" -> "application/json")

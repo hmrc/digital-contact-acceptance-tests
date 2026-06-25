@@ -23,9 +23,7 @@ import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.PtaPaperlessTests
 import uk.gov.hmrc.ui.utils.GeneratedTestData
 
-
 class PtaPaperlessOptinTestSpec extends BaseSpec {
-
 
   Feature("Opt-in PTA/BTA Welcome Secure Message") {
 

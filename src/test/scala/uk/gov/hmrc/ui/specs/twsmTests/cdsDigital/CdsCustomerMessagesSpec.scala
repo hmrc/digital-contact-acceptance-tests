@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs.twsm.cdsDigital
+package uk.gov.hmrc.ui.specs.twsmTests.cdsDigital
 
 import org.scalatest.featurespec.AnyFeatureSpec
 import uk.gov.hmrc.ui.ElementLocators.*
@@ -30,7 +30,6 @@ import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.TwsmTests
 import uk.gov.hmrc.ui.utils.DBTestSupport.deleteDatabase
 import uk.gov.hmrc.ui.utils.TestData
-
 
 class CdsCustomerMessagesSpec extends BaseSpec with TestData {
 
@@ -90,7 +89,7 @@ class CdsCustomerMessagesSpec extends BaseSpec with TestData {
       waitForText(firstReadMessageText, "First read")
     }
 
-    Scenario("Customer navigate back to messages page from conversation detail", TwsmTests){
+    Scenario("Customer navigate back to messages page from conversation detail", TwsmTests) {
       Given("I navigate to secure message page and submitted With Customer Name")
       logIntoMessage("cds", "secure-message-conversation")
       submitFormWithCustomerName()
@@ -110,7 +109,7 @@ class CdsCustomerMessagesSpec extends BaseSpec with TestData {
       waitForText(cdsMessageReadCount, "0")
     }
 
-    Scenario("Customer can reply to a conversation", TwsmTests){
+    Scenario("Customer can reply to a conversation", TwsmTests) {
       Given("I navigate to secure message page and submitted With Customer Name")
       logIntoMessage("cds", "secure-message-conversation")
       submitFormWithCustomerName()
@@ -129,7 +128,7 @@ class CdsCustomerMessagesSpec extends BaseSpec with TestData {
       waitForText(cdsMessageDetailHeader, "Message sent")
     }
 
-    Scenario("Customer can navigate back to list of messages from reply success page", TwsmTests){
+    Scenario("Customer can navigate back to list of messages from reply success page", TwsmTests) {
       Given("I navigate to secure message page and submitted With Customer Name")
       logIntoMessage("cds", "secure-message-conversation")
       submitFormWithCustomerName()
@@ -158,7 +157,7 @@ class CdsCustomerMessagesSpec extends BaseSpec with TestData {
       waitForText(cdsMessageReadCount, "0")
     }
 
-    Scenario("Customer can view the replied message from caseworker and count", TwsmTests){
+    Scenario("Customer can view the replied message from caseworker and count", TwsmTests) {
       Given("I navigate to secure message page and submitted With Customer Name")
       logIntoMessage("cds", "secure-message-conversation")
       submitFormWithCustomerName()
@@ -185,7 +184,7 @@ class CdsCustomerMessagesSpec extends BaseSpec with TestData {
       waitForText(cdsMessageReadCount, "1")
     }
 
-    Scenario("Customer can view & reply once again after caseworker replied and count", TwsmTests){
+    Scenario("Customer can view & reply once again after caseworker replied and count", TwsmTests) {
       Given("I navigate to secure message page and submitted With Customer Name")
       logIntoMessage("cds", "secure-message-conversation")
       submitFormWithCustomerName()
@@ -223,7 +222,7 @@ class CdsCustomerMessagesSpec extends BaseSpec with TestData {
       waitForText(cdsMessageReadCount, "0")
     }
 
-    Scenario("Customer can toggle language from English to Welsh and vice versa", TwsmTests){
+    Scenario("Customer can toggle language from English to Welsh and vice versa", TwsmTests) {
       Given("I navigate to secure message page and submitted With Customer Name")
       logIntoMessage("cds", "secure-message-conversation")
       submitFormWithCustomerName()

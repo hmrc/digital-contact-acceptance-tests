@@ -20,8 +20,8 @@ import org.openqa.selenium.By
 import uk.gov.hmrc.ui.ElementLocators.*
 import uk.gov.hmrc.ui.pages.BasePage
 
-object SecureMessagesPage extends BasePage{
-  
+object SecureMessagesPage extends BasePage {
+
   def clickOnSubject(): Unit = {
     val subjectLink: By = By.cssSelector(demoFrontEndInboxFirstMessageSubject)
     click(subjectLink)
@@ -45,10 +45,9 @@ object SecureMessagesPage extends BasePage{
     click(subjectLink)
     fluentWait
   }
-  
-  def pageContains(subject: String): Unit = {
+
+  def pageContains(subject: String): Unit =
     assert(getPageSource.contains(subject))
-  }
 
   def backLink(): Unit = {
     val pageBackLink: By = By.cssSelector("#main-content > div > div > div > a")

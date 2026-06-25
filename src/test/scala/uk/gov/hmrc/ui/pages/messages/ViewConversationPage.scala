@@ -22,10 +22,10 @@ import uk.gov.hmrc.ui.ElementLocators.*
 import uk.gov.hmrc.ui.pages.BasePage
 import uk.gov.hmrc.ui.pages.paperless.PaperlessPTAHomePage.fluentWait
 
-object ViewConversationPage extends BasePage{
-  
+object ViewConversationPage extends BasePage {
+
   var viewConversationPageTitle: String = "view conversation"
-  
+
   def pageTitle(): Unit =
     fluentWait.until(ExpectedConditions.titleContains(viewConversationPageTitle))
 
@@ -40,7 +40,5 @@ object ViewConversationPage extends BasePage{
     click(replyToThisMessageLink)
     fluentWait
   }
-  
-  
-  
+
 }
