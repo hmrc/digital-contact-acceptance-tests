@@ -23,9 +23,7 @@ import uk.gov.hmrc.ui.pages.preferencesAdmin.{PreferencesAdminPage, PreferencesA
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.PtaPaperlessTests
 
-
 class PtaPaperlessReOptInPageTestSpec extends BaseSpec {
-
 
   Feature("Re-opt-in page") {
 
@@ -87,8 +85,10 @@ class PtaPaperlessReOptInPageTestSpec extends BaseSpec {
       PaperlessPTAHomePage.waitUntilPageLoad()
     }
 
-
-    Scenario("No Re-opt-in page display to existing PTA email opted-in, verified, email changed, unverified customer", PtaPaperlessTests) {
+    Scenario(
+      "No Re-opt-in page display to existing PTA email opted-in, verified, email changed, unverified customer",
+      PtaPaperlessTests
+    ) {
       Given("I am logged into PTA account with nino and sautr enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr", pta)
@@ -115,7 +115,10 @@ class PtaPaperlessReOptInPageTestSpec extends BaseSpec {
       PaperlessPTAHomePage.waitUntilPageLoad()
     }
 
-    Scenario("No Re-opt-in page display to existing PTA email opted-in, verified, email changed, bounced customer", PtaPaperlessTests) {
+    Scenario(
+      "No Re-opt-in page display to existing PTA email opted-in, verified, email changed, bounced customer",
+      PtaPaperlessTests
+    ) {
       Given("I am logged into PTA account with nino and sautr enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr", pta)
@@ -144,7 +147,10 @@ class PtaPaperlessReOptInPageTestSpec extends BaseSpec {
       PaperlessPTAHomePage.waitUntilPageLoad()
     }
 
-    Scenario("Re-opt-in page display to existing PTA email opted-in, verified, email changed, verified customer", PtaPaperlessTests) {
+    Scenario(
+      "Re-opt-in page display to existing PTA email opted-in, verified, email changed, verified customer",
+      PtaPaperlessTests
+    ) {
       Given("I am logged into PTA account with nino and sautr enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr", pta)
@@ -163,7 +169,7 @@ class PtaPaperlessReOptInPageTestSpec extends BaseSpec {
       PaperlessPTAHomePage.navigateToCheckYourSettings()
       And("I change email address")
       PaperlessCheckYourSettingsPage.clickOnChangeEmailAddressLinkVerified()
-      val verifyNewEmailUrl:String = PaperlessChangeEmailAddressPage.fillChangeEmailPage()
+      val verifyNewEmailUrl: String = PaperlessChangeEmailAddressPage.fillChangeEmailPage()
       And("I verify new email address")
       verifyEmail()
       And("I navigate back to Verify your email address page")
@@ -201,7 +207,10 @@ class PtaPaperlessReOptInPageTestSpec extends BaseSpec {
       PaperlessPTAHomePage.waitUntilPageLoad()
     }
 
-    Scenario("Re-opt-in page display to existing PTA email opted-in, unverified, email changed, verified customer", PtaPaperlessTests) {
+    Scenario(
+      "Re-opt-in page display to existing PTA email opted-in, unverified, email changed, verified customer",
+      PtaPaperlessTests
+    ) {
       Given("I am logged into PTA account with nino and sautr enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr", pta)
@@ -240,7 +249,10 @@ class PtaPaperlessReOptInPageTestSpec extends BaseSpec {
       PaperlessPTAHomePage.waitUntilPageLoad()
     }
 
-    Scenario("No Re-opt-in page display to existing PTA email opted-in, unverified, email changed, unverified customer", PtaPaperlessTests) {
+    Scenario(
+      "No Re-opt-in page display to existing PTA email opted-in, unverified, email changed, unverified customer",
+      PtaPaperlessTests
+    ) {
       Given("I am logged into PTA account with nino and sautr enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr", pta)
@@ -265,7 +277,10 @@ class PtaPaperlessReOptInPageTestSpec extends BaseSpec {
       PaperlessPTAHomePage.waitUntilPageLoad()
     }
 
-    Scenario("No Re-opt-in page display to existing PTA email opted-in, unverified, bounced customer", PtaPaperlessTests) {
+    Scenario(
+      "No Re-opt-in page display to existing PTA email opted-in, unverified, bounced customer",
+      PtaPaperlessTests
+    ) {
       Given("I am logged into PTA account with nino and sautr enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr2", pta)
@@ -468,7 +483,10 @@ class PtaPaperlessReOptInPageTestSpec extends BaseSpec {
       PreferencesAdminUserSummaryPage.userOptOutSuccessfullyMessage()
     }
 
-    Scenario("No Re-opt-in page display to existing PTA email opted-in, verified, email changed, changed email bounced customer", PtaPaperlessTests) {
+    Scenario(
+      "No Re-opt-in page display to existing PTA email opted-in, verified, email changed, changed email bounced customer",
+      PtaPaperlessTests
+    ) {
       Given("I am logged into PTA account with nino and sautr enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr", pta)
@@ -496,7 +514,10 @@ class PtaPaperlessReOptInPageTestSpec extends BaseSpec {
       PaperlessPTAHomePage.waitUntilPageLoad()
     }
 
-    Scenario("No Re-opt-in page display to existing PTA email opted-in, verified, email changed, verified and changed email bounced customer", PtaPaperlessTests) {
+    Scenario(
+      "No Re-opt-in page display to existing PTA email opted-in, verified, email changed, verified and changed email bounced customer",
+      PtaPaperlessTests
+    ) {
       Given("I am logged into PTA account with nino and sautr enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr", pta)
@@ -525,7 +546,10 @@ class PtaPaperlessReOptInPageTestSpec extends BaseSpec {
       PaperlessPTAHomePage.waitUntilPageLoad()
     }
 
-    Scenario("Re-opt-in by existing PTA email verified customer by changing email address - sautr 2", PtaPaperlessTests) {
+    Scenario(
+      "Re-opt-in by existing PTA email verified customer by changing email address - sautr 2",
+      PtaPaperlessTests
+    ) {
       Given("I am logged into PTA account with nino and sautr enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr2", pta)

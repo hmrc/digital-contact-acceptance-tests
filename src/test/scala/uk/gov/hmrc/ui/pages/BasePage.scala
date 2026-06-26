@@ -35,6 +35,7 @@ import uk.gov.hmrc.ui.pages.messages.GmcMessages.preferences
 import uk.gov.hmrc.ui.utils.{ApiPayLoad, GeneratedTestData, TestData}
 import play.api.libs.ws.DefaultBodyWritables.writeableOf_String
 import uk.gov.hmrc.ui.ElementLocators.{pageBackLink, pageHeader1, pageHeader2, pageLanguageEnglish, pageLanguageWelsh}
+import uk.gov.hmrc.ui.pages.messages.CdsMessages.{caseworkerReplyMessage, caseworkerReplyPayload, conversationId, name}
 
 import java.time.Duration
 import scala.concurrent.Await
@@ -122,14 +123,14 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
     fluentWait
   }
 
-  def verifyEmail(nino:String = GeneratedTestData.ninoNumber): Unit = {
+  def verifyEmail(nino: String = GeneratedTestData.ninoNumber): Unit = {
 
     // To get entity ID via sa-api proxy
-    val entityIdUrl: String                                       = saApiProxy + ("/entity-resolver/entity-resolver/paye/" + nino)
-    val entityIdUrlResponse: StandaloneWSRequest#Response         = waitGetUrlResult(entityIdUrl)
-    val resultBody                                                = entityIdUrlResponse.body
-    val bodyAsJson                                                = Json.parse(resultBody).\("_id").toString
-    val extractedEntityId                                         = bodyAsJson.replaceAll(entityIdRegex, "")
+    val entityIdUrl: String                               = saApiProxy + ("/entity-resolver/entity-resolver/paye/" + nino)
+    val entityIdUrlResponse: StandaloneWSRequest#Response = waitGetUrlResult(entityIdUrl)
+    val resultBody                                        = entityIdUrlResponse.body
+    val bodyAsJson                                        = Json.parse(resultBody).\("_id").toString
+    val extractedEntityId                                 = bodyAsJson.replaceAll(entityIdRegex, "")
     // To get verificaton token via sa-api proxy
     val verificationTokenUrl: String                      =
       saApiProxy + s"/preferences/test-only/preferences-admin/$extractedEntityId/verification-token"
@@ -161,14 +162,10 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
   }
 
   def waitUntilHeader(header: String): Unit =
-    fluentWait.until(driver =>
-      driver.findElement(By.cssSelector(pageHeader1)).getText.equals(header)
-    )
+    fluentWait.until(driver => driver.findElement(By.cssSelector(pageHeader1)).getText.equals(header))
 
   def waitUntilHeader2(header: String): Unit =
-    fluentWait.until(driver =>
-      driver.findElement(By.cssSelector(pageHeader2)).getText.equals(header)
-    )
+    fluentWait.until(driver => driver.findElement(By.cssSelector(pageHeader2)).getText.equals(header))
 
   def waitGetUrlResult(url: String): StandaloneWSRequest#Response = {
     val response: StandaloneWSRequest#Response = Await.result(WsClient.url(url).get(), 5.seconds)
@@ -183,19 +180,20 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
   }
 
   def selectLanguageWelsh(): Unit = {
-    val welshLink: By = By.cssSelector(pageLanguageWelsh)
+    val welshLink: By = By.partialLinkText("Cymraeg")
     click(welshLink)
   }
 
   def selectLanguageEnglish(): Unit = {
-    val englishLink: By = By.cssSelector(pageLanguageEnglish)
+    val englishLink: By = By.partialLinkText("English")
     click(englishLink)
   }
 
   def clickOnBackLink(): Unit = {
     click(By.cssSelector(pageBackLink))
+    fluentWait
   }
-  
+
   def navigateToUrl(url: String): Unit = {
     Driver.instance.navigate.to(url)
     fluentWait.until(ExpectedConditions.urlContains(url))
@@ -203,15 +201,19 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
 
   def bounceChangedEmail(): Unit = {
     val bounceUrl = preferences + "test-only/preferences-admin/bounce-email"
-    val response = Await.result(WsClient.url(bounceUrl)
-      .addHttpHeaders("Content-Type" -> "application/json")
-      .post(payloadBounceEmail2), 5.seconds)
+    val response  = Await.result(
+      WsClient
+        .url(bounceUrl)
+        .addHttpHeaders("Content-Type" -> "application/json")
+        .post(payloadBounceEmail2),
+      5.seconds
+    )
     assert(response.status == 204)
   }
-  
-  def waitForText(selector:String, text: String): Unit = {
-    fluentWait.until(driver => driver.findElement(By.cssSelector(selector)).getText.equals(text))
 
+  def waitForText(selector: String, text: String): Unit = {
+    val getText = fluentWait.until(driver => driver.findElement(By.cssSelector(selector)).getText)
+    getText.equals(text)
   }
 
   def postCDSMessage(payload: String): Unit = {
@@ -222,18 +224,29 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
         .post(payload),
       5.seconds
     )
-    println(response.status)
+    assert(response.status == 201)
+  }
+
+  def caseWorkerReply(): Unit = {
+    val caseWorkerReplyUrl: String =
+      secureMessage.concat(s"secure-messaging/conversation/$name/$conversationId/caseworker-message")
+    val response                   = Await.result(
+      WsClient
+        .url(caseWorkerReplyUrl)
+        .addHttpHeaders("Content-Type" -> "application/json")
+        .post(caseworkerReplyPayload),
+      5.seconds
+    )
     assert(response.status == 201)
   }
 
   def suppressionDataToNpsThruHip(scenario: String): Unit = {
-    val payload = scenario match {
+    val payload     = scenario match {
       case "digital" => digitalSuppressionDataToNpsThruHip
-      case "paper" => paperSuppressionDataToNpsThruHip
+      case "paper"   => paperSuppressionDataToNpsThruHip
       case "bounced" => bouncedSuppressionDataToNpsThruHip
-      case _ => throw new IllegalArgumentException(s"Unknown scenario: $scenario")
+      case _         => throw new IllegalArgumentException(s"Unknown scenario: $scenario")
     }
-
     val p2HipNpsUrl = digitalContactStub + "/paye/individual/print-preferences"
 
     val response = Await.result(

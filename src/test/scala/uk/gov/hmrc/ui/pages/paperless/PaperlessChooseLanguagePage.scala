@@ -21,26 +21,23 @@ import uk.gov.hmrc.ui.ElementLocators.{chooseLanguagePageContinueButton, chooseL
 import uk.gov.hmrc.ui.pages.BasePage
 
 object PaperlessChooseLanguagePage extends BasePage {
-  
-  var paperlessChooseLanguagePageTitle: String = "Get your paperless email notification in Welsh"
+
+  var paperlessChooseLanguagePageTitle: String      = "Get your paperless email notification in Welsh"
   var paperlessChooseLanguagePageTitleWelsh: String = "Cael eich hysbysiadau di-bapur drwy e-bost yn Gymraeg"
 
-  def waitUntilPageLoad(isWelsh: Boolean=false): Unit = {
-    if(isWelsh) {
+  def waitUntilPageLoad(isWelsh: Boolean = false): Unit =
+    if (isWelsh) {
       waitForText(chooseLanguagePageHeader, paperlessChooseLanguagePageTitleWelsh)
     } else
       waitForText(chooseLanguagePageHeader, paperlessChooseLanguagePageTitle)
-  }
 
-  def chooseSendPaperlessLanguage(isWelsh: Boolean = true): Unit = {
-    if(isWelsh) 
+  def chooseSendPaperlessLanguage(isWelsh: Boolean = true): Unit =
+    if (isWelsh)
       click(By.cssSelector(chooseLanguagePageWelsh))
-    else 
-      click(By.cssSelector(chooseLanguagePageEnglish ))
-  }
+    else
+      click(By.cssSelector(chooseLanguagePageEnglish))
 
-  def clickOnContinueButton(): Unit = {
-    click(By.cssSelector(chooseLanguagePageContinueButton ))
-  }
-  
+  def clickOnContinueButton(): Unit =
+    click(By.cssSelector(chooseLanguagePageContinueButton))
+
 }

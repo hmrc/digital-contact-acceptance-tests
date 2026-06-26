@@ -19,69 +19,69 @@ package uk.gov.hmrc.ui.utils
 import uk.gov.hmrc.ui.pages.messages.GmcMessages.{alertQueueValue, batchIdValue, englishContentValue, englishSubjectValue, messageTypeValue, regimeSaValue, sourceDataValue, sourceValue, taxIdentifierNameSautrValue, validFromValue}
 
 case class MessageFormData(
-                            externalRef: MessageFormData.ExternalRef,
-                            recipient: MessageFormData.Recipient,
-                            regime: String,
-                            messageType: String,
-                            subjectEnglish: String,
-                            contentEnglish: String,
-                            subjectWelsh: String,
-                            contentWelsh: String,
-                            validFrom: String,
-                            alertQueue: String,
-                            details: MessageFormData.Details
-                          )
+  externalRef: MessageFormData.ExternalRef,
+  recipient: MessageFormData.Recipient,
+  regime: String,
+  messageType: String,
+  subjectEnglish: String,
+  contentEnglish: String,
+  subjectWelsh: String,
+  contentWelsh: String,
+  validFrom: String,
+  alertQueue: String,
+  details: MessageFormData.Details
+)
 
 object MessageFormData {
   case class ExternalRef(
-                          id: String,
-                          source: String
-                        )
+    id: String,
+    source: String
+  )
 
   case class TaxIdentifier(
-                            name: String,
-                            value: String
-                          )
+    name: String,
+    value: String
+  )
 
   case class RecipientName(
-                            line1: String
-                          )
+    line1: String
+  )
 
   case class Recipient(
-                        taxIdentifier: TaxIdentifier,
-                        name: RecipientName,
-                        email: String
-                      )
+    taxIdentifier: TaxIdentifier,
+    name: RecipientName,
+    email: String
+  )
 
   case class Details(
-                      formId: String,
-                      issueDate: String,
-                      batchId: String,
-                      sourceData: String
-                    )
+    formId: String,
+    issueDate: String,
+    batchId: String,
+    sourceData: String
+  )
 
   // Update and return a new FormData
   def update(
-              formData: MessageFormData,
-              externalRefId: Option[String] = None,
-              externalRefSource: Option[String] = None,
-              identifierName: Option[String] = None,
-              identifierValue: Option[String] = None,
-              nameLine1: Option[String] = None,
-              email: Option[String] = None,
-              formId: Option[String] = None,
-              issueDate: Option[String] = None,
-              batchId: Option[String] = None,
-              sourceData: Option[String] = None,
-              subjectEnglish: Option[String] = None,
-              contentEnglish: Option[String] = None,
-              subjectWelsh: Option[String] = None,
-              contentWelsh: Option[String] = None,
-              regime: Option[String] = None,
-              validFrom: Option[String] = None,
-              alertQueue: Option[String] = None,
-              messageType: Option[String] = None
-            ): MessageFormData = {
+    formData: MessageFormData,
+    externalRefId: Option[String] = None,
+    externalRefSource: Option[String] = None,
+    identifierName: Option[String] = None,
+    identifierValue: Option[String] = None,
+    nameLine1: Option[String] = None,
+    email: Option[String] = None,
+    formId: Option[String] = None,
+    issueDate: Option[String] = None,
+    batchId: Option[String] = None,
+    sourceData: Option[String] = None,
+    subjectEnglish: Option[String] = None,
+    contentEnglish: Option[String] = None,
+    subjectWelsh: Option[String] = None,
+    contentWelsh: Option[String] = None,
+    regime: Option[String] = None,
+    validFrom: Option[String] = None,
+    alertQueue: Option[String] = None,
+    messageType: Option[String] = None
+  ): MessageFormData =
     formData.copy(
       externalRef = formData.externalRef.copy(
         id = externalRefId.getOrElse(formData.externalRef.id),
@@ -112,7 +112,6 @@ object MessageFormData {
         sourceData = sourceData.getOrElse(formData.details.sourceData)
       )
     )
-  }
 
   val default: MessageFormData = MessageFormData(
     externalRef = ExternalRef(
@@ -127,7 +126,8 @@ object MessageFormData {
       name = RecipientName(
         line1 = "P800"
       ),
-      email = GeneratedTestData.email),
+      email = GeneratedTestData.email
+    ),
     regime = regimeSaValue,
     messageType = messageTypeValue,
     subjectEnglish = englishSubjectValue,

@@ -22,9 +22,7 @@ import uk.gov.hmrc.ui.pages.paperless.*
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.PtaPaperlessTests
 
-
 class PtaPaperlessChooseLanguagePageTestSpec extends BaseSpec {
-
 
   Feature("Choose language for email preference page") {
 
@@ -49,13 +47,13 @@ class PtaPaperlessChooseLanguagePageTestSpec extends BaseSpec {
       PaperlessCheckYourSettingsPage.waitUntilPageLoad()
       When("I click Emails sent in Change link")
       PaperlessCheckYourSettingsPage.clickOnEmailsSentInChangeLink()
-      And("I choose Send paperless email notification in Welsh" )
+      And("I choose Send paperless email notification in Welsh")
       PaperlessChooseLanguagePage.chooseSendPaperlessLanguage()
       And("I click Continue button")
       PaperlessChooseLanguagePage.clickOnContinueButton()
       Then("I see the page: Check your settings")
       PaperlessCheckYourSettingsPage.waitUntilPageLoad()
-      And("I see Emails sent in: Welsh, if available" )
+      And("I see Emails sent in: Welsh, if available")
       PaperlessCheckYourSettingsPage.contentVerification("Emails sent in for verified", "Welsh, if available")
       When("I click Emails sent in Change link")
       PaperlessCheckYourSettingsPage.clickOnEmailsSentInChangeLink()

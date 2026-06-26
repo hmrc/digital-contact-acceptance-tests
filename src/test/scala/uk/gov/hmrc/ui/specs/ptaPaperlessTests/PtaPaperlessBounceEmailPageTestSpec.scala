@@ -22,13 +22,14 @@ import uk.gov.hmrc.ui.pages.paperless.*
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.PtaPaperlessTests
 
-
 class PtaPaperlessBounceEmailPageTestSpec extends BaseSpec {
-
 
   Feature("Bounce Email page") {
 
-    Scenario("Email bounce page, enter email address page and OptOut page display through Email Bounce page", PtaPaperlessTests) {
+    Scenario(
+      "Email bounce page, enter email address page and OptOut page display through Email Bounce page",
+      PtaPaperlessTests
+    ) {
       Given("I am logged into PTA account with nino and sautr enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr", pta)

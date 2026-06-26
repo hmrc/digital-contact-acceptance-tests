@@ -22,9 +22,7 @@ import uk.gov.hmrc.ui.pages.paperless.*
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.PtaPaperlessTests
 
-
 class PtaPaperlessCheckYourSettingsPageTestSpec extends BaseSpec {
-
 
   Feature("Check Your Settings Page") {
 
@@ -47,9 +45,15 @@ class PtaPaperlessCheckYourSettingsPageTestSpec extends BaseSpec {
       Then("I see the page: Check Your Settings")
       PaperlessCheckYourSettingsPage.waitUntilPageLoad()
       And("I see Tax documents: Post only until you verify your email address")
-      PaperlessCheckYourSettingsPage.contentVerification("Tax documents", "Post only until you verify your email address")
-      And("I see Emails sent in: Not available until you verify your email address" )
-      PaperlessCheckYourSettingsPage.contentVerification("Emails sent in", "Not available until you verify your email address")
+      PaperlessCheckYourSettingsPage.contentVerification(
+        "Tax documents",
+        "Post only until you verify your email address"
+      )
+      And("I see Emails sent in: Not available until you verify your email address")
+      PaperlessCheckYourSettingsPage.contentVerification(
+        "Emails sent in",
+        "Not available until you verify your email address"
+      )
     }
 
     Scenario("Change email address for unverified user under Contact Details", PtaPaperlessTests) {
@@ -100,7 +104,10 @@ class PtaPaperlessCheckYourSettingsPageTestSpec extends BaseSpec {
       PaperlessPTAHomePage.waitUntilPageLoad()
     }
 
-    Scenario("Unverified user toggles the language on Check Your Settings Page from English to Welsh", PtaPaperlessTests) {
+    Scenario(
+      "Unverified user toggles the language on Check Your Settings Page from English to Welsh",
+      PtaPaperlessTests
+    ) {
       Given("I am logged into PTA account with nino and sautr enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr", pta)
@@ -124,7 +131,10 @@ class PtaPaperlessCheckYourSettingsPageTestSpec extends BaseSpec {
       PaperlessCheckYourSettingsPage.waitUntilPageLoad(true)
     }
 
-    Scenario("Unverified user toggles the language on Check Your Settings Page from Welsh to English", PtaPaperlessTests) {
+    Scenario(
+      "Unverified user toggles the language on Check Your Settings Page from Welsh to English",
+      PtaPaperlessTests
+    ) {
       Given("I am logged into PTA account with nino and sautr enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr", pta)

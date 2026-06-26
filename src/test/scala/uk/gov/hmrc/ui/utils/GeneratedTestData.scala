@@ -27,9 +27,9 @@ object GeneratedTestData {
   val ninoNumber: String = s"YY${randomDigits(6)}A"
 
   val ninoNumber1: String = s"SP${randomDigits(6)}A"
-  
+
   val epsNinoNumber: String = "YY000200A"
-  
+
   val itsaIdentifierValue: String = s"ITSA${randomDigits(11)}"
 
   val vatVrnIdentifierValue: String = randomDigits(9)
@@ -37,7 +37,7 @@ object GeneratedTestData {
   val iossIdentifierValue: String = s"GB${randomDigits(10)}"
 
   val iossInterIdentifierValue: String = s"IN${randomDigits(10)}"
-  
+
   val iossNetpIdentifierValue: String = s"IN${randomDigits(10)}"
 
   val ossIdentifierValue: String = randomDigits(9)
@@ -55,7 +55,7 @@ object GeneratedTestData {
   val identifierValuePpt: String = s"XMPPT${randomDigits(10)}"
 
   val identifierValueEori: String = s"GB${randomDigits(10)}"
-  
+
   val identifierValueEori2: String = s"GB${randomDigits(10)}"
 
   val epayeTaxOfficeNumberAndReferenceValue: String = s"840PR${randomDigits(8)}"

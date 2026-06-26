@@ -18,8 +18,8 @@ package uk.gov.hmrc.ui.utils.html
 
 object V4MessageHtmlContentSa300 {
   val HtmlContentSa300_SubjectEnglish = "File your Self Assessment return"
-  val HtmlContentSa300_SubjectWelsh = "Ffeiliwch eich datganiad Hunanasesiad"
-  val HtmlContentSa300 =
+  val HtmlContentSa300_SubjectWelsh   = "Ffeiliwch eich datganiad Hunanasesiad"
+  val HtmlContentSa300                =
     s"""{
         <section lang="en", subject="File your Self Assessment return">
         <p class="govuk-body">You must send us your income and expenses update for your foreign property income for the quarter ending 05 July 2020.</p>

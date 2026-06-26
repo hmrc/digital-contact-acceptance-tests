@@ -26,9 +26,8 @@ object PaperlessChangeEmailAddressPage extends BasePage {
   // This is Change Email Address page for paperless journey using digital-contact-demo-frontend
   var paperlessPTAChangeEmailAddressPageTitle: String = "Change your email address"
 
-  def waitUntilPageLoad(): Unit = {
+  def waitUntilPageLoad(): Unit =
     waitForText(changeEmailAddressPageHeader, paperlessPTAChangeEmailAddressPageTitle)
-   }
 
   def fillChangeEmailPage(): String = {
     sendKeys(By.id(emailMainId), GeneratedTestData.email2)

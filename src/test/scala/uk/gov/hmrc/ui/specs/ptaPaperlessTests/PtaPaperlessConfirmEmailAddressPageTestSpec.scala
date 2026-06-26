@@ -22,9 +22,7 @@ import uk.gov.hmrc.ui.pages.paperless.*
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.PtaPaperlessTests
 
-
 class PtaPaperlessConfirmEmailAddressPageTestSpec extends BaseSpec {
-
 
   Feature("Email address confirmation") {
 

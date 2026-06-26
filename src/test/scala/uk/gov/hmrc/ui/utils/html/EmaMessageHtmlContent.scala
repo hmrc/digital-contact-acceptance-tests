@@ -16,9 +16,9 @@
 
 package uk.gov.hmrc.ui.utils.html
 
-object EmaMessageHtmlContent{
-        val EmaHtmlContent=
-        s"""{
+object EmaMessageHtmlContent {
+  val EmaHtmlContent =
+    s"""{
            |<section lang="en" Subject="Late Payment Interest Due"
            |<div class="govuk-grid-row grid-row">
            |<div class="govuk-grid-column-two-thirds column-two-thirds"><h2 class="govuk-heading-l govuk-!-margin-top-9">You owe late payment interest on your VAT</h2>
@@ -105,4 +105,4 @@ object EmaMessageHtmlContent{
            |</section>
     }""".stripMargin
 
-        }
+}

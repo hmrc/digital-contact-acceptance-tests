@@ -21,8 +21,6 @@ import uk.gov.hmrc.ui.ElementLocators.{clickOnAddNewFormButtonId, clickOnDeleteF
 import uk.gov.hmrc.ui.pages.BasePage
 import uk.gov.hmrc.ui.pages.preferencesAdmin.PreferencesMessageBrakePage.getText
 
-
-
 object PreferencesMessageBrakeAllowlistPage extends BasePage {
 
   var searchPageTitle: String = "Message Form IDs Allowlist"
@@ -32,7 +30,6 @@ object PreferencesMessageBrakeAllowlistPage extends BasePage {
 
   def clickOnAddNewFormButton(): Unit =
     click(By.cssSelector(clickOnAddNewFormButtonId))
-
 
   def clickOnDeleteFormId(): Unit = {
     click(By.cssSelector(clickOnDeleteFormButtonId))
@@ -50,7 +47,7 @@ object PreferencesMessageBrakeAllowlistPage extends BasePage {
     getText(By.cssSelector("#main-content > div > div")).contains("SA316")
 
   def addNewFormId(id: String): Unit = {
-    val formId: By = By.id(newFormIdId)
+    val formId: By     = By.id(newFormIdId)
     val reasonText: By = By.id(reasonTextId)
     sendKeys(formId, id)
     sendKeys(reasonText, reasonTextForAdding)
@@ -62,7 +59,6 @@ object PreferencesMessageBrakeAllowlistPage extends BasePage {
     click(By.xpath(xpathForId))
   }
 
-  def confirmFormIdDeleted(id: String): Unit = {
+  def confirmFormIdDeleted(id: String): Unit =
     assert(getPageSource.contains(id).equals(false))
-  }
 }

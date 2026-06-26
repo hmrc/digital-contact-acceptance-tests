@@ -59,7 +59,7 @@ class p2PaperlessJourneyHipTestSpec extends BaseSpec {
       Then("the suppression data is sent to NPS for outputPreference as paper and bounced false through HIP")
       suppressionDataToNpsThruHip("paper")
     }
-    
+
     Scenario("Paperless bounce journey for the P2 customer", PtaPaperlessTests) {
       Given("I am logged into PTA account with nino and sautr enrolment")
       LoginUsingAuthWizardPage.pageLoad()

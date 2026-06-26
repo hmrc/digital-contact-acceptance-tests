@@ -1,0 +1,48 @@
+/*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package uk.gov.hmrc.ui.pages.messages
+
+import org.openqa.selenium.By
+import uk.gov.hmrc.ui.ElementLocators.*
+import uk.gov.hmrc.ui.pages.BasePage
+import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.sendKeys
+
+object ReplyToConversationPage extends BasePage {
+
+  def clickOnSend(): Unit = {
+    val sendButton: By = By.cssSelector(replySendButton)
+    click(sendButton)
+    fluentWait
+  }
+
+  def enterMessage(customerMessage: String): Unit = {
+    val messageTextArea: By = By.id(replyTextId)
+    customerMessage.toLowerCase match {
+      case "valid"                  => sendKeys(messageTextArea, validCustomerMessage)
+      case "error"                  => sendKeys(messageTextArea, errorCustomerMessage)
+      case "valid message for hint" => sendKeys(messageTextArea, validHintCustomerMessage)
+      case _                        => throw new IllegalArgumentException(s"$customerMessage is not a message")
+    }
+    fluentWait
+  }
+
+  def clickOnBackToMessagesButton(): Unit = {
+    val backToMessages: By = By.cssSelector(backToMessagesButton)
+    click(backToMessages)
+    fluentWait
+  }
+}

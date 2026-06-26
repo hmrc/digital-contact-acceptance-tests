@@ -25,24 +25,30 @@ import uk.gov.hmrc.ui.utils.GeneratedTestData
 
 object PaperlessReOptInPage extends BasePage {
   var PaperlessReOptInPageTitleEnglish: String = "Keep getting your tax letters online"
-  var PaperlessReOptInPageTitleWelsh: String = "Parhau i gael eich llythyrau treth ar-lein"
+  var PaperlessReOptInPageTitleWelsh: String   = "Parhau i gael eich llythyrau treth ar-lein"
 
-  def waitUntilPageLoad(isWelsh: Boolean=false): Unit = {
+  def waitUntilPageLoad(isWelsh: Boolean = false): Unit =
     if (isWelsh) {
       waitForText(reOptInPageHeader, PaperlessReOptInPageTitleWelsh)
     } else {
       waitForText(reOptInPageHeader, PaperlessReOptInPageTitleEnglish)
     }
-  }
 
   def reOptIn(emailBounced: Boolean = false): Unit = {
     click(By.id(spsReOptInId))
     click(By.id(submitEmailButtonId))
 
-    if(! emailBounced)
-      fluentWait.until(driver => driver.findElement(By.cssSelector(reOptInPageSubmitEmailFormHeader)).getText.equals("Which email do you want to use for your tax letters?"))
+    if (!emailBounced)
+      fluentWait.until(driver =>
+        driver
+          .findElement(By.cssSelector(reOptInPageSubmitEmailFormHeader))
+          .getText
+          .equals("Which email do you want to use for your tax letters?")
+      )
     else
-      fluentWait.until(driver => driver.findElement(By.cssSelector(emailPageHeader2)).getText.equals("Enter your email address"))
+      fluentWait.until(driver =>
+        driver.findElement(By.cssSelector(emailPageHeader2)).getText.equals("Enter your email address")
+      )
   }
 
   def reOptInWithVerifiedEmail(): Unit = {
@@ -76,8 +82,7 @@ object PaperlessReOptInPage extends BasePage {
     fluentWait
   }
 
-  def clickCloseButton(): Unit = {
+  def clickCloseButton(): Unit =
     click(By.cssSelector("#main-content > div > div > div:nth-child(5) > a"))
-  }
 
 }

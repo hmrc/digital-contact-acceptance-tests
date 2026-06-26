@@ -24,17 +24,15 @@ import uk.gov.hmrc.ui.pages.BasePage
 object PaperlessOptOutSurveyPage extends BasePage {
 
   // This is Opt out survey page for paperless journey using digital-contact-demo-frontend
-  var paperlessOptOutSurveyPageTitle: String = "Why did you choose paper tax letters?"
+  var paperlessOptOutSurveyPageTitle: String   = "Why did you choose paper tax letters?"
   var paperlessReOptOutSurveyPageTitle: String = "Why did you choose to go back to paper letters?"
 
-  def waitUntilPageLoad(reOptout: Boolean = false): Unit = {
+  def waitUntilPageLoad(reOptout: Boolean = false): Unit =
     if (reOptout) {
       waitForText(optOutSurveyPageHeader, paperlessReOptOutSurveyPageTitle)
     } else {
       waitForText(optOutSurveyPageHeader, paperlessOptOutSurveyPageTitle)
     }
-
-  }
 
   def optOutSurveyQuestionsSelection(): Unit = {
     click(By.cssSelector("#choice-d210eccd-9ea1-48fd-a28e-25abbb7508fe"))
@@ -52,20 +50,16 @@ object PaperlessOptOutSurveyPage extends BasePage {
     click(By.cssSelector("#choice-15d28c3f-9f33-4c44-aefa-165fc84b5e23"))
   }
 
-  def enterSurveyReason(): Unit = {
+  def enterSurveyReason(): Unit =
     sendKeys(By.cssSelector(optOutSurveyReason), "Testing the survey functionality")
-  }
 
-  def clickOnContinueButton(): Unit = {
+  def clickOnContinueButton(): Unit =
     click(By.cssSelector(optOutSurveyContinueButton))
-  }
 
-  def clickOnSkipButton(): Unit = {
+  def clickOnSkipButton(): Unit =
     click(By.cssSelector(optOutSurveySkipButton))
-  }
 
-  def pageNotVisible(): Unit = {
+  def pageNotVisible(): Unit =
     assert(Driver.instance.findElements(By.cssSelector(optOutSurveyPageHeader)).size() == 0)
-  }
 
 }

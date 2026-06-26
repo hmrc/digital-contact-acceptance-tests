@@ -18,11 +18,10 @@ package uk.gov.hmrc.ui.pages.paperless
 
 import uk.gov.hmrc.ui.pages.BasePage
 
-
 object PaperlessReOptInChooseEmailPage extends BasePage {
   var paperlessChooseEmailPageTitle: String = "Which email do you want to use for your tax letters?"
 
   def chooseEmailPageTitle(): Unit =
     getTitle.contains(paperlessChooseEmailPageTitle)
-    
+
 }

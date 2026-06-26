@@ -23,10 +23,9 @@ import uk.gov.hmrc.ui.utils.GeneratedTestData
 
 object PaperlessEmailPage extends BasePage {
   var paperlessEmailPageTitle: String = "Enter your email address"
-  
-  def waitUntilPageLoad(): Unit = {
+
+  def waitUntilPageLoad(): Unit =
     waitForText(emailPageHeader, paperlessEmailPageTitle)
-  }
 
   def fillEmailPage(email: String = GeneratedTestData.email): Unit = {
     val getEmailTextField: By = By.id(getEmailTextFieldId)

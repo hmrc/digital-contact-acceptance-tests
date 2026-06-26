@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs.owsm.epaye
+package uk.gov.hmrc.ui.specs.owsmTests.epaye
 
 import org.scalatest.featurespec.AnyFeatureSpec
 import uk.gov.hmrc.ui.ElementLocators.{demoFrontEndInboxFirstMessageSubject, demoFrontEndInboxFirstMessageSubject2}
@@ -26,7 +26,6 @@ import uk.gov.hmrc.ui.pages.messages.SecureMessagesPage
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.OwsmTests
 import uk.gov.hmrc.ui.utils.TestData
-
 
 class EpayeMessageTestSpec extends BaseSpec with TestData {
 

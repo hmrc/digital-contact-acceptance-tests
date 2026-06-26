@@ -18,8 +18,8 @@ package uk.gov.hmrc.ui.utils.html
 
 object V4MessageHtmlContentVat {
   val htmlContentVat_SubjectEnglish = "Late Payment Interest Due"
-  val htmlContentVat_SubjectWelsh = "Y llog sy’n ddyledus am dalu’n hwyr"
-  val HtmlContentVat =
+  val htmlContentVat_SubjectWelsh   = "Y llog sy’n ddyledus am dalu’n hwyr"
+  val HtmlContentVat                =
     s"""{
   <section lang="en" Subject="Late Payment Interest Due"
         <div class="govuk-grid-row grid-row">

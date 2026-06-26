@@ -22,9 +22,7 @@ import uk.gov.hmrc.ui.pages.paperless.*
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.PtaPaperlessTests
 
-
 class PtaPaperlessReOptOutSurveyPageTestSpec extends BaseSpec {
-
 
   Feature("Re-opt-out Survey page") {
 

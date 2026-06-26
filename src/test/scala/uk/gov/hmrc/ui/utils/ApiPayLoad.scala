@@ -16,12 +16,11 @@
 
 package uk.gov.hmrc.ui.utils
 
-
 trait ApiPayLoad {
 
-  val email: String = GeneratedTestData.email
+  val email: String  = GeneratedTestData.email
   val email2: String = GeneratedTestData.email2
-  
+
   val payloadBounceEmail1: String =
     s"""{
             "emailAddress": "$email"
@@ -66,7 +65,6 @@ trait ApiPayLoad {
        |"outputFormType": "P2",
        |"printStatus": "PAPER",
        |"lastUpdatedDate": "2025-04-11"}]
-       |}""".stripMargin  
+       |}""".stripMargin
 
 }
-
