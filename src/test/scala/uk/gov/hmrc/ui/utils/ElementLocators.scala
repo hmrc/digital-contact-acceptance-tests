@@ -90,7 +90,7 @@ object ElementLocators {
   val pageHeader2                                = "#main-content > div > div > h2"
   val pageLanguageEnglish                        = "body > header > section > div > nav > ul > li:nth-child(1) > a"
   val pageLanguageWelsh                          = "body > header > section > div > nav > ul > li:nth-child(2) > a"
-  val pageBackLink                               = "#main-content > div > div > div > div > a"
+  val pageBackLink                               = "body > div > div > div:nth-child(1) > div > a"
   val sendMessageResponse                        = "#main-content > div > div > div.data > p > span"
   val cdsMessagePageHeader                       = "#main-content > div > div > div > div > h1"
   val cdsQueryCreatedPageHeader                  = "#main-content > div > div > div > div > div > h1"
@@ -145,5 +145,8 @@ object ElementLocators {
     "#main-content > div > div > div > div > div.govuk-grid-column-two-thirds > form > button"
   val EnglishLanguageToggle: String                   =
     "#main-content > div > div > div > div > div.govuk-grid-column-two-thirds > form > button"
-
+  val cdsQueryCreationCompleteBackLink: String               =
+    "#main-content > div > div > div > div > a"
+  val cdsConversationBackLink: String =
+    "#main-content > div > div > div > a"
 }

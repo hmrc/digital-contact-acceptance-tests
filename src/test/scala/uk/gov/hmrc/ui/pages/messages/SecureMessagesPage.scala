@@ -49,9 +49,16 @@ object SecureMessagesPage extends BasePage {
   def pageContains(subject: String): Unit =
     assert(getPageSource.contains(subject))
 
-  def backLink(): Unit = {
-    val pageBackLink: By = By.cssSelector("#main-content > div > div > div > a")
+  def backLinkCdsQuery(): Unit = {
+    val pageBackLink: By = By.cssSelector(cdsQueryCreationCompleteBackLink)
+    click(pageBackLink)
+    fluentWait
+  }
+
+  def backLinkCdsConversation(): Unit = {
+    val pageBackLink: By = By.cssSelector(cdsConversationBackLink)
     click(pageBackLink)
     fluentWait
   }
 }
+

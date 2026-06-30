@@ -34,8 +34,8 @@ import play.api.libs.json.{JsValue, Json}
 import uk.gov.hmrc.ui.pages.messages.GmcMessages.preferences
 import uk.gov.hmrc.ui.utils.{ApiPayLoad, GeneratedTestData, TestData}
 import play.api.libs.ws.DefaultBodyWritables.writeableOf_String
-import uk.gov.hmrc.ui.ElementLocators.{pageBackLink, pageHeader1, pageHeader2, pageLanguageEnglish, pageLanguageWelsh}
-import uk.gov.hmrc.ui.pages.messages.CdsMessages.{caseworkerReplyMessage, caseworkerReplyPayload, conversationId, name}
+import uk.gov.hmrc.ui.ElementLocators.{pageBackLink, pageHeader1, pageHeader2, pageLanguageWelsh}
+import uk.gov.hmrc.ui.pages.messages.CdsMessages.{caseworkerReplyPayload, conversationId, name}
 
 import java.time.Duration
 import scala.concurrent.Await
@@ -180,7 +180,7 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
   }
 
   def selectLanguageWelsh(): Unit = {
-    val welshLink: By = By.partialLinkText("Cymraeg")
+    val welshLink: By = By.cssSelector(pageLanguageWelsh)
     click(welshLink)
   }
 
@@ -190,6 +190,7 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
   }
 
   def clickOnBackLink(): Unit = {
+
     click(By.cssSelector(pageBackLink))
     fluentWait
   }
