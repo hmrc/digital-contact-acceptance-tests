@@ -24,7 +24,7 @@ import uk.gov.hmrc.ui.pages.messages.CdsMessages
 import uk.gov.hmrc.ui.pages.messages.CdsMessages.submitFormWithCustomerName
 import uk.gov.hmrc.ui.pages.messages.GmcMessages.*
 import uk.gov.hmrc.ui.pages.messages.ReplyToConversationPage.{clickOnBackToMessagesButton, clickOnSend, enterMessage}
-import uk.gov.hmrc.ui.pages.messages.SecureMessagesPage.{backLink, clickOnReadSubjectCds, clickOnUnreadSubjectCds}
+import uk.gov.hmrc.ui.pages.messages.SecureMessagesPage.{backLinkCdsConversation, clickOnReadSubjectCds, clickOnUnreadSubjectCds}
 import uk.gov.hmrc.ui.pages.messages.ViewConversationPage.clickOnReplyToThisMessageLink
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.TwsmTests
@@ -74,7 +74,7 @@ class CdsCustomerMessagesSpec extends BaseSpec with TestData {
       Then("I see below subject as")
       waitForText(cdsMessageDetailHeader, "MRN20210219105505513 Case D-89019")
       When("I click conversation back link")
-      backLink()
+      backLinkCdsConversation()
       Then("I can see Messages between you and HMRC text on the page")
       waitForText(cdsMessagePageHeader, "Messages between you and HMRC")
       And("I see the message with read status")
@@ -100,7 +100,7 @@ class CdsCustomerMessagesSpec extends BaseSpec with TestData {
       Then("I see below subject as")
       waitForText(cdsMessageDetailHeader, "MRN20210219105505513 Case D-89019")
       When("I click conversation back link")
-      backLink()
+      backLinkCdsConversation()
       Then("I can see Messages between you and HMRC text on the page")
       waitForText(cdsMessagePageHeader, "Messages between you and HMRC")
       And("I see the message with read status")

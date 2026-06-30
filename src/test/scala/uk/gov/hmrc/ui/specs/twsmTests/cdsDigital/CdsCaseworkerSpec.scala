@@ -23,7 +23,7 @@ import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.logIntoMessage
 import uk.gov.hmrc.ui.pages.messages.CdsMessages.submitFormWithCustomerName
 import uk.gov.hmrc.ui.pages.messages.GmcMessages.*
 import uk.gov.hmrc.ui.pages.messages.ReplyToConversationPage.{clickOnSend, enterMessage}
-import uk.gov.hmrc.ui.pages.messages.SecureMessagesPage.clickOnUnreadSubjectCds
+import uk.gov.hmrc.ui.pages.messages.SecureMessagesPage.{backLinkCdsQuery, clickOnUnreadSubjectCds}
 import uk.gov.hmrc.ui.pages.messages.ViewConversationPage.clickOnReplyToThisMessageLink
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.TwsmTests
@@ -49,7 +49,7 @@ class CdsCaseworkerSpec extends BaseSpec with TestData {
       Then("I can see Query creation complete")
       waitForText(cdsQueryCreatedPageHeader, "Query creation complete")
       When("I click back link on the page")
-      clickOnBackLink()
+      backLinkCdsQuery()
       Then("I should be on the secure message stub page")
       waitGetUrlResult("http://localhost:9202/secure-message-stub")
     }
@@ -61,7 +61,7 @@ class CdsCaseworkerSpec extends BaseSpec with TestData {
       Then("I can see Query creation complete")
       waitForText(cdsQueryCreatedPageHeader, "Query creation complete")
       When("I click back link on the page")
-      clickOnBackLink()
+      backLinkCdsQuery()
       And("I resubmit the same query with same Name and Id")
       submitFormWithCustomerName()
       Then("I can see Query creation unsuccessfull text on the page")
