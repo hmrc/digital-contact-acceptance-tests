@@ -37,7 +37,7 @@ object DBTestSupport {
     database match {
       case "conversation" => messagedb.getCollection("conversation").deleteMany(Filters.empty()).toFuture().futureValue
       case "entity"       => entityDB.getCollection("entity").deleteMany(Filters.empty()).toFuture().futureValue
-      case "printSuppressionAlerts" => entityDB.getCollection("printSuppressionAlerts").deleteMany(Filters.empty()).toFuture().futureValue
+      case "printSuppressionAlerts" => payeNotificationDB.getCollection("printSuppressionAlerts").deleteMany(Filters.empty()).toFuture().futureValue
     }
   }
 

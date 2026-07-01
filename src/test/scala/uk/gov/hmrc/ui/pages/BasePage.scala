@@ -293,7 +293,6 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
     } else {
       val epsStatus: String = getPrintSuppressionAlertsMongoId
       if (epsStatus == expectedStatus) {
-        print("Passed")
         true
       } else if (epsStatus == "in-progress" || epsStatus == "todo") {
         eventually(timeout(Span(10, Seconds))) {
