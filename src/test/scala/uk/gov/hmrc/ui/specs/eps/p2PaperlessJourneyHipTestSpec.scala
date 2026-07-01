@@ -20,7 +20,7 @@ import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
 import uk.gov.hmrc.ui.pages.messages.GmcMessages.{bounceVerifyEmail, deleteMongoRecordsFromCollection, pta, suppressionDataToNpsThruHip, verifyEmail}
 import uk.gov.hmrc.ui.pages.paperless.*
 import uk.gov.hmrc.ui.specs.BaseSpec
-import uk.gov.hmrc.ui.specs.tags.PtaPaperlessTests
+import uk.gov.hmrc.ui.specs.tags.EpsPaperlessTests
 import uk.gov.hmrc.ui.utils.GeneratedTestData
 import uk.gov.hmrc.ui.utils.GeneratedTestData.epsNinoNumber
 
@@ -28,7 +28,7 @@ class p2PaperlessJourneyHipTestSpec extends BaseSpec {
 
   Feature("P2 preference status flow from DC to EPS to NPS via HIP") {
 
-    Scenario("Paperless opt - in journey for the P2 customer", PtaPaperlessTests) {
+    Scenario("Paperless opt - in journey for the P2 customer", EpsPaperlessTests) {
       Given("I am logged into PTA account with nino enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("NoSautr", pta, epsNinoNumber)
@@ -41,7 +41,7 @@ class p2PaperlessJourneyHipTestSpec extends BaseSpec {
       suppressionDataToNpsThruHip("digital")
     }
 
-    Scenario("Paperless opt - out journey for the P2 customer", PtaPaperlessTests) {
+    Scenario("Paperless opt - out journey for the P2 customer", EpsPaperlessTests) {
       Given("I am logged into PTA account with nino and sautr enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("NoSautr", pta, epsNinoNumber)
@@ -60,7 +60,7 @@ class p2PaperlessJourneyHipTestSpec extends BaseSpec {
       suppressionDataToNpsThruHip("paper")
     }
 
-    Scenario("Paperless bounce journey for the P2 customer", PtaPaperlessTests) {
+    Scenario("Paperless bounce journey for the P2 customer", EpsPaperlessTests) {
       Given("I am logged into PTA account with nino and sautr enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("NoSautr", pta, epsNinoNumber)

@@ -16,6 +16,9 @@
 
 package uk.gov.hmrc.ui.utils
 
+import java.time.Instant
+import java.time.temporal.ChronoUnit
+
 trait ApiPayLoad {
 
   val email: String  = GeneratedTestData.email
@@ -66,5 +69,41 @@ trait ApiPayLoad {
        |"printStatus": "PAPER",
        |"lastUpdatedDate": "2025-04-11"}]
        |}""".stripMargin
+
+  def p2EmailFlowFromNps(nino: String): String =
+    s"""
+         |{
+         | "alert": {"identifier":
+         | {"id_type":"nino",
+         | "value":"$nino"},
+         | "hod_id":"nps",
+         | "template_id":"0004"}
+         |}""".stripMargin
+
+  def workAddedToQueue(nino: String): String = {
+    s"""
+       |{
+       |  "alert": {
+       |    "identifier": {
+       |      "id_type": "nino",
+       |      "value": "$nino"
+       |    },
+       |    "hod_id": "nps",
+       |    "template_id": "0004"
+       |  }
+       |}
+       |""".stripMargin
+  }
+
+    def pullOutstandingWork: String = {
+      val futureDate = Instant.now().plus(60, ChronoUnit.DAYS).toString
+      s"""
+         |{
+         |  "filters": {
+         |    "failedBefore": "$futureDate",
+         |    "availableBefore": "$futureDate"
+         |  }
+         |}""".stripMargin
+  }
 
 }

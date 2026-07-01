@@ -21,7 +21,8 @@ import org.mongodb.scala.model.{Filters, Updates}
 import org.mongodb.scala.{Document, MongoClient, MongoCollection, MongoDatabase, SingleObservableFuture}
 import org.openqa.selenium.{By, WebDriver}
 import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait, Wait}
-import org.scalatest.concurrent.Futures.PatienceConfig
+import org.scalatest.concurrent.Eventually.eventually
+import org.scalatest.concurrent.Futures.{PatienceConfig, timeout}
 import play.api.libs.ws.StandaloneWSRequest
 import play.api.libs.ws.ahc.StandaloneAhcWSClient
 import uk.gov.hmrc.selenium.component.PageObject
@@ -36,8 +37,10 @@ import uk.gov.hmrc.ui.utils.{ApiPayLoad, GeneratedTestData, TestData}
 import play.api.libs.ws.DefaultBodyWritables.writeableOf_String
 import uk.gov.hmrc.ui.ElementLocators.{pageBackLink, pageHeader1, pageHeader2, pageLanguageWelsh}
 import uk.gov.hmrc.ui.pages.messages.CdsMessages.{caseworkerReplyPayload, conversationId, name}
+import uk.gov.hmrc.ui.utils.DBTestSupport.getPrintSuppressionAlertsMongoId
+import org.slf4j.LoggerFactory
 
-import java.time.Duration
+import java.time.{Duration, Instant}
 import scala.concurrent.Await
 
 trait BasePage extends PageObject with TestData with ApiPayLoad {
@@ -100,6 +103,8 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
   val messageFormId                 = "message"
   val checkYourSettings             = "Checkyoursettings"
   val close                         = "#main-content > div > div > div:nth-child(5) > a"
+
+  private val logger = LoggerFactory.getLogger(getClass)
 
   private val PREFERENCESDATABASE = "preferences"
   private val COLLECTION2         = "saIndividualPreferences"
@@ -259,4 +264,47 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
     )
     assert(response.status == 200)
   }
+
+  def p2EmailAlerts(nino: String): Unit = {
+
+    val p2EmailAlertUrl = epsHodsAdapter + "/eps-hods-adapter/preferences/alert"
+
+    val response = Await.result(
+      WsClient
+        .url(p2EmailAlertUrl)
+        .addHttpHeaders("Content-Type" -> "application/json")
+        .post(p2EmailFlowFromNps(nino)),
+      5.seconds
+    )
+    assert(response.status == 202)
+  }
+
+  def waitForSeconds(seconds: Int): Unit = {
+    val currentDateTime = Instant.now()
+    val waitTime = currentDateTime.plusSeconds(seconds)
+    while waitTime.compareTo(Instant.now()) > 0
+    do {}
+  }
+
+  def matchEpsStatus(nino: String, expectedStatus: String, maxRetries: Int = 0): Boolean = {
+    if (maxRetries == 3) {
+      logger.warn(s"$maxRetries did as per max limit")
+      false
+    } else {
+      val epsStatus: String = getPrintSuppressionAlertsMongoId
+      if (epsStatus == expectedStatus) {
+        print("Passed")
+        true
+      } else if (epsStatus == "in-progress" || epsStatus == "todo") {
+        eventually(timeout(Span(10, Seconds))) {
+          matchEpsStatus(nino, expectedStatus, maxRetries + 1)
+        }
+      }
+      else {
+        logger.warn(s"${epsStatus} did not match $expectedStatus")
+        false
+      }
+    }
+  }
+
 }
