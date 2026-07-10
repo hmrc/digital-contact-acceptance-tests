@@ -103,6 +103,7 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
   val messageFormId                 = "message"
   val checkYourSettings             = "Checkyoursettings"
   val close                         = "#main-content > div > div > div:nth-child(5) > a"
+  val uploadAndProcess              = "submit"
 
   private val logger = LoggerFactory.getLogger(getClass)
 

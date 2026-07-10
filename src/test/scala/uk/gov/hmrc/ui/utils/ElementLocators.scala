@@ -25,6 +25,10 @@ object ElementLocators {
   val clickOnAddNewFormButtonId                  = "#main-content > div > div > form > div > button"
   val clickOnDeleteFormButtonId                  = "#main-content > div > div > div:nth-child(8) > form > button"
   val clickOnMessageDecode                       = "#main-content > div > div > div > ul > li:nth-child(4) > a"
+  val clickOnBulkOptOutLink                      = "#main-content > div > div > div > ul > li:nth-child(7) > a"
+  val chooseFileUpload                           = "csv-upload"
+
+  
   val reOptinPageHeader                          = "#main-content > div > div > header > h1"
   val btaHomePageContactPreferenceText           =
     "#main-content > div > div.govuk-grid-column-two-thirds > div > div:nth-child(2) > span"
@@ -147,6 +151,9 @@ object ElementLocators {
     "#main-content > div > div > div > div > div.govuk-grid-column-two-thirds > form > button"
   val cdsQueryCreationCompleteBackLink: String               =
     "#main-content > div > div > div > div > a"
-  val cdsConversationBackLink: String =
+  val cdsConversationBackLink: String = {
     "#main-content > div > div > div > a"
+  }
+  val successFileUploadMsg: String = "#file-upload-confirmation > p"
+  val ninoOptedOutBulk: String = "#file-upload-confirmation > ul"
 }
