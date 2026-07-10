@@ -19,6 +19,7 @@ package uk.gov.hmrc.ui.pages.preferencesAdmin
 import org.openqa.selenium.By
 import org.openqa.selenium.support.ui.ExpectedConditions
 import uk.gov.hmrc.configuration.TestEnvironment
+import uk.gov.hmrc.ui.ElementLocators
 import uk.gov.hmrc.ui.ElementLocators.*
 import uk.gov.hmrc.ui.pages.BasePage
 
@@ -94,4 +95,10 @@ object PreferencesAdminPage extends BasePage {
     click(By.ByCssSelector(clickOnMessageBrakeAllowlistLink))
     fluentWait
   }
+
+  def clickOnBulkOptOut(): Unit = {
+    click(By.ByCssSelector(clickOnBulkOptOutLink))
+    fluentWait
+  }
+  
 }

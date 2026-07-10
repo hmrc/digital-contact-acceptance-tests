@@ -67,4 +67,12 @@ object GeneratedTestData {
   val email: String = s"testuser${randomDigits(6)}@example.com"
 
   val email2: String = s"testuser${randomDigits(6)}@example.org"
+
+  val ninosForBulkOptOut: Seq[String] = Seq(
+    "AA111111A",
+    "AA111112A",
+    "AA111113A",
+    "AA111114A",
+    "AA111115A"
+  )
 }
