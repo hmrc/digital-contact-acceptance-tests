@@ -101,7 +101,7 @@ object ElementLocators {
   val cdsMessageDetailHeader                     = "#main-content > div > div > div > div > div.govuk-grid-column-two-thirds > div > h1"
   val cdsMessagePageFirstMessageSubject          = "#message-0"
   val cdsMessagePageSecondMessageSubject         = "#message-1"
-  val cdsMessagePageReadSubject                  = "#message-0 > span.black-text.no--underline"
+  val cdsMessagePageReadSubject                  = "#message-0 > span.govuk-link"
   val cdsMessageReadCount                        = "body > header > div.govuk-width-container > a > span"
   val cdsMessageUnreadCount                      = "body > header > div:nth-child(3) > a > span"
   val cdsMessageThreadCount                      = "body > header > div:nth-child(3) > a > span"
