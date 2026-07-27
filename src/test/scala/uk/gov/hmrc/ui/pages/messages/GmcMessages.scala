@@ -224,14 +224,12 @@ object GmcMessages extends BasePage {
       elementEnglish,
       formData.contentEnglish
     )
-//    sendKeys(englishContentInputField, formData.contentEnglish)
     sendKeys(welshSubjectInputField, formData.subjectWelsh)
     js.executeScript(
       "arguments[0].value = arguments[1];",
       elementWelsh,
       formData.contentWelsh
     )
-//    sendKeys(welshContentInputField, formData.contentWelsh)
     sendKeys(validFromInputField, formData.validFrom)
     sendKeys(formIdInputField, formData.details.formId)
     sendKeys(issueDateInputField, formData.details.issueDate)
