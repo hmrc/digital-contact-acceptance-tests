@@ -16,11 +16,12 @@
 
 package uk.gov.hmrc.ui.pages.messages
 
-import org.openqa.selenium.By
+import org.openqa.selenium.{By, JavascriptExecutor, WebDriver, WebElement}
 import uk.gov.hmrc.ui.pages.BasePage
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.*
 import uk.gov.hmrc.ui.utils.{GeneratedTestData, MessageFormData}
 import org.apache.commons.codec.binary.Base64
+import uk.gov.hmrc.selenium.webdriver.Driver
 import uk.gov.hmrc.ui.ElementLocators.sendMessageResponse
 import uk.gov.hmrc.ui.utils.html.*
 
@@ -203,6 +204,12 @@ object GmcMessages extends BasePage {
     val batchIdInputField: By         = By.id(batchId)
     val sourceDataIdInputField: By    = By.id(sourceData)
 
+    val driver: WebDriver = Driver.instance
+    val elementEnglish: WebElement = driver.findElement(englishContentInputField)
+    val elementWelsh: WebElement = driver.findElement(welshContentInputField)
+    val js = driver.asInstanceOf[JavascriptExecutor]
+
+
     sendKeys(referenceIdInputField, formData.externalRef.id)
     sendKeys(sourceInputField, formData.externalRef.source)
     sendKeys(identifierNameInputField, formData.recipient.taxIdentifier.name)
@@ -212,9 +219,17 @@ object GmcMessages extends BasePage {
     sendKeys(messageTypeInputField, formData.messageType)
     sendKeys(alertQueueInputField, formData.alertQueue)
     sendKeys(englishSubjectInputField, formData.subjectEnglish)
-    sendKeys(englishContentInputField, formData.contentEnglish)
+    js.executeScript(
+      "arguments[0].value = arguments[1];",
+      elementEnglish,
+      formData.contentEnglish
+    )
     sendKeys(welshSubjectInputField, formData.subjectWelsh)
-    sendKeys(welshContentInputField, formData.contentWelsh)
+    js.executeScript(
+      "arguments[0].value = arguments[1];",
+      elementWelsh,
+      formData.contentWelsh
+    )
     sendKeys(validFromInputField, formData.validFrom)
     sendKeys(formIdInputField, formData.details.formId)
     sendKeys(issueDateInputField, formData.details.issueDate)
