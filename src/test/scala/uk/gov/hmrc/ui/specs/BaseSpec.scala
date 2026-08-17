@@ -18,8 +18,14 @@ package uk.gov.hmrc.ui.specs
 
 import org.scalatest.featurespec.AnyFeatureSpec
 import org.scalatest.matchers.should.Matchers
-import org.scalatest.{BeforeAndAfterEach, GivenWhenThen}
+import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, GivenWhenThen}
 import uk.gov.hmrc.selenium.webdriver.{Browser, ScreenshotOnFailure}
+import uk.gov.hmrc.ui.pages.messages.CdsMessages.deleteMongoRecordsFromCollection
+import uk.gov.hmrc.ui.specs.BaseSpec.entityCollectionDeleted
+
+object BaseSpec {
+  var entityCollectionDeleted = false
+}
 
 trait BaseSpec
     extends AnyFeatureSpec
@@ -27,7 +33,8 @@ trait BaseSpec
     with Matchers
     with BeforeAndAfterEach
     with Browser
-    with ScreenshotOnFailure {
+    with ScreenshotOnFailure
+    with BeforeAndAfterAll {
 
   override def beforeEach(): Unit =
     startBrowser()
@@ -35,4 +42,11 @@ trait BaseSpec
   override def afterEach(): Unit =
     quitBrowser()
 
+  override def beforeAll(): Unit = {
+    super.beforeAll()
+    if(!entityCollectionDeleted) {
+      deleteMongoRecordsFromCollection("entity-resolver")
+      entityCollectionDeleted = true
+    }
+  }
 }

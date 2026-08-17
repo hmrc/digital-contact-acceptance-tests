@@ -43,6 +43,7 @@ trait TestData {
   val message: String                    = TestEnvironment.url("message")
   val digitalContactStub: String         = TestEnvironment.url("digital-contact-stub")
   val epsHodsAdapter: String             = TestEnvironment.url("eps-hods-adapter")
+  val entityResolver: String             = TestEnvironment.url("entity-resolver")
 
   val credentialStrength: String              = "strong"
   val confidenceLevel: String                 = "200"
