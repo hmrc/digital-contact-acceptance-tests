@@ -44,6 +44,7 @@ trait BaseSpec
 
   override def beforeAll(): Unit = {
     super.beforeAll()
+
     if(!entityCollectionDeleted) {
       deleteMongoRecordsFromCollection("entity-resolver")
       entityCollectionDeleted = true
