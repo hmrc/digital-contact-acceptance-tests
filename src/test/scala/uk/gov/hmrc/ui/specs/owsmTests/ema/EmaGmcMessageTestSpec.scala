@@ -46,7 +46,8 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       "LPP2_ITSA",
       "PAR1_ITSA",
       "NIREF1",
-      "NIREF4"
+      "NIREF4",
+      "CH(A)1700"
     )
 
     formIds.foreach { formId =>
@@ -403,6 +404,25 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       logIntoMessage("pta", "regime", regimeValue)
       Then("I see the message: National Insurance contributions - we may owe you a refund")
       waitForText(demoFrontEndInboxFirstMessageSubject, "National Insurance contributions - we may owe you a refund")
+    }
+
+    Scenario("Customer can view the CH(A)1700 messages in PTA inbox", OwsmTests) {
+      Given("I am logged into PTA account with nino enrolment")
+      LoginUsingAuthWizardPage.pageLoad()
+      LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("NoSautr", pta)
+      PaperlessInterruptPage.pageTitle()
+      And("I am unverified for paperless")
+      PaperlessInterruptPage.fillInterruptPageForOptin()
+      PaperlessEmailPage.fillEmailPage()
+      PaperlessVerifyEmailPage.pageTitle()
+      And("I verify the email address")
+      verifyEmail()
+      When("A GMC message is created via EMA using CH(A)1700")
+      createV4Message("CH(A)1700")
+      And("I open my messages for PTA using regime")
+      logIntoMessage("pta", "regime", regimeValue)
+      Then("I see the message: Tax calculation for the year 6 April 2020 to 5 April 2021")
+      waitForText(demoFrontEndInboxFirstMessageSubject, subject_p800)
     }
 
     formIds.foreach { formId =>
