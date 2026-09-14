@@ -75,4 +75,6 @@ object GeneratedTestData {
     "AA111114A",
     "AA111115A"
   )
+
+  val identifierValueVpd: String = s"GBWK${randomDigits(7)}WK"
 }
