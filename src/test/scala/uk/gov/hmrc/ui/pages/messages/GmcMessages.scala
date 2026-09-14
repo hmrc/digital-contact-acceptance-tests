@@ -115,6 +115,7 @@ object GmcMessages extends BasePage {
         fillFormIossInter(V4MessageHtmlContentVat.htmlContentVat_SubjectEnglish, base64_encoded_content_vat_v4)
       case "oss"                  => fillFormOss(V4MessageHtmlContentVat.htmlContentVat_SubjectEnglish, base64_encoded_content_vat_v4)
       case "ad"                   => fillFormAd(V4MessageHtmlContentVat.htmlContentVat_SubjectEnglish, base64_encoded_content_vat_v4)
+      case "vpd"                  => fillFormVpd(V4MessageHtmlContentVat.htmlContentVat_SubjectEnglish, base64_encoded_content_vat_v4)
       case "itsaid for en"        =>
         fillFormItsaEn(EnMessageHtmlContentItsa.HtmlContentEnItsa_SubjectEnglish, base64_encoded_content_itsa_en)
       case "itsamig1 for en"      =>
@@ -385,6 +386,19 @@ object GmcMessages extends BasePage {
       identifierValue = Some(GeneratedTestData.adIdentifierValue),
       regime = Some(regimeAdValue),
       formId = Some("AD2"),
+      subjectEnglish = Some(subjectEnglish),
+      contentEnglish = Some(contentEnglish)
+    )
+    fillMessageForm(updated)
+  }
+
+  def fillFormVpd(subjectEnglish: String, contentEnglish: String): Unit = {
+    val updated: MessageFormData = MessageFormData.update(
+      MessageFormData.default,
+      identifierName = Some(enrolmentKeyVpd),
+      identifierValue = Some(GeneratedTestData.identifierValueVpd),
+      regime = Some(regimeVpdValue),
+      formId = Some("VPD1"),
       subjectEnglish = Some(subjectEnglish),
       contentEnglish = Some(contentEnglish)
     )

@@ -240,7 +240,8 @@ object LoginUsingAuthWizardPage extends BasePage {
         "epayeTaxIdentifier" -> (enrolmentKeyEpaye, taxIdentifierNameEpayeValueUc, GeneratedTestData.epayeTaxOfficeNumberAndReferenceValue),
         "ppt"                -> (enrolmentKeyPpt, taxIdentifierNamePptValueUc, GeneratedTestData.identifierValuePpt),
         "pptTaxIdentifier"   -> (enrolmentKeyPpt, taxIdentifierNamePptValueUc, GeneratedTestData.identifierValuePpt),
-        "cds"                -> (enrolmentKeyCds, taxIdentifierNameCds, GeneratedTestData.identifierValueEori)
+        "cds"                -> (enrolmentKeyCds, taxIdentifierNameCds, GeneratedTestData.identifierValueEori),
+        "vpd"                -> (enrolmentKeyVpd, taxIdentifierNameVpdValue, GeneratedTestData.identifierValueVpd)
       ).withDefaultValue(enrolmentKey, identifierName, GeneratedTestData.identifierValue)
 
       val (key, name, value) = enrolmentKeyMap(enrolmentType)

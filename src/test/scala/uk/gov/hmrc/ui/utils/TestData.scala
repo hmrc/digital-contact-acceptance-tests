@@ -78,7 +78,10 @@ trait TestData {
   val enrolmentKeyAd: String                  = "HMRC-AD-ORG"
   val taxIdentifierNameAdValue: String        = "APPAID"
   val regimeAdValue: String                   = "ad"
-
+  val enrolmentKeyVpd: String                 = "HMRC-VPD-ORG"
+  val taxIdentifierNameVpdValue: String       = "ZVPD"
+  val regimeVpdValue: String                  = "vpd"
+  
   val enrolmentKeyObtds: String           = "HMRC-OBTDS-ORG"
   val taxIdentifierNameObtdsValue: String = "EtmpRegistrationNumber"
   val regimeSdilValue: String             = "sdil"
