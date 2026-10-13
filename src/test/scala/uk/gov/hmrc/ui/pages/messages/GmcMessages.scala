@@ -132,8 +132,7 @@ object GmcMessages extends BasePage {
         fillFormNiref1En(NIREF1EnMessageHtmlContent.HtmlContentNiref1_SubjectEnglish, base64_encoded_content_niref1_en)
       case "niref4 en"            =>
         fillFormNiref4En(NIREF1EnMessageHtmlContent.HtmlContentNiref1_SubjectEnglish, base64_encoded_content_niref1_en)
-      case "cha1700"              =>
-        fillFormCHA1700(NIREF1EnMessageHtmlContent.HtmlContentNiref1_SubjectEnglish, base64_encoded_content_p800_v4)
+      case "cha1700"              => fillFormCHA1700(subject_p800, base64_encoded_content_p800_v4)
       case "invalidalertqueue"    => fillFormInvalidAlertQueue(subject_p800, base64_encoded_content_p800_v4)
       case "emptyalertqueue"      => fillFormEmptyAlertQueue(subject_p800, base64_encoded_content_p800_v4)
       case "invalidsourcedata"    => fillFormInvalidSourceData(subject_p800, base64_encoded_content_p800_v4)
