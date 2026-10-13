@@ -79,7 +79,7 @@ object GmcMessages extends BasePage {
     logIntoDemoFrontendForV4()
     gmcMessageType.toLowerCase match {
       case "invalid formid"       => fillFormWithInvalidFormId()
-      case "nino" | "ch(a)1700"   => fillFormNino(subject_p800, base64_encoded_content_p800_v4)
+      case "nino"                 => fillFormNino(subject_p800, base64_encoded_content_p800_v4)
       case "sautr for ats"        =>
         fillFormSautrAts("Your Annual Tax Summary for 2019 to 2020 is now", base64_encoded_content_atssautr)
       case "nino for v4"          =>
@@ -132,6 +132,7 @@ object GmcMessages extends BasePage {
         fillFormNiref1En(NIREF1EnMessageHtmlContent.HtmlContentNiref1_SubjectEnglish, base64_encoded_content_niref1_en)
       case "niref4 en"            =>
         fillFormNiref4En(NIREF1EnMessageHtmlContent.HtmlContentNiref1_SubjectEnglish, base64_encoded_content_niref1_en)
+      case "cha1700"              => fillFormCHA1700(subject_p800, base64_encoded_content_p800_v4)
       case "invalidalertqueue"    => fillFormInvalidAlertQueue(subject_p800, base64_encoded_content_p800_v4)
       case "emptyalertqueue"      => fillFormEmptyAlertQueue(subject_p800, base64_encoded_content_p800_v4)
       case "invalidsourcedata"    => fillFormInvalidSourceData(subject_p800, base64_encoded_content_p800_v4)
@@ -724,6 +725,19 @@ object GmcMessages extends BasePage {
       subjectWelsh = Some(subjectWelsh),
       contentWelsh = Some(contentWelsh),
       messageType = Some("cds_ddi_setup_dcs_alert")
+    )
+    fillMessageForm(updated)
+  }
+
+  def fillFormCHA1700(subject: String, content: String): Unit = {
+    val updated: MessageFormData = MessageFormData.update(
+      MessageFormData.default,
+      identifierName = Some(taxIdentifierNameValue),
+      identifierValue = Some(GeneratedTestData.ninoNumber),
+      regime = Some(regimeValue),
+      subjectEnglish = Some(subject),
+      contentEnglish = Some(content), 
+      formId = Some("CHA1700")
     )
     fillMessageForm(updated)
   }
