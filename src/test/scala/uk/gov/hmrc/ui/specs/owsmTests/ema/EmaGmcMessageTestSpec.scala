@@ -47,7 +47,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       "PAR1_ITSA",
       "NIREF1",
       "NIREF4",
-      "CH(A)1700",
+      "CHA1700",
       "VPD1"
     )
 
@@ -407,7 +407,7 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       waitForText(demoFrontEndInboxFirstMessageSubject, "National Insurance contributions - we may owe you a refund")
     }
 
-    Scenario("Customer can view the CH(A)1700 messages in PTA inbox", OwsmTests) {
+    Scenario("Customer can view the CHA1700 messages in PTA inbox", OwsmTests) {
       Given("I am logged into PTA account with nino enrolment")
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("NoSautr", pta)
@@ -418,8 +418,8 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       PaperlessVerifyEmailPage.pageTitle()
       And("I verify the email address")
       verifyEmail()
-      When("A GMC message is created via EMA using CH(A)1700")
-      createV4Message("CH(A)1700")
+      When("A GMC message is created via EMA using CHA1700")
+      createV4Message("CHA1700")
       And("I open my messages for PTA using regime")
       logIntoMessage("pta", "regime", regimeValue)
       Then("I see the message: Tax calculation for the year 6 April 2020 to 5 April 2021")
