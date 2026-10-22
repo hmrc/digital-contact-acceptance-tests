@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.specs.owsmTests.cdsFinancials
 
 import org.scalatest.featurespec.AnyFeatureSpec
-import uk.gov.hmrc.ui.ElementLocators.{cdsMessagePageFirstMessageSubject, cdsMessagePageHeader, cdsMessagePageSecondMessageSubject, cdsMessageReadCount, cdsMessageUnreadCount}
+import uk.gov.hmrc.ui.ElementLocators.{cdsMessagePageHeader, cdsMessagePageReadSecondSubject, cdsMessagePageReadSubject, cdsMessageReadCount, cdsMessageUnreadCount}
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.logIntoMessage
 import uk.gov.hmrc.ui.pages.messages.CdsMessages.{CreateCDSMessageWithMultipleTag, CreateCDSMessageWithTag, checkInboxIsEmpty}
@@ -39,7 +39,7 @@ class CdsMessageApiFilteringTestSpec extends BaseSpec with TestData {
       Then("I can see Messages between you and HMRC text on the page")
       waitForText(cdsMessagePageHeader, "Messages between you and HMRC")
       And("I can see Direct debit test text on the page")
-      waitForText(cdsMessagePageFirstMessageSubject, "Direct debit test")
+      waitForText(cdsMessagePageReadSubject, "Direct debit test")
       And("I can see 1 count in inbox list")
       waitForText(cdsMessageUnreadCount, "1")
     }
@@ -52,9 +52,9 @@ class CdsMessageApiFilteringTestSpec extends BaseSpec with TestData {
       Then("I can see Messages between you and HMRC text on the page")
       waitForText(cdsMessagePageHeader, "Messages between you and HMRC")
       And("I can see Direct debit test text on the page")
-      waitForText(cdsMessagePageFirstMessageSubject, "Direct debit test")
+      waitForText(cdsMessagePageReadSubject, "Direct debit test")
       And("I can see Direct debit logo test text on the page")
-      waitForText(cdsMessagePageSecondMessageSubject, "Direct debit logo test")
+      waitForText(cdsMessagePageReadSecondSubject, "Direct debit logo test")
       And("I can see 2 count in inbox list")
       waitForText(cdsMessageUnreadCount, "2")
     }
@@ -67,7 +67,7 @@ class CdsMessageApiFilteringTestSpec extends BaseSpec with TestData {
       Then("I can see Messages between you and HMRC text on the page")
       waitForText(cdsMessagePageHeader, "Messages between you and HMRC")
       And("I can see Direct debit logo test text on the page")
-      waitForText(cdsMessagePageFirstMessageSubject, "Direct debit logo test")
+      waitForText(cdsMessagePageReadSubject, "Direct debit logo test")
       And("I can see 1 count in inbox list")
       waitForText(cdsMessageUnreadCount, "1")
     }
@@ -80,7 +80,7 @@ class CdsMessageApiFilteringTestSpec extends BaseSpec with TestData {
       Then("I can see Messages between you and HMRC text on the page")
       waitForText(cdsMessagePageHeader, "Messages between you and HMRC")
       And("I can see Direct debit logo test text on the page")
-      waitForText(cdsMessagePageFirstMessageSubject, "Direct debit logo test")
+      waitForText(cdsMessagePageReadSubject, "Direct debit logo test")
       And("I can see 1 count in inbox list")
       waitForText(cdsMessageUnreadCount, "1")
     }
@@ -93,9 +93,9 @@ class CdsMessageApiFilteringTestSpec extends BaseSpec with TestData {
       Then("I can see Messages between you and HMRC text on the page")
       waitForText(cdsMessagePageHeader, "Messages between you and HMRC")
       And("I can see Direct debit test text on the page")
-      waitForText(cdsMessagePageFirstMessageSubject, "Direct debit test")
+      waitForText(cdsMessagePageReadSubject, "Direct debit test")
       And("I can see Direct debit logo test text on the page")
-      waitForText(cdsMessagePageSecondMessageSubject, "Direct debit logo test")
+      waitForText(cdsMessagePageReadSecondSubject, "Direct debit logo test")
       And("I can see 2 count in inbox list")
       waitForText(cdsMessageUnreadCount, "2")
     }
@@ -108,7 +108,7 @@ class CdsMessageApiFilteringTestSpec extends BaseSpec with TestData {
       Then("I can see Messages between you and HMRC text on the page")
       waitForText(cdsMessagePageHeader, "Messages between you and HMRC")
       And("I can see Direct debit logo test text on the page")
-      waitForText(cdsMessagePageFirstMessageSubject, "Direct debit logo test")
+      waitForText(cdsMessagePageReadSubject, "Direct debit logo test")
       And("I can see 1 count in inbox list")
       waitForText(cdsMessageUnreadCount, "1")
     }
@@ -121,7 +121,7 @@ class CdsMessageApiFilteringTestSpec extends BaseSpec with TestData {
       Then("I can see Messages between you and HMRC text on the page")
       waitForText(cdsMessagePageHeader, "Messages between you and HMRC")
       And("I can see Direct debit test text on the page")
-      waitForText(cdsMessagePageFirstMessageSubject, "Direct debit test")
+      waitForText(cdsMessagePageReadSubject, "Direct debit test")
       And("I can see 1 count in inbox list")
       waitForText(cdsMessageUnreadCount, "1")
     }
@@ -134,9 +134,9 @@ class CdsMessageApiFilteringTestSpec extends BaseSpec with TestData {
       Then("I can see Messages between you and HMRC text on the page")
       waitForText(cdsMessagePageHeader, "Messages between you and HMRC")
       And("I can see Direct debit test text on the page")
-      waitForText(cdsMessagePageFirstMessageSubject, "Direct debit test")
+      waitForText(cdsMessagePageReadSubject, "Direct debit test")
       And("I can see Direct debit logo test text on the page")
-      waitForText(cdsMessagePageSecondMessageSubject, "Direct debit logo test")
+      waitForText(cdsMessagePageReadSecondSubject, "Direct debit logo test")
       And("I can see 2 count in inbox list")
       waitForText(cdsMessageUnreadCount, "2")
     }
@@ -151,7 +151,7 @@ class CdsMessageApiFilteringTestSpec extends BaseSpec with TestData {
       Then("I can see Messages between you and HMRC text on the page")
       waitForText(cdsMessagePageHeader, "Messages between you and HMRC")
       And("I can see Direct debit logo test text on the page")
-      waitForText(cdsMessagePageFirstMessageSubject, "Direct debit logo test")
+      waitForText(cdsMessagePageReadSubject, "Direct debit logo test")
       And("I can see 1 count in inbox list")
       waitForText(cdsMessageUnreadCount, "1")
     }
@@ -170,7 +170,7 @@ class CdsMessageApiFilteringTestSpec extends BaseSpec with TestData {
     }
 
   }
-
+  
   override def beforeEach(): Unit = {
     super.beforeEach()
     deleteMongoRecordsFromCollection("preferences")
