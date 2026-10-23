@@ -221,8 +221,7 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
   }
 
   def waitForText(selector: String, text: String): Unit = {
-    val getText = fluentWait.until(driver => driver.findElement(By.cssSelector(selector)).getText)
-    getText.equals(text)
+    fluentWait.until(driver => driver.findElement(By.cssSelector(selector)).getText.contains(text))
   }
 
   def postCDSMessage(payload: String): Unit = {

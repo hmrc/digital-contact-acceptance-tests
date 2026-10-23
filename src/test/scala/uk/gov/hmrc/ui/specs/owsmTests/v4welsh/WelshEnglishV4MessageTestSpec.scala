@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.specs.owsmTests.v4welsh
 
 import org.scalatest.featurespec.AnyFeatureSpec
-import uk.gov.hmrc.ui.ElementLocators.{cdsMessagePageFirstMessageSubject, cdsMessagePageHeader, demoFrontEndInboxFirstMessageSubject, demoFrontEndInboxFirstMessageSubject2}
+import uk.gov.hmrc.ui.ElementLocators.{cdsMessagePageHeader, cdsMessagePageReadSubject, demoFrontEndInboxFirstMessageSubject, demoFrontEndInboxFirstMessageSubject2}
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage
 import uk.gov.hmrc.ui.pages.authWizard.LoginUsingAuthWizardPage.logIntoMessage
 import uk.gov.hmrc.ui.pages.messages.GmcMessages.*
@@ -126,11 +126,11 @@ class WelshEnglishV4MessageTestSpec extends BaseSpec with TestData {
       Then("I see the text: Messages between you and HMRC")
       waitForText(cdsMessagePageHeader, "Messages between you and HMRC")
       Then("I see the Message: CDS messages for test")
-      waitForText(cdsMessagePageFirstMessageSubject, "CDS messages for test")
+      waitForText(cdsMessagePageReadSubject, "CDS messages for test")
       And("I click Welsh language link")
       selectLanguageWelsh()
       Then("I see the message: Negeseuon CDS ar gyfer prawf")
-      waitForText(cdsMessagePageFirstMessageSubject, "Negeseuon CDS ar gyfer prawf")
+      waitForText(cdsMessagePageReadSubject, "Negeseuon CDS ar gyfer prawf")
       And("I click the message: Negeseuon CDS ar gyfer prawf")
       SecureMessagesPage.clickOnUnreadSubjectCds()
       And("When I see the message: Negeseuon CDS ar gyfer prawf")
