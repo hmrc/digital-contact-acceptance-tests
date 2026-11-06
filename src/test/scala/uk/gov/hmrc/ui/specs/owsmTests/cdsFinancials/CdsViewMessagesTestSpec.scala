@@ -26,7 +26,6 @@ import uk.gov.hmrc.ui.pages.messages.SecureMessagesPage.clickOnUnreadSubjectCds
 import uk.gov.hmrc.ui.pages.messages.{CdsMessages, SecureMessagesPage, ViewConversationPage}
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.OwsmTests
-import uk.gov.hmrc.ui.utils.DBTestSupport.deleteDatabase
 import uk.gov.hmrc.ui.utils.TestData
 
 class CdsViewMessagesTestSpec extends BaseSpec with TestData {
@@ -260,6 +259,6 @@ class CdsViewMessagesTestSpec extends BaseSpec with TestData {
     super.beforeEach()
     deleteMongoRecordsFromCollection("preferences")
     deleteMongoRecordsFromCollection("secure message")
-    deleteDatabase("conversation")
+    deleteMongoRecordsFromCollection("conversation")
   }
 }

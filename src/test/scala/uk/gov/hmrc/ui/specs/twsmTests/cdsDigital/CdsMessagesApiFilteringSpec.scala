@@ -23,7 +23,6 @@ import uk.gov.hmrc.ui.pages.messages.CdsMessages.{checkInboxIsEmpty, submitFormW
 import uk.gov.hmrc.ui.pages.messages.GmcMessages.*
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.TwsmTests
-import uk.gov.hmrc.ui.utils.DBTestSupport.deleteDatabase
 import uk.gov.hmrc.ui.utils.TestData
 
 class CdsMessagesApiFilteringSpec extends BaseSpec with TestData {
@@ -210,6 +209,6 @@ class CdsMessagesApiFilteringSpec extends BaseSpec with TestData {
   override def beforeEach(): Unit = {
     super.beforeEach()
     deleteMongoRecordsFromCollection("secure message")
-    deleteDatabase("conversation")
+    deleteMongoRecordsFromCollection("conversation")
   }
 }

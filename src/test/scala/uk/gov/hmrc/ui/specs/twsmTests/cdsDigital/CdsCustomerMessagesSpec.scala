@@ -28,7 +28,6 @@ import uk.gov.hmrc.ui.pages.messages.SecureMessagesPage.{backLinkCdsConversation
 import uk.gov.hmrc.ui.pages.messages.ViewConversationPage.clickOnReplyToThisMessageLink
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.TwsmTests
-import uk.gov.hmrc.ui.utils.DBTestSupport.deleteDatabase
 import uk.gov.hmrc.ui.utils.TestData
 
 class CdsCustomerMessagesSpec extends BaseSpec with TestData {
@@ -244,6 +243,6 @@ class CdsCustomerMessagesSpec extends BaseSpec with TestData {
   override def beforeEach(): Unit = {
     super.beforeEach()
     deleteMongoRecordsFromCollection("secure message")
-    deleteDatabase("conversation")
+    deleteMongoRecordsFromCollection("conversation")
   }
 }
