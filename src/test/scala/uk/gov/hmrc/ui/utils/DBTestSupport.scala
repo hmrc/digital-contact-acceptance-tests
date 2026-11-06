@@ -23,8 +23,6 @@ import play.api.libs.json.{JsValue, Json}
 import uk.gov.hmrc.selenium.webdriver.Driver
 
 object DBTestSupport {
-  private val MESSAGEDATABASE  = "message"
-  private val ENTITYDB         = "entity-resolver"
   private val PAYENOTIFICATIONDB = "paye-notification"
 
   def mongoClient: MongoClient = MongoClient()

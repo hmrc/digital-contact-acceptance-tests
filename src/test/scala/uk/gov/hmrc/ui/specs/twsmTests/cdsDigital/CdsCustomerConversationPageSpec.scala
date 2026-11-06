@@ -25,7 +25,6 @@ import uk.gov.hmrc.ui.pages.messages.SecureMessagesPage.clickOnUnreadSubjectCds
 import uk.gov.hmrc.ui.pages.messages.ViewConversationPage.clickOnReplyToThisMessageLink
 import uk.gov.hmrc.ui.specs.BaseSpec
 import uk.gov.hmrc.ui.specs.tags.TwsmTests
-import uk.gov.hmrc.ui.utils.DBTestSupport.deleteDatabase
 import uk.gov.hmrc.ui.utils.TestData
 
 class CdsCustomerConversationPageSpec extends BaseSpec with TestData {
