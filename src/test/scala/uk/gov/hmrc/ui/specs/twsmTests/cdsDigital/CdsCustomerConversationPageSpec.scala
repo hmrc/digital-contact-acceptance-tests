@@ -77,6 +77,6 @@ class CdsCustomerConversationPageSpec extends BaseSpec with TestData {
   override def beforeEach(): Unit = {
     super.beforeEach()
     deleteMongoRecordsFromCollection("secure message")
-    deleteDatabase("conversation")
+    deleteMongoRecordsFromCollection("conversation")
   }
 }

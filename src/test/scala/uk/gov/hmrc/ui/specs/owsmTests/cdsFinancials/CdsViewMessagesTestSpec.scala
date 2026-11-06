@@ -260,6 +260,7 @@ class CdsViewMessagesTestSpec extends BaseSpec with TestData {
     super.beforeEach()
     deleteMongoRecordsFromCollection("preferences")
     deleteMongoRecordsFromCollection("secure message")
-    deleteDatabase("conversation")
+    deleteMongoRecordsFromCollection("conversation")
+//    deleteDatabase("conversation")
   }
 }

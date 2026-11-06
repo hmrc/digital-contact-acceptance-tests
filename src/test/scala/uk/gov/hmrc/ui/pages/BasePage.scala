@@ -122,11 +122,13 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
     val deletePreferencesRecords: String   = preferences + "test-only/preferences-admin/print-suppression"
     val deleteSecureMessageRecords: String = secureMessage + "test-only/delete/secure-messages"
     val deleteEntityRecords: String        = entityResolver + "test-only/entity-resolver-admin/all"
+    val deleteConversationRecords: String  = secureMessage + "test-only/delete/conversations"
 
     serviceCollection.toLowerCase() match {
       case "preferences"     => WsClient.url(deletePreferencesRecords).delete()
       case "secure message"  => WsClient.url(deleteSecureMessageRecords).delete()
       case "entity-resolver" => WsClient.url(deleteEntityRecords).delete()
+      case "conversation"    => WsClient.url(deleteConversationRecords).delete()
     }
     fluentWait
   }
