@@ -48,7 +48,8 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       "NIREF1",
       "NIREF4",
       "CHA1700",
-      "VPD1"
+      "VPD1",
+      "VPD-CA"
     )
 
     formIds.foreach { formId =>
@@ -431,6 +432,15 @@ class EmaGmcMessageTestSpec extends BaseSpec with TestData {
       createV4Message("vpd")
       And("I open my messages for vpd using regime")
       logIntoMessage("vpd", "regime", regimeVpdValue)
+      Then("I see the message: Late Payment Interest Due")
+      waitForText(demoFrontEndInboxFirstMessageSubject2, "Late Payment Interest Due")
+    }
+
+    Scenario("Customer can view the VPD CA messages in secure message inbox", OwsmTests) {
+      Given("A GMC message is created via EMA using VPD")
+      createV4Message("vpdca")
+      And("I open my messages for vpd using regime")
+      logIntoMessage("vpdca", "regime", regimeVpdValue)
       Then("I see the message: Late Payment Interest Due")
       waitForText(demoFrontEndInboxFirstMessageSubject2, "Late Payment Interest Due")
     }
