@@ -151,13 +151,10 @@ class BtaPaperlessStatusSpec extends BaseSpec with BasePage {
       LoginUsingAuthWizardPage.pageLoad()
       LoginUsingAuthWizardPage.loginIntoAccountByAuthWizard("sautr")
       PaperlessBTAHomePage.clickOnGetTaxLettersOnlineLink()
-      When("I continue opt out")
       PaperlessInterruptPage.fillInterruptPageForOptout()
       PaperlessOptoutPage.clickOnContinueButton()
-      When("I see the page: Business Tax Account")
       Then("I see the status By Post and the link Get tax letters online")
-      PaperlessBTAHomePage.checkContactPreferenceText("By post")
-      PaperlessBTAHomePage.checkDisplayedLink("Get tax letters online")
+      PaperlessOptoutPage.youNowGetTaxLettersByPostTitle()
     }
   }
 

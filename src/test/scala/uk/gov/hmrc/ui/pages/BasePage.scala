@@ -58,8 +58,6 @@ trait BasePage extends PageObject with TestData with ApiPayLoad {
   val getCredentialStrengthId       = "credentialStrength"
   val getConfidenceLevelId          = "confidenceLevel"
   val getNinoId                     = "nino"
-  val onlineRadioButtonId           = "sps-opt-in"
-  val postRadioButtonId             = "sps-opt-in-2"
   val getEmailTextFieldId           = "sps-opt-in-email"
   val saUtrRadioButtonId            = "name"
   val ninoRadioButtonId             = "name-2"

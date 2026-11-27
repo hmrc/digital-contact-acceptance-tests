@@ -24,8 +24,9 @@ import uk.gov.hmrc.ui.pages.BasePage
 object PaperlessOptoutPage extends BasePage {
   var paperlessOptoutPageTitle: String = "You now get tax letters by post"
 
-  def waitUntilPageLoad(): Unit =
+  def waitUntilPageLoad(): Unit = {
     waitForText(optOutPageHeader, paperlessOptoutPageTitle)
+  }
 
   def inPaperlessOptoutConfirmPage(): Unit =
     assert(Driver.instance.findElement(By.cssSelector(optOutPageHeader)).getText == paperlessOptoutPageTitle)
