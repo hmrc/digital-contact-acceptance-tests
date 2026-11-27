@@ -81,6 +81,7 @@ object ElementLocators {
   val FixthisId                                  = "Fixthis"
   val ReviewupdatedtermsId                       = "Reviewupdatedterms"
   val submitEmailButtonId                        = "submitEmailButton"
+  val optOutButton                               = "optOutButton"
   val spsReOptInId                               = "sps-re-opt-in"
   val spsReOptInIdEmailId                        = "sps-re-opt-in-email"
   val spsReOptIn2Id                              = "sps-re-opt-in-2"

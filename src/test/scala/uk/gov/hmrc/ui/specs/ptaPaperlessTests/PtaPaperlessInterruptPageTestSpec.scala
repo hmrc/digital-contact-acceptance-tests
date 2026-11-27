@@ -41,8 +41,8 @@ class PtaPaperlessInterruptPageTestSpec extends BaseSpec {
       PaperlessInterruptPage.pageTitle()
       When("I click toggle link to Welsh")
       selectLanguageWelsh()
-      Then("I see the page: Dewis sut i gael eich llythyrau treth")
-      waitUntilHeader("Dewis sut i gael eich llythyrau treth")
+      Then("I see the page: Rydym yn mynd yn ddi-bapur")
+      waitUntilHeader("Rydym yn mynd yn ddi-bapur")
     }
 
     Scenario("Opt-in with email address verified", PtaPaperlessTests) {
@@ -96,7 +96,6 @@ class PtaPaperlessInterruptPageTestSpec extends BaseSpec {
   override def beforeEach(): Unit = {
     super.beforeEach()
     deleteMongoRecordsFromCollection("preferences")
-//    deleteMongoRecordsFromCollection("Secure Message")
   }
 
 }

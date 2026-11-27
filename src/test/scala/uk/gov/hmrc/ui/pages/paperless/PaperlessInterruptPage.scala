@@ -18,26 +18,23 @@ package uk.gov.hmrc.ui.pages.paperless
 
 import org.openqa.selenium.By
 import org.openqa.selenium.support.ui.ExpectedConditions
-import uk.gov.hmrc.ui.ElementLocators.submitEmailButtonId
+import uk.gov.hmrc.ui.ElementLocators.{submitEmailButtonId, optOutButton}
 import uk.gov.hmrc.ui.pages.BasePage
 
 object PaperlessInterruptPage extends BasePage {
-  var paperlessPageTitle: String = "Choose how to get your tax letters"
+  var paperlessPageTitle: String = "We're going paperless"
 
   def pageTitle(): Unit =
     fluentWait.until(ExpectedConditions.titleContains(paperlessPageTitle))
 
   def fillInterruptPageForOptin(): Unit = {
-    val getOnlineRadioButton: By = By.id(onlineRadioButtonId)
-    selectCheckbox(getOnlineRadioButton)
     click(By.id(submitEmailButtonId))
     fluentWait
   }
 
   def fillInterruptPageForOptout(): Unit = {
-    val getPostRadioButton: By = By.id(postRadioButtonId)
-    selectCheckbox(getPostRadioButton)
-    click(By.id(submitEmailButtonId))
+    click(By.id(optOutButton))
+    fluentWait
   }
 
   def chooseHowToGetYourTaxLettersTitle(): Unit =
